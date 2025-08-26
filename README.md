@@ -409,6 +409,7 @@ The TLD Challenges frontend is deployed as part of a unified Docker-based archit
 ### Development Resources
 - **[API Documentation](../docs/api.md)** - Backend API endpoints and data models
 - **[Component Guide](../docs/components.md)** - Reusable component documentation
+- **[Color System](../docs/colors.md)** - Comprehensive color palette and theme implementation guide
 - **[Deployment Guide](../docs/deployment.md)** - Production deployment instructions
 - **[Copilot Instructions](../.github/copilot-instructions.md)** - AI development guidance
 - **[Storybook](http://localhost:6006)** - Component showcase and interactive documentation (when running locally)
