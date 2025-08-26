@@ -128,6 +128,16 @@ interface SubmissionForm {
 
 ## Development Guidelines
 
+### Color Visualization in Markdown Documentation
+
+**IMPORTANT**: When creating color documentation or visualizing colors in markdown files, always use shields.io as the first approach:
+
+```markdown
+![#COLORCODE](https://img.shields.io/badge/-COLORCODE-COLORCODE?style=flat-square)
+```
+
+This approach works reliably in both GitHub and VS Code, unlike other services (via.placeholder.com, SVG inline, etc.) which may fail on GitHub due to security restrictions. Always test color visualization on both platforms before considering the task complete.
+
 ### TypeScript Best Practices
 
 #### Type Safety and Strict Configuration

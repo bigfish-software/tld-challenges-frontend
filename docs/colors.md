@@ -19,93 +19,93 @@
 ### Secondary Colors  
 | Shade | Color | Hex Code | Usage | Light Theme | Dark Theme |
 |-------|-------|----------|-------|-------------|------------|
-| 50 | ![#F7F4F4](https://via.placeholder.com/15x15/F7F4F4/F7F4F4?text=+) | `#F7F4F4` | Lightest tint | Backgrounds | - |
-| 100 | ![#E8E0E0](https://via.placeholder.com/15x15/E8E0E0/E8E0E0?text=+) | `#E8E0E0` | Very light | Subtle backgrounds | - |
-| 200 | ![#D1C1C2](https://via.placeholder.com/15x15/D1C1C2/D1C1C2?text=+) | `#D1C1C2` | Light | Borders | Hover states |
-| 300 | ![#B9A1A3](https://via.placeholder.com/15x15/B9A1A3/B9A1A3?text=+) | `#B9A1A3` | Medium light | Subtle text | **Secondary color** |
-| 400 | ![#A27E81](https://via.placeholder.com/15x15/A27E81/A27E81?text=+) | `#A27E81` | Medium | Secondary elements | - |
-| 500 | ![#8B5A5C](https://via.placeholder.com/15x15/8B5A5C/8B5A5C?text=+) | `#8B5A5C` | **Base color** | **Secondary actions** | - |
-| 600 | ![#73484A](https://via.placeholder.com/15x15/73484A/73484A?text=+) | `#73484A` | Medium dark | Hover states | - |
-| 700 | ![#5B3739](https://via.placeholder.com/15x15/5B3739/5B3739?text=+) | `#5B3739` | Dark | Active states | - |
-| 800 | ![#432729](https://via.placeholder.com/15x15/432729/432729?text=+) | `#432729` | Very dark | Text | - |
-| 900 | ![#2B1819](https://via.placeholder.com/15x15/2B1819/2B1819?text=+) | `#2B1819` | Darkest | Strong text | - |
+| 50 | ![#F7F4F4](https://img.shields.io/badge/-F7F4F4-F7F4F4?style=flat-square) | `#F7F4F4` | Lightest tint | Backgrounds | - |
+| 100 | ![#E8E0E0](https://img.shields.io/badge/-E8E0E0-E8E0E0?style=flat-square) | `#E8E0E0` | Very light | Subtle backgrounds | - |
+| 200 | ![#D1C1C2](https://img.shields.io/badge/-D1C1C2-D1C1C2?style=flat-square) | `#D1C1C2` | Light | Borders | Hover states |
+| 300 | ![#B9A1A3](https://img.shields.io/badge/-B9A1A3-B9A1A3?style=flat-square) | `#B9A1A3` | Medium light | Subtle text | **Secondary color** |
+| 400 | ![#A27E81](https://img.shields.io/badge/-A27E81-A27E81?style=flat-square) | `#A27E81` | Medium | Secondary elements | - |
+| 500 | ![#8B5A5C](https://img.shields.io/badge/-8B5A5C-8B5A5C?style=flat-square) | `#8B5A5C` | **Base color** | **Secondary actions** | - |
+| 600 | ![#73484A](https://img.shields.io/badge/-73484A-73484A?style=flat-square) | `#73484A` | Medium dark | Hover states | - |
+| 700 | ![#5B3739](https://img.shields.io/badge/-5B3739-5B3739?style=flat-square) | `#5B3739` | Dark | Active states | - |
+| 800 | ![#432729](https://img.shields.io/badge/-432729-432729?style=flat-square) | `#432729` | Very dark | Text | - |
+| 900 | ![#2B1819](https://img.shields.io/badge/-2B1819-2B1819?style=flat-square) | `#2B1819` | Darkest | Strong text | - |
 
 ### Accent Colors
 | Shade | Color | Hex Code | Usage | Light Theme | Dark Theme |
 |-------|-------|----------|-------|-------------|------------|
-| 50 | ![#FDF9F4](https://via.placeholder.com/15x15/FDF9F4/FDF9F4?text=+) | `#FDF9F4` | Lightest tint | Backgrounds | - |
-| 100 | ![#F9EFDE](https://via.placeholder.com/15x15/F9EFDE/F9EFDE?text=+) | `#F9EFDE` | Very light | Subtle backgrounds | - |
-| 200 | ![#F3DFBD](https://via.placeholder.com/15x15/F3DFBD/F3DFBD?text=+) | `#F3DFBD` | Light | Borders | - |
-| 300 | ![#EDCF9C](https://via.placeholder.com/15x15/EDCF9C/EDCF9C?text=+) | `#EDCF9C` | Medium light | Subtle accents | **Accent color** |
-| 400 | ![#E6B894](https://via.placeholder.com/15x15/E6B894/E6B894?text=+) | `#E6B894` | **Base color** | **Accent elements** | **Accent elements** |
-| 500 | ![#D9A373](https://via.placeholder.com/15x15/D9A373/D9A373?text=+) | `#D9A373` | Medium | Hover states | - |
-| 600 | ![#C08752](https://via.placeholder.com/15x15/C08752/C08752?text=+) | `#C08752` | Medium dark | Active states | - |
-| 700 | ![#A06B31](https://via.placeholder.com/15x15/A06B31/A06B31?text=+) | `#A06B31` | Dark | Strong accents | - |
-| 800 | ![#7A4F10](https://via.placeholder.com/15x15/7A4F10/7A4F10?text=+) | `#7A4F10` | Very dark | Text on light | - |
-| 900 | ![#4D3200](https://via.placeholder.com/15x15/4D3200/4D3200?text=+) | `#4D3200` | Darkest | Strong text | - |
+| 50 | ![#FDF9F4](https://img.shields.io/badge/-FDF9F4-FDF9F4?style=flat-square) | `#FDF9F4` | Lightest tint | Backgrounds | - |
+| 100 | ![#F9EFDE](https://img.shields.io/badge/-F9EFDE-F9EFDE?style=flat-square) | `#F9EFDE` | Very light | Subtle backgrounds | - |
+| 200 | ![#F3DFBD](https://img.shields.io/badge/-F3DFBD-F3DFBD?style=flat-square) | `#F3DFBD` | Light | Borders | - |
+| 300 | ![#EDCF9C](https://img.shields.io/badge/-EDCF9C-EDCF9C?style=flat-square) | `#EDCF9C` | Medium light | Subtle accents | **Accent color** |
+| 400 | ![#E6B894](https://img.shields.io/badge/-E6B894-E6B894?style=flat-square) | `#E6B894` | **Base color** | **Accent elements** | **Accent elements** |
+| 500 | ![#D9A373](https://img.shields.io/badge/-D9A373-D9A373?style=flat-square) | `#D9A373` | Medium | Hover states | - |
+| 600 | ![#C08752](https://img.shields.io/badge/-C08752-C08752?style=flat-square) | `#C08752` | Medium dark | Active states | - |
+| 700 | ![#A06B31](https://img.shields.io/badge/-A06B31-A06B31?style=flat-square) | `#A06B31` | Dark | Strong accents | - |
+| 800 | ![#7A4F10](https://img.shields.io/badge/-7A4F10-7A4F10?style=flat-square) | `#7A4F10` | Very dark | Text on light | - |
+| 900 | ![#4D3200](https://img.shields.io/badge/-4D3200-4D3200?style=flat-square) | `#4D3200` | Darkest | Strong text | - |
 
 ### Neutral Colors
 | Shade | Color | Hex Code | Usage | Light Theme | Dark Theme |
 |-------|-------|----------|-------|-------------|------------|
-| 50 | ![#FAFAFA](https://via.placeholder.com/15x15/FAFAFA/FAFAFA?text=+) | `#FAFAFA` | Lightest | **Main background** | **Text color** |
-| 100 | ![#F5F5F5](https://via.placeholder.com/15x15/F5F5F5/F5F5F5?text=+) | `#F5F5F5` | Very light | Card backgrounds | - |
-| 200 | ![#E5E5E5](https://via.placeholder.com/15x15/E5E5E5/E5E5E5?text=+) | `#E5E5E5` | Light | Borders | - |
-| 300 | ![#D4D4D4](https://via.placeholder.com/15x15/D4D4D4/D4D4D4?text=+) | `#D4D4D4` | Medium light | Subtle borders | **Secondary text** |
-| 400 | ![#A3A3A3](https://via.placeholder.com/15x15/A3A3A3/A3A3A3?text=+) | `#A3A3A3` | Medium | Disabled text | **Tertiary text** |
-| 500 | ![#7A7A7A](https://via.placeholder.com/15x15/7A7A7A/7A7A7A?text=+) | `#7A7A7A` | **Base neutral** | Secondary text | - |
-| 600 | ![#525252](https://via.placeholder.com/15x15/525252/525252?text=+) | `#525252` | Medium dark | Primary text | **Disabled text** |
-| 700 | ![#404040](https://via.placeholder.com/15x15/404040/404040?text=+) | `#404040` | Dark | Strong text | **Surface raised** |
-| 800 | ![#262626](https://via.placeholder.com/15x15/262626/262626?text=+) | `#262626` | Very dark | - | **Surface color** |
-| 900 | ![#171717](https://via.placeholder.com/15x15/171717/171717?text=+) | `#171717` | Darkest | - | **Background** |
+| 50 | ![#FAFAFA](https://img.shields.io/badge/-FAFAFA-FAFAFA?style=flat-square) | `#FAFAFA` | Lightest | **Main background** | **Text color** |
+| 100 | ![#F5F5F5](https://img.shields.io/badge/-F5F5F5-F5F5F5?style=flat-square) | `#F5F5F5` | Very light | Card backgrounds | - |
+| 200 | ![#E5E5E5](https://img.shields.io/badge/-E5E5E5-E5E5E5?style=flat-square) | `#E5E5E5` | Light | Borders | - |
+| 300 | ![#D4D4D4](https://img.shields.io/badge/-D4D4D4-D4D4D4?style=flat-square) | `#D4D4D4` | Medium light | Subtle borders | **Secondary text** |
+| 400 | ![#A3A3A3](https://img.shields.io/badge/-A3A3A3-A3A3A3?style=flat-square) | `#A3A3A3` | Medium | Disabled text | **Tertiary text** |
+| 500 | ![#7A7A7A](https://img.shields.io/badge/-7A7A7A-7A7A7A?style=flat-square) | `#7A7A7A` | **Base neutral** | Secondary text | - |
+| 600 | ![#525252](https://img.shields.io/badge/-525252-525252?style=flat-square) | `#525252` | Medium dark | Primary text | **Disabled text** |
+| 700 | ![#404040](https://img.shields.io/badge/-404040-404040?style=flat-square) | `#404040` | Dark | Strong text | **Surface raised** |
+| 800 | ![#262626](https://img.shields.io/badge/-262626-262626?style=flat-square) | `#262626` | Very dark | - | **Surface color** |
+| 900 | ![#171717](https://img.shields.io/badge/-171717-171717?style=flat-square) | `#171717` | Darkest | - | **Background** |
 
 ### Semantic Colors
 
 #### Success (Green)
 | Shade | Color | Hex Code | Light Theme | Dark Theme |
 |-------|-------|----------|-------------|------------|
-| 50 | ![#F0FDF4](https://via.placeholder.com/15x15/F0FDF4/F0FDF4?text=+) | `#F0FDF4` | Background tint | - |
-| 400 | ![#4ADE80](https://via.placeholder.com/15x15/4ADE80/4ADE80?text=+) | `#4ADE80` | - | **Success color** |
-| 600 | ![#16A34A](https://via.placeholder.com/15x15/16A34A/16A34A?text=+) | `#16A34A` | **Success color** | - |
+| 50 | ![#F0FDF4](https://img.shields.io/badge/-F0FDF4-F0FDF4?style=flat-square) | `#F0FDF4` | Background tint | - |
+| 400 | ![#4ADE80](https://img.shields.io/badge/-4ADE80-4ADE80?style=flat-square) | `#4ADE80` | - | **Success color** |
+| 600 | ![#16A34A](https://img.shields.io/badge/-16A34A-16A34A?style=flat-square) | `#16A34A` | **Success color** | - |
 
 #### Warning (Amber)
 | Shade | Color | Hex Code | Light Theme | Dark Theme |
 |-------|-------|----------|-------------|------------|
-| 50 | ![#FFFBEB](https://via.placeholder.com/15x15/FFFBEB/FFFBEB?text=+) | `#FFFBEB` | Background tint | - |
-| 400 | ![#FBBF24](https://via.placeholder.com/15x15/FBBF24/FBBF24?text=+) | `#FBBF24` | - | **Warning color** |
-| 500 | ![#F59E0B](https://via.placeholder.com/15x15/F59E0B/F59E0B?text=+) | `#F59E0B` | **Warning color** | - |
+| 50 | ![#FFFBEB](https://img.shields.io/badge/-FFFBEB-FFFBEB?style=flat-square) | `#FFFBEB` | Background tint | - |
+| 400 | ![#FBBF24](https://img.shields.io/badge/-FBBF24-FBBF24?style=flat-square) | `#FBBF24` | - | **Warning color** |
+| 500 | ![#F59E0B](https://img.shields.io/badge/-F59E0B-F59E0B?style=flat-square) | `#F59E0B` | **Warning color** | - |
 
 #### Error (Red)
 | Shade | Color | Hex Code | Light Theme | Dark Theme |
 |-------|-------|----------|-------------|------------|
-| 50 | ![#FEF2F2](https://via.placeholder.com/15x15/FEF2F2/FEF2F2?text=+) | `#FEF2F2` | Background tint | - |
-| 400 | ![#F87171](https://via.placeholder.com/15x15/F87171/F87171?text=+) | `#F87171` | - | **Error color** |
-| 600 | ![#DC2626](https://via.placeholder.com/15x15/DC2626/DC2626?text=+) | `#DC2626` | **Error color** | - |
+| 50 | ![#FEF2F2](https://img.shields.io/badge/-FEF2F2-FEF2F2?style=flat-square) | `#FEF2F2` | Background tint | - |
+| 400 | ![#F87171](https://img.shields.io/badge/-F87171-F87171?style=flat-square) | `#F87171` | - | **Error color** |
+| 600 | ![#DC2626](https://img.shields.io/badge/-DC2626-DC2626?style=flat-square) | `#DC2626` | **Error color** | - |
 
 #### Info (Blue)
 | Shade | Color | Hex Code | Light Theme | Dark Theme |
 |-------|-------|----------|-------------|------------|
-| 50 | ![#EFF6FF](https://via.placeholder.com/15x15/EFF6FF/EFF6FF?text=+) | `#EFF6FF` | Background tint | - |
-| 400 | ![#60A5FA](https://via.placeholder.com/15x15/60A5FA/60A5FA?text=+) | `#60A5FA` | - | **Info color** |
-| 600 | ![#2563EB](https://via.placeholder.com/15x15/2563EB/2563EB?text=+) | `#2563EB` | **Info color** | - |
+| 50 | ![#EFF6FF](https://img.shields.io/badge/-EFF6FF-EFF6FF?style=flat-square) | `#EFF6FF` | Background tint | - |
+| 400 | ![#60A5FA](https://img.shields.io/badge/-60A5FA-60A5FA?style=flat-square) | `#60A5FA` | - | **Info color** |
+| 600 | ![#2563EB](https://img.shields.io/badge/-2563EB-2563EB?style=flat-square) | `#2563EB` | **Info color** | - |
 
 ---
 
 ## Quick Color Reference
 
 ### Gaming Theme Highlights
-- 🎮 **Primary Dark Theme**: ![#B385B3](https://via.placeholder.com/15x15/B385B3/B385B3?text=+) `#B385B3` - Vibrant plum for gaming UI
-- 🎮 **Background Dark**: ![#171717](https://via.placeholder.com/15x15/171717/171717?text=+) `#171717` - Deep black for eye strain reduction  
-- 🎮 **Surface Dark**: ![#262626](https://via.placeholder.com/15x15/262626/262626?text=+) `#262626` - Rich gray for elevated elements
-- 🎮 **Accent Warm**: ![#E6B894](https://via.placeholder.com/15x15/E6B894/E6B894?text=+) `#E6B894` - Warm peach for highlights and CTAs
+- 🎮 **Primary Dark Theme**: ![#B385B3](https://img.shields.io/badge/-B385B3-B385B3?style=flat-square) - Vibrant plum for gaming UI
+- 🎮 **Background Dark**: ![#171717](https://img.shields.io/badge/-171717-171717?style=flat-square) - Deep black for eye strain reduction  
+- 🎮 **Surface Dark**: ![#262626](https://img.shields.io/badge/-262626-262626?style=flat-square) - Rich gray for elevated elements
+- 🎮 **Accent Warm**: ![#E6B894](https://img.shields.io/badge/-E6B894-E6B894?style=flat-square) - Warm peach for highlights and CTAs
 
 ## Base Palette Analysis
 
 The foundation palette consists of five colors extracted from the provided image:
-- `#4A2C4A` - Deep plum (primary candidate)
-- `#7A7A7A` - Medium gray (neutral base)
-- `#B8B0A8` - Warm light gray (surface candidate)
-- `#E6B894` - Warm peach (accent candidate)
-- `#8B5A5C` - Muted burgundy (secondary candidate)
+- ![#4A2C4A](https://img.shields.io/badge/-4A2C4A-4A2C4A?style=flat-square) - Deep plum (primary candidate)
+- ![#7A7A7A](https://img.shields.io/badge/-7A7A7A-7A7A7A?style=flat-square) - Medium gray (neutral base)
+- ![#B8B0A8](https://img.shields.io/badge/-B8B0A8-B8B0A8?style=flat-square) - Warm light gray (surface candidate)
+- ![#E6B894](https://img.shields.io/badge/-E6B894-E6B894?style=flat-square) - Warm peach (accent candidate)
+- ![#8B5A5C](https://img.shields.io/badge/-8B5A5C-8B5A5C?style=flat-square) - Muted burgundy (secondary candidate)
 
 ## Expanded Color System
 
@@ -327,7 +327,7 @@ The foundation palette consists of five colors extracted from the provided image
 This color system is optimized for **dark theme as the default** to match gaming community preferences:
 
 - **Deep Backgrounds**: True blacks and rich grays reduce eye strain during extended gaming sessions
-- **Vibrant Accents**: Higher contrast accent colors (#B385B3, #E6B894) ensure UI elements pop against dark backgrounds  
+- **Vibrant Accents**: Higher contrast accent colors (![#B385B3](https://img.shields.io/badge/-B385B3-B385B3?style=flat-square), ![#E6B894](https://img.shields.io/badge/-E6B894-E6B894?style=flat-square)) ensure UI elements pop against dark backgrounds  
 - **Gaming Aesthetics**: Plum and burgundy tones create a sophisticated, non-generic gaming feel
 - **Accessibility**: Enhanced contrast ratios (21:1, 12.6:1) support long gaming sessions
 
@@ -352,7 +352,7 @@ This color system is optimized for **dark theme as the default** to match gaming
 ### Theme Transition Smoothness
 The 50-900 scale structure ensures smooth theme transitions:
 - **Light to Dark**: Semantic roles maintain meaning while colors invert appropriately
-- **Consistent Branding**: Primary plum (#4A2C4A → #B385B3) maintains brand recognition
+- **Consistent Branding**: Primary plum (![#4A2C4A](https://img.shields.io/badge/-4A2C4A-4A2C4A?style=flat-square) → ![#B385B3](https://img.shields.io/badge/-B385B3-B385B3?style=flat-square)) maintains brand recognition
 - **Gaming Community Appeal**: Dark theme default aligns with community preferences
 
 ## Accessibility Guidelines
