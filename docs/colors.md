@@ -5,98 +5,98 @@
 ### Primary Colors
 | Shade | Color | Hex Code | Usage | Light Theme | Dark Theme |
 |-------|-------|----------|-------|-------------|------------|
-| 50 | <svg width="20" height="20"><rect width="20" height="20" fill="#F5F0F5" stroke="#ccc"/></svg> | `#F5F0F5` | Lightest tint | Backgrounds | - |
-| 100 | <svg width="20" height="20"><rect width="20" height="20" fill="#E6D6E6" stroke="#ccc"/></svg> | `#E6D6E6` | Very light | Subtle backgrounds | - |
-| 200 | <svg width="20" height="20"><rect width="20" height="20" fill="#CCADCC" stroke="#ccc"/></svg> | `#CCADCC` | Light | Hover states | Active states |
-| 300 | <svg width="20" height="20"><rect width="20" height="20" fill="#B385B3" stroke="#ccc"/></svg> | `#B385B3` | Medium light | Borders | **Primary color** |
-| 400 | <svg width="20" height="20"><rect width="20" height="20" fill="#7A5C7A" stroke="#ccc"/></svg> | `#7A5C7A` | Medium | Secondary text | Focus states |
-| 500 | <svg width="20" height="20"><rect width="20" height="20" fill="#4A2C4A" stroke="#ccc"/></svg> | `#4A2C4A` | **Base color** | **Primary actions** | - |
-| 600 | <svg width="20" height="20"><rect width="20" height="20" fill="#3D233D" stroke="#ccc"/></svg> | `#3D233D` | Medium dark | Hover states | - |
-| 700 | <svg width="20" height="20"><rect width="20" height="20" fill="#2F1B2F" stroke="#ccc"/></svg> | `#2F1B2F` | Dark | Active states | - |
-| 800 | <svg width="20" height="20"><rect width="20" height="20" fill="#221322" stroke="#ccc"/></svg> | `#221322` | Very dark | Text | - |
-| 900 | <svg width="20" height="20"><rect width="20" height="20" fill="#140A14" stroke="#ccc"/></svg> | `#140A14` | Darkest | Strong text | - |
+| 50 | ![#F5F0F5](https://img.shields.io/badge/-F5F0F5-F5F0F5?style=flat-square) | `#F5F0F5` | Lightest tint | Backgrounds | - |
+| 100 | ![#E6D6E6](https://img.shields.io/badge/-E6D6E6-E6D6E6?style=flat-square) | `#E6D6E6` | Very light | Subtle backgrounds | - |
+| 200 | ![#CCADCC](https://img.shields.io/badge/-CCADCC-CCADCC?style=flat-square) | `#CCADCC` | Light | Hover states | Active states |
+| 300 | ![#B385B3](https://img.shields.io/badge/-B385B3-B385B3?style=flat-square) | `#B385B3` | Medium light | Borders | **Primary color** |
+| 400 | ![#7A5C7A](https://img.shields.io/badge/-7A5C7A-7A5C7A?style=flat-square) | `#7A5C7A` | Medium | Secondary text | Focus states |
+| 500 | ![#4A2C4A](https://img.shields.io/badge/-4A2C4A-4A2C4A?style=flat-square) | `#4A2C4A` | **Base color** | **Primary actions** | - |
+| 600 | ![#3D233D](https://img.shields.io/badge/-3D233D-3D233D?style=flat-square) | `#3D233D` | Medium dark | Hover states | - |
+| 700 | ![#2F1B2F](https://img.shields.io/badge/-2F1B2F-2F1B2F?style=flat-square) | `#2F1B2F` | Dark | Active states | - |
+| 800 | ![#221322](https://img.shields.io/badge/-221322-221322?style=flat-square) | `#221322` | Very dark | Text | - |
+| 900 | ![#140A14](https://img.shields.io/badge/-140A14-140A14?style=flat-square) | `#140A14` | Darkest | Strong text | - |
 
 ### Secondary Colors  
 | Shade | Color | Hex Code | Usage | Light Theme | Dark Theme |
 |-------|-------|----------|-------|-------------|------------|
-| 50 | <svg width="20" height="20"><rect width="20" height="20" fill="#F7F4F4" stroke="#ccc"/></svg> | `#F7F4F4` | Lightest tint | Backgrounds | - |
-| 100 | <svg width="20" height="20"><rect width="20" height="20" fill="#E8E0E0" stroke="#ccc"/></svg> | `#E8E0E0` | Very light | Subtle backgrounds | - |
-| 200 | <svg width="20" height="20"><rect width="20" height="20" fill="#D1C1C2" stroke="#ccc"/></svg> | `#D1C1C2` | Light | Borders | Hover states |
-| 300 | <svg width="20" height="20"><rect width="20" height="20" fill="#B9A1A3" stroke="#ccc"/></svg> | `#B9A1A3` | Medium light | Subtle text | **Secondary color** |
-| 400 | <svg width="20" height="20"><rect width="20" height="20" fill="#A27E81" stroke="#ccc"/></svg> | `#A27E81` | Medium | Secondary elements | - |
-| 500 | <svg width="20" height="20"><rect width="20" height="20" fill="#8B5A5C" stroke="#ccc"/></svg> | `#8B5A5C` | **Base color** | **Secondary actions** | - |
-| 600 | <svg width="20" height="20"><rect width="20" height="20" fill="#73484A" stroke="#ccc"/></svg> | `#73484A` | Medium dark | Hover states | - |
-| 700 | <svg width="20" height="20"><rect width="20" height="20" fill="#5B3739" stroke="#ccc"/></svg> | `#5B3739` | Dark | Active states | - |
-| 800 | <svg width="20" height="20"><rect width="20" height="20" fill="#432729" stroke="#ccc"/></svg> | `#432729` | Very dark | Text | - |
-| 900 | <svg width="20" height="20"><rect width="20" height="20" fill="#2B1819" stroke="#ccc"/></svg> | `#2B1819` | Darkest | Strong text | - |
+| 50 | ![#F7F4F4](https://via.placeholder.com/15x15/F7F4F4/F7F4F4?text=+) | `#F7F4F4` | Lightest tint | Backgrounds | - |
+| 100 | ![#E8E0E0](https://via.placeholder.com/15x15/E8E0E0/E8E0E0?text=+) | `#E8E0E0` | Very light | Subtle backgrounds | - |
+| 200 | ![#D1C1C2](https://via.placeholder.com/15x15/D1C1C2/D1C1C2?text=+) | `#D1C1C2` | Light | Borders | Hover states |
+| 300 | ![#B9A1A3](https://via.placeholder.com/15x15/B9A1A3/B9A1A3?text=+) | `#B9A1A3` | Medium light | Subtle text | **Secondary color** |
+| 400 | ![#A27E81](https://via.placeholder.com/15x15/A27E81/A27E81?text=+) | `#A27E81` | Medium | Secondary elements | - |
+| 500 | ![#8B5A5C](https://via.placeholder.com/15x15/8B5A5C/8B5A5C?text=+) | `#8B5A5C` | **Base color** | **Secondary actions** | - |
+| 600 | ![#73484A](https://via.placeholder.com/15x15/73484A/73484A?text=+) | `#73484A` | Medium dark | Hover states | - |
+| 700 | ![#5B3739](https://via.placeholder.com/15x15/5B3739/5B3739?text=+) | `#5B3739` | Dark | Active states | - |
+| 800 | ![#432729](https://via.placeholder.com/15x15/432729/432729?text=+) | `#432729` | Very dark | Text | - |
+| 900 | ![#2B1819](https://via.placeholder.com/15x15/2B1819/2B1819?text=+) | `#2B1819` | Darkest | Strong text | - |
 
 ### Accent Colors
 | Shade | Color | Hex Code | Usage | Light Theme | Dark Theme |
 |-------|-------|----------|-------|-------------|------------|
-| 50 | <svg width="20" height="20"><rect width="20" height="20" fill="#FDF9F4" stroke="#ccc"/></svg> | `#FDF9F4` | Lightest tint | Backgrounds | - |
-| 100 | <svg width="20" height="20"><rect width="20" height="20" fill="#F9EFDE" stroke="#ccc"/></svg> | `#F9EFDE` | Very light | Subtle backgrounds | - |
-| 200 | <svg width="20" height="20"><rect width="20" height="20" fill="#F3DFBD" stroke="#ccc"/></svg> | `#F3DFBD` | Light | Borders | - |
-| 300 | <svg width="20" height="20"><rect width="20" height="20" fill="#EDCF9C" stroke="#ccc"/></svg> | `#EDCF9C` | Medium light | Subtle accents | **Accent color** |
-| 400 | <svg width="20" height="20"><rect width="20" height="20" fill="#E6B894" stroke="#ccc"/></svg> | `#E6B894` | **Base color** | **Accent elements** | **Accent elements** |
-| 500 | <svg width="20" height="20"><rect width="20" height="20" fill="#D9A373" stroke="#ccc"/></svg> | `#D9A373` | Medium | Hover states | - |
-| 600 | <svg width="20" height="20"><rect width="20" height="20" fill="#C08752" stroke="#ccc"/></svg> | `#C08752` | Medium dark | Active states | - |
-| 700 | <svg width="20" height="20"><rect width="20" height="20" fill="#A06B31" stroke="#ccc"/></svg> | `#A06B31` | Dark | Strong accents | - |
-| 800 | <svg width="20" height="20"><rect width="20" height="20" fill="#7A4F10" stroke="#ccc"/></svg> | `#7A4F10` | Very dark | Text on light | - |
-| 900 | <svg width="20" height="20"><rect width="20" height="20" fill="#4D3200" stroke="#ccc"/></svg> | `#4D3200` | Darkest | Strong text | - |
+| 50 | ![#FDF9F4](https://via.placeholder.com/15x15/FDF9F4/FDF9F4?text=+) | `#FDF9F4` | Lightest tint | Backgrounds | - |
+| 100 | ![#F9EFDE](https://via.placeholder.com/15x15/F9EFDE/F9EFDE?text=+) | `#F9EFDE` | Very light | Subtle backgrounds | - |
+| 200 | ![#F3DFBD](https://via.placeholder.com/15x15/F3DFBD/F3DFBD?text=+) | `#F3DFBD` | Light | Borders | - |
+| 300 | ![#EDCF9C](https://via.placeholder.com/15x15/EDCF9C/EDCF9C?text=+) | `#EDCF9C` | Medium light | Subtle accents | **Accent color** |
+| 400 | ![#E6B894](https://via.placeholder.com/15x15/E6B894/E6B894?text=+) | `#E6B894` | **Base color** | **Accent elements** | **Accent elements** |
+| 500 | ![#D9A373](https://via.placeholder.com/15x15/D9A373/D9A373?text=+) | `#D9A373` | Medium | Hover states | - |
+| 600 | ![#C08752](https://via.placeholder.com/15x15/C08752/C08752?text=+) | `#C08752` | Medium dark | Active states | - |
+| 700 | ![#A06B31](https://via.placeholder.com/15x15/A06B31/A06B31?text=+) | `#A06B31` | Dark | Strong accents | - |
+| 800 | ![#7A4F10](https://via.placeholder.com/15x15/7A4F10/7A4F10?text=+) | `#7A4F10` | Very dark | Text on light | - |
+| 900 | ![#4D3200](https://via.placeholder.com/15x15/4D3200/4D3200?text=+) | `#4D3200` | Darkest | Strong text | - |
 
 ### Neutral Colors
 | Shade | Color | Hex Code | Usage | Light Theme | Dark Theme |
 |-------|-------|----------|-------|-------------|------------|
-| 50 | <svg width="20" height="20"><rect width="20" height="20" fill="#FAFAFA" stroke="#ccc"/></svg> | `#FAFAFA` | Lightest | **Main background** | **Text color** |
-| 100 | <svg width="20" height="20"><rect width="20" height="20" fill="#F5F5F5" stroke="#ccc"/></svg> | `#F5F5F5` | Very light | Card backgrounds | - |
-| 200 | <svg width="20" height="20"><rect width="20" height="20" fill="#E5E5E5" stroke="#ccc"/></svg> | `#E5E5E5` | Light | Borders | - |
-| 300 | <svg width="20" height="20"><rect width="20" height="20" fill="#D4D4D4" stroke="#ccc"/></svg> | `#D4D4D4` | Medium light | Subtle borders | **Secondary text** |
-| 400 | <svg width="20" height="20"><rect width="20" height="20" fill="#A3A3A3" stroke="#ccc"/></svg> | `#A3A3A3` | Medium | Disabled text | **Tertiary text** |
-| 500 | <svg width="20" height="20"><rect width="20" height="20" fill="#7A7A7A" stroke="#ccc"/></svg> | `#7A7A7A` | **Base neutral** | Secondary text | - |
-| 600 | <svg width="20" height="20"><rect width="20" height="20" fill="#525252" stroke="#ccc"/></svg> | `#525252` | Medium dark | Primary text | **Disabled text** |
-| 700 | <svg width="20" height="20"><rect width="20" height="20" fill="#404040" stroke="#ccc"/></svg> | `#404040` | Dark | Strong text | **Surface raised** |
-| 800 | <svg width="20" height="20"><rect width="20" height="20" fill="#262626" stroke="#ccc"/></svg> | `#262626` | Very dark | - | **Surface color** |
-| 900 | <svg width="20" height="20"><rect width="20" height="20" fill="#171717" stroke="#ccc"/></svg> | `#171717` | Darkest | - | **Background** |
+| 50 | ![#FAFAFA](https://via.placeholder.com/15x15/FAFAFA/FAFAFA?text=+) | `#FAFAFA` | Lightest | **Main background** | **Text color** |
+| 100 | ![#F5F5F5](https://via.placeholder.com/15x15/F5F5F5/F5F5F5?text=+) | `#F5F5F5` | Very light | Card backgrounds | - |
+| 200 | ![#E5E5E5](https://via.placeholder.com/15x15/E5E5E5/E5E5E5?text=+) | `#E5E5E5` | Light | Borders | - |
+| 300 | ![#D4D4D4](https://via.placeholder.com/15x15/D4D4D4/D4D4D4?text=+) | `#D4D4D4` | Medium light | Subtle borders | **Secondary text** |
+| 400 | ![#A3A3A3](https://via.placeholder.com/15x15/A3A3A3/A3A3A3?text=+) | `#A3A3A3` | Medium | Disabled text | **Tertiary text** |
+| 500 | ![#7A7A7A](https://via.placeholder.com/15x15/7A7A7A/7A7A7A?text=+) | `#7A7A7A` | **Base neutral** | Secondary text | - |
+| 600 | ![#525252](https://via.placeholder.com/15x15/525252/525252?text=+) | `#525252` | Medium dark | Primary text | **Disabled text** |
+| 700 | ![#404040](https://via.placeholder.com/15x15/404040/404040?text=+) | `#404040` | Dark | Strong text | **Surface raised** |
+| 800 | ![#262626](https://via.placeholder.com/15x15/262626/262626?text=+) | `#262626` | Very dark | - | **Surface color** |
+| 900 | ![#171717](https://via.placeholder.com/15x15/171717/171717?text=+) | `#171717` | Darkest | - | **Background** |
 
 ### Semantic Colors
 
 #### Success (Green)
 | Shade | Color | Hex Code | Light Theme | Dark Theme |
 |-------|-------|----------|-------------|------------|
-| 50 | <svg width="20" height="20"><rect width="20" height="20" fill="#F0FDF4" stroke="#ccc"/></svg> | `#F0FDF4` | Background tint | - |
-| 400 | <svg width="20" height="20"><rect width="20" height="20" fill="#4ADE80" stroke="#ccc"/></svg> | `#4ADE80` | - | **Success color** |
-| 600 | <svg width="20" height="20"><rect width="20" height="20" fill="#16A34A" stroke="#ccc"/></svg> | `#16A34A` | **Success color** | - |
+| 50 | ![#F0FDF4](https://via.placeholder.com/15x15/F0FDF4/F0FDF4?text=+) | `#F0FDF4` | Background tint | - |
+| 400 | ![#4ADE80](https://via.placeholder.com/15x15/4ADE80/4ADE80?text=+) | `#4ADE80` | - | **Success color** |
+| 600 | ![#16A34A](https://via.placeholder.com/15x15/16A34A/16A34A?text=+) | `#16A34A` | **Success color** | - |
 
 #### Warning (Amber)
 | Shade | Color | Hex Code | Light Theme | Dark Theme |
 |-------|-------|----------|-------------|------------|
-| 50 | <svg width="20" height="20"><rect width="20" height="20" fill="#FFFBEB" stroke="#ccc"/></svg> | `#FFFBEB` | Background tint | - |
-| 400 | <svg width="20" height="20"><rect width="20" height="20" fill="#FBBF24" stroke="#ccc"/></svg> | `#FBBF24` | - | **Warning color** |
-| 500 | <svg width="20" height="20"><rect width="20" height="20" fill="#F59E0B" stroke="#ccc"/></svg> | `#F59E0B` | **Warning color** | - |
+| 50 | ![#FFFBEB](https://via.placeholder.com/15x15/FFFBEB/FFFBEB?text=+) | `#FFFBEB` | Background tint | - |
+| 400 | ![#FBBF24](https://via.placeholder.com/15x15/FBBF24/FBBF24?text=+) | `#FBBF24` | - | **Warning color** |
+| 500 | ![#F59E0B](https://via.placeholder.com/15x15/F59E0B/F59E0B?text=+) | `#F59E0B` | **Warning color** | - |
 
 #### Error (Red)
 | Shade | Color | Hex Code | Light Theme | Dark Theme |
 |-------|-------|----------|-------------|------------|
-| 50 | <svg width="20" height="20"><rect width="20" height="20" fill="#FEF2F2" stroke="#ccc"/></svg> | `#FEF2F2` | Background tint | - |
-| 400 | <svg width="20" height="20"><rect width="20" height="20" fill="#F87171" stroke="#ccc"/></svg> | `#F87171` | - | **Error color** |
-| 600 | <svg width="20" height="20"><rect width="20" height="20" fill="#DC2626" stroke="#ccc"/></svg> | `#DC2626` | **Error color** | - |
+| 50 | ![#FEF2F2](https://via.placeholder.com/15x15/FEF2F2/FEF2F2?text=+) | `#FEF2F2` | Background tint | - |
+| 400 | ![#F87171](https://via.placeholder.com/15x15/F87171/F87171?text=+) | `#F87171` | - | **Error color** |
+| 600 | ![#DC2626](https://via.placeholder.com/15x15/DC2626/DC2626?text=+) | `#DC2626` | **Error color** | - |
 
 #### Info (Blue)
 | Shade | Color | Hex Code | Light Theme | Dark Theme |
 |-------|-------|----------|-------------|------------|
-| 50 | <svg width="20" height="20"><rect width="20" height="20" fill="#EFF6FF" stroke="#ccc"/></svg> | `#EFF6FF` | Background tint | - |
-| 400 | <svg width="20" height="20"><rect width="20" height="20" fill="#60A5FA" stroke="#ccc"/></svg> | `#60A5FA` | - | **Info color** |
-| 600 | <svg width="20" height="20"><rect width="20" height="20" fill="#2563EB" stroke="#ccc"/></svg> | `#2563EB` | **Info color** | - |
+| 50 | ![#EFF6FF](https://via.placeholder.com/15x15/EFF6FF/EFF6FF?text=+) | `#EFF6FF` | Background tint | - |
+| 400 | ![#60A5FA](https://via.placeholder.com/15x15/60A5FA/60A5FA?text=+) | `#60A5FA` | - | **Info color** |
+| 600 | ![#2563EB](https://via.placeholder.com/15x15/2563EB/2563EB?text=+) | `#2563EB` | **Info color** | - |
 
 ---
 
 ## Quick Color Reference
 
 ### Gaming Theme Highlights
-- 🎮 **Primary Dark Theme**: <svg width="20" height="20" style="display:inline-block;vertical-align:middle;"><rect width="20" height="20" fill="#B385B3" stroke="#ccc"/></svg> `#B385B3` - Vibrant plum for gaming UI
-- 🎮 **Background Dark**: <svg width="20" height="20" style="display:inline-block;vertical-align:middle;"><rect width="20" height="20" fill="#171717" stroke="#ccc"/></svg> `#171717` - Deep black for eye strain reduction  
-- 🎮 **Surface Dark**: <svg width="20" height="20" style="display:inline-block;vertical-align:middle;"><rect width="20" height="20" fill="#262626" stroke="#ccc"/></svg> `#262626` - Rich gray for elevated elements
-- 🎮 **Accent Warm**: <svg width="20" height="20" style="display:inline-block;vertical-align:middle;"><rect width="20" height="20" fill="#E6B894" stroke="#ccc"/></svg> `#E6B894` - Warm peach for highlights and CTAs
+- 🎮 **Primary Dark Theme**: ![#B385B3](https://via.placeholder.com/15x15/B385B3/B385B3?text=+) `#B385B3` - Vibrant plum for gaming UI
+- 🎮 **Background Dark**: ![#171717](https://via.placeholder.com/15x15/171717/171717?text=+) `#171717` - Deep black for eye strain reduction  
+- 🎮 **Surface Dark**: ![#262626](https://via.placeholder.com/15x15/262626/262626?text=+) `#262626` - Rich gray for elevated elements
+- 🎮 **Accent Warm**: ![#E6B894](https://via.placeholder.com/15x15/E6B894/E6B894?text=+) `#E6B894` - Warm peach for highlights and CTAs
 
 ## Base Palette Analysis
 
