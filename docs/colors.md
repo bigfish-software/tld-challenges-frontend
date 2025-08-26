@@ -1,173 +1,92 @@
 # Color System Documentation
 
-<details>
-<summary><strong>Color Swatches</strong> (click to expand)</summary>
+## Color Palette Overview
 
-<div style="display: flex; flex-direction: column; gap: 1.5em; font-family: sans-serif;">
-  <!-- Primary -->
-  <div><strong>Primary</strong><br>
-    <div style="display: flex; gap: 0.5em; align-items: flex-end;">
-      <div style="width: 40px; height: 40px; background: #F5F0F5; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #E6D6E6; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #CCADCC; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #B385B3; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #7A5C7A; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #4A2C4A; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #3D233D; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #2F1B2F; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #221322; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #140A14; border: 1px solid #ccc;"></div>
-    </div>
-    <div style="display: flex; gap: 0.5em; font-size: 0.75em; color: #555;">
-      <span>50</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span><span>600</span><span>700</span><span>800</span><span>900</span>
-    </div>
-  </div>
-  <!-- Secondary -->
-  <div><strong>Secondary</strong><br>
-    <div style="display: flex; gap: 0.5em; align-items: flex-end;">
-      <div style="width: 40px; height: 40px; background: #F7F4F4; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #E8E0E0; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #D1C1C2; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #B9A1A3; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #A27E81; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #8B5A5C; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #73484A; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #5B3739; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #432729; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #2B1819; border: 1px solid #ccc;"></div>
-    </div>
-    <div style="display: flex; gap: 0.5em; font-size: 0.75em; color: #555;">
-      <span>50</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span><span>600</span><span>700</span><span>800</span><span>900</span>
-    </div>
-  </div>
-  <!-- Accent -->
-  <div><strong>Accent</strong><br>
-    <div style="display: flex; gap: 0.5em; align-items: flex-end;">
-      <div style="width: 40px; height: 40px; background: #FDF9F4; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #F9EFDE; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #F3DFBD; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #EDCF9C; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #E6B894; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #D9A373; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #C08752; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #A06B31; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #7A4F10; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #4D3200; border: 1px solid #ccc;"></div>
-    </div>
-    <div style="display: flex; gap: 0.5em; font-size: 0.75em; color: #555;">
-      <span>50</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span><span>600</span><span>700</span><span>800</span><span>900</span>
-    </div>
-  </div>
-  <!-- Neutral -->
-  <div><strong>Neutral</strong><br>
-    <div style="display: flex; gap: 0.5em; align-items: flex-end;">
-      <div style="width: 40px; height: 40px; background: #FAFAFA; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #F5F5F5; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #E5E5E5; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #D4D4D4; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #A3A3A3; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #7A7A7A; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #525252; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #404040; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #262626; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #171717; border: 1px solid #ccc;"></div>
-    </div>
-    <div style="display: flex; gap: 0.5em; font-size: 0.75em; color: #555;">
-      <span>50</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span><span>600</span><span>700</span><span>800</span><span>900</span>
-    </div>
-  </div>
-  <!-- Surface -->
-  <div><strong>Surface</strong><br>
-    <div style="display: flex; gap: 0.5em; align-items: flex-end;">
-      <div style="width: 40px; height: 40px; background: #FCFCFB; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #F8F7F5; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #EFEDE8; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #E5E2DB; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #D1CCC1; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #B8B0A8; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #9B938A; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #7E766C; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #615A4E; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #443D30; border: 1px solid #ccc;"></div>
-    </div>
-    <div style="display: flex; gap: 0.5em; font-size: 0.75em; color: #555;">
-      <span>50</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span><span>600</span><span>700</span><span>800</span><span>900</span>
-    </div>
-  </div>
-  <!-- Semantic: Success -->
-  <div><strong>Success</strong><br>
-    <div style="display: flex; gap: 0.5em; align-items: flex-end;">
-      <div style="width: 40px; height: 40px; background: #F0FDF4; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #DCFCE7; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #BBF7D0; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #86EFAC; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #4ADE80; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #22C55E; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #16A34A; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #15803D; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #166534; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #14532D; border: 1px solid #ccc;"></div>
-    </div>
-    <div style="display: flex; gap: 0.5em; font-size: 0.75em; color: #555;">
-      <span>50</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span><span>600</span><span>700</span><span>800</span><span>900</span>
-    </div>
-  </div>
-  <!-- Semantic: Warning -->
-  <div><strong>Warning</strong><br>
-    <div style="display: flex; gap: 0.5em; align-items: flex-end;">
-      <div style="width: 40px; height: 40px; background: #FFFBEB; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #FEF3C7; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #FDE68A; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #FCD34D; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #FBBF24; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #F59E0B; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #D97706; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #B45309; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #92400E; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #78350F; border: 1px solid #ccc;"></div>
-    </div>
-    <div style="display: flex; gap: 0.5em; font-size: 0.75em; color: #555;">
-      <span>50</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span><span>600</span><span>700</span><span>800</span><span>900</span>
-    </div>
-  </div>
-  <!-- Semantic: Error -->
-  <div><strong>Error</strong><br>
-    <div style="display: flex; gap: 0.5em; align-items: flex-end;">
-      <div style="width: 40px; height: 40px; background: #FEF2F2; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #FEE2E2; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #FECACA; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #FCA5A5; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #F87171; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #EF4444; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #DC2626; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #B91C1C; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #991B1B; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #7F1D1D; border: 1px solid #ccc;"></div>
-    </div>
-    <div style="display: flex; gap: 0.5em; font-size: 0.75em; color: #555;">
-      <span>50</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span><span>600</span><span>700</span><span>800</span><span>900</span>
-    </div>
-  </div>
-  <!-- Semantic: Info -->
-  <div><strong>Info</strong><br>
-    <div style="display: flex; gap: 0.5em; align-items: flex-end;">
-      <div style="width: 40px; height: 40px; background: #EFF6FF; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #DBEAFE; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #BFDBFE; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #93C5FD; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #60A5FA; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #3B82F6; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #2563EB; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #1D4ED8; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #1E40AF; border: 1px solid #ccc;"></div>
-      <div style="width: 40px; height: 40px; background: #1E3A8A; border: 1px solid #ccc;"></div>
-    </div>
-    <div style="display: flex; gap: 0.5em; font-size: 0.75em; color: #555;">
-      <span>50</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500</span><span>600</span><span>700</span><span>800</span><span>900</span>
-    </div>
-  </div>
-</div>
-</details>
+### Primary Colors
+| Shade | Hex Code | Usage | Light Theme | Dark Theme |
+|-------|----------|-------|-------------|------------|
+| 50 | `#F5F0F5` | Lightest tint | Backgrounds | - |
+| 100 | `#E6D6E6` | Very light | Subtle backgrounds | - |
+| 200 | `#CCADCC` | Light | Hover states | Active states |
+| 300 | `#B385B3` | Medium light | Borders | Primary color |
+| 400 | `#7A5C7A` | Medium | Secondary text | Focus states |
+| 500 | `#4A2C4A` | **Base color** | Primary actions | - |
+| 600 | `#3D233D` | Medium dark | Hover states | - |
+| 700 | `#2F1B2F` | Dark | Active states | - |
+| 800 | `#221322` | Very dark | Text | - |
+| 900 | `#140A14` | Darkest | Strong text | - |
+
+### Secondary Colors  
+| Shade | Hex Code | Usage | Light Theme | Dark Theme |
+|-------|----------|-------|-------------|------------|
+| 50 | `#F7F4F4` | Lightest tint | Backgrounds | - |
+| 100 | `#E8E0E0` | Very light | Subtle backgrounds | - |
+| 200 | `#D1C1C2` | Light | Borders | Hover states |
+| 300 | `#B9A1A3` | Medium light | Subtle text | Secondary color |
+| 400 | `#A27E81` | Medium | Secondary elements | - |
+| 500 | `#8B5A5C` | **Base color** | Secondary actions | - |
+| 600 | `#73484A` | Medium dark | Hover states | - |
+| 700 | `#5B3739` | Dark | Active states | - |
+| 800 | `#432729` | Very dark | Text | - |
+| 900 | `#2B1819` | Darkest | Strong text | - |
+
+### Accent Colors
+| Shade | Hex Code | Usage | Light Theme | Dark Theme |
+|-------|----------|-------|-------------|------------|
+| 50 | `#FDF9F4` | Lightest tint | Backgrounds | - |
+| 100 | `#F9EFDE` | Very light | Subtle backgrounds | - |
+| 200 | `#F3DFBD` | Light | Borders | - |
+| 300 | `#EDCF9C` | Medium light | Subtle accents | Accent color |
+| 400 | `#E6B894` | **Base color** | Accent elements | Accent elements |
+| 500 | `#D9A373` | Medium | Hover states | - |
+| 600 | `#C08752` | Medium dark | Active states | - |
+| 700 | `#A06B31` | Dark | Strong accents | - |
+| 800 | `#7A4F10` | Very dark | Text on light | - |
+| 900 | `#4D3200` | Darkest | Strong text | - |
+
+### Neutral Colors
+| Shade | Hex Code | Usage | Light Theme | Dark Theme |
+|-------|----------|-------|-------------|------------|
+| 50 | `#FAFAFA` | Lightest | Main background | Text color |
+| 100 | `#F5F5F5` | Very light | Card backgrounds | - |
+| 200 | `#E5E5E5` | Light | Borders | - |
+| 300 | `#D4D4D4` | Medium light | Subtle borders | Secondary text |
+| 400 | `#A3A3A3` | Medium | Disabled text | Tertiary text |
+| 500 | `#7A7A7A` | **Base neutral** | Secondary text | - |
+| 600 | `#525252` | Medium dark | Primary text | Disabled text |
+| 700 | `#404040` | Dark | Strong text | Surface raised |
+| 800 | `#262626` | Very dark | - | Surface color |
+| 900 | `#171717` | Darkest | - | Background |
+
+### Semantic Colors
+
+#### Success (Green)
+| Shade | Hex Code | Light Theme | Dark Theme |
+|-------|----------|-------------|------------|
+| 50 | `#F0FDF4` | Background tint | - |
+| 400 | `#4ADE80` | - | Success color |
+| 600 | `#16A34A` | Success color | - |
+
+#### Warning (Amber)
+| Shade | Hex Code | Light Theme | Dark Theme |
+|-------|----------|-------------|------------|
+| 50 | `#FFFBEB` | Background tint | - |
+| 400 | `#FBBF24` | - | Warning color |
+| 500 | `#F59E0B` | Warning color | - |
+
+#### Error (Red)
+| Shade | Hex Code | Light Theme | Dark Theme |
+|-------|----------|-------------|------------|
+| 50 | `#FEF2F2` | Background tint | - |
+| 400 | `#F87171` | - | Error color |
+| 600 | `#DC2626` | Error color | - |
+
+#### Info (Blue)
+| Shade | Hex Code | Light Theme | Dark Theme |
+|-------|----------|-------------|------------|
+| 50 | `#EFF6FF` | Background tint | - |
+| 400 | `#60A5FA` | - | Info color |
+| 600 | `#2563EB` | Info color | - |
 
 ## Base Palette Analysis
 
