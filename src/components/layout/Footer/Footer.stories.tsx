@@ -56,7 +56,36 @@ export const Mobile: Story = {
     docs: {
       description: {
         story: 'Footer component on mobile devices. Tests community links layout, spacing, and responsive behavior on small screens.'
+      },
+      story: {
+        inline: false,
+        iframeHeight: 400
       }
     }
-  }
+  },
+  render: () => (
+    <div style={{ maxWidth: '375px', margin: '0 auto' }}>
+      <style>{`
+        /* Force mobile layout in Storybook docs */
+        .mobile-footer-demo .md\\:grid-cols-4 { 
+          grid-template-columns: repeat(1, minmax(0, 1fr)) !important; 
+        }
+        .mobile-footer-demo .md\\:col-span-2 { 
+          grid-column: span 1 / span 1 !important; 
+        }
+        .mobile-footer-demo .sm\\:flex-row { 
+          flex-direction: column !important; 
+        }
+        .mobile-footer-demo .sm\\:mt-0 { 
+          margin-top: 0.5rem !important; 
+        }
+        .mobile-footer-demo .sm\\:justify-between { 
+          justify-content: center !important; 
+        }
+      `}</style>
+      <div className="bg-white dark:bg-slate-900 mobile-footer-demo">
+        <Footer />
+      </div>
+    </div>
+  )
 };

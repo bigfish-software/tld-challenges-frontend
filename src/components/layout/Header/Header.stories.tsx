@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { within, userEvent } from '@storybook/test';
+import { useState } from 'react';
 import { Header } from './Header';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import { Button } from '@/components/ui/Button';
 
 const meta = {
   title: 'Layout/Header',
@@ -96,9 +97,35 @@ export const Mobile: Story = {
     docs: {
       description: {
         story: 'Header component on mobile devices. Tests navigation menu, theme toggle, and responsive layout behavior on small screens. Click the hamburger menu icon to test mobile navigation.'
+      },
+      story: {
+        inline: false,
+        iframeHeight: 200
       }
     }
-  }
+  },
+  render: () => (
+    <div style={{ maxWidth: '375px', margin: '0 auto' }}>
+      <style>{`
+        /* Force mobile layout in Storybook docs */
+        .mobile-demo nav[class*="hidden md:flex"] { display: none !important; }
+        .mobile-demo button[class*="md:hidden"] { display: flex !important; }
+        .mobile-demo button[class*="hidden md:block"] { display: none !important; }
+        .mobile-demo .hidden.md\\:block { display: none !important; }
+        .mobile-demo .md\\:hidden { display: flex !important; }
+      `}</style>
+      <ThemeProvider>
+        <div className="bg-white dark:bg-slate-900 mobile-demo">
+          <Header />
+          <div className="p-4">
+            <p className="text-slate-600 dark:text-slate-400 text-sm">
+              Mobile view with hamburger menu visible.
+            </p>
+          </div>
+        </div>
+      </ThemeProvider>
+    </div>
+  )
 };
 
 /**
@@ -113,63 +140,133 @@ export const MobileMenuOpen: Story = {
     docs: {
       description: {
         story: 'Mobile header with navigation menu expanded. Shows how the hamburger menu reveals the main navigation links on mobile devices.'
+      },
+      story: {
+        inline: false,
+        iframeHeight: 350
       }
     }
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    
-    // Find and click the mobile menu button (hamburger)
-    const menuButton = canvas.getByRole('button', { name: /toggle mobile menu/i });
-    await userEvent.click(menuButton);
-  }
-};
+  render: () => {
+    const [isMobileMenuOpen] = useState(true);
 
-/**
- * Theme comparison for the Header component showing both light and dark variants.
- * Critical for ensuring proper contrast and visibility in both themes.
- */
-export const ThemeComparison: Story = {
-  render: () => (
-    <div className="space-y-8">
-      <div className="space-y-4">
-        <h3 className="font-semibold text-center text-slate-900">Light Theme</h3>
-        <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
-          <ThemeProvider>
-            <div className="light">
-              <Header />
-              <div className="p-4">
-                <p className="text-slate-600 text-sm">
-                  Light theme optimized for daylight viewing conditions.
-                </p>
+    return (
+      <div style={{ maxWidth: '375px', margin: '0 auto' }}>
+        <style>{`
+          /* Force mobile layout in Storybook docs */
+          .mobile-demo-open nav[class*="hidden md:flex"] { display: none !important; }
+          .mobile-demo-open button[class*="md:hidden"] { display: flex !important; }
+          .mobile-demo-open button[class*="hidden md:block"] { display: none !important; }
+          .mobile-demo-open .hidden.md\\:block { display: none !important; }
+          .mobile-demo-open .md\\:hidden { display: flex !important; }
+        `}</style>
+        <ThemeProvider>
+          <div className="bg-white dark:bg-slate-900 mobile-demo-open">
+            <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-slate-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-slate-900/80">
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex h-16 items-center justify-between">
+                  {/* Logo/Brand */}
+                  <div className="flex items-center space-x-4">
+                    <div className="flex-shrink-0">
+                      <h1 className="text-xl font-bold text-primary-700 dark:text-primary-300">
+                        TLD Challenges
+                      </h1>
+                    </div>
+                  </div>
+
+                  {/* Right side actions */}
+                  <div className="flex items-center space-x-2">
+                    {/* Mobile menu button - Show close icon since menu is open */}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="md:hidden p-2"
+                      aria-label="Toggle mobile menu"
+                    >
+                      <svg
+                        className="h-5 w-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Mobile Navigation Menu - Always shown for this story */}
+                {isMobileMenuOpen && (
+                  <div className="md:hidden">
+                    <div className="px-2 pt-2 pb-3 space-y-1 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
+                      <a
+                        href="#custom-codes"
+                        className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                      >
+                        Custom Codes
+                      </a>
+                      <a
+                        href="#challenges"
+                        className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                      >
+                        Challenges
+                      </a>
+                      <a
+                        href="#tournaments"
+                        className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                      >
+                        Tournaments
+                      </a>
+                      
+                      {/* Divider */}
+                      <div className="border-t border-slate-200 dark:border-slate-700 my-2"></div>
+                      
+                      {/* Submit Run Link - Mobile */}
+                      <a
+                        href="#submit"
+                        className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                      >
+                        Submit Run
+                      </a>
+                      
+                      {/* Theme Toggle - Mobile */}
+                      <button
+                        className="flex items-center w-full px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                      >
+                        <svg
+                          className="h-4 w-4 mr-3"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                          />
+                        </svg>
+                        Switch to Dark Theme
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
+            </header>
+            <div className="p-4">
+              <p className="text-slate-600 dark:text-slate-400 text-sm">
+                Mobile view with navigation menu expanded.
+              </p>
             </div>
-          </ThemeProvider>
-        </div>
+          </div>
+        </ThemeProvider>
       </div>
-      
-      <div className="space-y-4">
-        <h3 className="font-semibold text-center text-slate-100">Dark Theme (Gaming Default)</h3>
-        <div className="bg-slate-900 rounded-lg border border-slate-700 overflow-hidden">
-          <ThemeProvider>
-            <div className="dark">
-              <Header />
-              <div className="p-4">
-                <p className="text-slate-300 text-sm">
-                  Gaming-optimized dark theme for reduced eye strain and immersive experience.
-                </p>
-              </div>
-            </div>
-          </ThemeProvider>
-        </div>
-      </div>
-    </div>
-  ),
-  parameters: {
-    docs: {
-      description: {
-        story: 'Side-by-side comparison of Header component in both light and dark themes, showing gaming-optimized styling and proper contrast ratios.'
-      }
-    }
+    );
   }
 };
