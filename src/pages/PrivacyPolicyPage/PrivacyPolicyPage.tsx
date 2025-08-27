@@ -1,5 +1,6 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { externalLinks } from '@/config/externalLinks';
 
 export const PrivacyPolicyPage = () => {
   return (
@@ -179,8 +180,8 @@ export const PrivacyPolicyPage = () => {
                 If you have any questions about this privacy policy or our data practices, you can reach us:
               </p>
               <ul className="list-disc pl-6 mb-4 space-y-2">
-                <li><strong>GitHub:</strong> <a href="https://github.com/bigfish-software/tld-challenges-frontend/issues" className="text-primary-600 dark:text-primary-400 hover:underline" target="_blank" rel="noopener noreferrer">Open an issue on GitHub</a></li>
-                <li><strong>Community:</strong> Through our Discord server (link in footer)</li>
+                <li><strong>GitHub Issues:</strong> <a href={externalLinks.support.githubIssues.url} className="text-primary-600 dark:text-primary-400 hover:underline" target="_blank" rel="noopener noreferrer">{externalLinks.support.githubIssues.label}</a> - {externalLinks.support.githubIssues.description}</li>
+                <li><strong>Discord Community:</strong> <a href={externalLinks.community.discord.url} className="text-primary-600 dark:text-primary-400 hover:underline" target="_blank" rel="noopener noreferrer">{externalLinks.community.discord.label}</a> - {externalLinks.community.discord.description}</li>
               </ul>
             </section>
 

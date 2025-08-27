@@ -174,6 +174,57 @@ const submitRun = useMutation({
 
 ## Development Guidelines
 
+### External Links Configuration
+
+The application uses a centralized configuration system for all external links to ensure consistency and ease of maintenance.
+
+#### Configuration Structure
+```typescript
+// src/config/externalLinks.ts
+export const externalLinks: ExternalLinksConfig = {
+  community: {
+    github: { url: 'https://github.com/bigfish-software', label: 'GitHub' },
+    discord: { url: 'https://discord.gg/tld-challenges', label: 'Discord' },
+    bigfishTwitch: { url: 'https://twitch.tv/bigfishsoftware', label: 'BigFish Twitch' },
+    chefmariaTwitch: { url: 'https://twitch.tv/chefmaria', label: 'ChefMaria Twitch' },
+    bigfishMods: { url: 'https://github.com/bigfish-software/bigfish-mods', label: 'BigFish Mods' }
+  },
+  support: {
+    githubIssues: { url: 'https://github.com/bigfish-software/tld-challenges-frontend/issues', label: 'GitHub Issues' }
+  },
+  // ... more categories
+};
+```
+
+#### Usage Examples
+```typescript
+// Import the configuration
+import { externalLinks, getExternalUrl, getGitHubUrl, getDiscordUrl } from '@/config/externalLinks';
+
+// Use in components
+<a href={externalLinks.community.github.url} target="_blank" rel="noopener noreferrer">
+  {externalLinks.community.github.label}
+</a>
+
+// Helper functions
+const githubUrl = getExternalUrl('community.github');
+const discordUrl = getDiscordUrl(); // Type-safe helper for Discord
+const githubDirectUrl = getGitHubUrl(); // Type-safe helper for GitHub
+```
+
+#### Benefits
+- **Single Source of Truth**: All external links managed in one place
+- **Type Safety**: TypeScript interfaces ensure correct usage
+- **Easy Updates**: Change URLs centrally rather than hunting through components
+- **Consistency**: Standardized labels and descriptions across the application
+- **Helper Functions**: Convenient utilities for common link access patterns
+
+#### Adding New Links
+1. Add the link to the appropriate category in `externalLinks.ts`
+2. Update the TypeScript interfaces if adding new categories
+3. Create helper functions for commonly used links
+4. Update components to use the new configuration
+
 ### Code Quality Standards
 - **TypeScript Strict Mode**: All code must pass strict type checking
 - **ESLint + Prettier**: Consistent code formatting and linting rules
@@ -459,7 +510,6 @@ MIT License - see LICENSE file for details
 
 ### Getting Help
 - **GitHub Issues**: Report bugs and request features
-- **Discussions**: Community questions and general discussion
 - **Pull Requests**: Contribute improvements and fixes
 - **Documentation**: Help improve project documentation
 
