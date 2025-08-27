@@ -73,10 +73,18 @@ export const NotFoundPage = () => {
               <ul className="space-y-2 text-sm">
                 <li>
                   <a 
+                    href="#custom-codes" 
+                    className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+                  >
+                    → Custom Codes
+                  </a>
+                </li>
+                <li>
+                  <a 
                     href="#challenges" 
                     className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
                   >
-                    → Browse Challenges
+                    → Challenges
                   </a>
                 </li>
                 <li>
@@ -84,15 +92,15 @@ export const NotFoundPage = () => {
                     href="#tournaments" 
                     className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
                   >
-                    → Active Tournaments
+                    → Tournaments
                   </a>
                 </li>
                 <li>
                   <a 
-                    href="#leaderboard" 
+                    href="#faq" 
                     className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
                   >
-                    → Leaderboard
+                    → FAQ
                   </a>
                 </li>
                 <li>
