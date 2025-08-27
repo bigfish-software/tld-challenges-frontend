@@ -63,29 +63,37 @@ export const Mobile: Story = {
       }
     }
   },
-  render: () => (
-    <div style={{ maxWidth: '375px', margin: '0 auto' }}>
-      <style>{`
-        /* Force mobile layout in Storybook docs */
-        .mobile-footer-demo .md\\:grid-cols-4 { 
-          grid-template-columns: repeat(1, minmax(0, 1fr)) !important; 
-        }
-        .mobile-footer-demo .md\\:col-span-2 { 
-          grid-column: span 1 / span 1 !important; 
-        }
-        .mobile-footer-demo .sm\\:flex-row { 
-          flex-direction: column !important; 
-        }
-        .mobile-footer-demo .sm\\:mt-0 { 
-          margin-top: 0.5rem !important; 
-        }
-        .mobile-footer-demo .sm\\:justify-between { 
-          justify-content: center !important; 
-        }
-      `}</style>
-      <div className="bg-white dark:bg-slate-900 mobile-footer-demo">
-        <Footer />
+  render: (_, context) => {
+    // Simply check for dark background value from Storybook
+    const background = context.globals?.backgrounds?.value;
+    const isDark = background && (background.includes('#1f2937') || background.includes('#0f172a') || background === 'dark');
+    
+    return (
+      <div style={{ maxWidth: '375px', margin: '0 auto', backgroundColor: isDark ? '#1f2937' : '#ffffff' }}>
+        <style>{`
+          /* Force mobile layout in Storybook docs */
+          .mobile-footer-demo .md\\:grid-cols-4 { 
+            grid-template-columns: repeat(1, minmax(0, 1fr)) !important; 
+          }
+          .mobile-footer-demo .md\\:col-span-2 { 
+            grid-column: span 1 / span 1 !important; 
+          }
+          .mobile-footer-demo .sm\\:flex-row { 
+            flex-direction: column !important; 
+          }
+          .mobile-footer-demo .sm\\:mt-0 { 
+            margin-top: 0.5rem !important; 
+          }
+          .mobile-footer-demo .sm\\:justify-between { 
+            justify-content: center !important; 
+          }
+        `}</style>
+        <div className={`mobile-footer-demo ${isDark ? 'dark' : ''}`}>
+          <div className="bg-white dark:bg-slate-900">
+            <Footer />
+          </div>
+        </div>
       </div>
-    </div>
-  )
+    );
+  }
 };

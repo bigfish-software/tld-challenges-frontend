@@ -37,6 +37,12 @@ The main header component for TLD Challenges with navigation, theme toggle, and 
   decorators: [
     (Story, context) => {
       const isDocsView = context.viewMode === 'docs';
+      const storyName = context.name;
+      
+      // Mobile stories should not use the default decorator
+      if (storyName === 'Mobile' || storyName === 'Mobile Menu Open') {
+        return <Story />;
+      }
       
       if (isDocsView) {
         // Compact decorator for docs view - with minimal sample content and proper spacing
@@ -46,7 +52,7 @@ The main header component for TLD Challenges with navigation, theme toggle, and 
               <Story />
               <div className="px-4 py-3">
                 <p className="text-slate-600 dark:text-slate-400 text-sm">
-                  This is sample content to show how the header looks with page content below.
+                  Sample content to show how the header looks with page content below.
                 </p>
               </div>
             </div>
@@ -104,28 +110,36 @@ export const Mobile: Story = {
       }
     }
   },
-  render: () => (
-    <div style={{ maxWidth: '375px', margin: '0 auto' }}>
-      <style>{`
-        /* Force mobile layout in Storybook docs */
-        .mobile-demo nav[class*="hidden md:flex"] { display: none !important; }
-        .mobile-demo button[class*="md:hidden"] { display: flex !important; }
-        .mobile-demo button[class*="hidden md:block"] { display: none !important; }
-        .mobile-demo .hidden.md\\:block { display: none !important; }
-        .mobile-demo .md\\:hidden { display: flex !important; }
-      `}</style>
-      <ThemeProvider>
-        <div className="bg-white dark:bg-slate-900 mobile-demo">
-          <Header />
-          <div className="p-4">
-            <p className="text-slate-600 dark:text-slate-400 text-sm">
-              Mobile view with hamburger menu visible.
-            </p>
+  render: (_, context) => {
+    // Simply check for dark background value from Storybook
+    const background = context.globals?.backgrounds?.value;
+    const isDark = background && (background.includes('#1f2937') || background.includes('#0f172a') || background === 'dark');
+    
+    return (
+      <div style={{ maxWidth: '375px', margin: '0 auto', minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: isDark ? '#1f2937' : '#ffffff' }}>
+        <style>{`
+          /* Force mobile layout in Storybook docs */
+          .mobile-demo nav[class*="hidden md:flex"] { display: none !important; }
+          .mobile-demo button[class*="md:hidden"] { display: flex !important; }
+          .mobile-demo button[class*="hidden md:block"] { display: none !important; }
+          .mobile-demo .hidden.md\\:block { display: none !important; }
+          .mobile-demo .md\\:hidden { display: flex !important; }
+        `}</style>
+        <ThemeProvider>
+          <div className={`mobile-demo flex-1 ${isDark ? 'dark' : ''}`}>
+            <div className="bg-white dark:bg-slate-900">
+              <Header />
+              <div className="p-4">
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                  Mobile header with hamburger menu. Tap menu to navigate.
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </ThemeProvider>
-    </div>
-  )
+        </ThemeProvider>
+      </div>
+    );
+  }
 };
 
 /**
@@ -143,15 +157,19 @@ export const MobileMenuOpen: Story = {
       },
       story: {
         inline: false,
-        iframeHeight: 350
+        iframeHeight: 450
       }
     }
   },
-  render: () => {
+  render: (_, context) => {
     const [isMobileMenuOpen] = useState(true);
+    
+    // Simply check for dark background value from Storybook
+    const background = context.globals?.backgrounds?.value;
+    const isDark = background && (background.includes('#1f2937') || background.includes('#0f172a') || background === 'dark');
 
     return (
-      <div style={{ maxWidth: '375px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '375px', margin: '0 auto', minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: isDark ? '#1f2937' : '#ffffff' }}>
         <style>{`
           /* Force mobile layout in Storybook docs */
           .mobile-demo-open nav[class*="hidden md:flex"] { display: none !important; }
@@ -161,8 +179,9 @@ export const MobileMenuOpen: Story = {
           .mobile-demo-open .md\\:hidden { display: flex !important; }
         `}</style>
         <ThemeProvider>
-          <div className="bg-white dark:bg-slate-900 mobile-demo-open">
-            <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-slate-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-slate-900/80">
+          <div className={`mobile-demo-open flex-1 ${isDark ? 'dark' : ''}`}>
+            <div className="bg-white dark:bg-slate-900">
+              <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-slate-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-slate-900/80">
               <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                   {/* Logo/Brand */}
@@ -260,9 +279,10 @@ export const MobileMenuOpen: Story = {
               </div>
             </header>
             <div className="p-4">
-              <p className="text-slate-600 dark:text-slate-400 text-sm">
-                Mobile view with navigation menu expanded.
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                Navigation menu open. Includes all links plus theme toggle.
               </p>
+            </div>
             </div>
           </div>
         </ThemeProvider>
