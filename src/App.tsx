@@ -1,10 +1,17 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { NotFoundPageLayout } from '@/pages/NotFoundPage';
+import { PrivacyPolicyPage } from '@/pages/PrivacyPolicyPage';
 
 function App() {
   return (
     <ThemeProvider>
-      <NotFoundPageLayout />
+      <Router>
+        <Routes>
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="*" element={<NotFoundPageLayout />} />
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }

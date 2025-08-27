@@ -31,12 +31,22 @@ Frontend (React + TypeScript) → Strapi API (backend repo) → PostgreSQL Datab
 - **Custom Game Codes**: Shareable game configuration codes for challenges
 
 ### User Journey Flow
-1. **Browse Challenges**: Users explore available challenges by category and difficulty
-2. **View Challenge Details**: Complete challenge specifications, rules, and custom game codes
-3. **Submit Runs**: Anonymous submission system for challenge completion videos
-4. **Tournament Participation**: View tournament standings and submit competition runs
-5. **Creator Profiles**: Browse challenges by specific community creators
-6. **FAQ System**: Context-aware help system for challenges, tournaments, and custom codes
+1. **Browse Custom Codes**: Users discover shareable game configuration codes that enable challenges
+2. **Explore Challenges**: Users browse available challenges by category and difficulty
+3. **View Challenge Details**: Complete challenge specifications, rules, and custom game codes
+4. **Submit Runs**: Anonymous submission system for challenge completion videos
+5. **Tournament Participation**: View tournament standings and submit competition runs
+6. **Creator Profiles**: Browse challenges by specific community creators
+7. **FAQ System**: Context-aware help system for challenges, tournaments, and custom codes
+
+### Platform Navigation Structure
+The main navigation emphasizes the platform's key features in order of importance:
+
+- **Custom Codes** are fundamental to the platform - they're the shareable game configuration codes that enable challenges
+- **Challenges** are the core feature where users browse and participate in community challenges  
+- **Tournaments** are the organized competitive events built on top of challenges
+
+This navigation hierarchy reflects the platform's unique value proposition, with Custom Codes being the foundational feature that distinguishes TLD Challenges from other gaming platforms.
 
 ## Architecture Guidelines
 

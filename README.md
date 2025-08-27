@@ -45,6 +45,15 @@ All data operations follow this strict pattern:
 - **Custom Game Codes**: Access shareable game configuration codes for challenges
 - **FAQ System**: Context-aware help system across all content types
 
+### Platform Navigation Structure
+The main navigation emphasizes the platform's key features in order of importance:
+
+- **Custom Codes** are fundamental to the platform - they're the shareable game configuration codes that enable challenges
+- **Challenges** are the core feature where users browse and participate in community challenges  
+- **Tournaments** are the organized competitive events built on top of challenges
+
+This navigation hierarchy reflects the platform's unique value proposition, with Custom Codes being the foundational feature that distinguishes TLD Challenges from other gaming platforms.
+
 ### User Experience Features
 - **Responsive Design**: Mobile-first approach with excellent mobile experience
 - **Light/Dark Theme Support**: Automatic system preference detection with manual toggle for gaming preferences

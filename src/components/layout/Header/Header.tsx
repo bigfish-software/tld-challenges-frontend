@@ -20,6 +20,12 @@ export const Header = () => {
           {/* Navigation - Simple for now */}
           <nav className="hidden md:flex items-center space-x-6">
             <a
+              href="#custom-codes"
+              className="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+            >
+              Custom Codes
+            </a>
+            <a
               href="#challenges"
               className="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
@@ -30,12 +36,6 @@ export const Header = () => {
               className="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Tournaments
-            </a>
-            <a
-              href="#leaderboard"
-              className="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-            >
-              Leaderboard
             </a>
           </nav>
 
