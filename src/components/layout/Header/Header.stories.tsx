@@ -7,9 +7,25 @@ const meta = {
   component: Header,
   parameters: {
     layout: 'fullscreen',
+    viewport: {
+      defaultViewport: 'responsive'
+    },
     docs: {
       description: {
-        component: 'The main header component for TLD Challenges with navigation, theme toggle, and gaming-optimized design.',
+        component: `
+The main header component for TLD Challenges with navigation, theme toggle, and gaming-optimized design.
+
+## Key Features
+- **Navigation Menu**: Custom Codes, Challenges, Tournaments with proper hierarchy
+- **Theme Toggle**: Light/dark mode switching with gaming-optimized defaults
+- **Submit Run Button**: Prominent call-to-action for challenge submissions
+- **Responsive Design**: Adaptive layout for all device sizes
+- **Sticky Positioning**: Remains accessible during page scrolling
+
+## Available Stories
+- **Default**: Complete header with all navigation and functionality
+- **Mobile**: Mobile viewport testing for responsive design issues
+        `,
       },
     },
   },
@@ -63,4 +79,21 @@ export const Default: Story = {
       },
     },
   },
+};
+
+/**
+ * Mobile viewport view to test responsive design and navigation behavior.
+ * Critical for identifying layout issues on smaller screens.
+ */
+export const Mobile: Story = {
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1'
+    },
+    docs: {
+      description: {
+        story: 'Header component on mobile devices. Tests navigation menu, theme toggle, and responsive layout behavior on small screens.'
+      }
+    }
+  }
 };

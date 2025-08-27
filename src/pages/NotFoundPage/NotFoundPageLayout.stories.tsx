@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { NotFoundPageLayout } from './NotFoundPageLayout';
+import { NotFoundPageContent } from './NotFoundPageContent';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 
 const meta = {
@@ -7,6 +8,9 @@ const meta = {
   component: NotFoundPageLayout,
   parameters: {
     layout: 'fullscreen',
+    viewport: {
+      defaultViewport: 'responsive'
+    },
     docs: {
       description: {
         component: `
@@ -59,8 +63,8 @@ export const ThemeComparison: Story = {
       <div className="space-y-4">
         <h3 className="text-xl font-semibold text-center">Light Theme</h3>
         <div className="border border-slate-300 rounded-lg overflow-hidden">
-          <div className="bg-white">
-            <NotFoundPageLayout />
+          <div className="bg-white min-h-[600px]">
+            <NotFoundPageContent />
           </div>
         </div>
       </div>
@@ -68,8 +72,8 @@ export const ThemeComparison: Story = {
       <div className="space-y-4">
         <h3 className="text-xl font-semibold text-center">Dark Theme</h3>
         <div className="border border-slate-700 rounded-lg overflow-hidden">
-          <div className="dark">
-            <NotFoundPageLayout />
+          <div className="dark bg-slate-900 min-h-[600px]">
+            <NotFoundPageContent />
           </div>
         </div>
       </div>

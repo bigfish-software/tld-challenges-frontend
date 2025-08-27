@@ -6,9 +6,25 @@ const meta = {
   component: Footer,
   parameters: {
     layout: 'fullscreen',
+    viewport: {
+      defaultViewport: 'responsive'
+    },
     docs: {
       description: {
-        component: 'The site footer with community links and information.',
+        component: `
+The site footer with community links and information.
+
+## Key Features
+- **Community Links**: GitHub, Discord, Twitch channels with proper icons
+- **External Links Integration**: Uses centralized external links configuration
+- **TLD-Themed Tagline**: Gaming community-focused messaging
+- **Responsive Layout**: Adaptive design for all screen sizes
+- **Theme Support**: Full light/dark theme variants
+
+## Available Stories
+- **Default**: Complete footer with all community links and information
+- **Mobile**: Mobile viewport testing for responsive layout behavior
+        `,
       },
     },
   },
@@ -26,4 +42,21 @@ export const Default: Story = {
       },
     },
   },
+};
+
+/**
+ * Mobile viewport view to test responsive design and layout behavior.
+ * Shows how community links and content adapt to smaller screens.
+ */
+export const Mobile: Story = {
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1'
+    },
+    docs: {
+      description: {
+        story: 'Footer component on mobile devices. Tests community links layout, spacing, and responsive behavior on small screens.'
+      }
+    }
+  }
 };

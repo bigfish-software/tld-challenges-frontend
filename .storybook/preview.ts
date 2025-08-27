@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import '../src/index.css';
 
 const ThemeDecorator = (Story: any, context: any) => {
-  const theme = context.globals.theme || 'dark';
+  const theme = context.globals.theme || 'light';
   const viewMode = context.viewMode || 'story'; // 'story' for Canvas, 'docs' for Docs
   
   // Apply theme class to document root for Tailwind CSS
@@ -167,7 +167,7 @@ const preview: Preview = {
   globalTypes: {
     theme: {
       description: 'Global theme for components',
-      defaultValue: 'dark',
+      defaultValue: 'light',
       toolbar: {
         title: 'Theme',
         icon: 'paintbrush',
