@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { within, userEvent } from '@storybook/test';
 import { Header } from './Header';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 
@@ -17,14 +18,16 @@ The main header component for TLD Challenges with navigation, theme toggle, and 
 
 ## Key Features
 - **Navigation Menu**: Custom Codes, Challenges, Tournaments with proper hierarchy
+- **Mobile Menu**: Hamburger menu with slide-down navigation for mobile devices
 - **Theme Toggle**: Light/dark mode switching with gaming-optimized defaults
 - **Submit Run Button**: Prominent call-to-action for challenge submissions
-- **Responsive Design**: Adaptive layout for all device sizes
+- **Responsive Design**: Adaptive layout for all device sizes with mobile navigation
 - **Sticky Positioning**: Remains accessible during page scrolling
 
 ## Available Stories
 - **Default**: Complete header with all navigation and functionality
-- **Mobile**: Mobile viewport testing for responsive design issues
+- **Mobile**: Mobile viewport testing for responsive design
+- **Mobile Menu Open**: Shows mobile navigation menu in expanded state
         `,
       },
     },
@@ -92,7 +95,80 @@ export const Mobile: Story = {
     },
     docs: {
       description: {
-        story: 'Header component on mobile devices. Tests navigation menu, theme toggle, and responsive layout behavior on small screens.'
+        story: 'Header component on mobile devices. Tests navigation menu, theme toggle, and responsive layout behavior on small screens. Click the hamburger menu icon to test mobile navigation.'
+      }
+    }
+  }
+};
+
+/**
+ * Shows the mobile menu in its opened state for testing and documentation.
+ * Demonstrates how the navigation appears when expanded on mobile devices.
+ */
+export const MobileMenuOpen: Story = {
+  parameters: {
+    viewport: {
+      defaultViewport: 'mobile1'
+    },
+    docs: {
+      description: {
+        story: 'Mobile header with navigation menu expanded. Shows how the hamburger menu reveals the main navigation links on mobile devices.'
+      }
+    }
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    
+    // Find and click the mobile menu button (hamburger)
+    const menuButton = canvas.getByRole('button', { name: /toggle mobile menu/i });
+    await userEvent.click(menuButton);
+  }
+};
+
+/**
+ * Theme comparison for the Header component showing both light and dark variants.
+ * Critical for ensuring proper contrast and visibility in both themes.
+ */
+export const ThemeComparison: Story = {
+  render: () => (
+    <div className="space-y-8">
+      <div className="space-y-4">
+        <h3 className="font-semibold text-center text-slate-900">Light Theme</h3>
+        <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
+          <ThemeProvider>
+            <div className="light">
+              <Header />
+              <div className="p-4">
+                <p className="text-slate-600 text-sm">
+                  Light theme optimized for daylight viewing conditions.
+                </p>
+              </div>
+            </div>
+          </ThemeProvider>
+        </div>
+      </div>
+      
+      <div className="space-y-4">
+        <h3 className="font-semibold text-center text-slate-100">Dark Theme (Gaming Default)</h3>
+        <div className="bg-slate-900 rounded-lg border border-slate-700 overflow-hidden">
+          <ThemeProvider>
+            <div className="dark">
+              <Header />
+              <div className="p-4">
+                <p className="text-slate-300 text-sm">
+                  Gaming-optimized dark theme for reduced eye strain and immersive experience.
+                </p>
+              </div>
+            </div>
+          </ThemeProvider>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Side-by-side comparison of Header component in both light and dark themes, showing gaming-optimized styling and proper contrast ratios.'
       }
     }
   }

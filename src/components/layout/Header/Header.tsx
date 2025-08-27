@@ -1,8 +1,14 @@
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
 
 export const Header = () => {
   const { toggleTheme, isDark } = useTheme();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-slate-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-slate-900/80">
@@ -11,30 +17,14 @@ export const Header = () => {
           {/* Logo/Brand */}
           <div className="flex items-center space-x-4">
             <div className="flex-shrink-0">
-              {/* Desktop: Full text, Mobile: Home icon */}
+              {/* Always show full text now that we have mobile menu */}
               <h1 className="text-xl font-bold text-primary-700 dark:text-primary-300">
-                <span className="hidden sm:inline">TLD Challenges</span>
-                <span className="sm:hidden">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                    />
-                  </svg>
-                </span>
+                TLD Challenges
               </h1>
             </div>
           </div>
 
-          {/* Navigation - Simple for now */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <a
               href="#custom-codes"
@@ -57,14 +47,53 @@ export const Header = () => {
           </nav>
 
           {/* Right side actions */}
-          <div className="flex items-center space-x-4">
-            {/* Theme toggle */}
+          <div className="flex items-center space-x-2">
+            {/* Mobile menu button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleMobileMenu}
+              className="md:hidden p-2"
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? (
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
+            </Button>
+
+            {/* Theme toggle - Desktop only */}
             <Button
               variant="ghost"
               size="sm"
               onClick={toggleTheme}
               aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
-              className="p-2"
+              className="hidden md:block p-2"
             >
               {isDark ? (
                 <svg
@@ -99,13 +128,97 @@ export const Header = () => {
               )}
             </Button>
 
-            {/* Submit Run CTA - Responsive text */}
-            <Button variant="primary" size="sm">
-              <span className="hidden sm:inline">Submit Run</span>
-              <span className="sm:hidden">Submit</span>
+            {/* Submit Run CTA - Desktop only */}
+            <Button variant="primary" size="sm" className="hidden md:block">
+              Submit Run
             </Button>
           </div>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
+              <a
+                href="#custom-codes"
+                className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Custom Codes
+              </a>
+              <a
+                href="#challenges"
+                className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Challenges
+              </a>
+              <a
+                href="#tournaments"
+                className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Tournaments
+              </a>
+              
+              {/* Divider */}
+              <div className="border-t border-slate-200 dark:border-slate-700 my-2"></div>
+              
+              {/* Submit Run Link - Mobile */}
+              <a
+                href="#submit"
+                className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Submit Run
+              </a>
+              
+              {/* Theme Toggle - Mobile */}
+              <button
+                onClick={toggleTheme}
+                className="flex items-center w-full px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+              >
+                {isDark ? (
+                  <>
+                    <svg
+                      className="h-4 w-4 mr-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                      />
+                    </svg>
+                    Switch to Light Theme
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      className="h-4 w-4 mr-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                      />
+                    </svg>
+                    Switch to Dark Theme
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

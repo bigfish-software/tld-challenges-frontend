@@ -60,6 +60,117 @@ export const PrivacyPolicyContent = () => {
           </section>
 
           <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">How We Use Your Data</h2>
+            <p className="mb-4">
+              The data we collect is used solely for platform functionality:
+            </p>
+            <ul className="list-disc pl-6 mb-4 space-y-2">
+              <li><strong>Display Submissions:</strong> Show your run submissions on challenge pages</li>
+              <li><strong>Community Features:</strong> Enable community browsing of challenge completions</li>
+              <li><strong>Platform Security:</strong> Prevent spam and abuse of the submission system</li>
+              <li><strong>Technical Operation:</strong> Ensure the platform works correctly across different browsers</li>
+            </ul>
+            
+            <p className="mb-4">
+              <strong>We do not:</strong>
+            </p>
+            <ul className="list-disc pl-6 mb-4 space-y-2">
+              <li>Sell or share your data with third parties</li>
+              <li>Use your data for advertising or marketing</li>
+              <li>Create user profiles or track behavior across sessions</li>
+              <li>Use your data for any commercial purposes</li>
+            </ul>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">Data Storage and Security</h2>
+            
+            <h3 className="text-xl font-medium mb-3">Where Your Data is Stored</h3>
+            <ul className="list-disc pl-6 mb-4 space-y-2">
+              <li><strong>Database:</strong> Submission data is stored in a secure PostgreSQL database</li>
+              <li><strong>Local Storage:</strong> Theme preferences are stored locally in your browser</li>
+              <li><strong>No Cloud Tracking:</strong> We don't use cloud analytics or tracking services</li>
+            </ul>
+
+            <h3 className="text-xl font-medium mb-3">Security Measures</h3>
+            <ul className="list-disc pl-6 mb-4 space-y-2">
+              <li>All data transmission is encrypted using HTTPS</li>
+              <li>Database access is restricted and secured</li>
+              <li>Regular security updates and monitoring</li>
+              <li>Input validation and sanitization to prevent abuse</li>
+            </ul>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">Data Retention</h2>
+            <ul className="list-disc pl-6 mb-4 space-y-2">
+              <li><strong>Submission Data:</strong> Stored indefinitely to maintain challenge completion records</li>
+              <li><strong>Technical Logs:</strong> Basic server logs are retained for 30 days for security purposes</li>
+              <li><strong>Theme Preferences:</strong> Stored locally in your browser until you clear your browser data</li>
+            </ul>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">External Links</h2>
+            <p className="mb-4">
+              Our platform may contain links to external websites (YouTube, Twitch, GitHub, etc.). 
+              We are not responsible for the privacy practices of these external sites. We encourage 
+              you to review their privacy policies when visiting these platforms.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">Your Rights</h2>
+            
+            <h3 className="text-xl font-medium mb-3">Anonymous Submissions</h3>
+            <p className="mb-4">
+              Since submissions are anonymous and we don't collect personal identifiers, we cannot 
+              automatically link submissions to specific individuals. However, you have the following rights:
+            </p>
+            
+            <h3 className="text-xl font-medium mb-3">Data Removal</h3>
+            <p className="mb-4">
+              If you want a specific submission removed, you can contact us with details about the 
+              submission (runner name, challenge, approximate submission date) and we will remove it 
+              from our platform.
+            </p>
+            
+            <h3 className="text-xl font-medium mb-3">Data Portability</h3>
+            <p className="mb-4">
+              You can request a copy of submissions you've made by providing identifying information.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">International Users</h2>
+            <p className="mb-4">
+              TLD Challenges is available globally. If you are located in the European Union or other 
+              regions with specific data protection laws, the same privacy protections described in 
+              this policy apply to you. Since we collect minimal data and don't track users, our 
+              practices are designed to be compliant with international privacy standards.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">Children's Privacy</h2>
+            <p className="mb-4">
+              TLD Challenges does not knowingly collect personal information from children under 13. 
+              Since we don't collect personal information and submissions are anonymous, we believe 
+              our platform is appropriate for The Long Dark players of all ages who have permission 
+              to submit content online.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">Changes to This Policy</h2>
+            <p className="mb-4">
+              We may update this privacy policy from time to time. Any changes will be posted on this 
+              page with an updated "Last updated" date. Continued use of the platform after changes 
+              indicates acceptance of the updated policy.
+            </p>
+          </section>
+
+          <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
             <p className="mb-4">
               If you have any questions about this privacy policy or our data practices, you can reach us:
