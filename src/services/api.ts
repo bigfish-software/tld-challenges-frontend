@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosRequestConfig } from 'axios';
 import type { APIResponse } from '@/types/common';
 
 // API Error class definition
@@ -31,7 +31,7 @@ class ApiClient {
   private setupInterceptors() {
     // Request interceptor for authentication
     this.instance.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
+      (config: InternalAxiosRequestConfig) => {
         const token = import.meta.env.VITE_API_TOKEN;
         if (token && config.headers) {
           config.headers.Authorization = `Bearer ${token}`;
