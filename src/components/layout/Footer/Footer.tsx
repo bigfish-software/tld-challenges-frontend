@@ -24,8 +24,7 @@ export const Footer = () => {
               </svg>
             </div>
             <p className="text-slate-600 dark:text-slate-400 text-sm max-w-md">
-              A community platform for The Long Dark players to discover custom game codes, 
-              participate in challenges and tournaments, and submit their completion runs.
+                A hub to explore or create custom game codes, challenges and tournaments, made by the community for the community.
             </p>
             <p className="text-slate-500 dark:text-slate-500 text-xs mt-2 italic">
               Made without crunch by people who care about their friends at a community that cares about its challenges.

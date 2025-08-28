@@ -136,7 +136,7 @@ export const HomePage = () => {
                   max-w-3xl 
                   mx-auto
                 ">
-                  Made without crunch by people who care about their friends at a community who cares about their challenges.
+                    A hub to explore or create custom game codes, challenges and tournaments, made by the community for the community.
                 </p>
               </div>
 
