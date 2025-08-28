@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/Button';
 import { FeatureCard } from '@/components/ui/FeatureCard';
 import { TournamentSection } from '@/components/ui/TournamentSection';
 import { DonationSection } from '@/components/ui/DonationSection';
+import tldHeroImage from '@/assets/screen_0dec6e6c-d9a2-4b1c-9479-7f305b7cfe19_hi.png';
 
 /**
  * HomePage content component without Header and Footer.
@@ -79,7 +80,18 @@ export const HomePageContent = () => {
     <main className="flex-1">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-        {/* Background Pattern */}
+        {/* TLD Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${tldHeroImage})`,
+          }}
+        />
+        
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-50/30 via-white/40 to-secondary-50/30 dark:from-slate-900/40 dark:via-slate-800/50 dark:to-slate-900/40" />
+        
+        {/* Subtle texture overlay */}
         <div className="absolute inset-0 opacity-5 dark:opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='53' cy='7' r='1'/%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3Ccircle cx='7' cy='53' r='1'/%3E%3Ccircle cx='53' cy='53' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
@@ -152,26 +164,26 @@ export const HomePageContent = () => {
             {/* Stats or Quick Info */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto pt-8">
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-400">
+                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300 drop-shadow-lg dark:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                   50+
                 </div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">
+                <div className="text-sm text-slate-600 dark:text-slate-300 drop-shadow-md dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                   Custom Codes
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-400">
+                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300 drop-shadow-lg dark:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                   500+
                 </div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">
+                <div className="text-sm text-slate-600 dark:text-slate-300 drop-shadow-md dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                   Challenges
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-400">
+                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300 drop-shadow-lg dark:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                   12+
                 </div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">
+                <div className="text-sm text-slate-600 dark:text-slate-300 drop-shadow-md dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                   Tournaments
                 </div>
               </div>
