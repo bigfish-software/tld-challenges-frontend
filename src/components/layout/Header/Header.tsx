@@ -48,19 +48,19 @@ export const Header = () => {
           <nav className="hidden md:flex items-center space-x-6">
             <Link
               to="/custom-codes"
-              className="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              className="text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Custom Codes
             </Link>
             <Link
               to="/challenges"
-              className="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              className="text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Challenges
             </Link>
             <Link
               to="/tournaments"
-              className="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              className="text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Tournaments
             </Link>
@@ -167,21 +167,21 @@ export const Header = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
               <Link
                 to="/custom-codes"
-                className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                className="block px-3 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Custom Codes
               </Link>
               <Link
                 to="/challenges"
-                className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                className="block px-3 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Challenges
               </Link>
               <Link
                 to="/tournaments"
-                className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                className="block px-3 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Tournaments
@@ -193,7 +193,7 @@ export const Header = () => {
               {/* Submit Run Link - Mobile */}
               <a
                 href="#submit"
-                className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                className="block px-3 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Submit Run
@@ -202,7 +202,7 @@ export const Header = () => {
               {/* Theme Toggle - Mobile */}
               <button
                 onClick={toggleTheme}
-                className="flex items-center w-full px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                className="flex items-center w-full px-3 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
               >
                 {isDark ? (
                   <>

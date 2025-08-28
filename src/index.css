@@ -5,16 +5,26 @@
 /* Custom TLD Headline Font */
 @font-face {
   font-family: 'TLD Headline';
-  src: url('./assets/TLD_Headline_One_2.1.ttf') format('truetype');
+  src: url('./assets/fonts/TLDHeadlineOne/TLD_Headline_One_2.1.ttf') format('truetype');
   font-display: swap;
   font-weight: normal;
+  font-style: normal;
+}
+
+/* Oswald Variable Font */
+@font-face {
+  font-family: 'Oswald';
+  src: url('./assets/fonts/Oswald/Oswald-VariableFont_wght.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 200 700;
   font-style: normal;
 }
 
 @layer base {
   /* Gaming-optimized typography */
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Oswald', system-ui, sans-serif;
+    font-size: 18px; /* Increased base font size for better readability */
     scroll-behavior: smooth;
   }
   

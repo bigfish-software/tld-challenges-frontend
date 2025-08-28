@@ -62,7 +62,7 @@ export const FeatureCard = ({
       {/* Content - grows to fill available space */}
       <div className="flex-1 flex flex-col">
         <h3 className="
-          text-lg 
+          text-xl 
           font-semibold 
           font-headline
           uppercase
@@ -80,7 +80,7 @@ export const FeatureCard = ({
         <p className="
           text-slate-600 
           dark:text-slate-300 
-          text-sm
+          text-base
           leading-relaxed
           flex-1
           mb-6

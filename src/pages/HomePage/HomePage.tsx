@@ -128,8 +128,8 @@ export const HomePage = () => {
                 </h1>
                 
                 <p className="
-                  text-xl 
-                  sm:text-2xl 
+                  text-2xl 
+                  sm:text-3xl 
                   text-slate-700 
                   dark:text-slate-300 
                   leading-relaxed 
@@ -169,7 +169,7 @@ export const HomePage = () => {
                   <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300 drop-shadow-lg dark:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                     50+
                   </div>
-                  <div className="text-sm text-slate-600 dark:text-slate-300 drop-shadow-md dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+                  <div className="text-base text-slate-600 dark:text-slate-300 drop-shadow-md dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                     Custom Codes
                   </div>
                 </div>
@@ -177,7 +177,7 @@ export const HomePage = () => {
                   <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300 drop-shadow-lg dark:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                     500+
                   </div>
-                  <div className="text-sm text-slate-600 dark:text-slate-300 drop-shadow-md dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+                  <div className="text-base text-slate-600 dark:text-slate-300 drop-shadow-md dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                     Challenges
                   </div>
                 </div>
@@ -185,7 +185,7 @@ export const HomePage = () => {
                   <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300 drop-shadow-lg dark:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                     12+
                   </div>
-                  <div className="text-sm text-slate-600 dark:text-slate-300 drop-shadow-md dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+                  <div className="text-base text-slate-600 dark:text-slate-300 drop-shadow-md dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                     Tournaments
                   </div>
                 </div>
@@ -211,7 +211,7 @@ export const HomePage = () => {
                 DISCOVER TLD CHALLENGES
               </h2>
               <p className="
-                text-lg 
+                text-xl 
                 text-slate-600 
                 dark:text-slate-400 
                 max-w-2xl 
@@ -254,7 +254,7 @@ export const HomePage = () => {
                 CURRENT TOURNAMENT
               </h2>
               <p className="
-                text-lg 
+                text-xl 
                 text-slate-600 
                 dark:text-slate-400 
                 max-w-2xl 

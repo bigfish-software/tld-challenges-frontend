@@ -71,9 +71,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Oswald', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
-        headline: ['TLD Headline', 'Inter', 'system-ui', 'sans-serif'],
+        headline: ['TLD Headline', 'Oswald', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
