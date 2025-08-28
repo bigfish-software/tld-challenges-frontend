@@ -24,8 +24,8 @@ export const Header = () => {
                 className="group inline-block"
                 aria-label="Go to TLD Challenges homepage"
               >
-                <h1 className="text-xl font-bold text-primary-700 dark:text-primary-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200 cursor-pointer">
-                  TLD Challenges
+                <h1 className="text-xl font-bold font-headline uppercase text-primary-700 dark:text-primary-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200 cursor-pointer">
+                  TLD CHALLENGES
                 </h1>
               </Link>
             </div>

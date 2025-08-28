@@ -53,11 +53,13 @@ export const DonationSection = ({ className = '' }: DonationSectionProps) => {
               text-2xl 
               sm:text-3xl 
               font-bold 
+              font-headline
+              uppercase
               text-slate-900 
               dark:text-slate-100
               leading-tight
             ">
-              Support the Community
+              SUPPORT THE COMMUNITY
             </h2>
           </div>
 

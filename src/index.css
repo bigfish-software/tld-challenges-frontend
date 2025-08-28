@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom TLD Headline Font */
+@font-face {
+  font-family: 'TLD Headline';
+  src: url('./assets/TLD_Headline_One_2.1.ttf') format('truetype');
+  font-display: swap;
+  font-weight: normal;
+  font-style: normal;
+}
+
 @layer base {
   /* Gaming-optimized typography */
   html {

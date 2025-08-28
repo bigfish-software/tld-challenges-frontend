@@ -7,8 +7,8 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand section */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-lg font-semibold text-primary-700 dark:text-primary-300 mb-3">
-              TLD Challenges
+            <h3 className="text-lg font-semibold font-headline uppercase text-primary-700 dark:text-primary-300 mb-3">
+              TLD CHALLENGES
             </h3>
             <p className="text-slate-600 dark:text-slate-400 text-sm max-w-md">
               A community platform for The Long Dark players to discover custom game codes, 
@@ -25,6 +25,20 @@ export const Footer = () => {
               Quick Links
             </h4>
             <ul className="space-y-2 text-sm">
+              <li>
+                <a 
+                  href={externalLinks.game.steamStore.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center space-x-2"
+                >
+                  {/* Steam icon */}
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.624 0 11.99-5.366 11.99-11.99C23.969 5.376 18.603.001 11.979.001zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.203-.898 2.203z"/>
+                  </svg>
+                  <span>{externalLinks.game.steamStore.label}</span>
+                </a>
+              </li>
               <li>
                 <a 
                   href="#custom-codes" 

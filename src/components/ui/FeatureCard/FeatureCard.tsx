@@ -64,6 +64,8 @@ export const FeatureCard = ({
         <h3 className="
           text-lg 
           font-semibold 
+          font-headline
+          uppercase
           text-slate-900 
           dark:text-slate-100
           group-hover:text-primary-700
@@ -72,7 +74,7 @@ export const FeatureCard = ({
           duration-200
           mb-3
         ">
-          {title}
+          {title.toUpperCase()}
         </h3>
         
         <p className="

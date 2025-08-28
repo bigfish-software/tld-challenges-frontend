@@ -101,11 +101,13 @@ export const TournamentSection = ({
                 text-2xl 
                 sm:text-3xl 
                 font-bold 
+                font-headline
+                uppercase
                 text-slate-900 
                 dark:text-slate-100
                 leading-tight
               ">
-                {displayTournament.title}
+                {displayTournament.title.toUpperCase()}
               </h2>
             </div>
 

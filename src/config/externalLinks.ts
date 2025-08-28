@@ -22,6 +22,9 @@ export interface ExternalLinksConfig {
   support: {
     githubIssues: ExternalLink;
   };
+  game: {
+    steamStore: ExternalLink;
+  };
 }
 
 /**
@@ -63,6 +66,13 @@ export const externalLinks: ExternalLinksConfig = {
       url: 'https://github.com/bigfish-software/tld-challenges-frontend/issues',
       label: 'GitHub Issues',
       description: 'Report bugs, request features, or get technical support'
+    }
+  },
+  game: {
+    steamStore: {
+      url: 'https://store.steampowered.com/app/305620/The_Long_Dark/',
+      label: 'Get the Game',
+      description: 'Purchase The Long Dark on Steam'
     }
   }
 };
@@ -108,3 +118,4 @@ export const getBigFishTwitchUrl = () => externalLinks.community.bigfishTwitch.u
 export const getChefMariaTwitchUrl = () => externalLinks.community.chefmariaTwitch.url;
 export const getBigFishModsUrl = () => externalLinks.community.bigfishMods.url;
 export const getGitHubIssuesUrl = () => externalLinks.support.githubIssues.url;
+export const getSteamStoreUrl = () => externalLinks.game.steamStore.url;

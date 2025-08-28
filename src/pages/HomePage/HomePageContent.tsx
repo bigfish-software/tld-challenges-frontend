@@ -120,8 +120,9 @@ export const HomePageContent = () => {
                   to-accent-400
                   dark:from-primary-300 
                   dark:to-accent-300
+                  font-headline
                 ">
-                  TLD Challenges
+                  TLD CHALLENGES
                 </span>
               </h1>
               
@@ -200,11 +201,13 @@ export const HomePageContent = () => {
               text-3xl 
               sm:text-4xl 
               font-bold 
+              font-headline
               text-slate-900 
               dark:text-slate-100 
               mb-4
+              uppercase
             ">
-              Discover TLD Challenges
+              DISCOVER TLD CHALLENGES
             </h2>
             <p className="
               text-lg 
@@ -241,11 +244,13 @@ export const HomePageContent = () => {
               text-3xl 
               sm:text-4xl 
               font-bold 
+              font-headline
               text-slate-900 
               dark:text-slate-100 
               mb-4
+              uppercase
             ">
-              Current Tournament
+              CURRENT TOURNAMENT
             </h2>
             <p className="
               text-lg 
