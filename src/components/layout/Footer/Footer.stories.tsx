@@ -15,6 +15,7 @@ const meta = {
 The site footer with community links and information.
 
 ## Key Features
+- **TLD Challenges Icons**: Logo icons for Custom Codes, Challenges, and Tournaments links
 - **Community Links**: GitHub, Discord, Twitch channels with proper icons
 - **External Links Integration**: Uses centralized external links configuration
 - **TLD-Themed Tagline**: Gaming community-focused messaging

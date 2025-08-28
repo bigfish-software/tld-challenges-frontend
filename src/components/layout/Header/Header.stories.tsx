@@ -19,6 +19,7 @@ const meta = {
 The main header component for TLD Challenges with navigation, theme toggle, and gaming-optimized design.
 
 ## Key Features
+- **Brand Logo**: TLD Challenges logo icon positioned next to the brand text
 - **Clickable Brand**: "TLD Challenges" title links to homepage with hover effects
 - **Navigation Menu**: Custom Codes, Challenges, Tournaments with proper hierarchy
 - **Mobile Menu**: Hamburger menu with slide-down navigation for mobile devices

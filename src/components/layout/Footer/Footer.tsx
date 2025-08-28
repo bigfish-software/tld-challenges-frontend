@@ -7,9 +7,22 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand section */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className="text-lg font-semibold font-headline uppercase text-primary-700 dark:text-primary-300 mb-3">
-              TLD CHALLENGES
-            </h3>
+            <div className="flex items-center space-x-2 mb-3">
+              <h3 className="text-lg font-semibold font-headline uppercase text-primary-700 dark:text-primary-300">
+                TLD CHALLENGES
+              </h3>
+              {/* Logo Icon */}
+              <svg 
+                className="h-5 w-5 text-primary-700 dark:text-primary-300"
+                viewBox="0 0 15.65 25.9"
+                fill="currentColor"
+                aria-label="TLD Challenges Logo"
+              >
+                <path d="M15.47,0L6.96,.47l-.47,.22-.53-.17L.07,.81l-.07,.11L.16,3.48l.05,1.49,.05,1.06s2.51,0,2.78,0c-.23,.15-1.23,.74-1.28,.78,.15,3.96,.72,8.45,.86,9.51h-.01v9.58h.35c.24,0,.5,0,.5,0,0,0,.86-2.8,.91-3.05,.07-.75,.22-3.58,.22-3.58,0,0,.43,2.28,.47,2.51,.08,.08,1.42,1.15,1.42,1.13,.03-.62,.07-1.43,.07-1.43l.02-3.11v-1.27l.04-2.52-.2-.65,.21-.53,.08-2.77s.03-4.27,.02-4.79c0,0,2.73,.14,7.65,2.96,1.93-3.6,1.09-8.8,1.09-8.8"/>
+                <polygon points="9.33 22.61 9.69 22.61 9.69 23.88 9.95 23.88 9.95 22.61 10.3 22.61 10.3 22.38 9.33 22.38 9.33 22.61"/>
+                <polygon points="11.15 23.29 11.15 23.29 10.72 22.38 10.48 22.38 10.48 23.89 10.71 23.89 10.71 22.89 10.72 22.89 11.09 23.63 11.21 23.63 11.58 22.89 11.59 22.89 11.59 23.89 11.82 23.89 11.82 22.38 11.58 22.38 11.15 23.29"/>
+              </svg>
+            </div>
             <p className="text-slate-600 dark:text-slate-400 text-sm max-w-md">
               A community platform for The Long Dark players to discover custom game codes, 
               participate in challenges and tournaments, and submit their completion runs.
@@ -42,25 +55,55 @@ export const Footer = () => {
               <li>
                 <a 
                   href="#custom-codes" 
-                  className="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  className="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center space-x-2"
                 >
-                  Custom Codes
+                  <svg 
+                    className="w-4 h-4 text-slate-600 dark:text-slate-400"
+                    viewBox="0 0 15.65 25.9"
+                    fill="currentColor"
+                    aria-label="TLD Challenges Logo"
+                  >
+                    <path d="M15.47,0L6.96,.47l-.47,.22-.53-.17L.07,.81l-.07,.11L.16,3.48l.05,1.49,.05,1.06s2.51,0,2.78,0c-.23,.15-1.23,.74-1.28,.78,.15,3.96,.72,8.45,.86,9.51h-.01v9.58h.35c.24,0,.5,0,.5,0,0,0,.86-2.8,.91-3.05,.07-.75,.22-3.58,.22-3.58,0,0,.43,2.28,.47,2.51,.08,.08,1.42,1.15,1.42,1.13,.03-.62,.07-1.43,.07-1.43l.02-3.11v-1.27l.04-2.52-.2-.65,.21-.53,.08-2.77s.03-4.27,.02-4.79c0,0,2.73,.14,7.65,2.96,1.93-3.6,1.09-8.8,1.09-8.8"/>
+                    <polygon points="9.33 22.61 9.69 22.61 9.69 23.88 9.95 23.88 9.95 22.61 10.3 22.61 10.3 22.38 9.33 22.38 9.33 22.61"/>
+                    <polygon points="11.15 23.29 11.15 23.29 10.72 22.38 10.48 22.38 10.48 23.89 10.71 23.89 10.71 22.89 10.72 22.89 11.09 23.63 11.21 23.63 11.58 22.89 11.59 22.89 11.59 23.89 11.82 23.89 11.82 22.38 11.58 22.38 11.15 23.29"/>
+                  </svg>
+                  <span>Custom Codes</span>
                 </a>
               </li>
               <li>
                 <a 
                   href="#challenges" 
-                  className="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  className="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center space-x-2"
                 >
-                  Challenges
+                  <svg 
+                    className="w-4 h-4 text-slate-600 dark:text-slate-400"
+                    viewBox="0 0 15.65 25.9"
+                    fill="currentColor"
+                    aria-label="TLD Challenges Logo"
+                  >
+                    <path d="M15.47,0L6.96,.47l-.47,.22-.53-.17L.07,.81l-.07,.11L.16,3.48l.05,1.49,.05,1.06s2.51,0,2.78,0c-.23,.15-1.23,.74-1.28,.78,.15,3.96,.72,8.45,.86,9.51h-.01v9.58h.35c.24,0,.5,0,.5,0,0,0,.86-2.8,.91-3.05,.07-.75,.22-3.58,.22-3.58,0,0,.43,2.28,.47,2.51,.08,.08,1.42,1.15,1.42,1.13,.03-.62,.07-1.43,.07-1.43l.02-3.11v-1.27l.04-2.52-.2-.65,.21-.53,.08-2.77s.03-4.27,.02-4.79c0,0,2.73,.14,7.65,2.96,1.93-3.6,1.09-8.8,1.09-8.8"/>
+                    <polygon points="9.33 22.61 9.69 22.61 9.69 23.88 9.95 23.88 9.95 22.61 10.3 22.61 10.3 22.38 9.33 22.38 9.33 22.61"/>
+                    <polygon points="11.15 23.29 11.15 23.29 10.72 22.38 10.48 22.38 10.48 23.89 10.71 23.89 10.71 22.89 10.72 22.89 11.09 23.63 11.21 23.63 11.58 22.89 11.59 22.89 11.59 23.89 11.82 23.89 11.82 22.38 11.58 22.38 11.15 23.29"/>
+                  </svg>
+                  <span>Challenges</span>
                 </a>
               </li>
               <li>
                 <a 
                   href="#tournaments" 
-                  className="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  className="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center space-x-2"
                 >
-                  Tournaments
+                  <svg 
+                    className="w-4 h-4 text-slate-600 dark:text-slate-400"
+                    viewBox="0 0 15.65 25.9"
+                    fill="currentColor"
+                    aria-label="TLD Challenges Logo"
+                  >
+                    <path d="M15.47,0L6.96,.47l-.47,.22-.53-.17L.07,.81l-.07,.11L.16,3.48l.05,1.49,.05,1.06s2.51,0,2.78,0c-.23,.15-1.23,.74-1.28,.78,.15,3.96,.72,8.45,.86,9.51h-.01v9.58h.35c.24,0,.5,0,.5,0,0,0,.86-2.8,.91-3.05,.07-.75,.22-3.58,.22-3.58,0,0,.43,2.28,.47,2.51,.08,.08,1.42,1.15,1.42,1.13,.03-.62,.07-1.43,.07-1.43l.02-3.11v-1.27l.04-2.52-.2-.65,.21-.53,.08-2.77s.03-4.27,.02-4.79c0,0,2.73,.14,7.65,2.96,1.93-3.6,1.09-8.8,1.09-8.8"/>
+                    <polygon points="9.33 22.61 9.69 22.61 9.69 23.88 9.95 23.88 9.95 22.61 10.3 22.61 10.3 22.38 9.33 22.38 9.33 22.61"/>
+                    <polygon points="11.15 23.29 11.15 23.29 10.72 22.38 10.48 22.38 10.48 23.89 10.71 23.89 10.71 22.89 10.72 22.89 11.09 23.63 11.21 23.63 11.58 22.89 11.59 22.89 11.59 23.89 11.82 23.89 11.82 22.38 11.58 22.38 11.15 23.29"/>
+                  </svg>
+                  <span>Tournaments</span>
                 </a>
               </li>
               <li>
