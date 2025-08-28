@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { MemoryRouter } from 'react-router-dom';
 import { PrivacyPolicyPage } from './PrivacyPolicyPage';
 import { PrivacyPolicyContent } from './PrivacyPolicyContent';
 
@@ -31,6 +32,13 @@ The Privacy Policy page provides comprehensive information about TLD Challenges'
     }
   },
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
   argTypes: {
     // No props for this page component
   }

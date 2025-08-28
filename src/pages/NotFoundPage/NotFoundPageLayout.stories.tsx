@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { MemoryRouter } from 'react-router-dom';
 import { NotFoundPageLayout } from './NotFoundPageLayout';
 import { NotFoundPageContent } from './NotFoundPageContent';
 import { ThemeProvider } from '@/contexts/ThemeContext';
@@ -33,9 +34,11 @@ A beautifully designed 404 page with gaming theme, including header and footer.
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <ThemeProvider>
-        <Story />
-      </ThemeProvider>
+      <MemoryRouter>
+        <ThemeProvider>
+          <Story />
+        </ThemeProvider>
+      </MemoryRouter>
     ),
   ],
 } satisfies Meta<typeof NotFoundPageLayout>;

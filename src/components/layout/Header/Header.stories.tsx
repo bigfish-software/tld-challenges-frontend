@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import { Header } from './Header';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/Button';
@@ -18,6 +19,7 @@ const meta = {
 The main header component for TLD Challenges with navigation, theme toggle, and gaming-optimized design.
 
 ## Key Features
+- **Clickable Brand**: "TLD Challenges" title links to homepage with hover effects
 - **Navigation Menu**: Custom Codes, Challenges, Tournaments with proper hierarchy
 - **Mobile Menu**: Hamburger menu with slide-down navigation for mobile devices
 - **Theme Toggle**: Light/dark mode switching with gaming-optimized defaults
@@ -39,40 +41,47 @@ The main header component for TLD Challenges with navigation, theme toggle, and 
       const isDocsView = context.viewMode === 'docs';
       const storyName = context.name;
       
-      // Mobile stories should not use the default decorator
+      // Always wrap with MemoryRouter and ThemeProvider for all stories
       if (storyName === 'Mobile' || storyName === 'Mobile Menu Open') {
+        // These stories have their own custom rendering with providers
         return <Story />;
       }
       
       if (isDocsView) {
         // Compact decorator for docs view - with minimal sample content and proper spacing
         return (
-          <ThemeProvider>
-            <div className="bg-white dark:bg-slate-900 pb-4">
-              <Story />
-              <div className="px-4 py-3">
-                <p className="text-slate-600 dark:text-slate-400 text-sm">
-                  Sample content to show how the header looks with page content below.
-                </p>
+          <MemoryRouter>
+            <ThemeProvider>
+              <div className="bg-white dark:bg-slate-900 pb-4">
+                <Story />
+                <div className="px-4 py-3">
+                  <p className="text-slate-600 dark:text-slate-400 text-sm">
+                    Sample content to show how the header looks with page content below.
+                    The "TLD Challenges" title is clickable and links to the homepage.
+                  </p>
+                </div>
               </div>
-            </div>
-          </ThemeProvider>
+            </ThemeProvider>
+          </MemoryRouter>
         );
       }
       
       // Full decorator for canvas view with full sample content
       return (
-        <ThemeProvider>
-          <div className="min-h-screen bg-white dark:bg-slate-900">
-            <Story />
-            <div className="p-8">
-              <p className="text-slate-600 dark:text-slate-400">
-                This is sample content to show how the header looks with page content below.
-                The header is sticky and will remain at the top when scrolling.
-              </p>
+        <MemoryRouter>
+          <ThemeProvider>
+            <div className="min-h-screen bg-white dark:bg-slate-900">
+              <Story />
+              <div className="p-8">
+                <p className="text-slate-600 dark:text-slate-400">
+                  This is sample content to show how the header looks with page content below.
+                  The header is sticky and will remain at the top when scrolling.
+                  Click on "TLD Challenges" to test the homepage link.
+                </p>
+              </div>
             </div>
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </MemoryRouter>
       );
     },
   ],
@@ -85,7 +94,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'The default header component. Use the theme switcher in the toolbar to test light and dark themes.',
+        story: 'The default header component with clickable brand title. Use the theme switcher in the toolbar to test light and dark themes. Click "TLD Challenges" to test homepage navigation.',
       },
     },
   },
@@ -125,18 +134,21 @@ export const Mobile: Story = {
           .mobile-demo .hidden.md\\:block { display: none !important; }
           .mobile-demo .md\\:hidden { display: flex !important; }
         `}</style>
-        <ThemeProvider>
-          <div className={`mobile-demo flex-1 ${isDark ? 'dark' : ''}`}>
-            <div className="bg-white dark:bg-slate-900">
-              <Header />
-              <div className="p-4">
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                  Mobile header with hamburger menu. Tap menu to navigate.
-                </p>
+        <MemoryRouter>
+          <ThemeProvider>
+            <div className={`mobile-demo flex-1 ${isDark ? 'dark' : ''}`}>
+              <div className="bg-white dark:bg-slate-900">
+                <Header />
+                <div className="p-4">
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                    Mobile header with hamburger menu. Tap menu to navigate.
+                    The "TLD Challenges" title is clickable and links to the homepage.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </MemoryRouter>
       </div>
     );
   }
@@ -178,20 +190,21 @@ export const MobileMenuOpen: Story = {
           .mobile-demo-open .hidden.md\\:block { display: none !important; }
           .mobile-demo-open .md\\:hidden { display: flex !important; }
         `}</style>
-        <ThemeProvider>
-          <div className={`mobile-demo-open flex-1 ${isDark ? 'dark' : ''}`}>
-            <div className="bg-white dark:bg-slate-900">
-              <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-slate-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-slate-900/80">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex h-16 items-center justify-between">
-                  {/* Logo/Brand */}
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0">
-                      <h1 className="text-xl font-bold text-primary-700 dark:text-primary-300">
-                        TLD Challenges
-                      </h1>
+        <MemoryRouter>
+          <ThemeProvider>
+            <div className={`mobile-demo-open flex-1 ${isDark ? 'dark' : ''}`}>
+              <div className="bg-white dark:bg-slate-900">
+                <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-slate-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-slate-900/80">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="flex h-16 items-center justify-between">
+                    {/* Logo/Brand */}
+                    <div className="flex items-center space-x-4">
+                      <div className="flex-shrink-0">
+                        <h1 className="text-xl font-bold text-primary-700 dark:text-primary-300">
+                          TLD Challenges
+                        </h1>
+                      </div>
                     </div>
-                  </div>
 
                   {/* Right side actions */}
                   <div className="flex items-center space-x-2">
@@ -278,14 +291,15 @@ export const MobileMenuOpen: Story = {
                 )}
               </div>
             </header>
-            <div className="p-4">
-              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                Navigation menu open. Includes all links plus theme toggle.
-              </p>
+                <div className="p-4">
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                    Navigation menu open. Includes all links plus theme toggle.
+                  </p>
+                </div>
+              </div>
             </div>
-            </div>
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </MemoryRouter>
       </div>
     );
   }

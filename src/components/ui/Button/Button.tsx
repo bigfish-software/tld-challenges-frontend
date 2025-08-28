@@ -4,11 +4,29 @@ import { clsx } from 'clsx';
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
+  shadow?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+  hoverEffect?: 'none' | 'scale' | 'shadow' | 'both';
+  fullWidth?: boolean;
+  responsive?: {
+    sm?: string;
+    lg?: string;
+  };
   isLoading?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', isLoading, children, ...props }, ref) => {
+  ({ 
+    className, 
+    variant = 'primary', 
+    size = 'md', 
+    shadow = 'sm',
+    hoverEffect = 'shadow',
+    fullWidth = false,
+    responsive,
+    isLoading, 
+    children, 
+    ...props 
+  }, ref) => {
     return (
       <button
         className={clsx(
@@ -17,6 +35,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
           'disabled:opacity-50 disabled:cursor-not-allowed',
           
+          // Layout variants
+          {
+            'w-full': fullWidth,
+            [responsive?.sm || '']: responsive?.sm,
+            [responsive?.lg || '']: responsive?.lg,
+          },
+          
           // Size variants
           {
             'px-3 py-1.5 text-sm': size === 'sm',
@@ -24,14 +49,33 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             'px-6 py-3 text-lg': size === 'lg',
           },
           
+          // Shadow variants
+          {
+            'shadow-none': shadow === 'none',
+            'shadow-sm': shadow === 'sm',
+            'shadow-md': shadow === 'md',
+            'shadow-lg': shadow === 'lg',
+            'shadow-xl': shadow === 'xl',
+          },
+          
+          // Hover effect variants
+          {
+            'hover:shadow-xl': hoverEffect === 'shadow' && shadow === 'lg',
+            'hover:shadow-2xl': hoverEffect === 'shadow' && shadow === 'xl',
+            'hover:shadow-lg': hoverEffect === 'shadow' && shadow === 'md',
+            'hover:shadow-md': hoverEffect === 'shadow' && shadow === 'sm',
+            'transform hover:scale-105': hoverEffect === 'scale' || hoverEffect === 'both',
+            'hover:shadow-xl transform hover:scale-105': hoverEffect === 'both' && shadow === 'lg',
+          },
+          
           // Color variants
           {
             // Primary variant
-            'bg-primary-500 hover:bg-primary-600 active:bg-primary-700 text-white shadow-sm': 
+            'bg-primary-500 hover:bg-primary-600 active:bg-primary-700 text-white': 
               variant === 'primary',
             
             // Secondary variant
-            'bg-secondary-500 hover:bg-secondary-600 active:bg-secondary-700 text-white shadow-sm': 
+            'bg-secondary-500 hover:bg-secondary-600 active:bg-secondary-700 text-white': 
               variant === 'secondary',
             
             // Outline variant

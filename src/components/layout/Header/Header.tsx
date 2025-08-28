@@ -1,6 +1,7 @@
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/Button';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   const { toggleTheme, isDark } = useTheme();
@@ -17,10 +18,16 @@ export const Header = () => {
           {/* Logo/Brand */}
           <div className="flex items-center space-x-4">
             <div className="flex-shrink-0">
-              {/* Always show full text now that we have mobile menu */}
-              <h1 className="text-xl font-bold text-primary-700 dark:text-primary-300">
-                TLD Challenges
-              </h1>
+              {/* Clickable brand name linking to homepage */}
+              <Link 
+                to="/" 
+                className="group inline-block"
+                aria-label="Go to TLD Challenges homepage"
+              >
+                <h1 className="text-xl font-bold text-primary-700 dark:text-primary-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200 cursor-pointer">
+                  TLD Challenges
+                </h1>
+              </Link>
             </div>
           </div>
 
@@ -129,7 +136,13 @@ export const Header = () => {
             </Button>
 
             {/* Submit Run CTA - Desktop only */}
-            <Button variant="primary" size="sm" className="hidden md:block">
+            <Button 
+              variant="secondary" 
+              size="sm" 
+              shadow="lg"
+              hoverEffect="both"
+              className="hidden md:block"
+            >
               Submit Run
             </Button>
           </div>

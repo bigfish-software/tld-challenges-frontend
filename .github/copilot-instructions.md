@@ -1396,6 +1396,60 @@ const preview: Preview = {
 export default preview;
 ```
 
+#### Storybook Theme Guidelines
+
+**IMPORTANT THEME STORY REQUIREMENTS:**
+
+1. **Component Stories (src/components/**/*.stories.tsx):**
+   - ❌ **DO NOT** create separate `LightTheme` and `DarkTheme` stories
+   - ❌ **DO NOT** create `ThemeComparison` stories for components
+   - ✅ **DO** rely on Storybook's global theme switcher in toolbar
+   - ✅ **DO** ensure components work with both themes through proper CSS classes
+
+2. **Page Stories (src/pages/**/*.stories.tsx):**
+   - ✅ **DO** create `ThemeComparison` stories for pages
+   - ❌ **DO NOT** create separate `LightTheme` and `DarkTheme` stories
+   - ✅ **DO** use side-by-side comparison format for theme stories
+
+```typescript
+// ✅ CORRECT: Page ThemeComparison story
+export const ThemeComparison: Story = {
+  render: () => (
+    <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div className="bg-white min-h-screen">
+        <div className="p-4 bg-gray-100 text-center font-semibold text-gray-900">
+          Light Theme
+        </div>
+        <PageComponent />
+      </div>
+      <div className="bg-slate-900 min-h-screen dark">
+        <div className="p-4 bg-slate-800 text-center font-semibold text-slate-100">
+          Dark Theme
+        </div>
+        <PageComponent />
+      </div>
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Side-by-side comparison of light and dark theme implementations'
+      }
+    }
+  }
+};
+
+// ❌ INCORRECT: Don't create these for components
+export const LightTheme: Story = { /* Don't do this */ };
+export const DarkTheme: Story = { /* Don't do this */ };
+```
+
+**Rationale:**
+- Component theme testing should use Storybook's global theme switcher
+- Page theme comparisons provide comprehensive visual testing
+- Reduces story duplication and maintenance overhead
+- Maintains consistent documentation patterns
+
 #### Storybook Testing Integration
 ```typescript
 // .storybook/test-runner.ts
@@ -1601,3 +1655,17 @@ VITE_APP_DOMAIN=http://localhost:3000
 ---
 
 *This documentation provides context for GitHub Copilot to assist with frontend development. Always refer to the latest backend API documentation for current endpoint specifications and data models.*
+
+## Documentation Links
+
+For comprehensive project information, refer to these documentation files:
+
+- **[Component Architecture](../docs/component-architecture.md)** - Component design patterns, encapsulation guidelines, and anti-patterns
+- **[API Documentation](../docs/api.md)** - Backend API integration, endpoints, and data models
+- **[Color System](../docs/colors.md)** - Color palette, theme implementation, and accessibility guidelines
+- **[Component Guidelines](../docs/components.md)** - Detailed component usage and implementation patterns
+- **[Deployment Guide](../docs/deployment.md)** - Production deployment and environment configuration
+- **[Development Summary](../docs/development-summary.md)** - Project overview and development workflow
+- **[External Links](../docs/external-links.md)** - Social media, community resources, and external integrations
+
+These documents contain detailed technical specifications, examples, and best practices that complement these Copilot instructions.
