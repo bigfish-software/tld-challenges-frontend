@@ -1,5 +1,8 @@
 import { ReactNode } from 'react';
 
+// Re-export API types for convenience
+export * from './api';
+
 // API Response Types
 export interface APIResponse<T> {
   data: T;

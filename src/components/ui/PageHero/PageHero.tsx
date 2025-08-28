@@ -79,8 +79,6 @@ export const PageHero = ({
                 text-slate-900 
                 dark:text-slate-100 
                 leading-tight
-                drop-shadow-lg 
-                dark:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]
               ">
                 {title}
               </h1>
@@ -93,8 +91,6 @@ export const PageHero = ({
                 leading-relaxed 
                 max-w-3xl 
                 mx-auto
-                drop-shadow-md 
-                dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]
               ">
                 {description}
               </p>

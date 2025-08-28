@@ -18,7 +18,7 @@ class ApiClient {
 
   constructor() {
     this.instance = axios.create({
-      baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:1337',
+      baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:1337/api',
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
@@ -78,23 +78,24 @@ class ApiClient {
     );
   }
 
-  async get<T>(url: string, config?: AxiosRequestConfig): Promise<APIResponse<T>> {
-    const response = await this.instance.get<APIResponse<T>>(url, config);
+  // Return the Strapi response directly, not wrapped in APIResponse
+  async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    const response = await this.instance.get<T>(url, config);
     return response.data;
   }
 
-  async post<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<APIResponse<T>> {
-    const response = await this.instance.post<APIResponse<T>>(url, data, config);
+  async post<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T> {
+    const response = await this.instance.post<T>(url, data, config);
     return response.data;
   }
 
-  async put<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<APIResponse<T>> {
-    const response = await this.instance.put<APIResponse<T>>(url, data, config);
+  async put<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T> {
+    const response = await this.instance.put<T>(url, data, config);
     return response.data;
   }
 
-  async delete<T>(url: string, config?: AxiosRequestConfig): Promise<APIResponse<T>> {
-    const response = await this.instance.delete<APIResponse<T>>(url, config);
+  async delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    const response = await this.instance.delete<T>(url, config);
     return response.data;
   }
 }

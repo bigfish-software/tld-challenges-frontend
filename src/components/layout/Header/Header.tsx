@@ -46,24 +46,24 @@ export const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <a
-              href="#custom-codes"
+            <Link
+              to="/custom-codes"
               className="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Custom Codes
-            </a>
-            <a
-              href="#challenges"
+            </Link>
+            <Link
+              to="/challenges"
               className="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Challenges
-            </a>
-            <a
-              href="#tournaments"
+            </Link>
+            <Link
+              to="/tournaments"
               className="text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
             >
               Tournaments
-            </a>
+            </Link>
           </nav>
 
           {/* Right side actions */}
@@ -165,27 +165,27 @@ export const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
-              <a
-                href="#custom-codes"
+              <Link
+                to="/custom-codes"
                 className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Custom Codes
-              </a>
-              <a
-                href="#challenges"
+              </Link>
+              <Link
+                to="/challenges"
                 className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Challenges
-              </a>
-              <a
-                href="#tournaments"
+              </Link>
+              <Link
+                to="/tournaments"
                 className="block px-3 py-2 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Tournaments
-              </a>
+              </Link>
               
               {/* Divider */}
               <div className="border-t border-slate-200 dark:border-slate-700 my-2"></div>
