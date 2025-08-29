@@ -4,7 +4,7 @@ import { FeatureCard } from '@/components/ui/FeatureCard';
 import { TournamentSection } from '@/components/ui/TournamentSection';
 import { DonationSection } from '@/components/ui/DonationSection';
 import { Button } from '@/components/ui/Button';
-import { ComputerIcon, PaperIcon } from '@/components/ui/icons';
+import { ComputerIcon, PaperIcon, DollarIcon } from '@/components/ui/icons';
 import tldHeroImage from '@/assets/screen_0dec6e6c-d9a2-4b1c-9479-7f305b7cfe19_hi.png';
 
 export const HomePage = () => {
@@ -13,20 +13,21 @@ export const HomePage = () => {
     {
       title: 'Custom Codes',
       description: 'Discover and share custom game configuration codes that enable unique challenges and gameplay experiences.',
-      titleIcon: <ComputerIcon className="h-8 w-8" />,
+      titleIcon: <ComputerIcon />,
       href: '/custom-codes',
       buttonText: 'Explore Codes'
     },
     {
       title: 'Challenges',
       description: 'Browse community-created challenges with leaderboards to track your progress and compete with other survivors.',
-      titleIcon: <PaperIcon className="h-8 w-8" />,
+      titleIcon: <PaperIcon />,
       href: '/challenges',
       buttonText: 'Browse Challenges'
     },
     {
       title: 'Tournaments',
       description: 'Join organized competitive events with prizes ranging from cold hard cash to warm fuzzy feelings of community fame.',
+      titleIcon: <DollarIcon />,
       href: '/tournaments',
       buttonText: 'View Tournaments'
     }
@@ -187,6 +188,7 @@ export const HomePage = () => {
                   title={feature.title}
                   description={feature.description}
                   titleIcon={feature.titleIcon}
+                  iconVariant="md"
                   href={feature.href}
                   buttonText={feature.buttonText}
                 />

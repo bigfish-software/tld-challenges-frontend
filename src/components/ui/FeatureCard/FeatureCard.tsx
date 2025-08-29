@@ -7,6 +7,7 @@ export interface FeatureCardProps {
   titleIcon?: ReactNode;
   href: string;
   buttonText: string;
+  iconVariant?: 'sm' | 'md' | 'lg';
 }
 
 export const FeatureCard = ({
@@ -14,8 +15,16 @@ export const FeatureCard = ({
   description,
   titleIcon,
   href,
-  buttonText
+  buttonText,
+  iconVariant = 'md'
 }: FeatureCardProps) => {
+  // Icon size variants - encapsulated styling  
+  const iconSizeClasses = {
+    sm: 'h-28 w-28',   // 112px - smaller size
+    md: 'h-32 w-32',   // 128px - smaller size  
+    lg: 'h-36 w-36'    // 144px - smaller size
+  };
+
   return (
     <div className="
       group
@@ -40,7 +49,30 @@ export const FeatureCard = ({
     ">
       {/* Content - grows to fill available space */}
       <div className="flex-1 flex flex-col">
-        <div className="flex items-center gap-3 mb-3">
+        {/* Icon Section - Above content */}
+        {titleIcon && (
+          <div className="
+            flex 
+            justify-center 
+            mb-6
+          ">
+            <div className={`
+              [&>svg]:fill-slate-600 
+              [&>svg]:dark:fill-slate-300
+              [&>svg]:group-hover:fill-primary-600
+              [&>svg]:dark:group-hover:fill-primary-400
+              transition-all
+              duration-300
+              group-hover:scale-110
+              ${iconSizeClasses[iconVariant]}
+            `}>
+              {titleIcon}
+            </div>
+          </div>
+        )}
+        
+        {/* Title Section */}
+        <div className="text-center mb-4">
           <h3 className="
             text-xl 
             font-semibold 
@@ -55,19 +87,6 @@ export const FeatureCard = ({
           ">
             {title.toUpperCase()}
           </h3>
-          {titleIcon && (
-            <div className="
-              text-slate-900 
-              dark:text-slate-100
-              group-hover:text-primary-700
-              dark:group-hover:text-primary-300
-              transition-colors
-              duration-200
-              flex-shrink-0
-            ">
-              {titleIcon}
-            </div>
-          )}
         </div>
         
         <p className="
@@ -75,6 +94,7 @@ export const FeatureCard = ({
           dark:text-slate-300 
           text-base
           leading-relaxed
+          text-center
           flex-1
           mb-6
         ">

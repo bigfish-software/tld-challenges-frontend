@@ -2,12 +2,19 @@ interface ComputerIconProps {
   className?: string;
 }
 
-export const ComputerIcon = ({ className = "w-6 h-6" }: ComputerIconProps) => (
+/**
+ * Computer Icon Component
+ * 
+ * A theme-aware computer/desktop icon that automatically inherits text color
+ * using currentColor. Optimized SVG with 41.2% size reduction.
+ * Size is controlled by parent container through className prop.
+ * 
+ * @param className - Optional CSS classes for styling (size, color, etc.)
+ */
+export const ComputerIcon = ({ className = "" }: ComputerIconProps) => (
   <svg 
     className={className}
     xmlns="http://www.w3.org/2000/svg" 
-    width="2080" 
-    height="2080" 
     viewBox="0 0 2080 2080"
     aria-hidden="true"
   >

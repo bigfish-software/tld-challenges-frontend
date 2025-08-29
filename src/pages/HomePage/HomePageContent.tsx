@@ -2,6 +2,9 @@ import { Button } from '@/components/ui/Button';
 import { FeatureCard } from '@/components/ui/FeatureCard';
 import { TournamentSection } from '@/components/ui/TournamentSection';
 import { DonationSection } from '@/components/ui/DonationSection';
+import { ComputerIcon } from '@/components/ui/icons/ComputerIcon';
+import { PaperIcon } from '@/components/ui/icons/PaperIcon';
+import { DollarIcon } from '@/components/ui/icons/DollarIcon';
 import tldHeroImage from '@/assets/screen_0dec6e6c-d9a2-4b1c-9479-7f305b7cfe19_hi.png';
 
 /**
@@ -9,68 +12,26 @@ import tldHeroImage from '@/assets/screen_0dec6e6c-d9a2-4b1c-9479-7f305b7cfe19_h
  * Used for theme comparison stories and content-only rendering.
  */
 export const HomePageContent = () => {
-  // Feature cards data - same as actual HomePage
+  // Feature cards data - using proper icon components
   const features = [
     {
       title: 'Custom Codes',
       description: 'Discover and share custom game configuration codes that enable unique challenges and gameplay experiences.',
-      icon: (
-        <svg
-          className="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-          />
-        </svg>
-      ),
+      titleIcon: <ComputerIcon />,
       href: '/custom-codes',
       buttonText: 'Explore Codes'
     },
     {
       title: 'Challenges',
       description: 'Browse community-created challenges with leaderboards to track your progress and compete with other survivors.',
-      icon: (
-        <svg
-          className="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M13 10V3L4 14h7v7l9-11h-7z"
-          />
-        </svg>
-      ),
+      titleIcon: <PaperIcon />,
       href: '/challenges',
       buttonText: 'Browse Challenges'
     },
     {
       title: 'Tournaments',
       description: 'Join organized competitive events with prizes ranging from cold hard cash to warm fuzzy feelings of community fame.',
-      icon: (
-        <svg
-          className="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-          />
-        </svg>
-      ),
+      titleIcon: <DollarIcon />,
       href: '/tournaments',
       buttonText: 'View Tournaments'
     }
@@ -227,7 +188,7 @@ export const HomePageContent = () => {
                 key={index}
                 title={feature.title}
                 description={feature.description}
-                icon={feature.icon}
+                titleIcon={feature.titleIcon}
                 href={feature.href}
                 buttonText={feature.buttonText}
               />
