@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button';
 export interface FeatureCardProps {
   title: string;
   description: string;
-  icon: ReactNode;
+  titleIcon?: ReactNode;
   href: string;
   buttonText: string;
 }
@@ -12,7 +12,7 @@ export interface FeatureCardProps {
 export const FeatureCard = ({
   title,
   description,
-  icon,
+  titleIcon,
   href,
   buttonText
 }: FeatureCardProps) => {
@@ -38,44 +38,37 @@ export const FeatureCard = ({
       dark:hover:border-primary-600
       p-6
     ">
-      {/* Icon */}
-      <div className="
-        flex 
-        h-12 
-        w-12 
-        items-center 
-        justify-center 
-        rounded-lg 
-        bg-primary-100 
-        dark:bg-primary-900/30 
-        text-primary-600 
-        dark:text-primary-400
-        mb-4
-        group-hover:bg-primary-200
-        dark:group-hover:bg-primary-900/50
-        transition-colors
-        duration-200
-      ">
-        {icon}
-      </div>
-
       {/* Content - grows to fill available space */}
       <div className="flex-1 flex flex-col">
-        <h3 className="
-          text-xl 
-          font-semibold 
-          font-headline
-          uppercase
-          text-slate-900 
-          dark:text-slate-100
-          group-hover:text-primary-700
-          dark:group-hover:text-primary-300
-          transition-colors
-          duration-200
-          mb-3
-        ">
-          {title.toUpperCase()}
-        </h3>
+        <div className="flex items-center gap-3 mb-3">
+          <h3 className="
+            text-xl 
+            font-semibold 
+            font-headline
+            uppercase
+            text-slate-900 
+            dark:text-slate-100
+            group-hover:text-primary-700
+            dark:group-hover:text-primary-300
+            transition-colors
+            duration-200
+          ">
+            {title.toUpperCase()}
+          </h3>
+          {titleIcon && (
+            <div className="
+              text-slate-900 
+              dark:text-slate-100
+              group-hover:text-primary-700
+              dark:group-hover:text-primary-300
+              transition-colors
+              duration-200
+              flex-shrink-0
+            ">
+              {titleIcon}
+            </div>
+          )}
+        </div>
         
         <p className="
           text-slate-600 
