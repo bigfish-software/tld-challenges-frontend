@@ -111,7 +111,10 @@ export const Header = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={toggleTheme}
+              onClick={(e) => {
+                toggleTheme();
+                e.currentTarget.blur();
+              }}
               aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
               className="hidden md:block p-2"
             >
@@ -201,7 +204,10 @@ export const Header = () => {
               
               {/* Theme Toggle - Mobile */}
               <button
-                onClick={toggleTheme}
+                onClick={(e) => {
+                  toggleTheme();
+                  e.currentTarget.blur();
+                }}
                 className="flex items-center w-full px-3 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
               >
                 {isDark ? (
