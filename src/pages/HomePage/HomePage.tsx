@@ -4,7 +4,7 @@ import { FeatureCard } from '@/components/ui/FeatureCard';
 import { TournamentSection } from '@/components/ui/TournamentSection';
 import { DonationSection } from '@/components/ui/DonationSection';
 import { Button } from '@/components/ui/Button';
-import { ComputerIcon } from '@/components/ui/icons/ComputerIcon';
+import { ComputerIcon, PaperIcon } from '@/components/ui/icons';
 import tldHeroImage from '@/assets/screen_0dec6e6c-d9a2-4b1c-9479-7f305b7cfe19_hi.png';
 
 export const HomePage = () => {
@@ -20,6 +20,7 @@ export const HomePage = () => {
     {
       title: 'Challenges',
       description: 'Browse community-created challenges with leaderboards to track your progress and compete with other survivors.',
+      titleIcon: <PaperIcon className="h-8 w-8" />,
       href: '/challenges',
       buttonText: 'Browse Challenges'
     },

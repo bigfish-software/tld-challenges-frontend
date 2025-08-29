@@ -9,3 +9,4 @@ export * from './CustomCodeCard';
 export * from './ChallengeCard';
 export * from './TournamentCard';
 export * from './RichTextRenderer';
+export * from './icons';
