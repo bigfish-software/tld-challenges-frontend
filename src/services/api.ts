@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosRequestConfig } from 'axios';
-import type { APIResponse } from '@/types/common';
 
 // API Error class definition
 export class APIError extends Error {

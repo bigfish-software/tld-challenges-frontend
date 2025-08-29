@@ -1,6 +1,8 @@
 // TypeScript types based on the Strapi backend ORM documentation
 // This file models the actual content types from the tld-challenges-backend
 
+import { StrapiRichTextBlocks } from './richText';
+
 export interface StrapiEntity {
   id: number;
   createdAt: string;
@@ -20,7 +22,7 @@ export interface StrapiCollection<T> {
 export interface Challenge extends StrapiEntity {
   attributes: {
     name: string;
-    description?: string; // Rich text (Blocks)
+    description?: StrapiRichTextBlocks; // Rich text (Blocks)
     slug: string;
     difficulty: 'Pilgrim' | 'Voyager' | 'Stalker' | 'Interloper' | 'Misery' | 'Nogoa' | 'Custom';
     created_date?: string;
@@ -56,7 +58,7 @@ export interface Submission extends StrapiEntity {
 export interface Tournament extends StrapiEntity {
   attributes: {
     name: string;
-    description?: string; // Rich text (Blocks)
+    description?: StrapiRichTextBlocks; // Rich text (Blocks)
     slug: string;
     start_date: string;
     end_date: string;
@@ -91,7 +93,7 @@ export interface CustomCode {
   name: string;
   slug: string;
   code: string;
-  description?: any; // Rich text blocks - complex structure from Strapi
+  description?: StrapiRichTextBlocks; // Rich text blocks - structured content from Strapi
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
@@ -100,14 +102,14 @@ export interface CustomCode {
   
   // Relations - Direct arrays as returned by Strapi populate
   creators: SimpleCreator[];
-  challenges?: any[];
-  faqs?: any[];
+  challenges?: Challenge[];
+  faqs?: FAQ[];
 }
 
 // Content Type: Rule
 export interface Rule extends StrapiEntity {
   attributes: {
-    description: string; // Rich text (Blocks)
+    description: StrapiRichTextBlocks; // Rich text (Blocks)
     
     // Relations
     challenges?: StrapiCollection<Challenge>;
@@ -133,7 +135,7 @@ export interface Creator extends StrapiEntity {
 export interface FAQ extends StrapiEntity {
   attributes: {
     question: string;
-    answer: string; // Rich text (Blocks)
+    answer: StrapiRichTextBlocks; // Rich text (Blocks)
     
     // Relations
     challenges?: StrapiCollection<Challenge>;
@@ -167,45 +169,4 @@ export interface StrapiCollectionResponse<T> {
   };
 }
 
-// Legacy types for compatibility with current mock data
-// These will be updated as we integrate with the real API
 
-export interface LegacyCustomCode {
-  id: number;
-  name: string;
-  description: string;
-  code: string;
-  creator: { name: string; url?: string };
-  tags: string[];
-  downloads: number;
-  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Extreme';
-  createdAt: string;
-}
-
-export interface LegacyChallenge {
-  id: number;
-  name: string;
-  description: string;
-  status: 'Active' | 'Upcoming' | 'Completed';
-  region: 'Mystery Lake' | 'Coastal Highway' | 'Pleasant Valley' | 'Timberwolf Mountain' | 'Forlorn Muskeg' | 'Broken Railroad' | 'Hushed River Valley' | 'Bleak Inlet' | 'Ash Canyon' | 'Blackrock' | 'Zone of Contamination';
-  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Extreme';
-  participants: number;
-  creator: { name: string; url?: string };
-  tournament?: string;
-  createdAt: string;
-}
-
-export interface LegacyTournament {
-  id: number;
-  name: string;
-  description: string;
-  format: 'Single Elimination' | 'Double Elimination' | 'Round Robin' | 'Swiss System' | 'Time Trial' | 'Survival Contest';
-  status: 'Registration Open' | 'In Progress' | 'Completed' | 'Cancelled';
-  participants: number;
-  maxParticipants: number;
-  prizePool: string;
-  startDate: string;
-  endDate: string;
-  entryFee: 'Free' | 'Paid';
-  creator: { name: string; url?: string };
-}

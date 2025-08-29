@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ChallengeCard } from './ChallengeCard';
+import type { MockChallenge } from '@/types/common';
 
 const meta: Meta<typeof ChallengeCard> = {
   title: 'UI/ChallengeCard',
@@ -51,7 +52,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Sample challenge data
-const activeChallenge = {
+const activeChallenge: MockChallenge = {
   id: 1,
   title: 'The 30-Day Nomad Challenge',
   description: 'Survive 30 days without establishing a permanent base. Move every 3 days and visit all major regions. Test your adaptability and resource management skills.',
@@ -76,7 +77,7 @@ const activeChallenge = {
   endDate: '2024-02-15T23:59:59Z'
 };
 
-const completedChallenge = {
+const completedChallenge: MockChallenge = {
   id: 2,
   title: 'Blizzard Survivor',
   description: 'Survive a continuous blizzard for 7 days in the most challenging weather conditions. Only the strongest will emerge victorious.',
@@ -101,7 +102,7 @@ const completedChallenge = {
   endDate: '2024-01-08T23:59:59Z'
 };
 
-const upcomingChallenge = {
+const upcomingChallenge: MockChallenge = {
   id: 3,
   title: 'Wolf Pack Encounter',
   description: 'Face enhanced wolf AI in a special challenge where wolves hunt in coordinated packs. Survive encounters with multiple wolf packs.',
@@ -125,7 +126,7 @@ const upcomingChallenge = {
   endDate: '2024-03-01T23:59:59Z'
 };
 
-const easyChallenge = {
+const easyChallenge: MockChallenge = {
   id: 4,
   title: 'Foragers Paradise',
   description: 'A beginner-friendly challenge focused on gathering, crafting, and exploring. Perfect for new players to learn the ropes.',

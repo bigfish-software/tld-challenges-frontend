@@ -138,6 +138,10 @@ interface SubmissionForm {
 
 ## Development Guidelines
 
+### TypeScript Type Checking - CRITICAL TIMING NOTE
+
+**IMPORTANT**: When running `npm run type-check`, this command takes 30-60+ seconds to complete and processes the entire codebase. DO NOT assume it has finished until you see the complete output including any error messages. Always wait for the full completion before proceeding with any other actions.
+
 ### Color Visualization in Markdown Documentation
 
 **IMPORTANT**: When creating color documentation or visualizing colors in markdown files, always use shields.io as the first approach:

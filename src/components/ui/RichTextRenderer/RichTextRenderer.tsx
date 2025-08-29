@@ -1,34 +1,23 @@
 import React from 'react';
-
-// Strapi Rich Text Block Types
-interface RichTextChild {
-  text: string;
-  type: 'text';
-  bold?: boolean;
-  italic?: boolean;
-  underline?: boolean;
-  strikethrough?: boolean;
-  code?: boolean;
-}
-
-interface RichTextBlock {
-  type: string;
-  level?: number;
-  format?: 'ordered' | 'unordered';
-  children: (RichTextChild | RichTextBlock)[];
-}
-
-// Type guard functions
-const isTextChild = (node: RichTextChild | RichTextBlock): node is RichTextChild => {
-  return node.type === 'text' && 'text' in node;
-};
-
-const isBlock = (node: RichTextChild | RichTextBlock): node is RichTextBlock => {
-  return node.type !== 'text' && 'children' in node;
-};
+import { createComponentLogger } from '@/utils/logger';
+import { 
+  StrapiRichTextBlocks, 
+  StrapiRichTextNode, 
+  TextNode,
+  isStrapiRichTextBlocks,
+  isTextNode,
+  isParagraphNode,
+  isHeadingNode,
+  isListNode,
+  isListItemNode,
+  isQuoteNode,
+  isCodeNode,
+  isLinkNode
+} from '@/types/richText';
+import { extractTextFromBlocks } from '@/utils/richText';
 
 interface RichTextRendererProps {
-  blocks: RichTextBlock[] | any;
+  blocks: StrapiRichTextBlocks | unknown;
   className?: string;
   variant?: 'default' | 'compact' | 'summary';
   maxLength?: number;
@@ -40,24 +29,23 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
   variant = 'default',
   maxLength = 200
 }) => {
-  console.log('RichTextRenderer - Input data:', {
-    blocks,
-    variant,
-    isArray: Array.isArray(blocks),
-    blocksLength: blocks?.length,
-    firstBlock: blocks?.[0],
-    firstBlockType: blocks?.[0]?.type,
-    firstBlockChildren: blocks?.[0]?.children
+  const logger = createComponentLogger('RichTextRenderer');
+
+  logger.debug('Processing rich text blocks', { variant }, {
+    isValidBlocks: isStrapiRichTextBlocks(blocks),
+    blocksLength: Array.isArray(blocks) ? blocks.length : 0,
+    firstBlockType: Array.isArray(blocks) && blocks.length > 0 ? blocks[0]?.type : 'none'
   });
 
-  if (!blocks || !Array.isArray(blocks)) {
-    console.log('RichTextRenderer - No valid blocks, returning null');
+  // Validate input using type guard
+  if (!isStrapiRichTextBlocks(blocks)) {
+    logger.debug('No valid blocks found, returning null');
     return null;
   }
 
   // For summary variant, extract plain text with length limit
   if (variant === 'summary') {
-    const plainText = extractPlainText(blocks);
+    const plainText = extractTextFromBlocks(blocks);
     const truncatedText = plainText.length > maxLength 
       ? plainText.substring(0, maxLength).replace(/\s+\S*$/, '') + '...'
       : plainText;
@@ -69,7 +57,7 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
     );
   }
 
-  const renderTextChild = (child: RichTextChild, index: number): React.ReactNode => {
+  const renderTextChild = (child: TextNode, index: number): React.ReactNode => {
     let element: React.ReactNode = child.text;
 
     if (child.bold) {
@@ -98,138 +86,139 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
     return element;
   };
 
-  const renderBlock = (block: RichTextBlock, index: number): React.ReactNode => {
+  const renderBlock = (block: StrapiRichTextNode, index: number): React.ReactNode => {
     const key = `block-${index}`;
 
     switch (block.type) {
       case 'paragraph':
-        return (
-          <p key={key} className="mb-4 last:mb-0">
-            {block.children.map((child, childIndex) => 
-              isTextChild(child)
-                ? renderTextChild(child, childIndex)
-                : renderBlock(child, childIndex)
-            )}
-          </p>
-        );
+        if (isParagraphNode(block)) {
+          return (
+            <p key={key} className="mb-4 last:mb-0">
+              {block.children.map((child, childIndex) => 
+                renderInlineElement(child, childIndex)
+              )}
+            </p>
+          );
+        }
+        break;
 
       case 'heading':
-        const HeadingTag = `h${block.level || 1}` as keyof JSX.IntrinsicElements;
-        const headingClasses = {
-          1: 'text-3xl font-bold mb-6',
-          2: 'text-2xl font-bold mb-5',
-          3: 'text-xl font-bold mb-4',
-          4: 'text-lg font-bold mb-3',
-          5: 'text-base font-bold mb-2',
-          6: 'text-sm font-bold mb-2'
-        };
-        
-        return (
-          <HeadingTag 
-            key={key} 
-            className={`${headingClasses[block.level as keyof typeof headingClasses] || headingClasses[1]} text-slate-900 dark:text-slate-100`}
-          >
-            {block.children.map((child, childIndex) => 
-              isTextChild(child)
-                ? renderTextChild(child, childIndex)
-                : renderBlock(child, childIndex)
-            )}
-          </HeadingTag>
-        );
+        if (isHeadingNode(block)) {
+          const HeadingTag = `h${block.level}` as keyof JSX.IntrinsicElements;
+          const headingClasses = {
+            1: 'text-3xl font-bold mb-6',
+            2: 'text-2xl font-bold mb-5',
+            3: 'text-xl font-bold mb-4',
+            4: 'text-lg font-bold mb-3',
+            5: 'text-base font-bold mb-2',
+            6: 'text-sm font-bold mb-2'
+          };
+          
+          return (
+            <HeadingTag 
+              key={key} 
+              className={`${headingClasses[block.level] || headingClasses[1]} text-slate-900 dark:text-slate-100`}
+            >
+              {block.children.map((child, childIndex) => 
+                renderInlineElement(child, childIndex)
+              )}
+            </HeadingTag>
+          );
+        }
+        break;
 
       case 'list':
-        const ListTag = block.format === 'ordered' ? 'ol' : 'ul';
-        const listClasses = block.format === 'ordered' 
-          ? 'list-decimal list-inside mb-4 space-y-1'
-          : 'list-disc list-inside mb-4 space-y-1';
-        
-        return (
-          <ListTag key={key} className={listClasses}>
-            {block.children.map((child, childIndex) => 
-              isTextChild(child)
-                ? renderTextChild(child, childIndex)
-                : renderBlock(child, childIndex)
-            )}
-          </ListTag>
-        );
-
-      case 'list-item':
-        return (
-          <li key={key} className="text-slate-700 dark:text-slate-300">
-            {block.children.map((child, childIndex) => 
-              isTextChild(child)
-                ? renderTextChild(child, childIndex)
-                : renderBlock(child, childIndex)
-            )}
-          </li>
-        );
+        if (isListNode(block)) {
+          const ListTag = block.format === 'ordered' ? 'ol' : 'ul';
+          const listClasses = block.format === 'ordered' 
+            ? 'list-decimal list-inside mb-4 space-y-1'
+            : 'list-disc list-inside mb-4 space-y-1';
+          
+          return (
+            <ListTag key={key} className={listClasses}>
+              {block.children.map((item, itemIndex) => {
+                if (isListItemNode(item)) {
+                  return (
+                    <li key={`item-${itemIndex}`} className="text-slate-800 dark:text-slate-200">
+                      {item.children.map((child, childIndex) => 
+                        renderInlineElement(child, childIndex)
+                      )}
+                    </li>
+                  );
+                }
+                return null;
+              })}
+            </ListTag>
+          );
+        }
+        break;
 
       case 'quote':
-        return (
-          <blockquote key={key} className="border-l-4 border-primary-400 pl-4 py-2 mb-4 italic text-slate-600 dark:text-slate-400">
-            {block.children.map((child, childIndex) => 
-              isTextChild(child)
-                ? renderTextChild(child, childIndex)
-                : renderBlock(child, childIndex)
-            )}
-          </blockquote>
-        );
+        if (isQuoteNode(block)) {
+          return (
+            <blockquote key={key} className="border-l-4 border-primary-400 pl-4 py-2 mb-4 italic text-slate-600 dark:text-slate-400">
+              {block.children.map((child, childIndex) => 
+                renderInlineElement(child, childIndex)
+              )}
+            </blockquote>
+          );
+        }
+        break;
 
       case 'code':
-        return (
-          <pre key={key} className="bg-slate-100 dark:bg-slate-800 p-4 rounded-lg mb-4 overflow-x-auto">
-            <code className="text-sm font-mono text-slate-800 dark:text-slate-200">
-              {block.children.map((child) => 
-                isTextChild(child) ? child.text : ''
-              ).join('')}
-            </code>
-          </pre>
-        );
+        if (isCodeNode(block)) {
+          return (
+            <pre key={key} className="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 mb-4 overflow-x-auto">
+              <code className="text-sm font-mono text-slate-800 dark:text-slate-200">
+                {block.children.map((child, childIndex) => 
+                  renderInlineElement(child, childIndex)
+                )}
+              </code>
+            </pre>
+          );
+        }
+        break;
 
       default:
-        // Fallback for unknown block types
-        return (
-          <div key={key} className="mb-2">
-            {block.children.map((child, childIndex) => 
-              isTextChild(child)
-                ? renderTextChild(child, childIndex)
-                : renderBlock(child, childIndex)
-            )}
-          </div>
-        );
+        logger.debug('Unknown block type encountered', { type: block.type });
+        return null;
     }
+    
+    return null;
   };
 
-  const baseClasses = variant === 'compact' 
-    ? 'text-sm leading-relaxed'
-    : 'leading-relaxed';
+  // Helper function to render inline elements (text nodes and links)
+  const renderInlineElement = (element: StrapiRichTextNode, index: number): React.ReactNode => {
+    if (isTextNode(element)) {
+      return renderTextChild(element, index);
+    }
+    
+    if (isLinkNode(element)) {
+      return (
+        <a
+          key={index}
+          href={element.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 underline"
+        >
+          {element.children.map((child: StrapiRichTextNode, childIndex: number) => 
+            renderInlineElement(child, childIndex)
+          )}
+        </a>
+      );
+    }
+    
+    // For any other node type that might appear inline, render as block
+    return renderBlock(element, index);
+  };
 
+  // Render blocks based on type
   return (
-    <div className={`prose dark:prose-invert max-w-none ${baseClasses} ${className}`}>
+    <div className={className}>
       {blocks.map((block, index) => renderBlock(block, index))}
     </div>
   );
 };
-
-// Helper function to extract plain text for summary variant
-function extractPlainText(blocks: RichTextBlock[] | any): string {
-  if (!blocks || !Array.isArray(blocks)) {
-    return '';
-  }
-
-  function extractFromBlock(block: RichTextBlock | RichTextChild): string {
-    if (isTextChild(block)) {
-      return block.text || '';
-    }
-
-    if (isBlock(block) && Array.isArray(block.children)) {
-      return block.children.map(extractFromBlock).join('');
-    }
-
-    return '';
-  }
-
-  return blocks.map(extractFromBlock).join(' ').trim();
-}
 
 export default RichTextRenderer;

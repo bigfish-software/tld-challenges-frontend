@@ -85,11 +85,11 @@ export const externalLinks: ExternalLinksConfig = {
  */
 export function getExternalLink(path: string): ExternalLink | undefined {
   const keys = path.split('.');
-  let current: any = externalLinks;
+  let current: unknown = externalLinks;
   
   for (const key of keys) {
     if (current && typeof current === 'object' && key in current) {
-      current = current[key];
+      current = (current as Record<string, unknown>)[key];
     } else {
       return undefined;
     }

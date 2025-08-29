@@ -4,9 +4,10 @@ export * from './TournamentSection';
 export * from './DonationSection';
 export * from './PageHero';
 export * from './FilterPanel';
-export * from './ContentGrid';
 export * from './CustomCodeCard';
+// Re-enabled - now supports both Strapi and Mock types
 export * from './ChallengeCard';
 export * from './TournamentCard';
 export * from './RichTextRenderer';
+export * from './ResultsHeader';
 export * from './icons';

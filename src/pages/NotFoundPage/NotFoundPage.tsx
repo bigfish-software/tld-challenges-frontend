@@ -1,10 +1,10 @@
+import { PageLayout } from '@/components/layout';
 import { NotFoundPageContent } from './NotFoundPageContent';
 
 export const NotFoundPage = () => {
   return (
-    <div className="flex flex-col">
-      {/* Main content */}
+    <PageLayout>
       <NotFoundPageContent />
-    </div>
+    </PageLayout>
   );
 };

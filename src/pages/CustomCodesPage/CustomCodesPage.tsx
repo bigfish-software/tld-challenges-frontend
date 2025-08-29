@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { PageHero, FilterPanel, ContentGrid, CustomCodeCard } from '@/components/ui';
+import { PageHero, FilterPanel, CustomCodeCard } from '@/components/ui';
+import { ContentGrid } from '@/components/layout';
 import { PageLayout } from '@/components/layout';
 import { useCustomCodes } from '@/hooks/api';
 

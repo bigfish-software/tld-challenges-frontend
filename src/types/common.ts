@@ -49,6 +49,48 @@ export class APIError extends Error {
   }
 }
 
+// Simplified mock types for Storybook and development
+export interface MockChallenge {
+  id: number;
+  title: string;
+  description: string;
+  rules: string[];
+  creator: {
+    name: string;
+    url?: string;
+  };
+  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Extreme';
+  duration: string;
+  region: string;
+  tags: string[];
+  submissions: number;
+  participants: number;
+  status: 'Active' | 'Completed' | 'Upcoming';
+  createdAt: string;
+  endDate: string;
+}
+
+export interface MockTournament {
+  id: number;
+  title: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  status: 'Upcoming' | 'Active' | 'Completed';
+  participants: number;
+  prizes: string[];
+  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Extreme';
+  creator: {
+    name: string;
+    url?: string;
+  };
+  challenges: number;
+  region: string;
+  tags: string[];
+}
+
+// Remove MockCustomCode - custom codes should use API structure in mock data
+
 // Environment Variables
 export interface EnvironmentConfig {
   API_BASE_URL: string;

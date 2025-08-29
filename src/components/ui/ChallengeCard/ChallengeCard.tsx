@@ -1,9 +1,10 @@
 import React from 'react';
 import type { Challenge } from '@/types/api';
+import type { MockChallenge } from '@/types/common';
 
 export interface ChallengeCardProps {
-  /** The challenge object from the API */
-  challenge: Challenge;
+  /** The challenge object from the API or mock data */
+  challenge: Challenge | MockChallenge;
   /** Display variant */
   variant?: 'default' | 'compact';
   /** Callback when card is clicked */
@@ -16,6 +17,11 @@ export interface ChallengeCardProps {
   className?: string;
 }
 
+// Type guard to check if challenge is a Strapi Challenge
+function isStrapiChallenge(challenge: Challenge | MockChallenge): challenge is Challenge {
+  return 'attributes' in challenge;
+}
+
 export const ChallengeCard = ({
   challenge,
   variant = 'default',
@@ -24,17 +30,34 @@ export const ChallengeCard = ({
   onCreatorClick,
   className = ''
 }: ChallengeCardProps) => {
-  const { id, attributes } = challenge;
-  const {
-    name,
-    description,
-    difficulty,
-    created_date,
-    creators,
-    rules,
-    tournament,
-    custom_code
-  } = attributes;
+  // Extract data based on challenge type
+  const id = challenge.id;
+  
+  let name: string, description: string, difficulty: string, created_date: string | undefined;
+  let creators: any, rules: any, tournament: any, custom_code: any;
+  
+  if (isStrapiChallenge(challenge)) {
+    // Handle Strapi Challenge structure
+    const { attributes } = challenge;
+    name = attributes.name;
+    description = typeof attributes.description === 'string' ? attributes.description : '';
+    difficulty = attributes.difficulty;
+    created_date = attributes.created_date;
+    creators = attributes.creators;
+    rules = attributes.rules;
+    tournament = attributes.tournament;
+    custom_code = attributes.custom_code;
+  } else {
+    // Handle MockChallenge structure
+    name = challenge.title;
+    description = challenge.description;
+    difficulty = challenge.difficulty;
+    created_date = challenge.createdAt;
+    creators = { data: [{ attributes: challenge.creator }] };
+    rules = { data: challenge.rules.map((rule: string, index: number) => ({ id: index, attributes: { description: rule } })) };
+    tournament = null;
+    custom_code = null;
+  }
 
   const handleCardClick = () => {
     onCardClick?.(id);

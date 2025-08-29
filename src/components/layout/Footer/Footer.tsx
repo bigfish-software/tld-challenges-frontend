@@ -1,4 +1,5 @@
 import { externalLinks } from '@/config/externalLinks';
+import { TldLogoIcon, SteamIcon } from '@/components/ui/icons';
 
 export const Footer = () => {
   return (
@@ -12,19 +13,10 @@ export const Footer = () => {
                 TLD CHALLENGES
               </h3>
               {/* Logo Icon */}
-              <svg 
-                className="h-5 w-5 text-primary-700 dark:text-primary-300"
-                viewBox="0 0 15.65 25.9"
-                fill="currentColor"
-                aria-label="TLD Challenges Logo"
-              >
-                <path d="M15.47,0L6.96,.47l-.47,.22-.53-.17L.07,.81l-.07,.11L.16,3.48l.05,1.49,.05,1.06s2.51,0,2.78,0c-.23,.15-1.23,.74-1.28,.78,.15,3.96,.72,8.45,.86,9.51h-.01v9.58h.35c.24,0,.5,0,.5,0,0,0,.86-2.8,.91-3.05,.07-.75,.22-3.58,.22-3.58,0,0,.43,2.28,.47,2.51,.08,.08,1.42,1.15,1.42,1.13,.03-.62,.07-1.43,.07-1.43l.02-3.11v-1.27l.04-2.52-.2-.65,.21-.53,.08-2.77s.03-4.27,.02-4.79c0,0,2.73,.14,7.65,2.96,1.93-3.6,1.09-8.8,1.09-8.8"/>
-                <polygon points="9.33 22.61 9.69 22.61 9.69 23.88 9.95 23.88 9.95 22.61 10.3 22.61 10.3 22.38 9.33 22.38 9.33 22.61"/>
-                <polygon points="11.15 23.29 11.15 23.29 10.72 22.38 10.48 22.38 10.48 23.89 10.71 23.89 10.71 22.89 10.72 22.89 11.09 23.63 11.21 23.63 11.58 22.89 11.59 22.89 11.59 23.89 11.82 23.89 11.82 22.38 11.58 22.38 11.15 23.29"/>
-              </svg>
+              <TldLogoIcon className="h-5 w-5 text-primary-700 dark:text-primary-300" />
             </div>
             <p className="text-slate-600 dark:text-slate-400 text-sm max-w-md">
-                A hub to explore or create custom game codes, challenges and tournaments, made by the community for the community.
+                A hub to explore and create custom game codes, challenges and tournaments, made by the community for the community.
             </p>
             <p className="text-slate-500 dark:text-slate-500 text-xs mt-2 italic">
               Made without crunch by people who care about their friends at a community that cares about its challenges.
@@ -44,10 +36,7 @@ export const Footer = () => {
                   rel="noopener noreferrer"
                   className="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center space-x-2"
                 >
-                  {/* Steam icon */}
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.624 0 11.99-5.366 11.99-11.99C23.969 5.376 18.603.001 11.979.001zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.203-.898 2.203z"/>
-                  </svg>
+                  <SteamIcon className="w-4 h-4" />
                   <span>{externalLinks.game.steamStore.label}</span>
                 </a>
               </li>
@@ -56,16 +45,7 @@ export const Footer = () => {
                   href="#custom-codes" 
                   className="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center space-x-2"
                 >
-                  <svg 
-                    className="w-4 h-4 text-slate-600 dark:text-slate-400"
-                    viewBox="0 0 15.65 25.9"
-                    fill="currentColor"
-                    aria-label="TLD Challenges Logo"
-                  >
-                    <path d="M15.47,0L6.96,.47l-.47,.22-.53-.17L.07,.81l-.07,.11L.16,3.48l.05,1.49,.05,1.06s2.51,0,2.78,0c-.23,.15-1.23,.74-1.28,.78,.15,3.96,.72,8.45,.86,9.51h-.01v9.58h.35c.24,0,.5,0,.5,0,0,0,.86-2.8,.91-3.05,.07-.75,.22-3.58,.22-3.58,0,0,.43,2.28,.47,2.51,.08,.08,1.42,1.15,1.42,1.13,.03-.62,.07-1.43,.07-1.43l.02-3.11v-1.27l.04-2.52-.2-.65,.21-.53,.08-2.77s.03-4.27,.02-4.79c0,0,2.73,.14,7.65,2.96,1.93-3.6,1.09-8.8,1.09-8.8"/>
-                    <polygon points="9.33 22.61 9.69 22.61 9.69 23.88 9.95 23.88 9.95 22.61 10.3 22.61 10.3 22.38 9.33 22.38 9.33 22.61"/>
-                    <polygon points="11.15 23.29 11.15 23.29 10.72 22.38 10.48 22.38 10.48 23.89 10.71 23.89 10.71 22.89 10.72 22.89 11.09 23.63 11.21 23.63 11.58 22.89 11.59 22.89 11.59 23.89 11.82 23.89 11.82 22.38 11.58 22.38 11.15 23.29"/>
-                  </svg>
+                  <TldLogoIcon className="w-4 h-4" />
                   <span>Custom Codes</span>
                 </a>
               </li>
@@ -74,16 +54,7 @@ export const Footer = () => {
                   href="#challenges" 
                   className="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center space-x-2"
                 >
-                  <svg 
-                    className="w-4 h-4 text-slate-600 dark:text-slate-400"
-                    viewBox="0 0 15.65 25.9"
-                    fill="currentColor"
-                    aria-label="TLD Challenges Logo"
-                  >
-                    <path d="M15.47,0L6.96,.47l-.47,.22-.53-.17L.07,.81l-.07,.11L.16,3.48l.05,1.49,.05,1.06s2.51,0,2.78,0c-.23,.15-1.23,.74-1.28,.78,.15,3.96,.72,8.45,.86,9.51h-.01v9.58h.35c.24,0,.5,0,.5,0,0,0,.86-2.8,.91-3.05,.07-.75,.22-3.58,.22-3.58,0,0,.43,2.28,.47,2.51,.08,.08,1.42,1.15,1.42,1.13,.03-.62,.07-1.43,.07-1.43l.02-3.11v-1.27l.04-2.52-.2-.65,.21-.53,.08-2.77s.03-4.27,.02-4.79c0,0,2.73,.14,7.65,2.96,1.93-3.6,1.09-8.8,1.09-8.8"/>
-                    <polygon points="9.33 22.61 9.69 22.61 9.69 23.88 9.95 23.88 9.95 22.61 10.3 22.61 10.3 22.38 9.33 22.38 9.33 22.61"/>
-                    <polygon points="11.15 23.29 11.15 23.29 10.72 22.38 10.48 22.38 10.48 23.89 10.71 23.89 10.71 22.89 10.72 22.89 11.09 23.63 11.21 23.63 11.58 22.89 11.59 22.89 11.59 23.89 11.82 23.89 11.82 22.38 11.58 22.38 11.15 23.29"/>
-                  </svg>
+                  <TldLogoIcon className="w-4 h-4" />
                   <span>Challenges</span>
                 </a>
               </li>
@@ -92,16 +63,7 @@ export const Footer = () => {
                   href="#tournaments" 
                   className="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center space-x-2"
                 >
-                  <svg 
-                    className="w-4 h-4 text-slate-600 dark:text-slate-400"
-                    viewBox="0 0 15.65 25.9"
-                    fill="currentColor"
-                    aria-label="TLD Challenges Logo"
-                  >
-                    <path d="M15.47,0L6.96,.47l-.47,.22-.53-.17L.07,.81l-.07,.11L.16,3.48l.05,1.49,.05,1.06s2.51,0,2.78,0c-.23,.15-1.23,.74-1.28,.78,.15,3.96,.72,8.45,.86,9.51h-.01v9.58h.35c.24,0,.5,0,.5,0,0,0,.86-2.8,.91-3.05,.07-.75,.22-3.58,.22-3.58,0,0,.43,2.28,.47,2.51,.08,.08,1.42,1.15,1.42,1.13,.03-.62,.07-1.43,.07-1.43l.02-3.11v-1.27l.04-2.52-.2-.65,.21-.53,.08-2.77s.03-4.27,.02-4.79c0,0,2.73,.14,7.65,2.96,1.93-3.6,1.09-8.8,1.09-8.8"/>
-                    <polygon points="9.33 22.61 9.69 22.61 9.69 23.88 9.95 23.88 9.95 22.61 10.3 22.61 10.3 22.38 9.33 22.38 9.33 22.61"/>
-                    <polygon points="11.15 23.29 11.15 23.29 10.72 22.38 10.48 22.38 10.48 23.89 10.71 23.89 10.71 22.89 10.72 22.89 11.09 23.63 11.21 23.63 11.58 22.89 11.59 22.89 11.59 23.89 11.82 23.89 11.82 22.38 11.58 22.38 11.15 23.29"/>
-                  </svg>
+                  <TldLogoIcon className="w-4 h-4" />
                   <span>Tournaments</span>
                 </a>
               </li>

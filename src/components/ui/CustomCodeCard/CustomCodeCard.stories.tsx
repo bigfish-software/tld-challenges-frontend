@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CustomCodeCard } from './CustomCodeCard';
+import type { CustomCode } from '@/types/api';
+import type { StrapiRichTextBlocks } from '@/types/richText';
 
 const meta: Meta<typeof CustomCodeCard> = {
   title: 'UI/CustomCodeCard',
@@ -10,10 +12,8 @@ const meta: Meta<typeof CustomCodeCard> = {
       description: {
         component: `
 A card component for displaying custom game configuration codes with:
-- Creator attribution and difficulty indicators
-- Code preview with copy functionality
-- Download counts and interaction tracking
-- Tag system for categorization
+- Creator attribution and rich text descriptions
+- Code preview with copy functionality  
 - Responsive design for different screen sizes
 
 ## Usage Examples
@@ -29,16 +29,12 @@ A card component for displaying custom game configuration codes with:
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['default', 'compact'],
+      options: ['default', 'compact', 'list'],
       description: 'Card display variant'
     },
     onCardClick: {
       action: 'card-clicked',
       description: 'Callback when card is clicked'
-    },
-    onDownload: {
-      action: 'download-clicked', 
-      description: 'Callback when download is clicked'
     },
     onCreatorClick: {
       action: 'creator-clicked',
@@ -50,64 +46,152 @@ A card component for displaying custom game configuration codes with:
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Sample custom code data
-const sampleCustomCode = {
+// Rich text description blocks
+const sampleDescription: StrapiRichTextBlocks = [
+  {
+    type: 'paragraph',
+    children: [
+      {
+        type: 'text',
+        text: 'Enhanced loot spawns with reduced wildlife aggression for a more relaxed survival experience. Perfect for new players or those wanting to focus on exploration and base building.'
+      }
+    ]
+  }
+];
+
+const extremeDescription: StrapiRichTextBlocks = [
+  {
+    type: 'paragraph',
+    children: [
+      {
+        type: 'text',
+        text: 'Extreme weather conditions with brutal cold, limited visibility, and scarce resources. ',
+        bold: true
+      },
+      {
+        type: 'text',
+        text: 'Only for the most experienced survivors who want the ultimate challenge.'
+      }
+    ]
+  }
+];
+
+const detailedDescription: StrapiRichTextBlocks = [
+  {
+    type: 'paragraph',
+    children: [
+      {
+        type: 'text',
+        text: 'A comprehensive overhaul that modifies multiple game systems:'
+      }
+    ]
+  },
+  {
+    type: 'list',
+    format: 'unordered',
+    children: [
+      {
+        type: 'list-item',
+        children: [
+          {
+            type: 'text',
+            text: 'Enhanced weather patterns with dynamic storms'
+          }
+        ]
+      },
+      {
+        type: 'list-item',
+        children: [
+          {
+            type: 'text',
+            text: 'Improved wildlife AI and pack hunting mechanics'
+          }
+        ]
+      },
+      {
+        type: 'list-item',
+        children: [
+          {
+            type: 'text',
+            text: 'Rebalanced loot spawns across all regions'
+          }
+        ]
+      }
+    ]
+  }
+];
+
+// Sample custom code data matching API structure
+const sampleCustomCode: CustomCode = {
   id: 1,
+  documentId: 'abc123',
   name: 'Survivor Paradise',
-  description: 'Enhanced loot spawns with reduced wildlife aggression for a more relaxed survival experience. Perfect for new players or those wanting to focus on exploration.',
+  slug: 'survivor-paradise',
+  description: sampleDescription,
   code: 'AAABBBCCCDDDEEEFFFGGGHHHIIIJJJKKKLLLMMMNNNOOOPPPQQQRRRSSSTTTUUUVVVWWWXXXYYYZZZ',
-  creator: {
-    name: 'BigFishSoftware',
-    url: 'https://twitch.tv/bigfishsoftware'
-  },
-  tags: ['Relaxed', 'Exploration', 'Beginner-Friendly', 'Custom Settings'],
-  downloads: 1247,
-  difficulty: 'Easy' as const,
-  createdAt: '2024-01-15T10:30:00Z'
+  creators: [
+    {
+      id: 1,
+      documentId: 'creator-1',
+      name: 'BigFishSoftware',
+      slug: 'bigfishsoftware',
+      twitch: 'https://twitch.tv/bigfishsoftware',
+      createdAt: '2024-01-15T10:30:00Z',
+      updatedAt: '2024-01-20T09:15:00Z',
+      publishedAt: '2024-01-15T10:30:00Z'
+    }
+  ],
+  createdAt: '2024-01-15T10:30:00Z',
+  updatedAt: '2024-01-20T09:15:00Z',
+  publishedAt: '2024-01-15T10:30:00Z'
 };
 
-const extremeCustomCode = {
+const extremeCustomCode: CustomCode = {
   id: 2,
+  documentId: 'def456',
   name: 'Blizzard Nightmare',
-  description: 'Extreme weather conditions with brutal cold, limited visibility, and scarce resources. Only for the most experienced survivors.',
+  slug: 'blizzard-nightmare',
+  description: extremeDescription,
   code: 'ZZZYYXXXWWWVVVUUUTTTSSSRRRNNNMMMLLLKKKYYYXXXWWWVVVUUUTTTSSSQQQPPPOOO',
-  creator: {
-    name: 'ChefMaria',
-    url: 'https://twitch.tv/chefmaria'
-  },
-  tags: ['Hardcore', 'Weather', 'Extreme', 'Challenge'],
-  downloads: 892,
-  difficulty: 'Extreme' as const,
-  createdAt: '2024-01-12T14:45:00Z'
+  creators: [
+    {
+      id: 2,
+      documentId: 'creator-2',
+      name: 'ChefMaria',
+      slug: 'chefmaria',
+      twitch: 'https://twitch.tv/chefmaria',
+      createdAt: '2024-01-12T14:45:00Z',
+      updatedAt: '2024-01-18T16:30:00Z',
+      publishedAt: '2024-01-12T14:45:00Z'
+    }
+  ],
+  createdAt: '2024-01-12T14:45:00Z',
+  updatedAt: '2024-01-18T16:30:00Z',
+  publishedAt: '2024-01-12T14:45:00Z'
 };
 
-const mediumCustomCode = {
+const detailedCustomCode: CustomCode = {
   id: 3,
-  name: 'Wolf Pack Territory',
-  description: 'Increased wolf spawns across all regions with enhanced AI behavior and pack hunting mechanics.',
-  code: 'MMMNNNOOOQQQRRRSSSTTTUUUVVVWWWXXXYYYLLLKKKNNN',
-  creator: {
-    name: 'SurvivalMaster'
-  },
-  tags: ['Wildlife', 'AI Enhanced', 'Pack Hunting'],
-  downloads: 2156,
-  difficulty: 'Hard' as const,
-  createdAt: '2024-01-18T09:15:00Z'
-};
-
-const longTagsCustomCode = {
-  id: 4,
+  documentId: 'ghi789',
   name: 'Comprehensive Overhaul',
-  description: 'A complete game overhaul featuring modified weather, wildlife, loot spawns, and survival mechanics.',
+  slug: 'comprehensive-overhaul',
+  description: detailedDescription,
   code: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-  creator: {
-    name: 'ModCommunity',
-    url: 'https://github.com/modcommunity'
-  },
-  tags: ['Complete Overhaul', 'Weather System', 'Wildlife AI', 'Loot Rebalance', 'Survival Mechanics', 'Custom Spawns', 'Modified UI', 'Enhanced Graphics'],
-  downloads: 5432,
-  difficulty: 'Medium' as const,
-  createdAt: '2024-01-20T16:20:00Z'
+  creators: [
+    {
+      id: 3,
+      documentId: 'creator-3',
+      name: 'ModCommunity',
+      slug: 'modcommunity',
+      youtube: 'https://youtube.com/modcommunity',
+      createdAt: '2024-01-20T16:20:00Z',
+      updatedAt: '2024-01-25T13:10:00Z',
+      publishedAt: '2024-01-20T16:20:00Z'
+    }
+  ],
+  createdAt: '2024-01-20T16:20:00Z',
+  updatedAt: '2024-01-25T13:10:00Z',
+  publishedAt: '2024-01-20T16:20:00Z'
 };
 
 // Default card
@@ -125,53 +209,50 @@ export const Compact: Story = {
   }
 };
 
-// Different difficulty levels
-export const EasyDifficulty: Story = {
+// List variant
+export const List: Story = {
+  args: {
+    customCode: detailedCustomCode,
+    variant: 'list'
+  }
+};
+
+// Different examples
+export const SimpleCode: Story = {
   args: {
     customCode: sampleCustomCode
   }
 };
 
-export const HardDifficulty: Story = {
+export const DetailedCode: Story = {
   args: {
-    customCode: mediumCustomCode
+    customCode: detailedCustomCode
   }
 };
 
-export const ExtremeDifficulty: Story = {
+export const ExtremeCode: Story = {
   args: {
     customCode: extremeCustomCode
   }
 };
 
-// High download count
-export const PopularCode: Story = {
+// Creator with different social links
+export const CreatorWithTwitch: Story = {
   args: {
-    customCode: longTagsCustomCode
+    customCode: sampleCustomCode
   }
 };
 
-// Many tags (showing truncation)
-export const ManyTags: Story = {
+export const CreatorWithYouTube: Story = {
   args: {
-    customCode: longTagsCustomCode
-  }
-};
-
-// Creator without URL
-export const CreatorNoURL: Story = {
-  args: {
-    customCode: mediumCustomCode
+    customCode: detailedCustomCode
   }
 };
 
 // Long description
 export const LongDescription: Story = {
   args: {
-    customCode: {
-      ...sampleCustomCode,
-      description: 'This is an extremely detailed custom code that modifies numerous aspects of The Long Dark gameplay experience, including but not limited to weather patterns, wildlife behavior, resource availability, crafting mechanics, and survival difficulty. It provides a completely new way to experience the game with enhanced realism and increased challenge for veteran players.'
-    }
+    customCode: detailedCustomCode
   }
 };
 
@@ -185,42 +266,12 @@ export const ShortCode: Story = {
   }
 };
 
-// No tags
-export const NoTags: Story = {
+// No description
+export const NoDescription: Story = {
   args: {
     customCode: {
       ...sampleCustomCode,
-      tags: []
-    }
-  }
-};
-
-// Low downloads
-export const LowDownloads: Story = {
-  args: {
-    customCode: {
-      ...sampleCustomCode,
-      downloads: 23
-    }
-  }
-};
-
-// Very high downloads
-export const HighDownloads: Story = {
-  args: {
-    customCode: {
-      ...sampleCustomCode,
-      downloads: 15430
-    }
-  }
-};
-
-// Recent creation date
-export const Recent: Story = {
-  args: {
-    customCode: {
-      ...sampleCustomCode,
-      createdAt: new Date().toISOString()
+      description: undefined
     }
   }
 };
@@ -231,10 +282,10 @@ export const GridLayout: Story = {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <CustomCodeCard customCode={sampleCustomCode} />
       <CustomCodeCard customCode={extremeCustomCode} />
-      <CustomCodeCard customCode={mediumCustomCode} />
-      <CustomCodeCard customCode={longTagsCustomCode} />
+      <CustomCodeCard customCode={detailedCustomCode} />
       <CustomCodeCard customCode={{...sampleCustomCode, id: 5}} variant="compact" />
       <CustomCodeCard customCode={{...extremeCustomCode, id: 6}} />
+      <CustomCodeCard customCode={{...detailedCustomCode, id: 7}} />
     </div>
   ),
   parameters: {
@@ -252,14 +303,32 @@ export const CompactGrid: Story = {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <CustomCodeCard customCode={sampleCustomCode} variant="compact" />
       <CustomCodeCard customCode={extremeCustomCode} variant="compact" />
-      <CustomCodeCard customCode={mediumCustomCode} variant="compact" />
-      <CustomCodeCard customCode={longTagsCustomCode} variant="compact" />
+      <CustomCodeCard customCode={detailedCustomCode} variant="compact" />
+      <CustomCodeCard customCode={{...sampleCustomCode, id: 8}} variant="compact" />
     </div>
   ),
   parameters: {
     docs: {
       description: {
         story: 'Compact variant suitable for denser layouts and more cards per row'
+      }
+    }
+  }
+};
+
+// List layout example
+export const ListLayout: Story = {
+  render: () => (
+    <div className="space-y-6">
+      <CustomCodeCard customCode={sampleCustomCode} variant="list" />
+      <CustomCodeCard customCode={extremeCustomCode} variant="list" />
+      <CustomCodeCard customCode={detailedCustomCode} variant="list" />
+    </div>
+  ),
+  parameters: {
+    docs: {
+      description: {
+        story: 'List variant with horizontal layout and expanded descriptions'
       }
     }
   }

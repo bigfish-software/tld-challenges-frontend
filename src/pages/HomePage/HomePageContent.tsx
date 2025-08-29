@@ -71,6 +71,7 @@ export const HomePageContent = () => {
                 text-slate-900 
                 dark:text-slate-100 
                 leading-tight
+                font-oswald
               ">
                 Welcome to{' '}
                 <span className="
@@ -88,15 +89,16 @@ export const HomePageContent = () => {
               </h1>
               
               <p className="
-                text-xl 
-                sm:text-2xl 
+                text-2xl 
+                sm:text-3xl 
                 text-slate-700 
                 dark:text-slate-300 
                 leading-relaxed 
                 max-w-3xl 
                 mx-auto
+                font-oswald
               ">
-                Made without crunch by people who care about their friends at a community who cares about their challenges.
+                A hub to explore and create custom game codes, challenges and tournaments, made by the community for the community.
               </p>
             </div>
 

@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react';
 import { apiClient } from '@/services/api';
+import { createApiLogger } from '@/utils/logger';
 import type { 
   CustomCode, 
   Challenge, 
   Tournament,
   Creator,
   Submission,
-  StrapiCollectionResponse 
+  StrapiCollectionResponse,
+  StrapiResponse
 } from '@/types/api';
+import { 
+  isNetworkError,
+  isValidationError,
+  isNotFoundError
+} from '@/types/errors';
+
+const logger = createApiLogger('hooks/api');
 
 // Hook for fetching custom codes from Strapi
 export const useCustomCodes = () => {
@@ -31,9 +40,22 @@ export const useCustomCodes = () => {
         });
         
         setCustomCodes(response.data || []);
-      } catch (err: any) {
-        const errorMessage = err.response?.data?.error?.message || err.message || 'Failed to fetch custom codes';
-        console.error('❌ Failed to fetch custom codes:', err);
+      } catch (err: unknown) {
+        let errorMessage = 'Failed to fetch custom codes';
+        
+        if (isNetworkError(err)) {
+          errorMessage = `Network error: ${err.message}`;
+        } else if (isValidationError(err)) {
+          errorMessage = `Validation error: ${err.message}`;
+        } else if (isNotFoundError(err)) {
+          errorMessage = 'Custom codes not found';
+        } else if (err instanceof Error) {
+          errorMessage = err.message;
+        }
+        
+        logger.error('Failed to fetch custom codes', err instanceof Error ? err : new Error(String(err)), { 
+          endpoint: '/custom-codes'
+        });
         setError(errorMessage);
       } finally {
         setLoading(false);
@@ -82,10 +104,23 @@ export const useChallenges = () => {
         });
         
         setChallenges(response.data || []);
-      } catch (err: any) {
-        const errorMessage = err.response?.data?.error?.message || err.message || 'Failed to fetch challenges';
+      } catch (err: unknown) {
+        let errorMessage = 'Failed to fetch challenges';
+        
+        if (isNetworkError(err)) {
+          errorMessage = `Network error: ${err.message}`;
+        } else if (isValidationError(err)) {
+          errorMessage = `Validation error: ${err.message}`;
+        } else if (isNotFoundError(err)) {
+          errorMessage = 'Challenges not found';
+        } else if (err instanceof Error) {
+          errorMessage = err.message;
+        }
+        
         setError(errorMessage);
-        console.error('Failed to fetch challenges:', err);
+        logger.error('Failed to fetch challenges', err instanceof Error ? err : new Error(String(err)), { 
+          endpoint: '/challenges'
+        });
       } finally {
         setLoading(false);
       }
@@ -130,10 +165,23 @@ export const useTournaments = () => {
         });
         
         setTournaments(response.data || []);
-      } catch (err: any) {
-        const errorMessage = err.response?.data?.error?.message || err.message || 'Failed to fetch tournaments';
+      } catch (err: unknown) {
+        let errorMessage = 'Failed to fetch tournaments';
+        
+        if (isNetworkError(err)) {
+          errorMessage = `Network error: ${err.message}`;
+        } else if (isValidationError(err)) {
+          errorMessage = `Validation error: ${err.message}`;
+        } else if (isNotFoundError(err)) {
+          errorMessage = 'Tournaments not found';
+        } else if (err instanceof Error) {
+          errorMessage = err.message;
+        }
+        
         setError(errorMessage);
-        console.error('Failed to fetch tournaments:', err);
+        logger.error('Failed to fetch tournaments', err instanceof Error ? err : new Error(String(err)), { 
+          endpoint: '/tournaments'
+        });
       } finally {
         setLoading(false);
       }
@@ -176,10 +224,23 @@ export const useCreators = () => {
         });
         
         setCreators(response.data || []);
-      } catch (err: any) {
-        const errorMessage = err.response?.data?.error?.message || err.message || 'Failed to fetch creators';
+      } catch (err: unknown) {
+        let errorMessage = 'Failed to fetch creators';
+        
+        if (isNetworkError(err)) {
+          errorMessage = `Network error: ${err.message}`;
+        } else if (isValidationError(err)) {
+          errorMessage = `Validation error: ${err.message}`;
+        } else if (isNotFoundError(err)) {
+          errorMessage = 'Creators not found';
+        } else if (err instanceof Error) {
+          errorMessage = err.message;
+        }
+        
         setError(errorMessage);
-        console.error('Failed to fetch creators:', err);
+        logger.error('Failed to fetch creators', err instanceof Error ? err : new Error(String(err)), { 
+          endpoint: '/creators'
+        });
       } finally {
         setLoading(false);
       }
@@ -220,7 +281,7 @@ export const useCreateSubmission = () => {
       setError(null);
 
       // Create submission - this endpoint is public (no auth required)
-      const response = await apiClient.post('/submissions', {
+      const response = await apiClient.post<StrapiResponse<Submission>>('/submissions', {
         data: {
           ...submissionData,
           submitted_date: new Date().toISOString(),
@@ -230,10 +291,23 @@ export const useCreateSubmission = () => {
       });
 
       return response.data;
-    } catch (err: any) {
-      const errorMessage = err.response?.data?.error?.message || err.message || 'Failed to create submission';
+    } catch (err: unknown) {
+      let errorMessage = 'Failed to create submission';
+      
+      if (isNetworkError(err)) {
+        errorMessage = `Network error: ${err.message}`;
+      } else if (isValidationError(err)) {
+        errorMessage = `Validation error: ${err.message}`;
+      } else if (isNotFoundError(err)) {
+        errorMessage = 'Submission endpoint not found';
+      } else if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      
       setError(errorMessage);
-      console.error('Failed to create submission:', err);
+      logger.error('Failed to create submission', err instanceof Error ? err : new Error(String(err)), { 
+        endpoint: '/submissions'
+      });
       throw new Error(errorMessage);
     } finally {
       setLoading(false);
@@ -272,10 +346,24 @@ export const useSubmissionsByChallenge = (challengeId: number) => {
         });
         
         setSubmissions(response.data || []);
-      } catch (err: any) {
-        const errorMessage = err.response?.data?.error?.message || err.message || 'Failed to fetch submissions';
+      } catch (err: unknown) {
+        let errorMessage = 'Failed to fetch submissions';
+        
+        if (isNetworkError(err)) {
+          errorMessage = `Network error: ${err.message}`;
+        } else if (isValidationError(err)) {
+          errorMessage = `Validation error: ${err.message}`;
+        } else if (isNotFoundError(err)) {
+          errorMessage = 'Submissions not found';
+        } else if (err instanceof Error) {
+          errorMessage = err.message;
+        }
+        
         setError(errorMessage);
-        console.error('Failed to fetch submissions:', err);
+        logger.error('Failed to fetch submissions', err instanceof Error ? err : new Error(String(err)), { 
+          endpoint: '/submissions',
+          challengeId
+        });
       } finally {
         setLoading(false);
       }

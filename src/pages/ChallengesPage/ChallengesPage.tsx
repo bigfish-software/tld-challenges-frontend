@@ -1,218 +1,138 @@
 import React, { useState } from 'react';
-import { PageHero, FilterPanel, ContentGrid, ChallengeCard } from '@/components/ui';
+import { PageHero, FilterPanel, ResultsHeader } from '@/components/ui';
+import { ContentGrid } from '@/components/layout';
 import { PageLayout } from '@/components/layout';
-import type { Challenge } from '@/types/api';
 
-// Mock data for Challenges (Complete API format)
-const mockChallenges: Challenge[] = [
+// Simplified mock data structure for development
+interface MockChallenge {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  difficulty: string;
+  created_date: string;
+  creators: Array<{
+    id: number;
+    name: string;
+    slug: string;
+    twitch?: string;
+    youtube?: string;
+  }>;
+  rules: Array<{
+    id: number;
+    description: string;
+  }>;
+}
+
+// Mock data for Challenges (Simplified structure)
+const mockChallenges: MockChallenge[] = [
   {
     id: 1,
-    attributes: {
-      name: 'The 30-Day Nomad Challenge',
-      slug: 'thirty-day-nomad-challenge',
-      description: 'Survive 30 days without establishing a permanent base. Move every 3 days and visit all major regions to test your adaptability.',
-      difficulty: 'Stalker',
-      created_date: '2024-01-10T08:00:00Z',
-      creators: {
-        data: [
-          {
-            id: 1,
-            attributes: {
-              name: 'WildernessGuide',
-              slug: 'wildernessguide',
-              twitch: 'https://twitch.tv/wildernessguide'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          }
-        ]
-      },
-      rules: {
-        data: [
-          {
-            id: 1,
-            attributes: {
-              description: 'No sleeping in the same location for more than 3 consecutive days'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          },
-          {
-            id: 2,
-            attributes: {
-              description: 'Must visit at least 5 different regions'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          },
-          {
-            id: 3,
-            attributes: {
-              description: 'Cannot store items in containers for more than 7 days'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          }
-        ]
+    name: 'The 30-Day Nomad Challenge',
+    slug: 'thirty-day-nomad-challenge',
+    description: 'Survive 30 days without establishing a permanent base. Move every 3 days and visit all major regions to test your adaptability.',
+    difficulty: 'Stalker',
+    created_date: '2024-01-10T08:00:00Z',
+    creators: [
+      {
+        id: 1,
+        name: 'WildernessGuide',
+        slug: 'wildernessguide',
+        twitch: 'https://twitch.tv/wildernessguide'
       }
-    },
-    createdAt: '2024-01-10T08:00:00Z',
-    updatedAt: '2024-01-10T08:00:00Z',
-    publishedAt: '2024-01-10T08:00:00Z'
+    ],
+    rules: [
+      {
+        id: 1,
+        description: 'No sleeping in the same location for more than 3 consecutive days'
+      },
+      {
+        id: 2,
+        description: 'Must visit at least 5 different regions'
+      },
+      {
+        id: 3,
+        description: 'Cannot store items in containers for more than 7 days'
+      }
+    ]
   },
   {
     id: 2,
-    attributes: {
-      name: 'Mystery Lake Speedrun',
-      slug: 'mystery-lake-speedrun',
-      description: 'Complete specific objectives in Mystery Lake as fast as possible. Perfect for competitive players looking for quick challenges.',
-      difficulty: 'Voyager',
-      created_date: '2024-01-08T14:30:00Z',
-      creators: {
-        data: [
-          {
-            id: 2,
-            attributes: {
-              name: 'SpeedRunner99',
-              slug: 'speedrunner99',
-              twitch: 'https://twitch.tv/speedrunner99'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          }
-        ]
-      },
-      rules: {
-        data: [
-          {
-            id: 4,
-            attributes: {
-              description: 'Locate and repair the radio tower'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          },
-          {
-            id: 5,
-            attributes: {
-              description: 'Collect 20 pieces of firewood'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          }
-        ]
+    name: 'Mystery Lake Speedrun',
+    slug: 'mystery-lake-speedrun',
+    description: 'Complete specific objectives in Mystery Lake as fast as possible. Perfect for competitive players looking for quick challenges.',
+    difficulty: 'Voyager',
+    created_date: '2024-01-08T14:30:00Z',
+    creators: [
+      {
+        id: 2,
+        name: 'SpeedRunner99',
+        slug: 'speedrunner99',
+        twitch: 'https://twitch.tv/speedrunner99'
       }
-    },
-    createdAt: '2024-01-08T14:30:00Z',
-    updatedAt: '2024-01-08T14:30:00Z',
-    publishedAt: '2024-01-08T14:30:00Z'
+    ],
+    rules: [
+      {
+        id: 4,
+        description: 'Locate and repair the radio tower'
+      },
+      {
+        id: 5,
+        description: 'Collect 20 pieces of firewood'
+      }
+    ]
   },
   {
     id: 3,
-    attributes: {
-      name: 'Bear Island Survival',
-      slug: 'bear-island-survival',
-      description: 'Survive on Great Bear Island for as long as possible with minimal starting gear. Only the strongest will endure.',
-      difficulty: 'Interloper',
-      created_date: '2024-01-05T16:45:00Z',
-      creators: {
-        data: [
-          {
-            id: 3,
-            attributes: {
-              name: 'SurvivalMaster',
-              slug: 'survivalmaster',
-              youtube: 'https://youtube.com/survivalmaster'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          }
-        ]
-      },
-      rules: {
-        data: [
-          {
-            id: 6,
-            attributes: {
-              description: 'Start with only basic clothing and a knife'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          },
-          {
-            id: 7,
-            attributes: {
-              description: 'No matches or accelerants allowed'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          }
-        ]
+    name: 'Bear Island Survival',
+    slug: 'bear-island-survival',
+    description: 'Survive on Great Bear Island for as long as possible with minimal starting gear. Only the strongest will endure.',
+    difficulty: 'Interloper',
+    created_date: '2024-01-05T16:45:00Z',
+    creators: [
+      {
+        id: 3,
+        name: 'SurvivalMaster',
+        slug: 'survivalmaster',
+        youtube: 'https://youtube.com/survivalmaster'
       }
-    },
-    createdAt: '2024-01-05T16:45:00Z',
-    updatedAt: '2024-01-05T16:45:00Z',
-    publishedAt: '2024-01-05T16:45:00Z'
+    ],
+    rules: [
+      {
+        id: 6,
+        description: 'Start with only basic clothing and a knife'
+      },
+      {
+        id: 7,
+        description: 'No matches or accelerants allowed'
+      }
+    ]
   },
   {
     id: 4,
-    attributes: {
-      name: 'Pilgrim Paradise',
-      slug: 'pilgrim-paradise',
-      description: 'A relaxed challenge perfect for beginners. Focus on exploration and learning the game mechanics without pressure.',
-      difficulty: 'Pilgrim',
-      created_date: '2024-01-03T10:15:00Z',
-      creators: {
-        data: [
-          {
-            id: 4,
-            attributes: {
-              name: 'NewPlayerGuide',
-              slug: 'newplayerguide',
-              youtube: 'https://youtube.com/newplayerguide'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          }
-        ]
-      },
-      rules: {
-        data: [
-          {
-            id: 8,
-            attributes: {
-              description: 'Explore all indoor locations in Mystery Lake'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          },
-          {
-            id: 9,
-            attributes: {
-              description: 'Craft at least 5 different items'
-            },
-            createdAt: '2024-01-01T00:00:00Z',
-            updatedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z'
-          }
-        ]
+    name: 'Pilgrim Paradise',
+    slug: 'pilgrim-paradise',
+    description: 'A relaxed challenge perfect for beginners. Focus on exploration and learning the game mechanics without pressure.',
+    difficulty: 'Pilgrim',
+    created_date: '2024-01-03T10:15:00Z',
+    creators: [
+      {
+        id: 4,
+        name: 'NewPlayerGuide',
+        slug: 'newplayerguide',
+        youtube: 'https://youtube.com/newplayerguide'
       }
-    },
-    createdAt: '2024-01-03T10:15:00Z',
-    updatedAt: '2024-01-03T10:15:00Z',
-    publishedAt: '2024-01-03T10:15:00Z'
+    ],
+    rules: [
+      {
+        id: 8,
+        description: 'Explore all indoor locations in Mystery Lake'
+      },
+      {
+        id: 9,
+        description: 'Craft at least 5 different items'
+      }
+    ]
   }
 ];
 
@@ -279,7 +199,7 @@ export const ChallengesPage: React.FC = () => {
     return Object.values(activeFilters).reduce((count, filters) => count + filters.length, 0);
   };
 
-  // Filter and sort logic (updated for API format)
+  // Filter and sort logic (updated for simplified mock format)
   const getFilteredAndSortedChallenges = () => {
     let filtered = [...mockChallenges];
 
@@ -287,10 +207,10 @@ export const ChallengesPage: React.FC = () => {
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(challenge => 
-        challenge.attributes.name.toLowerCase().includes(query) ||
-        (challenge.attributes.description && challenge.attributes.description.toLowerCase().includes(query)) ||
-        challenge.attributes.creators?.data.some(creator => 
-          creator.attributes.name.toLowerCase().includes(query)
+        challenge.name.toLowerCase().includes(query) ||
+        challenge.description.toLowerCase().includes(query) ||
+        challenge.creators.some(creator => 
+          creator.name.toLowerCase().includes(query)
         )
       );
     }
@@ -298,16 +218,16 @@ export const ChallengesPage: React.FC = () => {
     // Apply difficulty filter
     if (activeFilters.difficulty?.length) {
       filtered = filtered.filter(challenge => 
-        activeFilters.difficulty!.includes(challenge.attributes.difficulty.toLowerCase())
+        activeFilters.difficulty!.includes(challenge.difficulty.toLowerCase())
       );
     }
 
     // Apply creator filter
     if (activeFilters.creator?.length) {
       filtered = filtered.filter(challenge => {
-        const creatorNames = challenge.attributes.creators?.data.map(creator => 
-          creator.attributes.name.toLowerCase()
-        ) || [];
+        const creatorNames = challenge.creators.map(creator => 
+          creator.name.toLowerCase()
+        );
         return activeFilters.creator!.some(filterId => {
           const creatorMap: Record<string, string> = {
             'wildguide': 'wildernessguide',
@@ -325,26 +245,26 @@ export const ChallengesPage: React.FC = () => {
     switch (sortBy) {
       case 'newest':
         filtered.sort((a, b) => {
-          const dateA = a.attributes.created_date || a.createdAt;
-          const dateB = b.attributes.created_date || b.createdAt;
+          const dateA = a.created_date;
+          const dateB = b.created_date;
           return new Date(dateB).getTime() - new Date(dateA).getTime();
         });
         break;
       case 'oldest':
         filtered.sort((a, b) => {
-          const dateA = a.attributes.created_date || a.createdAt;
-          const dateB = b.attributes.created_date || b.createdAt;
+          const dateA = a.created_date;
+          const dateB = b.created_date;
           return new Date(dateA).getTime() - new Date(dateB).getTime();
         });
         break;
       case 'difficulty':
         const difficultyOrder = ['Pilgrim', 'Voyager', 'Stalker', 'Interloper', 'Misery', 'Nogoa', 'Custom'];
         filtered.sort((a, b) => 
-          difficultyOrder.indexOf(a.attributes.difficulty) - difficultyOrder.indexOf(b.attributes.difficulty)
+          difficultyOrder.indexOf(a.difficulty) - difficultyOrder.indexOf(b.difficulty)
         );
         break;
       case 'name':
-        filtered.sort((a, b) => a.attributes.name.localeCompare(b.attributes.name));
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
         break;
     }
 
@@ -426,7 +346,49 @@ export const ChallengesPage: React.FC = () => {
                   }
                 >
                   {filteredChallenges.map(challenge => (
-                    <ChallengeCard key={challenge.id} challenge={challenge} />
+                    <div key={challenge.id} className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 border border-slate-200 dark:border-slate-700">
+                      {/* Challenge Header */}
+                      <div className="flex items-start justify-between mb-4">
+                        <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+                          {challenge.name}
+                        </h3>
+                        <span className={`
+                          px-2 py-1 rounded-full text-xs font-medium
+                          ${challenge.difficulty === 'Pilgrim' 
+                            ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                            : challenge.difficulty === 'Voyager'
+                            ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300'
+                            : challenge.difficulty === 'Stalker'
+                            ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300'
+                            : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
+                          }
+                        `}>
+                          {challenge.difficulty}
+                        </span>
+                      </div>
+                      
+                      {/* Description */}
+                      <p className="text-slate-600 dark:text-slate-300 text-sm mb-4 line-clamp-3">
+                        {challenge.description}
+                      </p>
+                      
+                      {/* Metadata */}
+                      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                        <div className="flex items-center space-x-4">
+                          <span>
+                            Created: {new Date(challenge.created_date).toLocaleDateString()}
+                          </span>
+                          {challenge.creators.length > 0 && (
+                            <span>
+                              By: {challenge.creators.map(c => c.name).join(', ')}
+                            </span>
+                          )}
+                        </div>
+                        <span>
+                          {challenge.rules.length} rules
+                        </span>
+                      </div>
+                    </div>
                   ))}
                 </ContentGrid>
               </div>

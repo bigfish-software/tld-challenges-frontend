@@ -1,6 +1,7 @@
 import React from 'react';
 import type { CustomCode } from '@/types/api';
 import { RichTextRenderer } from '../RichTextRenderer';
+import { createComponentLogger } from '@/utils/logger';
 
 export interface CustomCodeCardProps {
   /** The custom code object from the API */
@@ -22,20 +23,15 @@ export const CustomCodeCard = ({
   onCreatorClick,
   className = ''
 }: CustomCodeCardProps) => {
-  const { 
-    id, 
-    name,
-    description,
-    code,
-    creators
-  } = customCode;
+  const logger = createComponentLogger('CustomCodeCard');
 
-  // Check if description has content
+  // Extract data from CustomCode API structure
+  const { id, name, description, code, creators } = customCode;
+
+  // Check if description has rich text content
   const hasDescription = description && Array.isArray(description) && description.length > 0;
   
-  // Debug logging
-  console.log('CustomCodeCard - Description data:', {
-    description,
+  logger.debug('Processing custom code description', { name }, {
     hasDescription,
     isArray: Array.isArray(description),
     length: description?.length

@@ -1,9 +1,10 @@
 import React from 'react';
 import type { Tournament } from '@/types/api';
+import type { MockTournament } from '@/types/common';
 
 export interface TournamentCardProps {
-  /** The tournament object from the API */
-  tournament: Tournament;
+  /** The tournament object from the API or mock data */
+  tournament: Tournament | MockTournament;
   /** Display variant */
   variant?: 'default' | 'compact';
   /** Callback when card is clicked */
@@ -16,6 +17,11 @@ export interface TournamentCardProps {
   className?: string;
 }
 
+// Type guard to check if tournament is a Strapi Tournament
+function isStrapiTournament(tournament: Tournament | MockTournament): tournament is Tournament {
+  return 'attributes' in tournament;
+}
+
 export const TournamentCard = ({
   tournament,
   variant = 'default',
@@ -24,16 +30,32 @@ export const TournamentCard = ({
   onOrganizerClick,
   className = ''
 }: TournamentCardProps) => {
-  const { id, attributes } = tournament;
-  const {
-    name,
-    description,
-    start_date,
-    end_date,
-    state,
-    created_date,
-    creators
-  } = attributes;
+  // Extract data based on tournament type
+  const id = tournament.id;
+  
+  let name: string, description: string, start_date: string, end_date: string, state: string, created_date: string | undefined;
+  let creators: any;
+  
+  if (isStrapiTournament(tournament)) {
+    // Handle Strapi Tournament structure
+    const { attributes } = tournament;
+    name = attributes.name;
+    description = typeof attributes.description === 'string' ? attributes.description : '';
+    start_date = attributes.start_date;
+    end_date = attributes.end_date;
+    state = attributes.state;
+    created_date = attributes.created_date;
+    creators = attributes.creators;
+  } else {
+    // Handle MockTournament structure
+    name = tournament.title;
+    description = tournament.description;
+    start_date = tournament.startDate;
+    end_date = tournament.endDate;
+    state = tournament.status;
+    created_date = tournament.startDate;
+    creators = { data: [{ attributes: tournament.creator }] };
+  }
 
   const handleCardClick = () => {
     onCardClick?.(id);

@@ -39,7 +39,7 @@ Each card includes an icon, title, description, and call-to-action button.
       control: 'text',
       description: 'Text displayed on the call-to-action button'
     },
-    icon: {
+    titleIcon: {
       description: 'Icon element to display at the top of the card'
     }
   },
@@ -111,7 +111,7 @@ export const CustomCodes: Story = {
   args: {
     title: 'Custom Codes',
     description: 'Discover and share custom game configuration codes that enable unique challenges and gameplay experiences.',
-    icon: CustomCodesIcon,
+    titleIcon: CustomCodesIcon,
     href: '/custom-codes',
     buttonText: 'Explore Codes'
   }
@@ -122,7 +122,7 @@ export const Challenges: Story = {
   args: {
     title: 'Challenges',
     description: 'Browse community-created challenges ranging from survival tests to speedrun objectives.',
-    icon: ChallengesIcon,
+    titleIcon: ChallengesIcon,
     href: '/challenges',
     buttonText: 'Browse Challenges'
   }
@@ -133,7 +133,7 @@ export const Tournaments: Story = {
   args: {
     title: 'Tournaments',
     description: 'Participate in organized competitive events and climb the leaderboards.',
-    icon: TournamentsIcon,
+    titleIcon: TournamentsIcon,
     href: '/tournaments',
     buttonText: 'View Tournaments'
   }
@@ -146,21 +146,21 @@ export const GridLayout: Story = {
       <FeatureCard
         title="Custom Codes"
         description="Discover and share custom game configuration codes that enable unique challenges and gameplay experiences."
-        icon={CustomCodesIcon}
+        titleIcon={CustomCodesIcon}
         href="/custom-codes"
         buttonText="Explore Codes"
       />
       <FeatureCard
         title="Challenges"
         description="Browse community-created challenges ranging from survival tests to speedrun objectives."
-        icon={ChallengesIcon}
+        titleIcon={ChallengesIcon}
         href="/challenges"
         buttonText="Browse Challenges"
       />
       <FeatureCard
         title="Tournaments"
         description="Participate in organized competitive events and climb the leaderboards."
-        icon={TournamentsIcon}
+        titleIcon={TournamentsIcon}
         href="/tournaments"
         buttonText="View Tournaments"
       />
