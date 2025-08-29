@@ -5,7 +5,7 @@ import { DonationSection } from '@/components/ui/DonationSection';
 import { ComputerIcon } from '@/components/ui/icons/ComputerIcon';
 import { PaperIcon } from '@/components/ui/icons/PaperIcon';
 import { DollarIcon } from '@/components/ui/icons/DollarIcon';
-import tldHeroImage from '@/assets/screen_0dec6e6c-d9a2-4b1c-9479-7f305b7cfe19_hi.png';
+import tldHeroImage from '@/assets/homepage_hero.png';
 
 /**
  * HomePage content component without Header and Footer.
@@ -128,26 +128,26 @@ export const HomePageContent = () => {
             {/* Stats or Quick Info */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto pt-8">
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300 drop-shadow-lg dark:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300">
                   50+
                 </div>
-                <div className="text-sm text-slate-600 dark:text-slate-300 drop-shadow-md dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+                <div className="text-sm text-slate-600 dark:text-slate-300">
                   Custom Codes
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300 drop-shadow-lg dark:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300">
                   500+
                 </div>
-                <div className="text-sm text-slate-600 dark:text-slate-300 drop-shadow-md dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+                <div className="text-sm text-slate-600 dark:text-slate-300">
                   Challenges
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300 drop-shadow-lg dark:drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300">
                   12+
                 </div>
-                <div className="text-sm text-slate-600 dark:text-slate-300 drop-shadow-md dark:drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+                <div className="text-sm text-slate-600 dark:text-slate-300">
                   Tournaments
                 </div>
               </div>

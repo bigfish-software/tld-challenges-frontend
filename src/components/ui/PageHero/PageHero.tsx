@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Button } from '@/components/ui/Button';
 import { externalLinks } from '@/config/externalLinks';
-import tldHeroImage from '@/assets/screen_0dec6e6c-d9a2-4b1c-9479-7f305b7cfe19_hi.png';
+import tldHeroImage from '@/assets/homepage_hero.png';
 
 export interface PageHeroProps {
   title: string;

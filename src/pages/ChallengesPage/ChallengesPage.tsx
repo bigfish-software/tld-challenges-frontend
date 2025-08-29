@@ -280,7 +280,7 @@ export const ChallengesPage: React.FC = () => {
         <PageHero
           title="Survival Challenges"
           description="Test your skills with community-created challenges ranging from beginner-friendly to extreme difficulty"
-          backgroundImage="/src/assets/screen_0dec6e6c-d9a2-4b1c-9479-7f305b7cfe19_hi.png"
+          backgroundImage="/src/assets/homepage_hero.png"
           contactMessage="Create Your Challenge!"
           contactSubtext="Share your unique survival scenarios"
         />

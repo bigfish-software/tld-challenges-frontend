@@ -263,7 +263,7 @@ export const TournamentsPage: React.FC = () => {
         <PageHero
           title="Tournaments"
           description="Join competitive events and tournaments created by the community. Test your skills and compete for prizes."
-          backgroundImage="/src/assets/screen_0dec6e6c-d9a2-4b1c-9479-7f305b7cfe19_hi.png"
+          backgroundImage="/src/assets/homepage_hero.png"
           contactMessage="Host Your Tournament!"
           contactSubtext="Organize competitive events for the community"
         />
