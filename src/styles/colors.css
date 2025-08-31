@@ -1,0 +1,178 @@
+/* TLD Challenges Color System - Simplified CSS Variables */
+
+:root {
+  /* Base Color Palette - Only essential shades */
+  --color-primary: #4A2C4A;           /* Main plum */
+  --color-primary-light: #B385B3;    /* Light variant */
+  --color-primary-dark: #2F1B2F;     /* Dark variant */
+
+  --color-secondary: #8B5A5C;        /* Main burgundy */
+  --color-secondary-light: #B9A1A3;  /* Light variant */
+  --color-secondary-dark: #5B3739;   /* Dark variant */
+
+  --color-accent: #E6B894;           /* Main peach */
+  --color-accent-light: #F3DFBD;     /* Light variant */
+  --color-accent-dark: #C08752;      /* Dark variant */
+
+  --color-neutral: #7A7A7A;          /* Main gray */
+  --color-neutral-light: #D4D4D4;    /* Light variant */
+  --color-neutral-dark: #404040;     /* Dark variant */
+
+  /* Semantic Colors - Single shade each */
+  --color-success: #16A34A;          /* Green */
+  --color-warning: #F59E0B;          /* Amber */
+  --color-error: #DC2626;            /* Red */
+  --color-info: #2563EB;             /* Blue */
+
+  /* Background System - Clear hierarchy */
+  --color-background: #FAFAFA;       /* Page background */
+  --color-surface: #FFFFFF;          /* Card/component background */
+  --color-surface-raised: #F5F5F5;   /* Elevated elements */
+
+  /* Text System - Clear hierarchy */
+  --color-text-primary: #171717;     /* Main text */
+  --color-text-secondary: #525252;   /* Secondary text */
+  --color-text-tertiary: #A3A3A3;    /* Muted text */
+
+  /* Border System */
+  --color-border: #E5E5E5;           /* Default borders */
+  --color-border-focus: var(--color-primary); /* Focus states */
+
+  /* Interactive States */
+  --color-primary-hover: var(--color-primary-dark);
+  --color-secondary-hover: var(--color-secondary-dark);
+  --color-accent-hover: var(--color-accent-dark);
+
+  /* Text on colored backgrounds */
+  --color-on-primary: #FFFFFF;
+  --color-on-secondary: #FFFFFF;
+  --color-on-accent: #2B1819;
+  --color-on-success: #FFFFFF;
+  --color-on-warning: #1F2937;
+  --color-on-error: #FFFFFF;
+  --color-on-info: #FFFFFF;
+}
+
+/* Dark Theme - Simplified */
+[data-theme="dark"] {
+  --color-primary: #B385B3;          /* Brighter for dark backgrounds */
+  --color-primary-light: #CCADCC;
+  --color-primary-dark: #7A5C7A;
+
+  --color-secondary: #B9A1A3;
+  --color-secondary-light: #D1C1C2;
+  --color-secondary-dark: #A27E81;
+
+  --color-accent: #E6B894;           /* Same - works in both themes */
+  --color-accent-light: #F3DFBD;
+  --color-accent-dark: #D9A373;
+
+  --color-neutral: #A3A3A3;
+  --color-neutral-light: #D4D4D4;
+  --color-neutral-dark: #525252;
+
+  /* Semantic Colors for dark theme */
+  --color-success: #4ADE80;
+  --color-warning: #FBBF24;
+  --color-error: #F87171;
+  --color-info: #60A5FA;
+
+  /* Dark theme backgrounds */
+  --color-background: #171717;
+  --color-surface: #262626;
+  --color-surface-raised: #404040;
+
+  /* Dark theme text */
+  --color-text-primary: #FAFAFA;
+  --color-text-secondary: #D4D4D4;
+  --color-text-tertiary: #A3A3A3;
+
+  /* Dark theme borders */
+  --color-border: #404040;
+  --color-border-focus: var(--color-primary);
+
+  /* Dark theme hovers */
+  --color-primary-hover: var(--color-primary-light);
+  --color-secondary-hover: var(--color-secondary-light);
+  --color-accent-hover: var(--color-accent-light);
+
+  /* Text on dark theme colored backgrounds */
+  --color-on-primary: #1F2937;
+  --color-on-secondary: #1F2937;
+  --color-on-accent: #1F2937;
+  --color-on-success: #1F2937;
+  --color-on-warning: #1F2937;
+  --color-on-error: #1F2937;
+  --color-on-info: #1F2937;
+}
+
+/* Simplified Utility Classes */
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-accent { background-color: var(--color-accent); }
+.bg-success { background-color: var(--color-success); }
+.bg-warning { background-color: var(--color-warning); }
+.bg-error { background-color: var(--color-error); }
+
+.text-primary-color { color: var(--color-primary); }
+.text-secondary-color { color: var(--color-secondary); }
+.text-accent { color: var(--color-accent); }
+
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-tertiary { color: var(--color-text-tertiary); }
+
+.bg-surface { background-color: var(--color-surface); }
+.bg-surface-raised { background-color: var(--color-surface-raised); }
+
+.border-default { border-color: var(--color-border); }
+
+/* Component Patterns - Clear and consistent */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.card:hover {
+  background-color: var(--color-surface-raised);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-on-secondary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary-hover);
+}
+
+/* Gaming-specific patterns */
+.difficulty-easy { 
+  background-color: var(--color-success);
+  color: var(--color-on-success);
+}
+
+.difficulty-medium { 
+  background-color: var(--color-warning);
+  color: var(--color-on-warning);
+}
+
+.difficulty-hard { 
+  background-color: var(--color-error);
+  color: var(--color-on-error);
+}
+
+.featured-border {
+  border: 2px solid var(--color-primary);
+  background-color: var(--color-surface-raised);
+}
