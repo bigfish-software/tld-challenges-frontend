@@ -191,7 +191,7 @@ export const useCreateIdea = () => {
 
 // Statistics (new from backend API)
 export const useStatsOverview = () => {
-  return useQuery({
+  return useQuery<{ data: StatsOverview }>({
     queryKey: queryKeys.stats,
     queryFn: () => apiService.stats.getOverview(),
     staleTime: 60 * 60 * 1000, // 1 hour (stats don't change frequently)

@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosRequestConfig } from 'axios';
+import type { StatsOverview } from '@/types/api';
 
 // API Error class definition
 export class APIError extends Error {
@@ -149,7 +150,7 @@ export const apiService = {
         }
       }
       
-      return apiClient.get('/api/challenges', { params });
+      return apiClient.get('/challenges', { params });
     },
     
     /**
@@ -160,7 +161,7 @@ export const apiService = {
       if (populate) {
         params.populate = populate;
       }
-      return apiClient.get(`/api/challenges/slug/${slug}`, { params });
+      return apiClient.get(`/challenges/slug/${slug}`, { params });
     },
     
     /**
@@ -173,7 +174,7 @@ export const apiService = {
       if (populate) {
         params.populate = populate;
       }
-      return apiClient.get('/api/challenges', { params });
+      return apiClient.get('/challenges', { params });
     },
     
     /**
@@ -186,7 +187,7 @@ export const apiService = {
       if (populate) {
         params.populate = populate;
       }
-      return apiClient.get('/api/challenges', { params });
+      return apiClient.get('/challenges', { params });
     },
   },
 
@@ -498,8 +499,8 @@ export const apiService = {
     /**
      * Get overview statistics for dashboard
      */
-    getOverview: () => {
-      return apiClient.get('/api/stats/overview');
+    getOverview: (): Promise<{ data: StatsOverview }> => {
+      return apiClient.get('/stats/overview');
     },
   },
 };

@@ -5,6 +5,7 @@ import { DonationSection } from '@/components/ui/DonationSection';
 import { ComputerIcon } from '@/components/ui/icons/ComputerIcon';
 import { PaperIcon } from '@/components/ui/icons/PaperIcon';
 import { DollarIcon } from '@/components/ui/icons/DollarIcon';
+import { useStatsOverview } from '@/hooks/api';
 import tldHeroImage from '@/assets/homepage_hero.png';
 
 /**
@@ -12,6 +13,12 @@ import tldHeroImage from '@/assets/homepage_hero.png';
  * Used for theme comparison stories and content-only rendering.
  */
 export const HomePageContent = () => {
+  // Fetch real statistics from API
+  const { data: statsResponse, isLoading: statsLoading, error: statsError } = useStatsOverview();
+  
+  // Extract stats data from the response
+  const stats = statsResponse?.data;
+
   // Feature cards data - using proper icon components
   const features = [
     {
@@ -129,7 +136,7 @@ export const HomePageContent = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto pt-8">
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300">
-                  50+
+                  {statsLoading ? '...' : statsError ? '?' : `${stats?.customCodes || 0}+`}
                 </div>
                 <div className="text-sm text-slate-600 dark:text-slate-300">
                   Custom Codes
@@ -137,7 +144,7 @@ export const HomePageContent = () => {
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300">
-                  500+
+                  {statsLoading ? '...' : statsError ? '?' : `${stats?.challenges || 0}+`}
                 </div>
                 <div className="text-sm text-slate-600 dark:text-slate-300">
                   Challenges
@@ -145,7 +152,7 @@ export const HomePageContent = () => {
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300">
-                  12+
+                  {statsLoading ? '...' : statsError ? '?' : `${stats?.tournaments || 0}+`}
                 </div>
                 <div className="text-sm text-slate-600 dark:text-slate-300">
                   Tournaments
@@ -156,8 +163,41 @@ export const HomePageContent = () => {
         </div>
       </section>
 
-      {/* Feature Cards Section */}
+      {/* Tournament Section */}
       <section className="py-16 sm:py-20 lg:py-24 bg-slate-50 dark:bg-slate-800/50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="
+              text-3xl 
+              sm:text-4xl 
+              font-bold 
+              font-headline
+              text-slate-900 
+              dark:text-slate-100 
+              mb-4
+              uppercase
+            ">
+              CURRENT TOURNAMENT
+            </h2>
+            <p className="
+              text-lg 
+              text-slate-600 
+              dark:text-slate-400 
+              max-w-2xl 
+              mx-auto
+            ">
+              Join our active tournament and compete with the community for recognition and prizes.
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto">
+            <TournamentSection />
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Cards Section */}
+      <section className="py-16 sm:py-20 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="
@@ -195,39 +235,6 @@ export const HomePageContent = () => {
                 buttonText={feature.buttonText}
               />
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tournament Section */}
-      <section className="py-16 sm:py-20 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="
-              text-3xl 
-              sm:text-4xl 
-              font-bold 
-              font-headline
-              text-slate-900 
-              dark:text-slate-100 
-              mb-4
-              uppercase
-            ">
-              CURRENT TOURNAMENT
-            </h2>
-            <p className="
-              text-lg 
-              text-slate-600 
-              dark:text-slate-400 
-              max-w-2xl 
-              mx-auto
-            ">
-              Join our active tournament and compete with the community for recognition and prizes.
-            </p>
-          </div>
-
-          <div className="max-w-5xl mx-auto">
-            <TournamentSection />
           </div>
         </div>
       </section>
