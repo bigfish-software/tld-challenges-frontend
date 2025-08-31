@@ -224,11 +224,8 @@ export const HomePageContent = () => {
                 // Handle both possible structures: flat or Strapi-style with attributes
                 const tournamentData = tournament?.attributes || tournament;
                 if (!tournamentData) {
-                  console.error('Tournament missing data:', tournament);
                   return null;
                 }
-
-                console.log('Processing tournament:', tournamentData);
 
                 return (
                   <TournamentSection 
