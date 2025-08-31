@@ -5,7 +5,8 @@ import { DonationSection } from '@/components/ui/DonationSection';
 import { ComputerIcon } from '@/components/ui/icons/ComputerIcon';
 import { PaperIcon } from '@/components/ui/icons/PaperIcon';
 import { DollarIcon } from '@/components/ui/icons/DollarIcon';
-import { useStatsOverview } from '@/hooks/api';
+import { useStatsOverview, useTournaments } from '@/hooks/api';
+import type { Tournament } from '@/types/api';
 import tldHeroImage from '@/assets/homepage_hero.png';
 
 /**
@@ -16,8 +17,31 @@ export const HomePageContent = () => {
   // Fetch real statistics from API
   const { data: statsResponse, isLoading: statsLoading, error: statsError } = useStatsOverview();
   
+  // Fetch active tournaments
+  const { data: tournamentsResponse, isLoading: tournamentsLoading, error: tournamentsError } = useTournaments({
+    state: 'active'
+  });
+  
   // Extract stats data from the response
   const stats = statsResponse?.data;
+  
+  // Extract active tournaments - handle different response structures
+  const activeTournaments: Tournament[] = (() => {
+    if (!tournamentsResponse) return [];
+    
+    // Handle direct array response
+    if (Array.isArray(tournamentsResponse)) {
+      return tournamentsResponse;
+    }
+    
+    // Handle Strapi response with data property
+    if ((tournamentsResponse as any)?.data) {
+      const data = (tournamentsResponse as any).data;
+      return Array.isArray(data) ? data : [data];
+    }
+    
+    return [];
+  })();
 
   // Feature cards data - using proper icon components
   const features = [
@@ -163,38 +187,68 @@ export const HomePageContent = () => {
         </div>
       </section>
 
-      {/* Tournament Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-slate-50 dark:bg-slate-800/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="
-              text-3xl 
-              sm:text-4xl 
-              font-bold 
-              font-headline
-              text-slate-900 
-              dark:text-slate-100 
-              mb-4
-              uppercase
-            ">
-              CURRENT TOURNAMENT
-            </h2>
-            <p className="
-              text-lg 
-              text-slate-600 
-              dark:text-slate-400 
-              max-w-2xl 
-              mx-auto
-            ">
-              Join our active tournament and compete with the community for recognition and prizes.
-            </p>
-          </div>
+      {/* Tournament Section - Only show if there are active tournaments */}
+      {!tournamentsLoading && !tournamentsError && activeTournaments.length > 0 && (
+        <section className="py-16 sm:py-20 lg:py-24 bg-slate-50 dark:bg-slate-800/50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="
+                text-3xl 
+                sm:text-4xl 
+                font-bold 
+                font-headline
+                text-slate-900 
+                dark:text-slate-100 
+                mb-4
+                uppercase
+              ">
+                {activeTournaments.length === 1 ? 'CURRENT TOURNAMENT' : 'ACTIVE TOURNAMENTS'}
+              </h2>
+              <p className="
+                text-lg 
+                text-slate-600 
+                dark:text-slate-400 
+                max-w-2xl 
+                mx-auto
+              ">
+                {activeTournaments.length === 1 
+                  ? 'Join our active tournament and compete with the community for recognition and prizes.'
+                  : 'Join one of our active tournaments and compete with the community for recognition and prizes.'
+                }
+              </p>
+            </div>
 
-          <div className="max-w-5xl mx-auto">
-            <TournamentSection />
+            <div className="max-w-5xl mx-auto space-y-6">
+              {activeTournaments.map((tournament) => {
+                // The data appears to be flat (not nested under attributes)
+                // Handle both possible structures: flat or Strapi-style with attributes
+                const tournamentData = tournament?.attributes || tournament;
+                if (!tournamentData) {
+                  console.error('Tournament missing data:', tournament);
+                  return null;
+                }
+
+                console.log('Processing tournament:', tournamentData);
+
+                return (
+                  <TournamentSection 
+                    key={tournament.id} 
+                    tournament={{
+                      id: tournament.id,
+                      title: (tournamentData as any).name || 'Unnamed Tournament',
+                      description: (tournamentData as any).description_short || (tournamentData as any).description || 'No description available',
+                      status: 'active',
+                      startDate: (tournamentData as any).start_date || '',
+                      endDate: (tournamentData as any).end_date || '',
+                      slug: (tournamentData as any).slug || '',
+                    }}
+                  />
+                );
+              }).filter(Boolean)}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Feature Cards Section */}
       <section className="py-16 sm:py-20 lg:py-24">

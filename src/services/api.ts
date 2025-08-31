@@ -227,7 +227,7 @@ export const apiService = {
         }
       }
       
-      return apiClient.get('/api/tournaments', { params });
+      return apiClient.get('/tournaments', { params });
     },
     
     /**
@@ -238,7 +238,7 @@ export const apiService = {
       if (populate) {
         params.populate = populate;
       }
-      return apiClient.get(`/api/tournaments/slug/${slug}`, { params });
+      return apiClient.get(`/tournaments/slug/${slug}`, { params });
     },
     
     /**
@@ -251,7 +251,7 @@ export const apiService = {
       if (populate) {
         params.populate = populate;
       }
-      return apiClient.get('/api/tournaments', { params });
+      return apiClient.get('/tournaments', { params });
     },
     
     /**
@@ -264,7 +264,7 @@ export const apiService = {
       if (populate) {
         params.populate = populate;
       }
-      return apiClient.get('/api/tournaments', { params });
+      return apiClient.get('/tournaments', { params });
     },
   },
 

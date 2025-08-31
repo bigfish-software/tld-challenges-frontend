@@ -10,6 +10,7 @@ export interface TournamentData {
   participantCount?: number;
   prizePool?: string;
   bannerImage?: string;
+  slug?: string;
 }
 
 export interface TournamentSectionProps {
@@ -148,7 +149,7 @@ export const TournamentSection = ({
                 sm: 'sm:min-w-[140px]',
                 lg: 'lg:w-full'
               }}
-              onClick={() => window.location.href = `/tournaments/${displayTournament.id}`}
+              onClick={() => window.location.href = `/tournaments/${displayTournament.slug || displayTournament.id}`}
             >
               View Details
             </Button>
