@@ -304,7 +304,7 @@ export const apiService = {
         }
       }
       
-      return apiClient.get('/api/custom-codes', { params });
+      return apiClient.get('/custom-codes', { params });
     },
     
     /**
@@ -315,7 +315,7 @@ export const apiService = {
       if (populate) {
         params.populate = populate;
       }
-      return apiClient.get(`/api/custom-codes/slug/${slug}`, { params });
+      return apiClient.get(`/custom-codes/slug/${slug}`, { params });
     },
     
     /**
@@ -328,7 +328,7 @@ export const apiService = {
       if (populate) {
         params.populate = populate;
       }
-      return apiClient.get('/api/custom-codes', { params });
+      return apiClient.get('/custom-codes', { params });
     },
   },
 

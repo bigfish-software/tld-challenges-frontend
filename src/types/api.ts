@@ -94,6 +94,8 @@ export interface CustomCode {
   slug: string;
   code: string;
   description?: StrapiRichTextBlocks; // Rich text blocks - structured content from Strapi
+  description_short?: string; // Short description for cards
+  is_featured?: boolean; // Whether this is a featured custom code
   createdAt: string;
   updatedAt: string;
   publishedAt: string;

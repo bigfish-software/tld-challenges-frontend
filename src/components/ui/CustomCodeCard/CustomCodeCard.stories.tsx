@@ -128,7 +128,9 @@ const sampleCustomCode: CustomCode = {
   name: 'Survivor Paradise',
   slug: 'survivor-paradise',
   description: sampleDescription,
+  description_short: 'Enhanced loot spawns with reduced wildlife aggression for a more relaxed survival experience.',
   code: 'AAABBBCCCDDDEEEFFFGGGHHHIIIJJJKKKLLLMMMNNNOOOPPPQQQRRRSSSTTTUUUVVVWWWXXXYYYZZZ',
+  is_featured: true,
   creators: [
     {
       id: 1,
@@ -152,7 +154,9 @@ const extremeCustomCode: CustomCode = {
   name: 'Blizzard Nightmare',
   slug: 'blizzard-nightmare',
   description: extremeDescription,
+  description_short: 'Extreme weather conditions with brutal cold, limited visibility, and scarce resources.',
   code: 'ZZZYYXXXWWWVVVUUUTTTSSSRRRNNNMMMLLLKKKYYYXXXWWWVVVUUUTTTSSSQQQPPPOOO',
+  is_featured: false,
   creators: [
     {
       id: 2,
@@ -176,7 +180,9 @@ const detailedCustomCode: CustomCode = {
   name: 'Comprehensive Overhaul',
   slug: 'comprehensive-overhaul',
   description: detailedDescription,
+  description_short: 'A comprehensive overhaul that modifies multiple game systems including weather, wildlife AI, and loot spawns.',
   code: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  is_featured: true,
   creators: [
     {
       id: 3,

@@ -1,7 +1,5 @@
 import React from 'react';
 import type { CustomCode } from '@/types/api';
-import { RichTextRenderer } from '../RichTextRenderer';
-import { createComponentLogger } from '@/utils/logger';
 
 export interface CustomCodeCardProps {
   /** The custom code object from the API */
@@ -23,78 +21,87 @@ export const CustomCodeCard = ({
   onCreatorClick,
   className = ''
 }: CustomCodeCardProps) => {
-  const logger = createComponentLogger('CustomCodeCard');
-
   // Extract data from CustomCode API structure
-  const { id, name, description, code, creators } = customCode;
-
-  // Check if description has rich text content
-  const hasDescription = description && Array.isArray(description) && description.length > 0;
-  
-  logger.debug('Processing custom code description', { name }, {
-    hasDescription,
-    isArray: Array.isArray(description),
-    length: description?.length
-  });
+  const { id, name, description_short, code, creators, is_featured } = customCode;
 
   const handleCardClick = () => {
     onCardClick?.(id);
   };
 
-  const handleCreatorClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const creator = creators?.[0];
-    if (creator) {
-      const creatorUrl = creator.twitch || creator.youtube;
-      onCreatorClick?.(creator.name, creatorUrl);
-    }
-  };
+
 
   const handleCopyCode = (e: React.MouseEvent) => {
     e.stopPropagation();
     navigator.clipboard.writeText(code || '');
-    // Could add a toast notification here
+  };
+
+  const handleViewDetails = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onCardClick?.(id);
   };
 
   const baseClasses = `
-    bg-white dark:bg-slate-800 
-    border border-slate-200 dark:border-slate-700 
-    rounded-lg shadow-sm hover:shadow-md 
+    ${is_featured ? 
+      // Featured card styles with subtle dark theme approach
+      `bg-primary-50 dark:bg-slate-700/80
+       border-2 border-primary-300 dark:border-primary-400/60
+       shadow-lg shadow-primary-200/20 dark:shadow-primary-900/40 hover:shadow-xl hover:shadow-primary-200/30 dark:hover:shadow-primary-900/60` :
+      // Regular card styles  
+      `bg-white dark:bg-slate-800 
+       border border-slate-200 dark:border-slate-700 
+       shadow-sm hover:shadow-md`
+    }
+    rounded-lg 
     transition-all duration-200 
     cursor-pointer group
+    relative
     ${className}
   `;
 
   // List layout - horizontal layout with more space for description
   if (variant === 'list') {
     return (
-      <div className={baseClasses} onClick={handleCardClick}>
-        <div className="p-6">
+    <div className={baseClasses} onClick={handleCardClick}>
+      {/* Featured badge in bottom-left corner */}
+      {is_featured && (
+        <div className="absolute -bottom-px -left-px z-10">
+          <div className="bg-primary-600 dark:bg-primary-400 text-white dark:text-slate-900 px-3 py-1 text-xs font-semibold rounded-bl-lg rounded-tr-lg">
+            FEATURED
+          </div>
+        </div>
+      )}        <div className="p-6">
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Left side - Main content */}
             <div className="flex-1 min-w-0">
-              {/* Header with title and creator */}
+              {/* Header with title and creators */}
               <div className="mb-4">
                 <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors mb-2">
                   {name}
                 </h3>
-                {creators?.[0] && (
-                  <button
-                    onClick={handleCreatorClick}
-                    className="text-sm text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                  >
-                    by {creators[0].name}
-                  </button>
+                {creators && creators.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {creators.map((creator, index) => (
+                      <button
+                        key={creator.id}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const creatorUrl = creator.twitch || creator.youtube;
+                          onCreatorClick?.(creator.name, creatorUrl);
+                        }}
+                        className="text-sm text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      >
+                        {index === 0 ? 'by ' : '& '}{creator.name}
+                      </button>
+                    ))}
+                  </div>
                 )}
               </div>
 
-              {/* Description */}
-              {hasDescription && (
-                <RichTextRenderer 
-                  blocks={description} 
-                  variant="default"
-                  className="text-slate-600 dark:text-slate-300 leading-relaxed"
-                />
+              {/* Short Description */}
+              {description_short && (
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {description_short}
+                </p>
               )}
             </div>
 
@@ -104,7 +111,7 @@ export const CustomCodeCard = ({
                 <div className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-md p-4">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
-                      Code
+                      Custom Code
                     </span>
                     <button
                       onClick={handleCopyCode}
@@ -124,10 +131,10 @@ export const CustomCodeCard = ({
             </div>
           </div>
           
-          {/* Button at absolute bottom right of entire card */}
-          <div className="flex justify-end mt-4">
+          {/* View Details Button */}
+          <div className="flex justify-end mt-6">
             <button
-              onClick={handleCardClick}
+              onClick={handleViewDetails}
               className="px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-md transition-colors"
             >
               View Details
@@ -138,41 +145,48 @@ export const CustomCodeCard = ({
     );
   }
 
+  // Default and compact layouts
   const contentClasses = variant === 'compact' ? 'p-4' : 'p-6';
 
   return (
     <div className={baseClasses} onClick={handleCardClick}>
+      {/* Featured badge in bottom-left corner */}
+      {is_featured && (
+        <div className="absolute -bottom-px -left-px z-10">
+          <div className="bg-primary-600 dark:bg-primary-400 text-white dark:text-slate-900 px-3 py-1 text-xs font-semibold rounded-bl-lg rounded-tr-lg">
+            FEATURED
+          </div>
+        </div>
+      )}
+
       <div className={contentClasses}>
-        {/* Header with title and action */}
+        {/* Header with title and view button */}
         <div className="flex items-start justify-between mb-3">
           <div className="flex-1 min-w-0 mr-3">
             <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-1">
               {name}
             </h3>
-            {creators?.[0] && (
-              <button
-                onClick={handleCreatorClick}
-                className="text-sm text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors mt-1 block"
-              >
-                by {creators[0].name}
-              </button>
+            {creators && creators.length > 0 && (
+              <div className="mt-1">
+                <span className="text-sm text-slate-600 dark:text-slate-400">
+                  by {creators.map(creator => creator.name).join(' & ')}
+                </span>
+              </div>
             )}
           </div>
           <button
-            onClick={handleCardClick}
+            onClick={handleViewDetails}
             className="px-3 py-1.5 text-xs font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-md transition-colors flex-shrink-0"
           >
-            View
+            View Details
           </button>
         </div>
 
-        {/* Description */}
-        {hasDescription && (
-          <RichTextRenderer 
-            blocks={description} 
-            variant="default"
-            className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3"
-          />
+        {/* Short Description */}
+        {description_short && (
+          <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4 line-clamp-3">
+            {description_short}
+          </p>
         )}
 
         {/* Code Display */}
@@ -180,14 +194,14 @@ export const CustomCodeCard = ({
           <div className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-md p-3">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
-                Code
+                Custom Code
               </span>
               <button
                 onClick={handleCopyCode}
                 className="text-xs text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors flex items-center space-x-1"
               >
                 <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                 </svg>
                 <span>Copy</span>
               </button>
