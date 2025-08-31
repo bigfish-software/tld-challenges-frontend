@@ -4,7 +4,7 @@ import { NotFoundPageContent } from './NotFoundPageContent';
 
 export const NotFoundPageLayout = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-900 transition-colors">
+    <div className="min-h-screen flex flex-col bg-background-primary transition-colors">
       <Header />
       <main className="flex-1">
         <NotFoundPageContent />

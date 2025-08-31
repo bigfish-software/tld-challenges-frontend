@@ -12,8 +12,13 @@ export const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const handleBrandClick = () => {
+    // Scroll to top when navigating to homepage
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-slate-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-slate-900/80">
+    <header className="sticky top-0 z-50 border-b border-default header-background shadow-md">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo/Brand */}
@@ -22,16 +27,17 @@ export const Header = () => {
               {/* Clickable brand name linking to homepage */}
               <Link 
                 to="/" 
-                className="group flex items-center space-x-2"
+                className="brand-hover flex items-center space-x-2"
                 aria-label="Go to TLD Challenges homepage"
+                onClick={handleBrandClick}
               >
                 {/* Brand Text */}
-                <h1 className="text-xl font-bold font-headline uppercase text-primary-700 dark:text-primary-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200 cursor-pointer">
+                <h1 className="brand-element text-xl font-bold font-headline uppercase text-primary-color transition-colors duration-200 cursor-pointer">
                   TLD CHALLENGES
                 </h1>
                 
                 {/* Actual Logo from assets folder - using icon component */}
-                <TldLogoIcon className="h-6 w-auto text-primary-700 dark:text-primary-300 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200" />
+                <TldLogoIcon className="brand-element h-6 w-auto text-primary-color transition-colors duration-200" />
               </Link>
             </div>
           </div>
@@ -40,19 +46,19 @@ export const Header = () => {
           <nav className="hidden md:flex items-center space-x-6">
             <Link
               to="/custom-codes"
-              className="text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              className="text-base text-primary nav-link"
             >
               Custom Codes
             </Link>
             <Link
               to="/challenges"
-              className="text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              className="text-base text-primary nav-link"
             >
               Challenges
             </Link>
             <Link
               to="/tournaments"
-              className="text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              className="text-base text-primary nav-link"
             >
               Tournaments
             </Link>
@@ -159,36 +165,36 @@ export const Header = () => {
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-default bg-background">
               <Link
                 to="/custom-codes"
-                className="block px-3 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                className="block px-3 py-2 text-base text-primary nav-link hover:bg-surface-raised rounded-md"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Custom Codes
               </Link>
               <Link
                 to="/challenges"
-                className="block px-3 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                className="block px-3 py-2 text-base text-primary nav-link hover:bg-surface-raised rounded-md"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Challenges
               </Link>
               <Link
                 to="/tournaments"
-                className="block px-3 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                className="block px-3 py-2 text-base text-primary nav-link hover:bg-surface-raised rounded-md"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Tournaments
               </Link>
               
               {/* Divider */}
-              <div className="border-t border-slate-200 dark:border-slate-700 my-2"></div>
+              <div className="border-t border-default my-2"></div>
               
               {/* Submit Run Link - Mobile */}
               <a
                 href="#submit"
-                className="block px-3 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                className="block px-3 py-2 text-base text-primary nav-link hover:bg-surface-raised rounded-md"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Submit Run
@@ -200,7 +206,7 @@ export const Header = () => {
                   toggleTheme();
                   e.currentTarget.blur();
                 }}
-                className="flex items-center w-full px-3 py-2 text-base text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-md transition-colors"
+                className="flex items-center w-full px-3 py-2 text-base text-primary nav-link hover:bg-surface-raised rounded-md"
               >
                 {isDark ? (
                   <>

@@ -76,7 +76,7 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
       element = (
         <code 
           key={`code-${index}`}
-          className="px-1 py-0.5 text-sm bg-slate-100 dark:bg-slate-800 rounded font-mono"
+          className="px-1 py-0.5 text-sm bg-surface rounded font-mono"
         >
           {element}
         </code>
@@ -117,7 +117,7 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
           return (
             <HeadingTag 
               key={key} 
-              className={`${headingClasses[block.level] || headingClasses[1]} text-slate-900 dark:text-slate-100`}
+              className={`${headingClasses[block.level] || headingClasses[1]} text-primary`}
             >
               {block.children.map((child, childIndex) => 
                 renderInlineElement(child, childIndex)
@@ -139,7 +139,7 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
               {block.children.map((item, itemIndex) => {
                 if (isListItemNode(item)) {
                   return (
-                    <li key={`item-${itemIndex}`} className="text-slate-800 dark:text-slate-200">
+                    <li key={`item-${itemIndex}`} className="text-secondary">
                       {item.children.map((child, childIndex) => 
                         renderInlineElement(child, childIndex)
                       )}
@@ -156,7 +156,7 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
       case 'quote':
         if (isQuoteNode(block)) {
           return (
-            <blockquote key={key} className="border-l-4 border-primary-400 pl-4 py-2 mb-4 italic text-slate-600 dark:text-slate-400">
+            <blockquote key={key} className="border-l-4 border-primary-color pl-4 py-2 mb-4 italic text-secondary">
               {block.children.map((child, childIndex) => 
                 renderInlineElement(child, childIndex)
               )}
@@ -168,8 +168,8 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
       case 'code':
         if (isCodeNode(block)) {
           return (
-            <pre key={key} className="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 mb-4 overflow-x-auto">
-              <code className="text-sm font-mono text-slate-800 dark:text-slate-200">
+            <pre key={key} className="bg-surface border-default rounded-lg p-4 mb-4 overflow-x-auto">
+              <code className="text-sm font-mono text-secondary">
                 {block.children.map((child, childIndex) => 
                   renderInlineElement(child, childIndex)
                 )}
@@ -200,7 +200,7 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
           href={element.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 underline"
+          className="text-primary-color hover:text-primary-dark underline"
         >
           {element.children.map((child: StrapiRichTextNode, childIndex: number) => 
             renderInlineElement(child, childIndex)

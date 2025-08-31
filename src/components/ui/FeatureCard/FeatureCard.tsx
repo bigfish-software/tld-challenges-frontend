@@ -31,20 +31,9 @@ export const FeatureCard = ({
       flex
       flex-col
       h-full
-      bg-white 
-      dark:bg-slate-800 
-      border 
-      border-slate-200 
-      dark:border-slate-700 
+      feature-card 
       rounded-lg 
-      shadow-sm 
-      dark:shadow-slate-900/20 
-      hover:shadow-md 
-      dark:hover:shadow-slate-900/30 
-      transition-all 
-      duration-200
-      hover:border-primary-300
-      dark:hover:border-primary-600
+      shadow-sm
       p-6
     ">
       {/* Content - grows to fill available space */}
@@ -57,10 +46,8 @@ export const FeatureCard = ({
             mb-6
           ">
             <div className={`
-              [&>svg]:fill-slate-600 
-              [&>svg]:dark:fill-slate-300
-              [&>svg]:group-hover:fill-primary-600
-              [&>svg]:dark:group-hover:fill-primary-400
+              text-primary
+              group-hover:text-primary-color
               transition-all
               duration-300
               group-hover:scale-110
@@ -78,10 +65,8 @@ export const FeatureCard = ({
             font-semibold 
             font-headline
             uppercase
-            text-slate-900 
-            dark:text-slate-100
-            group-hover:text-primary-700
-            dark:group-hover:text-primary-300
+            text-primary
+            group-hover:text-primary-color
             transition-colors
             duration-200
           ">
@@ -90,8 +75,7 @@ export const FeatureCard = ({
         </div>
         
         <p className="
-          text-slate-600 
-          dark:text-slate-300 
+          text-secondary 
           text-base
           leading-relaxed
           text-center

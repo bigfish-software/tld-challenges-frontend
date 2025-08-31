@@ -56,19 +56,19 @@ export const FilterPanel = ({
 
   return (
     <div className={clsx(
-      'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm dark:shadow-slate-900/20',
+      'card-surface border border-default rounded-lg shadow-sm',
       className
     )}>
       {/* Header */}
-      <div className="p-4 border-b border-slate-200 dark:border-slate-700">
+      <div className="p-4 border-b border-default">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+          <h3 className="text-lg font-semibold text-primary">
             {title}
           </h3>
           {showClearAll && getTotalSelectedCount() > 0 && (
             <button
               onClick={onClearAll}
-              className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+              className="text-sm text-primary-color hover:text-primary transition-colors"
             >
               Clear All ({getTotalSelectedCount()})
             </button>
@@ -77,7 +77,7 @@ export const FilterPanel = ({
       </div>
 
       {/* Filter Groups */}
-      <div className="divide-y divide-slate-200 dark:divide-slate-700">
+      <div className="divide-y divide-border-default">
         {groups.map((group) => {
           const isExpanded = expandedGroups.has(group.id);
           const groupFilters = selectedFilters[group.id] || [];
@@ -89,16 +89,16 @@ export const FilterPanel = ({
                 onClick={() => group.collapsible && toggleGroup(group.id)}
                 className={clsx(
                   'flex items-center justify-between w-full text-left',
-                  group.collapsible && 'hover:text-primary-600 dark:hover:text-primary-400 transition-colors'
+                  group.collapsible && 'hover:text-primary-color transition-colors'
                 )}
                 disabled={!group.collapsible}
               >
                 <div className="flex items-center space-x-2">
-                  <span className="font-medium text-slate-900 dark:text-slate-100">
+                  <span className="font-medium text-primary">
                     {group.label}
                   </span>
                   {groupFilters.length > 0 && (
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200">
+                    <span className="badge-info">
                       {groupFilters.length}
                     </span>
                   )}
@@ -106,7 +106,7 @@ export const FilterPanel = ({
                 {group.collapsible && (
                   <svg
                     className={clsx(
-                      'h-5 w-5 text-slate-400 transition-transform duration-200',
+                      'h-5 w-5 text-secondary transition-transform duration-200',
                       isExpanded ? 'rotate-180' : 'rotate-0'
                     )}
                     fill="none"
@@ -140,13 +140,13 @@ export const FilterPanel = ({
                             onChange={(e) => onFilterChange(group.id, option.id, e.target.checked)}
                             className="
                               h-4 w-4 
-                              text-primary-600 
-                              border-slate-300 dark:border-slate-600 
+                              text-primary-color 
+                              border-default 
                               rounded 
-                              focus:ring-primary-500 
+                              focus:ring-primary-color 
                               focus:ring-2 
                               focus:ring-offset-0
-                              bg-white dark:bg-slate-700
+                              bg-surface
                               transition-colors
                             "
                           />
@@ -160,19 +160,19 @@ export const FilterPanel = ({
                               <span className={clsx(
                                 'text-sm',
                                 isSelected 
-                                  ? 'text-slate-900 dark:text-slate-100 font-medium' 
-                                  : 'text-slate-700 dark:text-slate-300'
+                                  ? 'text-primary font-medium' 
+                                  : 'text-secondary'
                               )}>
                                 {option.label}
                               </span>
                               {option.description && (
-                                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                                <p className="text-xs text-secondary mt-0.5">
                                   {option.description}
                                 </p>
                               )}
                             </div>
                             {option.count !== undefined && (
-                              <span className="text-xs text-slate-500 dark:text-slate-400 ml-2">
+                              <span className="text-xs text-secondary ml-2">
                                 {option.count}
                               </span>
                             )}
@@ -190,10 +190,10 @@ export const FilterPanel = ({
 
       {/* Mobile Clear All (bottom) */}
       {showClearAll && getTotalSelectedCount() > 0 && (
-        <div className="p-4 border-t border-slate-200 dark:border-slate-700 sm:hidden">
+        <div className="p-4 border-t border-default sm:hidden">
           <button
             onClick={onClearAll}
-            className="w-full text-center text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+            className="w-full text-center text-sm text-primary-color hover:text-primary transition-colors"
           >
             Clear All Filters ({getTotalSelectedCount()})
           </button>

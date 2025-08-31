@@ -32,7 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={clsx(
           // Base styles
           'inline-flex items-center justify-center rounded-md font-medium transition-all duration-200',
-          'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
+          'focus:outline-none focus:ring-2 focus:ring-offset-2',
           'disabled:opacity-50 disabled:cursor-not-allowed',
           
           // Layout variants
@@ -68,24 +68,23 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             'hover:shadow-xl transform hover:scale-105': hoverEffect === 'both' && shadow === 'lg',
           },
           
-          // Color variants
+          // Color variants using CSS variables
           {
             // Primary variant
-            'bg-primary-500 hover:bg-primary-600 active:bg-primary-700 text-white': 
-              variant === 'primary',
+            'btn-primary': variant === 'primary',
             
             // Secondary variant
-            'bg-secondary-500 hover:bg-secondary-600 active:bg-secondary-700 text-white': 
-              variant === 'secondary',
+            'btn-secondary': variant === 'secondary',
             
             // Outline variant
-            'border border-primary-300 dark:border-primary-600 text-primary-700 dark:text-primary-300 hover:bg-primary-50 dark:hover:bg-primary-900/20': 
-              variant === 'outline',
+            'border border-default text-primary hover:bg-surface-raised btn-outline-hover': variant === 'outline',
             
             // Ghost variant
-            'text-primary-700 dark:text-primary-300 hover:bg-primary-50 dark:hover:bg-primary-900/20': 
-              variant === 'ghost',
+            'text-primary hover:bg-surface-raised btn-ghost-hover': variant === 'ghost',
           },
+          
+          // Focus ring using CSS variable
+          'focus:ring-color-[var(--color-border-focus)]',
           
           className
         )}

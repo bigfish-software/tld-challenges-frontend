@@ -236,15 +236,15 @@ export const TournamentsPage: React.FC = () => {
   const getStatusColor = (state: string) => {
     switch (state) {
       case 'active':
-        return 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300';
+        return 'badge-success';
       case 'planned':
-        return 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300';
+        return 'badge-info';
       case 'completed':
-        return 'bg-gray-100 dark:bg-gray-900/30 text-gray-800 dark:text-gray-300';
+        return 'badge-neutral';
       case 'cancelled':
-        return 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300';
+        return 'badge-error';
       default:
-        return 'bg-gray-100 dark:bg-gray-900/30 text-gray-800 dark:text-gray-300';
+        return 'badge-neutral';
     }
   };
 
@@ -258,7 +258,7 @@ export const TournamentsPage: React.FC = () => {
 
   return (
     <PageLayout>
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+      <div className="min-h-screen bg-background">
         {/* Hero Section */}
         <PageHero
           title="Tournaments"
@@ -308,20 +308,20 @@ export const TournamentsPage: React.FC = () => {
                   isEmpty={filteredTournaments.length === 0}
                   emptyStateComponent={
                     <div className="text-center py-16">
-                      <div className="mx-auto h-24 w-24 text-primary-400 dark:text-primary-600 mb-6">
+                      <div className="mx-auto h-24 w-24 text-secondary mb-6">
                         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="h-full w-full">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                       </div>
-                      <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">
+                      <h3 className="text-lg font-medium text-primary mb-2">
                         No tournaments found
                       </h3>
-                      <p className="text-slate-600 dark:text-slate-400 max-w-md mx-auto mb-6">
+                      <p className="text-secondary max-w-md mx-auto mb-6">
                         Try adjusting your search query or filters to find tournaments that match your interests.
                       </p>
                       <button 
                         onClick={clearAllFilters}
-                        className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
+                        className="btn-primary px-4 py-2 rounded-md"
                       >
                         Clear Filters
                       </button>
@@ -329,10 +329,10 @@ export const TournamentsPage: React.FC = () => {
                   }
                 >
                   {filteredTournaments.map(tournament => (
-                    <div key={tournament.id} className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-6 border border-slate-200 dark:border-slate-700">
+                    <div key={tournament.id} className="card-surface rounded-lg shadow-md p-6 border-default">
                       {/* Tournament Header */}
                       <div className="flex items-start justify-between mb-4">
-                        <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+                        <h3 className="text-lg font-semibold text-primary">
                           {tournament.name}
                         </h3>
                         <span className={`
@@ -344,12 +344,12 @@ export const TournamentsPage: React.FC = () => {
                       </div>
                       
                       {/* Description */}
-                      <p className="text-slate-600 dark:text-slate-300 text-sm mb-4 line-clamp-3">
+                      <p className="text-secondary text-sm mb-4 line-clamp-3">
                         {tournament.description}
                       </p>
                       
                       {/* Dates */}
-                      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 mb-4">
+                      <div className="flex items-center justify-between text-xs text-secondary mb-4">
                         <div className="flex items-center space-x-4">
                           <span>
                             Start: {formatDate(tournament.start_date)}
@@ -361,7 +361,7 @@ export const TournamentsPage: React.FC = () => {
                       </div>
                       
                       {/* Metadata */}
-                      <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                      <div className="flex items-center justify-between text-xs text-secondary">
                         <div className="flex items-center space-x-4">
                           <span>
                             Created: {formatDate(tournament.created_date)}

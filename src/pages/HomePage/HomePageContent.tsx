@@ -71,7 +71,7 @@ export const HomePageContent = () => {
   return (
     <main className="flex-1">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+      <section className="relative overflow-hidden">
         {/* TLD Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -80,15 +80,8 @@ export const HomePageContent = () => {
           }}
         />
         
-        {/* Overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-50/30 via-white/40 to-secondary-50/30 dark:from-slate-900/40 dark:via-slate-800/50 dark:to-slate-900/40" />
-        
-        {/* Subtle texture overlay */}
-        <div className="absolute inset-0 opacity-5 dark:opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='53' cy='7' r='1'/%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3Ccircle cx='7' cy='53' r='1'/%3E%3Ccircle cx='53' cy='53' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-        </div>
+        {/* Simple dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black bg-opacity-40" />
         
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
           <div className="text-center max-w-4xl mx-auto space-y-8">
@@ -99,8 +92,7 @@ export const HomePageContent = () => {
                 sm:text-5xl 
                 lg:text-6xl 
                 font-bold 
-                text-slate-900 
-                dark:text-slate-100 
+                text-light-primary 
                 leading-tight
                 font-oswald
               ">
@@ -108,11 +100,7 @@ export const HomePageContent = () => {
                 <span className="
                   text-transparent 
                   bg-clip-text 
-                  bg-gradient-to-r 
-                  from-primary-400 
-                  to-accent-400
-                  dark:from-primary-300 
-                  dark:to-accent-300
+                  bg-gradient-brand
                   font-headline
                 ">
                   TLD CHALLENGES
@@ -122,8 +110,7 @@ export const HomePageContent = () => {
               <p className="
                 text-2xl 
                 sm:text-3xl 
-                text-slate-700 
-                dark:text-slate-300 
+                text-light-secondary 
                 leading-relaxed 
                 max-w-3xl 
                 mx-auto
@@ -159,26 +146,26 @@ export const HomePageContent = () => {
             {/* Stats or Quick Info */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto pt-8">
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300">
+                <div className="text-2xl sm:text-3xl font-bold text-light-primary">
                   {statsLoading ? '...' : statsError ? '?' : `${stats?.customCodes || 0}+`}
                 </div>
-                <div className="text-sm text-slate-600 dark:text-slate-300">
+                <div className="text-sm text-light-secondary">
                   Custom Codes
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300">
+                <div className="text-2xl sm:text-3xl font-bold text-light-primary">
                   {statsLoading ? '...' : statsError ? '?' : `${stats?.challenges || 0}+`}
                 </div>
-                <div className="text-sm text-slate-600 dark:text-slate-300">
+                <div className="text-sm text-light-secondary">
                   Challenges
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-primary-600 dark:text-primary-300">
+                <div className="text-2xl sm:text-3xl font-bold text-light-primary">
                   {statsLoading ? '...' : statsError ? '?' : `${stats?.tournaments || 0}+`}
                 </div>
-                <div className="text-sm text-slate-600 dark:text-slate-300">
+                <div className="text-sm text-light-secondary">
                   Tournaments
                 </div>
               </div>
@@ -189,7 +176,7 @@ export const HomePageContent = () => {
 
       {/* Tournament Section - Only show if there are active tournaments */}
       {!tournamentsLoading && !tournamentsError && activeTournaments.length > 0 && (
-        <section className="py-16 sm:py-20 lg:py-24 bg-slate-50 dark:bg-slate-800/50">
+        <section className="py-16 sm:py-20 lg:py-24 section-primary">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="
@@ -197,8 +184,7 @@ export const HomePageContent = () => {
                 sm:text-4xl 
                 font-bold 
                 font-headline
-                text-slate-900 
-                dark:text-slate-100 
+                text-primary 
                 mb-4
                 uppercase
               ">
@@ -206,8 +192,7 @@ export const HomePageContent = () => {
               </h2>
               <p className="
                 text-lg 
-                text-slate-600 
-                dark:text-slate-400 
+                text-secondary 
                 max-w-2xl 
                 mx-auto
               ">
@@ -248,7 +233,7 @@ export const HomePageContent = () => {
       )}
 
       {/* Feature Cards Section */}
-      <section className="py-16 sm:py-20 lg:py-24">
+      <section className="py-16 sm:py-20 lg:py-24 section-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="
@@ -256,8 +241,7 @@ export const HomePageContent = () => {
               sm:text-4xl 
               font-bold 
               font-headline
-              text-slate-900 
-              dark:text-slate-100 
+              text-primary 
               mb-4
               uppercase
             ">
@@ -265,8 +249,7 @@ export const HomePageContent = () => {
             </h2>
             <p className="
               text-lg 
-              text-slate-600 
-              dark:text-slate-400 
+              text-secondary 
               max-w-2xl 
               mx-auto
             ">
@@ -291,7 +274,7 @@ export const HomePageContent = () => {
       </section>
 
       {/* Donation Section */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-slate-50 dark:bg-slate-800/50">
+      <section className="py-16 sm:py-20 lg:py-24 section-primary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">
             <DonationSection />

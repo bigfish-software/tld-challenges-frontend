@@ -20,7 +20,7 @@ export const PageLayout = ({
   if (!includeHeaderFooter) {
     // Content-only mode for stories and flexible usage
     return (
-      <div className={`bg-white dark:bg-slate-900 transition-colors ${className}`}>
+      <div className={`bg-background-primary transition-colors ${className}`}>
         {children}
       </div>
     );
@@ -28,7 +28,7 @@ export const PageLayout = ({
 
   // Full page layout with header and footer
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-900 transition-colors">
+    <div className="min-h-screen flex flex-col bg-background-primary transition-colors">
       <Header />
       <main className={`flex-1 ${className}`}>
         {children}

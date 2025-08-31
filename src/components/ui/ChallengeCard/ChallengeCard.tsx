@@ -90,30 +90,29 @@ export const ChallengeCard = ({
   const getDifficultyInfo = (diff: typeof difficulty) => {
     switch (diff) {
       case 'Pilgrim':
-        return { label: 'Easy', color: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300' };
+        return { label: 'Easy', color: 'badge-success' };
       case 'Voyager':
-        return { label: 'Easy', color: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300' };
+        return { label: 'Easy', color: 'badge-success' };
       case 'Stalker':
-        return { label: 'Medium', color: 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300' };
+        return { label: 'Medium', color: 'badge-warning' };
       case 'Interloper':
-        return { label: 'Hard', color: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300' };
+        return { label: 'Hard', color: 'badge-error' };
       case 'Misery':
-        return { label: 'Extreme', color: 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300' };
+        return { label: 'Extreme', color: 'badge-secondary' };
       case 'Nogoa':
-        return { label: 'Extreme', color: 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300' };
+        return { label: 'Extreme', color: 'badge-secondary' };
       case 'Custom':
-        return { label: 'Custom', color: 'bg-slate-100 dark:bg-slate-900/30 text-slate-800 dark:text-slate-300' };
+        return { label: 'Custom', color: 'badge-neutral' };
       default:
-        return { label: 'Medium', color: 'bg-slate-100 dark:bg-slate-900/30 text-slate-800 dark:text-slate-300' };
+        return { label: 'Medium', color: 'badge-neutral' };
     }
   };
 
   const difficultyInfo = getDifficultyInfo(difficulty);
 
   const baseClasses = `
-    bg-white dark:bg-slate-800 
-    border border-slate-200 dark:border-slate-700 
-    rounded-lg shadow-sm hover:shadow-md 
+    card-surface
+    hover:shadow-md 
     transition-all duration-200 
     cursor-pointer group
     ${className}
@@ -127,13 +126,13 @@ export const ChallengeCard = ({
         {/* Header */}
         <div className="flex items-start justify-between mb-3">
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors truncate">
+            <h3 className="text-lg font-semibold text-primary group-hover:text-primary-hover transition-colors truncate">
               {name}
             </h3>
             {creators?.data?.[0] && (
               <button
                 onClick={handleCreatorClick}
-                className="text-sm text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors mt-1"
+                className="text-sm text-secondary hover:text-primary transition-colors mt-1"
               >
                 by {creators.data[0].attributes.name}
               </button>
@@ -149,7 +148,7 @@ export const ChallengeCard = ({
 
         {/* Description */}
         {description && (
-          <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4 line-clamp-2">
+          <p className="text-secondary text-sm leading-relaxed mb-4 line-clamp-2">
             {description}
           </p>
         )}
@@ -158,7 +157,7 @@ export const ChallengeCard = ({
         {variant !== 'compact' && (
           <div className="space-y-3 mb-4">
             {/* Tournament and Custom Code */}
-            <div className="flex items-center space-x-4 text-sm text-slate-600 dark:text-slate-400">
+            <div className="flex items-center space-x-4 text-sm text-secondary">
               {tournament?.data && (
                 <div className="flex items-center space-x-1">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -179,24 +178,24 @@ export const ChallengeCard = ({
 
             {/* Rules Preview */}
             {rules?.data && rules.data.length > 0 && (
-              <div className="bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-md p-3">
+              <div className="card-surface-raised p-3">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                  <span className="text-xs font-medium text-secondary uppercase tracking-wide">
                     Key Rules
                   </span>
-                  <span className="text-xs text-slate-400 dark:text-slate-500">
+                  <span className="text-xs text-secondary">
                     {rules.data.length} rule{rules.data.length !== 1 ? 's' : ''}
                   </span>
                 </div>
                 <ul className="space-y-1">
                   {rules.data.slice(0, 2).map((rule: any, index: number) => (
-                    <li key={index} className="text-xs text-slate-600 dark:text-slate-400 flex items-start space-x-2">
-                      <span className="text-primary-500 mt-1">•</span>
+                    <li key={index} className="text-xs text-secondary flex items-start space-x-2">
+                      <span className="text-primary-color mt-1">•</span>
                       <span className="flex-1">{rule.attributes.description}</span>
                     </li>
                   ))}
                   {rules.data.length > 2 && (
-                    <li className="text-xs text-slate-500 dark:text-slate-400 italic">
+                    <li className="text-xs text-secondary italic">
                       +{rules.data.length - 2} more rules...
                     </li>
                   )}
@@ -207,15 +206,15 @@ export const ChallengeCard = ({
         )}
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-700">
-          <div className="flex items-center space-x-4 text-xs text-slate-500 dark:text-slate-400">
+        <div className="flex items-center justify-between pt-3 border-t border-default">
+          <div className="flex items-center space-x-4 text-xs text-secondary">
             {created_date && <span>{formatDate(created_date)}</span>}
           </div>
           
           <div className="flex items-center space-x-2">
             <button
               onClick={handleJoinChallenge}
-              className="px-3 py-1.5 text-xs font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-md transition-colors"
+              className="btn-primary px-3 py-1.5 text-xs font-medium rounded-md"
             >
               View Challenge
             </button>

@@ -92,28 +92,28 @@ const DefaultLoadingComponent = () => (
     {Array.from({ length: 8 }).map((_, index) => (
       <div
         key={index}
-        className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-6 animate-pulse"
+        className="card-surface border-default rounded-lg p-6 animate-pulse"
       >
         {/* Header skeleton */}
         <div className="flex items-center space-x-3 mb-4">
-          <div className="h-10 w-10 bg-slate-200 dark:bg-slate-700 rounded-lg" />
+          <div className="h-10 w-10 bg-surface rounded-lg" />
           <div className="flex-1">
-            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded mb-2" />
-            <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded w-2/3" />
+            <div className="h-4 bg-surface rounded mb-2" />
+            <div className="h-3 bg-surface rounded w-2/3" />
           </div>
         </div>
         
         {/* Content skeleton */}
         <div className="space-y-3 mb-4">
-          <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded" />
-          <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded" />
-          <div className="h-3 bg-slate-200 dark:bg-slate-700 rounded w-3/4" />
+          <div className="h-3 bg-surface rounded" />
+          <div className="h-3 bg-surface rounded" />
+          <div className="h-3 bg-surface rounded w-3/4" />
         </div>
         
         {/* Footer skeleton */}
         <div className="flex items-center justify-between">
-          <div className="h-6 w-16 bg-slate-200 dark:bg-slate-700 rounded-full" />
-          <div className="h-8 w-20 bg-slate-200 dark:bg-slate-700 rounded" />
+          <div className="h-6 w-16 bg-surface rounded-full" />
+          <div className="h-8 w-20 bg-surface rounded" />
         </div>
       </div>
     ))}
@@ -123,7 +123,7 @@ const DefaultLoadingComponent = () => (
 // Default empty state component
 const DefaultEmptyState = () => (
   <div className="text-center py-16">
-    <div className="mx-auto h-24 w-24 text-slate-400 dark:text-slate-600 mb-6">
+    <div className="mx-auto h-24 w-24 text-secondary mb-6">
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="h-full w-full">
         <path
           strokeLinecap="round"
@@ -133,10 +133,10 @@ const DefaultEmptyState = () => (
         />
       </svg>
     </div>
-    <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">
+    <h3 className="text-lg font-medium text-primary mb-2">
       No results found
     </h3>
-    <p className="text-slate-600 dark:text-slate-400 max-w-md mx-auto">
+    <p className="text-secondary max-w-md mx-auto">
       Try adjusting your search terms or filters to find what you're looking for.
     </p>
   </div>

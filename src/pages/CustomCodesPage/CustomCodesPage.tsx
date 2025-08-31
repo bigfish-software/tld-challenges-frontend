@@ -94,7 +94,7 @@ export const CustomCodesPage: React.FC = () => {
   if (error) {
     return (
       <PageLayout>
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+        <div className="min-h-screen bg-background">
           <PageHero
             title="Custom Game Codes"
             description="Discover and share custom game configurations to enhance your survival experience"
@@ -104,20 +104,20 @@ export const CustomCodesPage: React.FC = () => {
           />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center py-16">
-              <div className="mx-auto h-24 w-24 text-red-400 mb-6">
+              <div className="mx-auto h-24 w-24 text-error mb-6">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="h-full w-full">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.314 16.5c-.77.833.192 2.5 1.732 2.5z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">
+              <h3 className="text-lg font-medium text-primary mb-2">
                 Unable to load custom codes
               </h3>
-              <p className="text-slate-600 dark:text-slate-400 max-w-md mx-auto mb-6">
+              <p className="text-secondary max-w-md mx-auto mb-6">
                 {error?.message || 'An unexpected error occurred'}
               </p>
               <button 
                 onClick={() => window.location.reload()}
-                className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
+                className="btn-primary px-4 py-2 rounded-md"
               >
                 Try Again
               </button>
@@ -130,7 +130,7 @@ export const CustomCodesPage: React.FC = () => {
 
   return (
     <PageLayout>
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+      <div className="min-h-screen bg-background">
         {/* Hero Section */}
         <PageHero
           title="Custom Game Codes"
@@ -165,20 +165,20 @@ export const CustomCodesPage: React.FC = () => {
                 isEmpty={filteredCodes.length === 0}
                 emptyStateComponent={
                   <div className="text-center py-16">
-                    <div className="mx-auto h-24 w-24 text-primary-400 dark:text-primary-600 mb-6">
+                    <div className="mx-auto h-24 w-24 text-secondary mb-6">
                       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="h-full w-full">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-2">
+                    <h3 className="text-lg font-medium text-primary mb-2">
                       No custom codes found
                     </h3>
-                    <p className="text-slate-600 dark:text-slate-400 max-w-md mx-auto mb-6">
+                    <p className="text-secondary max-w-md mx-auto mb-6">
                       Try adjusting your filters to find the perfect custom code for your gameplay style.
                     </p>
                     <button 
                       onClick={clearAllFilters}
-                      className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
+                      className="btn-primary px-4 py-2 rounded-md"
                     >
                       Clear Filters
                     </button>

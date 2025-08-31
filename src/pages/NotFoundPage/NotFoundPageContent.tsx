@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/Button';
+import { Link } from 'react-router-dom';
 
 export const NotFoundPageContent = () => {
   return (
@@ -6,28 +7,28 @@ export const NotFoundPageContent = () => {
       <div className="max-w-lg w-full text-center">
         {/* Image/Illustration placeholder */}
         <div className="relative mb-8">
-          <div className="mx-auto h-48 w-48 bg-gradient-to-br from-primary-400 via-secondary-400 to-accent-400 rounded-full flex items-center justify-center shadow-xl">
-            <div className="text-white text-6xl font-bold">404</div>
+          <div className="mx-auto h-48 w-48 bg-gradient-brand rounded-full flex items-center justify-center shadow-xl">
+            <div className="text-primary-dark text-6xl font-bold">404</div>
           </div>
           
           {/* Subtle gaming elements */}
-          <div className="absolute -top-2 -right-2 h-8 w-8 bg-accent-400 rounded-full animate-pulse" />
-          <div className="absolute -bottom-2 -left-2 h-6 w-6 bg-secondary-400 rounded-full animate-pulse delay-75" />
+          <div className="absolute -top-2 -right-2 h-8 w-8 bg-accent rounded-full animate-pulse" />
+          <div className="absolute -bottom-2 -left-2 h-6 w-6 bg-secondary rounded-full animate-pulse delay-75" />
         </div>
 
         {/* Content */}
         <div className="space-y-6">
           <div>
-            <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">
+            <h1 className="text-4xl font-bold text-primary mb-2">
               Lost in the Wilderness
             </h1>
-            <p className="text-lg text-slate-600 dark:text-slate-400">
+            <p className="text-lg text-secondary">
               The page you're looking for has vanished like tracks in a blizzard.
             </p>
           </div>
 
-          <div className="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-6 border border-slate-200 dark:border-slate-700">
-            <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
+          <div className="bg-surface rounded-lg p-6 border border-default">
+            <p className="text-sm text-secondary mb-4">
               Don't worry, survivor. Even the most experienced Long Dark players get lost sometimes.
               Let's get you back to safety.
             </p>
@@ -65,49 +66,49 @@ export const NotFoundPageContent = () => {
 
           {/* Helpful links */}
           <div className="text-left">
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-3">
+            <h3 className="text-sm font-semibold text-primary mb-3">
               Popular destinations:
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a 
-                  href="#custom-codes" 
-                  className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+                <Link 
+                  to="/custom-codes" 
+                  className="text-secondary nav-link"
                 >
                   → Custom Codes
-                </a>
+                </Link>
               </li>
               <li>
-                <a 
-                  href="#challenges" 
-                  className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+                <Link 
+                  to="/challenges" 
+                  className="text-secondary nav-link"
                 >
                   → Challenges
-                </a>
+                </Link>
               </li>
               <li>
-                <a 
-                  href="#tournaments" 
-                  className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+                <Link 
+                  to="/tournaments" 
+                  className="text-secondary nav-link"
                 >
                   → Tournaments
-                </a>
+                </Link>
               </li>
               <li>
-                <a 
-                  href="#faq" 
-                  className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+                <Link 
+                  to="/#faq" 
+                  className="text-secondary nav-link"
                 >
                   → FAQ
-                </a>
+                </Link>
               </li>
               <li>
-                <a 
-                  href="#submit" 
-                  className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+                <Link 
+                  to="/#submit" 
+                  className="text-secondary nav-link"
                 >
                   → Submit Run
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

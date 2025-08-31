@@ -25,7 +25,7 @@ export const PageHero = ({
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <section className="relative overflow-hidden bg-gradient-hero">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -35,7 +35,7 @@ export const PageHero = ({
       />
       
       {/* Overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-50/40 via-white/50 to-secondary-50/40 dark:from-slate-900/50 dark:via-slate-800/60 dark:to-slate-900/50" />
+      <div className="absolute inset-0 bg-overlay-hero" />
       
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 opacity-5 dark:opacity-10">
@@ -59,10 +59,8 @@ export const PageHero = ({
                     items-center 
                     justify-center 
                     rounded-lg 
-                    bg-primary-100 
-                    dark:bg-primary-900/30 
-                    text-primary-600 
-                    dark:text-primary-400
+                    bg-primary-light 
+                    text-primary-color
                   ">
                     {icon}
                   </div>
@@ -76,8 +74,7 @@ export const PageHero = ({
                 font-bold 
                 font-headline
                 uppercase
-                text-slate-900 
-                dark:text-slate-100 
+                text-primary 
                 leading-tight
               ">
                 {title}
@@ -86,8 +83,7 @@ export const PageHero = ({
               <p className="
                 text-lg 
                 sm:text-xl 
-                text-slate-700 
-                dark:text-slate-300 
+                text-secondary 
                 leading-relaxed 
                 max-w-3xl 
                 mx-auto
@@ -97,14 +93,14 @@ export const PageHero = ({
             </div>
 
             {/* Contact Section */}
-            <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-lg border border-slate-200/50 dark:border-slate-700/50 p-6 max-w-2xl mx-auto">
+            <div className="bg-surface/80 backdrop-blur-sm rounded-lg border-default/50 p-6 max-w-2xl mx-auto">
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+                <h3 className="text-lg font-semibold text-primary">
                   {contactMessage}
                 </h3>
                 
                 {contactSubtext && (
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                  <p className="text-sm text-secondary">
                     {contactSubtext}
                   </p>
                 )}

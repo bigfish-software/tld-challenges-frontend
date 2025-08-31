@@ -4,7 +4,7 @@ export interface TournamentData {
   id: number;
   title: string;
   description: string;
-  status: 'upcoming' | 'active' | 'ending-soon';
+  status: 'planned' | 'active' | 'completed' | 'cancelled';
   startDate?: string;
   endDate?: string;
   participantCount?: number;
@@ -41,13 +41,15 @@ export const TournamentSection = ({
     
     switch (status) {
       case 'active':
-        return `${baseClasses} bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300`;
-      case 'upcoming':
-        return `${baseClasses} bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300`;
-      case 'ending-soon':
-        return `${baseClasses} bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300`;
+        return `${baseClasses} badge-success`;
+      case 'planned':
+        return `${baseClasses} badge-warning`;
+      case 'completed':
+        return `${baseClasses} badge-neutral`;
+      case 'cancelled':
+        return `${baseClasses} badge-error`;
       default:
-        return `${baseClasses} bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-300`;
+        return `${baseClasses} badge-neutral`;
     }
   };
 
@@ -55,10 +57,12 @@ export const TournamentSection = ({
     switch (status) {
       case 'active':
         return 'Active Now';
-      case 'upcoming':
+      case 'planned':
         return 'Coming Soon';
-      case 'ending-soon':
-        return 'Ending Soon';
+      case 'completed':
+        return 'Completed';
+      case 'cancelled':
+        return 'Cancelled';
       default:
         return 'Tournament';
     }
@@ -75,13 +79,11 @@ export const TournamentSection = ({
   return (
     <section className={`
       bg-gradient-to-r 
-      from-primary-50 
-      to-primary-100 
-      dark:from-slate-800 
-      dark:to-slate-900 
+      from-primary-light
+      to-primary-base
+      card-surface
       border 
-      border-primary-200 
-      dark:border-slate-700 
+      border-primary
       rounded-lg 
       overflow-hidden
       ${className}
@@ -104,8 +106,7 @@ export const TournamentSection = ({
                 font-bold 
                 font-headline
                 uppercase
-                text-slate-900 
-                dark:text-slate-100
+                text-primary 
                 leading-tight
               ">
                 {displayTournament.title.toUpperCase()}
@@ -114,8 +115,7 @@ export const TournamentSection = ({
 
             {/* Description */}
             <p className="
-              text-slate-700 
-              dark:text-slate-300 
+              text-secondary 
               text-base 
               leading-relaxed
               max-w-2xl
@@ -124,7 +124,7 @@ export const TournamentSection = ({
             </p>
 
             {/* Tournament Meta */}
-            <div className="flex flex-wrap gap-6 text-sm text-slate-600 dark:text-slate-400">
+            <div className="flex flex-wrap gap-6 text-sm text-secondary">
               {displayTournament.startDate && displayTournament.endDate && (
                 <div className="flex items-center gap-1.5">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

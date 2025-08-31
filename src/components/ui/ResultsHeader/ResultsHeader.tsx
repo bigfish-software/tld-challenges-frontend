@@ -45,7 +45,7 @@ export const ResultsHeader = ({
 
   return (
     <div className={clsx(
-      'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm dark:shadow-slate-900/20 p-4',
+      'card-surface border-default rounded-lg shadow-sm p-4',
       className
     )}>
       <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
@@ -55,19 +55,19 @@ export const ResultsHeader = ({
           <div className="flex items-center space-x-2">
             {isLoading ? (
               <div className="flex items-center space-x-2">
-                <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary-600 border-t-transparent" />
-                <span className="text-sm text-slate-600 dark:text-slate-400">Loading...</span>
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary-color border-t-transparent" />
+                <span className="text-sm text-secondary">Loading...</span>
               </div>
             ) : (
-              <div className="text-sm text-slate-600 dark:text-slate-400">
+              <div className="text-sm text-secondary">
                 {showingFiltered ? (
                   <>
-                    Showing <span className="font-medium text-slate-900 dark:text-slate-100">{displayCount.toLocaleString()}</span> of{' '}
-                    <span className="font-medium text-slate-900 dark:text-slate-100">{totalCount.toLocaleString()}</span> results
+                    Showing <span className="font-medium text-primary">{displayCount.toLocaleString()}</span> of{' '}
+                    <span className="font-medium text-primary">{totalCount.toLocaleString()}</span> results
                   </>
                 ) : (
                   <>
-                    <span className="font-medium text-slate-900 dark:text-slate-100">{displayCount.toLocaleString()}</span>{' '}
+                    <span className="font-medium text-primary">{displayCount.toLocaleString()}</span>{' '}
                     {displayCount === 1 ? 'result' : 'results'}
                   </>
                 )}
@@ -80,7 +80,7 @@ export const ResultsHeader = ({
             <div className="relative min-w-0 flex-1 sm:max-w-xs">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <svg
-                  className="h-4 w-4 text-slate-400"
+                  className="h-4 w-4 text-secondary"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -100,12 +100,12 @@ export const ResultsHeader = ({
                 placeholder={searchPlaceholder}
                 className="
                   block w-full pl-10 pr-3 py-2 text-sm
-                  border border-slate-300 dark:border-slate-600 
+                  border-default 
                   rounded-md 
-                  bg-white dark:bg-slate-700
-                  text-slate-900 dark:text-slate-100
-                  placeholder:text-slate-400 dark:placeholder:text-slate-500
-                  focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+                  bg-background
+                  text-primary
+                  placeholder:text-secondary
+                  focus:outline-none focus:ring-2 focus:ring-primary-color focus:border-primary-color
                   transition-colors
                 "
               />
@@ -115,7 +115,7 @@ export const ResultsHeader = ({
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
                 >
                   <svg
-                    className="h-4 w-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                    className="h-4 w-4 text-secondary hover:text-secondary"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -138,18 +138,18 @@ export const ResultsHeader = ({
           {/* Sort dropdown */}
           {sortOptions.length > 0 && onSortChange && (
             <div className="flex items-center space-x-2">
-              <label className="text-sm text-slate-600 dark:text-slate-400">
+              <label className="text-sm text-secondary">
                 Sort by:
               </label>
               <select
                 value={currentSort || ''}
                 onChange={(e) => onSortChange(e.target.value)}
                 className="
-                  text-sm border border-slate-300 dark:border-slate-600 
+                  text-sm border-default 
                   rounded-md px-2 py-1.5
-                  bg-white dark:bg-slate-700
-                  text-slate-900 dark:text-slate-100
-                  focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+                  bg-background
+                  text-primary
+                  focus:outline-none focus:ring-2 focus:ring-primary-color focus:border-primary-color
                   transition-colors
                 "
               >
@@ -164,14 +164,14 @@ export const ResultsHeader = ({
 
           {/* View mode toggle */}
           {showViewToggle && onViewModeChange && (
-            <div className="flex items-center border border-slate-300 dark:border-slate-600 rounded-md">
+            <div className="flex items-center border-default rounded-md">
               <button
                 onClick={() => onViewModeChange('grid')}
                 className={clsx(
-                  'p-2 text-sm border-r border-slate-300 dark:border-slate-600 transition-colors',
+                  'p-2 text-sm border-r border-default transition-colors',
                   viewMode === 'grid'
-                    ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300'
-                    : 'bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
+                    ? 'bg-primary-light text-primary-color'
+                    : 'bg-background text-secondary hover:text-primary'
                 )}
                 title="Grid view"
               >
@@ -184,8 +184,8 @@ export const ResultsHeader = ({
                 className={clsx(
                   'p-2 text-sm transition-colors',
                   viewMode === 'list'
-                    ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300'
-                    : 'bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
+                    ? 'bg-primary-light text-primary-color'
+                    : 'bg-background text-secondary hover:text-primary'
                 )}
                 title="List view"
               >
