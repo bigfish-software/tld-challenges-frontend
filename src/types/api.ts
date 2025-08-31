@@ -144,6 +144,29 @@ export interface FAQ extends StrapiEntity {
   };
 }
 
+// Content Type: Idea (New from backend API)
+export interface Idea extends StrapiEntity {
+  attributes: {
+    title: string;
+    description: StrapiRichTextBlocks; // Rich text (Blocks)
+    author_name: string;
+    social_links?: Array<{
+      platform: string;
+      url: string;
+    }>;
+  };
+}
+
+// Content Type: StatsOverview (New from backend API)
+export interface StatsOverview {
+  challenges: number;
+  tournaments: number;
+  customCodes: number;
+  submissions: number;
+  creators: number;
+  ideas: number;
+}
+
 // Helper types for API responses
 export interface StrapiResponse<T> {
   data: T;

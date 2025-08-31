@@ -17,8 +17,8 @@ class ApiClient {
 
   constructor() {
     this.instance = axios.create({
-      baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:1337/api',
-      timeout: 10000,
+      baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:1337',
+      timeout: 30000,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -100,3 +100,406 @@ class ApiClient {
 }
 
 export const apiClient = new ApiClient();
+
+/**
+ * API service for interacting with TLD Challenges backend
+ * Based on Postman collection and API reference documentation
+ * 
+ * Key features from backend:
+ * - Slug-based endpoints for better SEO and user-friendly URLs
+ * - Complex population patterns for related data
+ * - Featured content filtering
+ * - Ideas content type for community submissions
+ * - Statistics endpoint for dashboard data
+ */
+export const apiService = {
+  // Challenges
+  challenges: {
+    /**
+     * Get all challenges with optional filtering and pagination
+     */
+    getAll: (options?: {
+      populate?: string;
+      filters?: Record<string, any>;
+      sort?: string;
+      pagination?: { page?: number; pageSize?: number };
+    }) => {
+      const params: Record<string, any> = {};
+      
+      if (options?.populate) {
+        params.populate = options.populate;
+      }
+      
+      if (options?.filters) {
+        Object.entries(options.filters).forEach(([key, value]) => {
+          params[`filters[${key}][$eq]`] = value;
+        });
+      }
+      
+      if (options?.sort) {
+        params.sort = options.sort;
+      }
+      
+      if (options?.pagination) {
+        if (options.pagination.page) {
+          params['pagination[page]'] = options.pagination.page;
+        }
+        if (options.pagination.pageSize) {
+          params['pagination[pageSize]'] = options.pagination.pageSize;
+        }
+      }
+      
+      return apiClient.get('/api/challenges', { params });
+    },
+    
+    /**
+     * Get challenge by slug (SEO-friendly URLs)
+     */
+    getBySlug: (slug: string, populate?: string) => {
+      const params: Record<string, any> = {};
+      if (populate) {
+        params.populate = populate;
+      }
+      return apiClient.get(`/api/challenges/slug/${slug}`, { params });
+    },
+    
+    /**
+     * Get featured challenges only
+     */
+    getFeatured: (populate?: string) => {
+      const params: Record<string, any> = {
+        'filters[is_featured][$eq]': true,
+      };
+      if (populate) {
+        params.populate = populate;
+      }
+      return apiClient.get('/api/challenges', { params });
+    },
+    
+    /**
+     * Filter challenges by difficulty level
+     */
+    getByDifficulty: (difficulty: 'Easy' | 'Medium' | 'Hard', populate?: string) => {
+      const params: Record<string, any> = {
+        'filters[difficulty][$eq]': difficulty,
+      };
+      if (populate) {
+        params.populate = populate;
+      }
+      return apiClient.get('/api/challenges', { params });
+    },
+  },
+
+  // Tournaments
+  tournaments: {
+    /**
+     * Get all tournaments with optional filtering and pagination
+     */
+    getAll: (options?: {
+      populate?: string;
+      filters?: Record<string, any>;
+      sort?: string;
+      pagination?: { page?: number; pageSize?: number };
+    }) => {
+      const params: Record<string, any> = {};
+      
+      if (options?.populate) {
+        params.populate = options.populate;
+      }
+      
+      if (options?.filters) {
+        Object.entries(options.filters).forEach(([key, value]) => {
+          params[`filters[${key}][$eq]`] = value;
+        });
+      }
+      
+      if (options?.sort) {
+        params.sort = options.sort;
+      }
+      
+      if (options?.pagination) {
+        if (options.pagination.page) {
+          params['pagination[page]'] = options.pagination.page;
+        }
+        if (options.pagination.pageSize) {
+          params['pagination[pageSize]'] = options.pagination.pageSize;
+        }
+      }
+      
+      return apiClient.get('/api/tournaments', { params });
+    },
+    
+    /**
+     * Get tournament by slug
+     */
+    getBySlug: (slug: string, populate?: string) => {
+      const params: Record<string, any> = {};
+      if (populate) {
+        params.populate = populate;
+      }
+      return apiClient.get(`/api/tournaments/slug/${slug}`, { params });
+    },
+    
+    /**
+     * Get active tournaments only
+     */
+    getActive: (populate?: string) => {
+      const params: Record<string, any> = {
+        'filters[state][$eq]': 'active',
+      };
+      if (populate) {
+        params.populate = populate;
+      }
+      return apiClient.get('/api/tournaments', { params });
+    },
+    
+    /**
+     * Get featured tournaments only
+     */
+    getFeatured: (populate?: string) => {
+      const params: Record<string, any> = {
+        'filters[is_featured][$eq]': true,
+      };
+      if (populate) {
+        params.populate = populate;
+      }
+      return apiClient.get('/api/tournaments', { params });
+    },
+  },
+
+  // Custom Codes
+  customCodes: {
+    /**
+     * Get all custom codes with optional filtering and pagination
+     */
+    getAll: (options?: {
+      populate?: string;
+      filters?: Record<string, any>;
+      sort?: string;
+      pagination?: { page?: number; pageSize?: number };
+    }) => {
+      const params: Record<string, any> = {};
+      
+      if (options?.populate) {
+        params.populate = options.populate;
+      }
+      
+      if (options?.filters) {
+        Object.entries(options.filters).forEach(([key, value]) => {
+          params[`filters[${key}][$eq]`] = value;
+        });
+      }
+      
+      if (options?.sort) {
+        params.sort = options.sort;
+      }
+      
+      if (options?.pagination) {
+        if (options.pagination.page) {
+          params['pagination[page]'] = options.pagination.page;
+        }
+        if (options.pagination.pageSize) {
+          params['pagination[pageSize]'] = options.pagination.pageSize;
+        }
+      }
+      
+      return apiClient.get('/api/custom-codes', { params });
+    },
+    
+    /**
+     * Get custom code by slug
+     */
+    getBySlug: (slug: string, populate?: string) => {
+      const params: Record<string, any> = {};
+      if (populate) {
+        params.populate = populate;
+      }
+      return apiClient.get(`/api/custom-codes/slug/${slug}`, { params });
+    },
+    
+    /**
+     * Get featured custom codes only
+     */
+    getFeatured: (populate?: string) => {
+      const params: Record<string, any> = {
+        'filters[is_featured][$eq]': true,
+      };
+      if (populate) {
+        params.populate = populate;
+      }
+      return apiClient.get('/api/custom-codes', { params });
+    },
+  },
+
+  // Creators
+  creators: {
+    /**
+     * Get all creators with optional pagination
+     */
+    getAll: (options?: {
+      populate?: string;
+      sort?: string;
+      pagination?: { page?: number; pageSize?: number };
+    }) => {
+      const params: Record<string, any> = {};
+      
+      if (options?.populate) {
+        params.populate = options.populate;
+      }
+      
+      if (options?.sort) {
+        params.sort = options.sort;
+      }
+      
+      if (options?.pagination) {
+        if (options.pagination.page) {
+          params['pagination[page]'] = options.pagination.page;
+        }
+        if (options.pagination.pageSize) {
+          params['pagination[pageSize]'] = options.pagination.pageSize;
+        }
+      }
+      
+      return apiClient.get('/api/creators', { params });
+    },
+    
+    /**
+     * Get creator by slug
+     */
+    getBySlug: (slug: string, populate?: string) => {
+      const params: Record<string, any> = {};
+      if (populate) {
+        params.populate = populate;
+      }
+      return apiClient.get(`/api/creators/slug/${slug}`, { params });
+    },
+    
+    /**
+     * Get creators with all their related content
+     */
+    getWithRelations: () => {
+      const params = {
+        'populate[challenges]': '*',
+        'populate[tournaments]': '*',
+        'populate[custom_codes]': '*',
+      };
+      return apiClient.get('/api/creators', { params });
+    },
+  },
+
+  // Submissions
+  submissions: {
+    /**
+     * Get all submissions with optional filtering
+     */
+    getAll: (options?: {
+      filters?: Record<string, any>;
+      sort?: string;
+      pagination?: { page?: number; pageSize?: number };
+    }) => {
+      const params: Record<string, any> = {};
+      
+      if (options?.filters) {
+        Object.entries(options.filters).forEach(([key, value]) => {
+          if (key === 'challenge') {
+            params[`filters[challenge][id][$eq]`] = value;
+          } else {
+            params[`filters[${key}][$eq]`] = value;
+          }
+        });
+      }
+      
+      if (options?.sort) {
+        params.sort = options.sort;
+      }
+      
+      if (options?.pagination) {
+        if (options.pagination.page) {
+          params['pagination[page]'] = options.pagination.page;
+        }
+        if (options.pagination.pageSize) {
+          params['pagination[pageSize]'] = options.pagination.pageSize;
+        }
+      }
+      
+      return apiClient.get('/api/submissions', { params });
+    },
+    
+    /**
+     * Create a new submission (matches backend field names)
+     */
+    create: (data: {
+      runner_name: string;
+      result?: string;
+      video_url?: string;
+      description?: string;
+      challenge: number;
+    }) => {
+      return apiClient.post('/api/submissions', { data });
+    },
+    
+    /**
+     * Get submissions for a specific challenge (leaderboard)
+     */
+    getByChallengeId: (challengeId: number, sort = 'createdAt:asc') => {
+      const params = {
+        'filters[challenge][id][$eq]': challengeId,
+        sort,
+      };
+      return apiClient.get('/api/submissions', { params });
+    },
+  },
+
+  // Ideas (New content type from backend)
+  ideas: {
+    /**
+     * Get all community ideas
+     */
+    getAll: (options?: {
+      sort?: string;
+      pagination?: { page?: number; pageSize?: number };
+    }) => {
+      const params: Record<string, any> = {};
+      
+      if (options?.sort) {
+        params.sort = options.sort;
+      }
+      
+      if (options?.pagination) {
+        if (options.pagination.page) {
+          params['pagination[page]'] = options.pagination.page;
+        }
+        if (options.pagination.pageSize) {
+          params['pagination[pageSize]'] = options.pagination.pageSize;
+        }
+      }
+      
+      return apiClient.get('/api/ideas', { params });
+    },
+    
+    /**
+     * Submit a new community idea with social links
+     */
+    create: (data: {
+      title: string;
+      description: string;
+      author_name: string;
+      social_links?: Array<{
+        platform: string;
+        url: string;
+      }>;
+    }) => {
+      return apiClient.post('/api/ideas', { data });
+    },
+  },
+
+  // Statistics (New endpoint from backend)
+  stats: {
+    /**
+     * Get overview statistics for dashboard
+     */
+    getOverview: () => {
+      return apiClient.get('/api/stats/overview');
+    },
+  },
+};

@@ -3,13 +3,19 @@ import { PageHero, FilterPanel, CustomCodeCard } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { PageLayout } from '@/components/layout';
 import { useCustomCodes } from '@/hooks/api';
+import { CustomCode } from '@/types/api';
 
 export const CustomCodesPage: React.FC = () => {
   const [viewMode] = useState<'grid' | 'list'>('list');
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
   
-  // API call for custom codes
-  const { customCodes, loading: isLoading, error } = useCustomCodes();
+  // API call for custom codes using React Query
+  const { data: apiResponse, isLoading, error } = useCustomCodes();
+  
+  // Handle different possible response structures
+  const customCodes: CustomCode[] = Array.isArray(apiResponse) 
+    ? apiResponse 
+    : (apiResponse as any)?.data || [];
 
   // Dynamic filter groups based on available data
   const filterGroups = [
@@ -107,7 +113,7 @@ export const CustomCodesPage: React.FC = () => {
                 Unable to load custom codes
               </h3>
               <p className="text-slate-600 dark:text-slate-400 max-w-md mx-auto mb-6">
-                {error}
+                {error?.message || 'An unexpected error occurred'}
               </p>
               <button 
                 onClick={() => window.location.reload()}

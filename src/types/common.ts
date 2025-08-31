@@ -22,6 +22,54 @@ export interface APIResponse<T> {
   };
 }
 
+// Base filter type that extends partial of any object
+export type BaseFilter<T> = Partial<T> & {
+  _q?: string; // Global search query
+  _sort?: string; // Sort parameter
+  _start?: number; // Pagination start
+  _limit?: number; // Pagination limit
+  page?: number; // Page number
+  pageSize?: number; // Page size
+};
+
+// Specific filter types for each content type
+export interface ChallengeFilters extends BaseFilter<{
+  name?: string;
+  slug?: string;
+  difficulty?: 'Pilgrim' | 'Voyager' | 'Stalker' | 'Interloper' | 'Misery' | 'Nogoa' | 'Custom';
+  tournament?: string; // Tournament slug
+  creator?: string; // Creator slug
+}> {}
+
+export interface SubmissionFilters extends BaseFilter<{
+  runner?: string;
+  state?: 'pending' | 'approved' | 'rejected';
+  challenge?: string; // Challenge slug
+}> {}
+
+export interface TournamentFilters extends BaseFilter<{
+  name?: string;
+  slug?: string;
+  state?: 'planned' | 'active' | 'completed' | 'cancelled';
+  creator?: string; // Creator slug
+}> {}
+
+export interface CustomCodeFilters extends BaseFilter<{
+  name?: string;
+  slug?: string;
+  creator?: string; // Creator slug
+}> {}
+
+export interface CreatorFilters extends BaseFilter<{
+  name?: string;
+  slug?: string;
+}> {}
+
+export interface IdeaFilters extends BaseFilter<{
+  title?: string;
+  author_name?: string;
+}> {}
+
 // Theme Types
 export type Theme = 'light' | 'dark';
 
