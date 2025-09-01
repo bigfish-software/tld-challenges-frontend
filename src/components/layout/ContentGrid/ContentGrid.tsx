@@ -31,7 +31,7 @@ export const ContentGrid = ({
   if (isLoading) {
     return (
       <div className={clsx('min-h-96', className)}>
-        {loadingComponent || <DefaultLoadingComponent />}
+        {loadingComponent || <DefaultLoadingComponent viewMode={viewMode} />}
       </div>
     );
   }
@@ -87,38 +87,91 @@ export const ContentGrid = ({
 };
 
 // Default loading component with skeleton cards
-const DefaultLoadingComponent = () => (
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-    {Array.from({ length: 8 }).map((_, index) => (
-      <div
-        key={index}
-        className="card-surface border-default rounded-lg p-6 animate-pulse"
-      >
-        {/* Header skeleton */}
-        <div className="flex items-center space-x-3 mb-4">
-          <div className="h-10 w-10 bg-surface rounded-lg" />
-          <div className="flex-1">
-            <div className="h-4 bg-surface rounded mb-2" />
-            <div className="h-3 bg-surface rounded w-2/3" />
+const DefaultLoadingComponent = ({ viewMode = 'grid' }: { viewMode?: 'grid' | 'list' }) => {
+  if (viewMode === 'list') {
+    return (
+      <div className="space-y-4">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <div
+            key={index}
+            className="feature-card rounded-lg p-6 animate-pulse"
+          >
+            <div className="flex flex-col lg:flex-row gap-6">
+              {/* Left side - Main content skeleton */}
+              <div className="flex-1 min-w-0">
+                {/* Header skeleton */}
+                <div className="mb-4">
+                  <div className="h-6 bg-surface rounded mb-2 w-3/4" />
+                  <div className="h-4 bg-surface rounded w-1/3" />
+                </div>
+                
+                {/* Description skeleton */}
+                <div className="space-y-2">
+                  <div className="h-4 bg-surface rounded" />
+                  <div className="h-4 bg-surface rounded" />
+                  <div className="h-4 bg-surface rounded w-2/3" />
+                </div>
+              </div>
+              
+              {/* Right side - Code/Badge section skeleton */}
+              <div className="lg:w-80 flex-shrink-0">
+                <div className="bg-surface border border-default rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="h-3 bg-surface rounded w-20" />
+                    <div className="h-3 bg-surface rounded w-12" />
+                  </div>
+                  <div className="h-12 bg-surface rounded" />
+                </div>
+              </div>
+            </div>
+            
+            {/* Button skeleton */}
+            <div className="flex justify-end mt-6">
+              <div className="h-8 w-24 bg-surface rounded" />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // Grid view skeleton
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {Array.from({ length: 8 }).map((_, index) => (
+        <div
+          key={index}
+          className="feature-card rounded-lg p-6 animate-pulse"
+        >
+          {/* Header skeleton */}
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex-1 min-w-0 mr-3">
+              <div className="h-5 bg-surface rounded mb-2" />
+              <div className="h-3 bg-surface rounded w-2/3" />
+            </div>
+            <div className="h-6 w-16 bg-surface rounded-full" />
+          </div>
+          
+          {/* Description skeleton */}
+          <div className="space-y-2 mb-4">
+            <div className="h-3 bg-surface rounded" />
+            <div className="h-3 bg-surface rounded" />
+            <div className="h-3 bg-surface rounded w-3/4" />
+          </div>
+          
+          {/* Code section skeleton */}
+          <div className="bg-surface border border-default rounded-lg p-3">
+            <div className="flex items-center justify-between mb-2">
+              <div className="h-3 bg-surface rounded w-20" />
+              <div className="h-3 bg-surface rounded w-12" />
+            </div>
+            <div className="h-8 bg-surface rounded" />
           </div>
         </div>
-        
-        {/* Content skeleton */}
-        <div className="space-y-3 mb-4">
-          <div className="h-3 bg-surface rounded" />
-          <div className="h-3 bg-surface rounded" />
-          <div className="h-3 bg-surface rounded w-3/4" />
-        </div>
-        
-        {/* Footer skeleton */}
-        <div className="flex items-center justify-between">
-          <div className="h-6 w-16 bg-surface rounded-full" />
-          <div className="h-8 w-20 bg-surface rounded" />
-        </div>
-      </div>
-    ))}
-  </div>
-);
+      ))}
+    </div>
+  );
+};
 
 // Default empty state component
 const DefaultEmptyState = () => (
