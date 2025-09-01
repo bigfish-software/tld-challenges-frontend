@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PageHero, FilterPanel, CustomCodeCard } from '@/components/ui';
+import { PageHero, FilterPanel, CustomCodeCard, ErrorDisplay } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { PageLayout } from '@/components/layout';
 import { useCustomCodes } from '@/hooks/api';
@@ -112,25 +112,13 @@ export const CustomCodesPage: React.FC = () => {
             buttonText="Submit Code"
           />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div className="text-center py-16">
-              <div className="mx-auto h-24 w-24 text-error mb-6">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="h-full w-full">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.314 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-medium text-primary mb-2">
-                Unable to load custom codes
-              </h3>
-              <p className="text-secondary max-w-md mx-auto mb-6">
-                {error?.message || 'An unexpected error occurred'}
-              </p>
-              <button 
-                onClick={() => window.location.reload()}
-                className="btn-primary px-4 py-2 rounded-md"
-              >
-                Try Again
-              </button>
-            </div>
+            <ErrorDisplay
+              title="Unable to load custom codes"
+              message={error?.message || 'An unexpected error occurred'}
+              showRetry={true}
+              retryText="Try Again"
+              onRetry={() => window.location.reload()}
+            />
           </div>
         </div>
       </PageLayout>
