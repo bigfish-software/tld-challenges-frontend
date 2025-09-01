@@ -11,6 +11,8 @@ export interface ChallengeCardProps {
   onCardClick?: (id: number) => void;
   /** Callback when join/submit is clicked */
   onJoinChallenge?: (id: number) => void;
+  /** Callback when submit run is clicked */
+  onSubmitRun?: (id: number) => void;
   /** Callback when creator is clicked */
   onCreatorClick?: (creatorName: string, creatorUrl?: string) => void;
   /** Additional CSS classes */
@@ -32,6 +34,7 @@ export const ChallengeCard = ({
   variant = 'default',
   onCardClick,
   onJoinChallenge,
+  onSubmitRun,
   onCreatorClick,
   className = ''
 }: ChallengeCardProps) => {
@@ -84,6 +87,11 @@ export const ChallengeCard = ({
   const handleJoinChallenge = (e: React.MouseEvent) => {
     e.stopPropagation();
     onJoinChallenge?.(id);
+  };
+
+  const handleSubmitRun = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onSubmitRun?.(id);
   };
 
   const handleCreatorClick = (e: React.MouseEvent) => {
@@ -248,16 +256,22 @@ export const ChallengeCard = ({
               </div>
             )}
             
-            {/* Spacer to push button to the right when no custom code */}
+            {/* Spacer to push buttons to the right when no custom code */}
             {!custom_code?.data && <div className="flex-1"></div>}
             
-            {/* View Details Button - always on the right */}
-            <div className="flex-shrink-0">
+            {/* Action Buttons - always on the right */}
+            <div className="flex-shrink-0 flex flex-col space-y-2">
               <button
                 onClick={handleJoinChallenge}
                 className="btn-primary px-4 py-2 text-sm font-medium rounded-md"
               >
                 View Details
+              </button>
+              <button
+                onClick={handleSubmitRun}
+                className="btn-secondary px-4 py-2 text-sm font-medium rounded-md"
+              >
+                Submit Run
               </button>
             </div>
           </div>
@@ -364,12 +378,18 @@ export const ChallengeCard = ({
 
         {/* Footer */}
         <div className="flex justify-end pt-3">
-          <div className="flex items-center space-x-2">
+          <div className="flex flex-col space-y-2">
             <button
               onClick={handleJoinChallenge}
               className="btn-primary px-4 py-2 text-sm font-medium rounded-md"
             >
               View Details
+            </button>
+            <button
+              onClick={handleSubmitRun}
+              className="btn-secondary px-4 py-2 text-sm font-medium rounded-md"
+            >
+              Submit Run
             </button>
           </div>
         </div>
