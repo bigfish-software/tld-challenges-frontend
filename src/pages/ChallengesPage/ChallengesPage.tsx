@@ -129,11 +129,12 @@ export const ChallengesPage: React.FC = () => {
       <PageLayout>
         <div className="min-h-screen bg-background">
           <PageHero
-            title="Survival Challenges"
-            description="Test your skills with community-created challenges ranging from beginner-friendly to extreme difficulty"
+            title="Challenges"
+            description="Test your skills with community-created challenges"
             backgroundImage="/src/assets/homepage_hero.png"
-            contactMessage="Create Your Challenge!"
-            contactSubtext="Share your unique survival scenarios"
+            contactMessage="Submit your Challenge"
+            contactSubtext="Share your challenges with players around the world and join our community of creators"
+            buttonText="Submit Challenge"
           />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <ErrorDisplay
@@ -154,11 +155,12 @@ export const ChallengesPage: React.FC = () => {
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
         <PageHero
-          title="Survival Challenges"
-          description="Test your skills with community-created challenges ranging from beginner-friendly to extreme difficulty"
+          title="Challenges"
+          description="Test your skills with community-created challenges"
           backgroundImage="/src/assets/homepage_hero.png"
-          contactMessage="Create Your Challenge!"
-          contactSubtext="Share your unique survival scenarios"
+          contactMessage="Submit your Challenge"
+          contactSubtext="Share your challenges with players around the world and join our community of creators"
+          buttonText="Submit Challenge"
         />
 
         {/* Main Content */}
