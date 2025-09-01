@@ -80,13 +80,16 @@ export const FilterPanel = ({
       </div>
 
       {/* Filter Groups */}
-      <div className="divide-y" style={{ borderColor: 'var(--color-border)' }}>
-        {groups.map((group) => {
+      <div>
+        {groups.map((group, index) => {
           const isExpanded = expandedGroups.has(group.id);
           const groupFilters = selectedFilters[group.id] || [];
 
           return (
-            <div key={group.id} className="p-4">
+            <div 
+              key={group.id} 
+              className={`p-4 ${index > 0 ? 'border-t border-default' : ''}`}
+            >
               {/* Group Header */}
               <button
                 onClick={() => group.collapsible && toggleGroup(group.id)}
