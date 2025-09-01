@@ -20,6 +20,7 @@ If the input is merely standard or underdeveloped, your response should be to an
 - **Verification First**: Before making claims about implementation status, verify the actual code using search tools.
 - **Systematic Documentation Updates**: When updating documentation, search for ALL instances of outdated information before making changes.
 - **Code-Based Truth**: Use semantic_search, grep_search, and read_file tools to understand current implementation rather than assuming based on previous conversations.
+- **CRITICAL: TypeScript Type Check Protocol**: When running `npm run type-check`, this command takes 30-60+ seconds to complete and processes the entire codebase. NEVER assume it has finished until you see the complete output including any error messages or successful completion. ALWAYS wait for the full completion before proceeding with any response or other actions. This is NON-NEGOTIABLE to prevent false positive reports and credit farming.
 
 ## Project Overview
 

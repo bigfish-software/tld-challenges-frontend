@@ -12,7 +12,8 @@ import {
   TournamentFilters,
   CustomCodeFilters,
   CreatorFilters,
-  IdeaFilters
+  IdeaFilters,
+  StrapiCollectionResponse
 } from '../types';
 import { apiService } from '../services/api';
 
@@ -123,11 +124,13 @@ export const useTournament = (slug: string) => {
 };
 
 // Custom Codes
-export const useCustomCodes = (filters?: CustomCodeFilters) => {
-  return useQuery({
-    queryKey: [...queryKeys.customCodes, filters],
+export const useCustomCodes = (filters?: CustomCodeFilters, pagination?: { start?: number; limit?: number }) => {
+  return useQuery<StrapiCollectionResponse<CustomCode>>({
+    queryKey: [...queryKeys.customCodes, filters, pagination],
     queryFn: () => apiService.customCodes.getAll({ 
-      filters: filters as Record<string, any> 
+      populate: 'creators',
+      filters: filters as Record<string, any>,
+      pagination: pagination || { start: 0, limit: 1 } // Default to pagesize 1 for testing
     }),
     staleTime: 10 * 60 * 1000, // 10 minutes
   });

@@ -8,14 +8,22 @@ import { CustomCode } from '@/types/api';
 export const CustomCodesPage: React.FC = () => {
   const [viewMode] = useState<'grid' | 'list'>('list');
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
+  const [currentPage, setCurrentPage] = useState(0);
+  const pageSize = 8; // 8 custom codes per page
   
-  // API call for custom codes using React Query
-  const { data: apiResponse, isLoading, error } = useCustomCodes();
+  // API call for custom codes using React Query with pagination
+  const { data: apiResponse, isLoading, error } = useCustomCodes(
+    undefined, // no filters for now
+    { start: currentPage * pageSize, limit: pageSize }
+  );
   
-  // Handle different possible response structures
-  const customCodes: CustomCode[] = Array.isArray(apiResponse) 
-    ? apiResponse 
-    : (apiResponse as any)?.data || [];
+  // Handle Strapi response structure: { data: [...], meta: { pagination: {...} } }
+  const customCodes: CustomCode[] = apiResponse?.data || [];
+  const totalCount = apiResponse?.meta?.pagination?.total || 0;
+  const totalPages = Math.ceil(totalCount / pageSize);
+  
+  console.log('API Response:', apiResponse); // Debug log to see the response structure
+  console.log('Custom codes:', customCodes); // Debug log to see the extracted data
 
   // Dynamic filter groups based on available data
   const filterGroups = [
@@ -94,13 +102,14 @@ export const CustomCodesPage: React.FC = () => {
   if (error) {
     return (
       <PageLayout>
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background-primary">
           <PageHero
             title="Custom Game Codes"
             description="Discover and share custom game configurations to enhance your survival experience"
-            backgroundImage="/src/assets/homepage_hero.png"
-            contactMessage="Create Your Own Code!"
-            contactSubtext="Join our community of creators"
+            backgroundImage="/src/assets/custom_code_hero.png"
+            contactMessage="Submit your Custom Code"
+            contactSubtext="Share your custom settings with players around the world and join our community of creators"
+            buttonText="Submit Code"
           />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center py-16">
@@ -130,14 +139,15 @@ export const CustomCodesPage: React.FC = () => {
 
   return (
     <PageLayout>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background-primary">
         {/* Hero Section */}
         <PageHero
           title="Custom Game Codes"
           description="Discover and share custom game configurations to enhance your survival experience"
-          backgroundImage="/src/assets/homepage_hero.png"
-          contactMessage="Create Your Own Code!"
-          contactSubtext="Join our community of creators"
+          backgroundImage="/src/assets/custom_code_hero.png"
+          contactMessage="Submit your Custom Code"
+          contactSubtext="Share your custom settings with players around the world and join our community of creators"
+          buttonText="Submit Code"
         />
 
       {/* Main Content */}
@@ -193,6 +203,29 @@ export const CustomCodesPage: React.FC = () => {
                   />
                 ))}
               </ContentGrid>
+              
+              {/* Pagination Controls for Testing */}
+              {totalCount > pageSize && (
+                <div className="mt-8 flex justify-center items-center space-x-4">
+                  <button
+                    onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
+                    disabled={currentPage === 0}
+                    className="btn-secondary px-4 py-2 rounded-md disabled:opacity-50"
+                  >
+                    Previous
+                  </button>
+                  <span className="text-secondary">
+                    Page {currentPage + 1} of {totalPages} (Total: {totalCount} items)
+                  </span>
+                  <button
+                    onClick={() => setCurrentPage(Math.min(totalPages - 1, currentPage + 1))}
+                    disabled={currentPage >= totalPages - 1}
+                    className="btn-secondary px-4 py-2 rounded-md disabled:opacity-50"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
             </div>
           </main>
         </div>

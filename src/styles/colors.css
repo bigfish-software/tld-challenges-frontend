@@ -249,6 +249,11 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
+/* Featured card maintains secondary border on hover */
+.featured-card:hover {
+  border-color: #8B5A5C !important;
+}
+
 /* Feature Card Button Hover Effects - Specific overrides */
 .feature-card button[class*="outline"]:hover {
   color: var(--color-secondary) !important;
@@ -265,6 +270,38 @@
 
 .btn-ghost-hover:hover {
   color: var(--color-secondary) !important;
+}
+
+/* Copy button hover effect */
+.copy-button:hover {
+  color: var(--color-secondary) !important;
+}
+
+/* Filter option hover effect */
+.filter-option-hover:hover span {
+  color: var(--color-secondary) !important;
+}
+
+/* Filter checkbox hover and focus effects */
+.filter-checkbox {
+  outline: none !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.filter-checkbox:hover {
+  border-color: var(--color-secondary) !important;
+}
+
+.filter-checkbox:focus {
+  outline: none !important;
+  border-color: var(--color-secondary) !important;
+  box-shadow: none !important;
+}
+
+.filter-checkbox:focus-visible {
+  outline: none !important;
+  border-color: var(--color-secondary) !important;
+  box-shadow: none !important;
 }
 
 /* General text link hover effects */

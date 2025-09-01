@@ -17,8 +17,12 @@ class ApiClient {
   private instance: AxiosInstance;
 
   constructor() {
+    // ⚠️ IMPORTANT: baseURL includes /api prefix, so endpoints should NOT include /api/
+    const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:1337';
+    const apiBaseURL = baseURL.endsWith('/api') ? baseURL : `${baseURL}/api`;
+    
     this.instance = axios.create({
-      baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:1337',
+      baseURL: apiBaseURL,
       timeout: 30000,
       headers: {
         'Content-Type': 'application/json',
@@ -106,6 +110,11 @@ export const apiClient = new ApiClient();
  * API service for interacting with TLD Challenges backend
  * Based on Postman collection and API reference documentation
  * 
+ * ⚠️  IMPORTANT: DO NOT ADD /api/ PREFIX TO ENDPOINTS!
+ * ⚠️  The baseURL is already configured as http://localhost:1337/api
+ * ⚠️  Endpoints should start with / (e.g., '/custom-codes', '/challenges')
+ * ⚠️  Adding /api/ will result in duplicate /api/api/ in the URL
+ * 
  * Key features from backend:
  * - Slug-based endpoints for better SEO and user-friendly URLs
  * - Complex population patterns for related data
@@ -113,6 +122,17 @@ export const apiClient = new ApiClient();
  * - Ideas content type for community submissions
  * - Statistics endpoint for dashboard data
  */
+
+// ⚠️ ENDPOINT PREFIX WARNING: Do not add /api/ to these paths!
+const ENDPOINTS = {
+  CHALLENGES: '/challenges',
+  TOURNAMENTS: '/tournaments', 
+  CUSTOM_CODES: '/custom-codes',
+  CREATORS: '/creators',
+  SUBMISSIONS: '/submissions',
+  IDEAS: '/ideas',
+  STATS: '/stats'
+} as const;
 export const apiService = {
   // Challenges
   challenges: {
@@ -272,18 +292,18 @@ export const apiService = {
   customCodes: {
     /**
      * Get all custom codes with optional filtering and pagination
+     * Uses proper Strapi API format with /api/ prefix and pagination parameters
      */
     getAll: (options?: {
       populate?: string;
       filters?: Record<string, any>;
       sort?: string;
-      pagination?: { page?: number; pageSize?: number };
-    }) => {
+      pagination?: { start?: number; limit?: number };
+    }): Promise<{ data: any[]; meta?: { pagination?: { page: number; pageSize: number; pageCount: number; total: number; } } }> => {
       const params: Record<string, any> = {};
       
-      if (options?.populate) {
-        params.populate = options.populate;
-      }
+      // Always populate creators as minimum
+      params.populate = options?.populate || 'creators';
       
       if (options?.filters) {
         Object.entries(options.filters).forEach(([key, value]) => {
@@ -295,16 +315,21 @@ export const apiService = {
         params.sort = options.sort;
       }
       
+      // Use Strapi pagination format: pagination[start] and pagination[limit]
       if (options?.pagination) {
-        if (options.pagination.page) {
-          params['pagination[page]'] = options.pagination.page;
+        if (options.pagination.start !== undefined) {
+          params['pagination[start]'] = options.pagination.start;
         }
-        if (options.pagination.pageSize) {
-          params['pagination[pageSize]'] = options.pagination.pageSize;
+        if (options.pagination.limit !== undefined) {
+          params['pagination[limit]'] = options.pagination.limit;
         }
+      } else {
+        // Default pagination for testing (pagesize of 1 as requested)
+        params['pagination[start]'] = 0;
+        params['pagination[limit]'] = 1;
       }
       
-      return apiClient.get('/custom-codes', { params });
+      return apiClient.get(ENDPOINTS.CUSTOM_CODES, { params });
     },
     
     /**
@@ -314,8 +339,10 @@ export const apiService = {
       const params: Record<string, any> = {};
       if (populate) {
         params.populate = populate;
+      } else {
+        params.populate = 'creators'; // Always populate creators
       }
-      return apiClient.get(`/custom-codes/slug/${slug}`, { params });
+      return apiClient.get(`${ENDPOINTS.CUSTOM_CODES}/slug/${slug}`, { params });
     },
     
     /**
@@ -324,11 +351,9 @@ export const apiService = {
     getFeatured: (populate?: string) => {
       const params: Record<string, any> = {
         'filters[is_featured][$eq]': true,
+        populate: populate || 'creators',
       };
-      if (populate) {
-        params.populate = populate;
-      }
-      return apiClient.get('/custom-codes', { params });
+      return apiClient.get(ENDPOINTS.CUSTOM_CODES, { params });
     },
   },
 
@@ -361,7 +386,7 @@ export const apiService = {
         }
       }
       
-      return apiClient.get('/api/creators', { params });
+      return apiClient.get(ENDPOINTS.CREATORS, { params });
     },
     
     /**
@@ -372,7 +397,7 @@ export const apiService = {
       if (populate) {
         params.populate = populate;
       }
-      return apiClient.get(`/api/creators/slug/${slug}`, { params });
+      return apiClient.get(`${ENDPOINTS.CREATORS}/slug/${slug}`, { params });
     },
     
     /**
@@ -384,7 +409,7 @@ export const apiService = {
         'populate[tournaments]': '*',
         'populate[custom_codes]': '*',
       };
-      return apiClient.get('/api/creators', { params });
+      return apiClient.get(ENDPOINTS.CREATORS, { params });
     },
   },
 
@@ -423,7 +448,7 @@ export const apiService = {
         }
       }
       
-      return apiClient.get('/api/submissions', { params });
+      return apiClient.get(ENDPOINTS.SUBMISSIONS, { params });
     },
     
     /**
@@ -436,7 +461,7 @@ export const apiService = {
       description?: string;
       challenge: number;
     }) => {
-      return apiClient.post('/api/submissions', { data });
+      return apiClient.post(ENDPOINTS.SUBMISSIONS, { data });
     },
     
     /**
@@ -447,7 +472,7 @@ export const apiService = {
         'filters[challenge][id][$eq]': challengeId,
         sort,
       };
-      return apiClient.get('/api/submissions', { params });
+      return apiClient.get(ENDPOINTS.SUBMISSIONS, { params });
     },
   },
 
@@ -475,7 +500,7 @@ export const apiService = {
         }
       }
       
-      return apiClient.get('/api/ideas', { params });
+      return apiClient.get(ENDPOINTS.IDEAS, { params });
     },
     
     /**
@@ -490,7 +515,7 @@ export const apiService = {
         url: string;
       }>;
     }) => {
-      return apiClient.post('/api/ideas', { data });
+      return apiClient.post(ENDPOINTS.IDEAS, { data });
     },
   },
 

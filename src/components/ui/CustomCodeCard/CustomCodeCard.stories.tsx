@@ -35,10 +35,6 @@ A card component for displaying custom game configuration codes with:
     onCardClick: {
       action: 'card-clicked',
       description: 'Callback when card is clicked'
-    },
-    onCreatorClick: {
-      action: 'creator-clicked',
-      description: 'Callback when creator is clicked'
     }
   }
 };
