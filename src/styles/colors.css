@@ -197,6 +197,11 @@
   color: var(--color-on-info);
 }
 
+.badge-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-on-secondary);
+}
+
 .badge-neutral {
   background-color: var(--color-neutral);
   color: var(--color-on-primary);

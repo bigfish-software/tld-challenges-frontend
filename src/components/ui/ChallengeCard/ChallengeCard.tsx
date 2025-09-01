@@ -98,16 +98,20 @@ export const ChallengeCard = ({
   // Map TLD difficulty to display colors (but keep original difficulty text)
   const getDifficultyColor = (diff: typeof difficulty) => {
     switch (diff) {
+      case 'Easy':
       case 'Pilgrim':
       case 'Voyager':
-        return 'badge-success';
+        return 'badge-success'; // Easy - Green
+      case 'Medium':
       case 'Stalker':
-        return 'badge-warning';
+        return 'badge-info'; // Medium - Blue  
+      case 'Hard':
       case 'Interloper':
-        return 'badge-error';
+        return 'badge-warning'; // Hard - Orange/Amber
+      case 'Very Hard':
       case 'Misery':
       case 'Nogoa':
-        return 'badge-secondary';
+        return 'badge-error'; // Very Hard - Red
       case 'Custom':
         return 'badge-neutral';
       default:
