@@ -1,138 +1,58 @@
 import React, { useState } from 'react';
-import { PageHero, FilterPanel, ResultsHeader } from '@/components/ui';
+import { PageHero, FilterPanel, ErrorDisplay } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { PageLayout } from '@/components/layout';
-
-// Simplified mock data structure for development
-interface MockTournament {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  start_date: string;
-  end_date: string;
-  state: 'planned' | 'active' | 'completed' | 'cancelled';
-  created_date: string;
-  creators: Array<{
-    id: number;
-    name: string;
-    slug: string;
-    twitch?: string;
-    youtube?: string;
-  }>;
-}
-
-// Mock data for Tournaments (Simplified structure)
-const mockTournaments: MockTournament[] = [
-  {
-    id: 1,
-    name: 'Winter Survival Championship',
-    slug: 'winter-survival-championship',
-    description: 'The ultimate test of survival skills in the harshest winter conditions. Compete against the best players for substantial prizes.',
-    start_date: '2024-02-20T18:00:00Z',
-    end_date: '2024-02-25T23:59:59Z',
-    state: 'planned',
-    created_date: '2024-01-15T10:00:00Z',
-    creators: [
-      {
-        id: 1,
-        name: 'TLD Esports',
-        slug: 'tld-esports',
-        twitch: 'https://twitch.tv/tldesports'
-      }
-    ]
-  },
-  {
-    id: 2,
-    name: 'Speed Building Competition',
-    slug: 'speed-building-competition',
-    description: 'Fast-paced challenges focusing on quick shelter construction and resource gathering under time pressure.',
-    start_date: '2024-02-10T16:00:00Z',
-    end_date: '2024-02-12T20:00:00Z',
-    state: 'active',
-    created_date: '2024-01-12T14:30:00Z',
-    creators: [
-      {
-        id: 2,
-        name: 'BuildMaster',
-        slug: 'buildmaster',
-        youtube: 'https://youtube.com/buildmaster'
-      }
-    ]
-  },
-  {
-    id: 3,
-    name: 'Beginner\'s Fortune',
-    slug: 'beginners-fortune',
-    description: 'A beginner-friendly tournament designed to welcome new players to competitive survival gaming.',
-    start_date: '2024-01-25T19:00:00Z',
-    end_date: '2024-01-28T22:00:00Z',
-    state: 'completed',
-    created_date: '2024-01-05T09:15:00Z',
-    creators: [
-      {
-        id: 3,
-        name: 'NewPlayerGuide',
-        slug: 'newplayerguide',
-        youtube: 'https://youtube.com/newplayerguide'
-      }
-    ]
-  },
-  {
-    id: 4,
-    name: 'Elite Survivor Challenge',
-    slug: 'elite-survivor-challenge',
-    description: 'The most challenging tournament for elite players. Only the most skilled survivors will make it through.',
-    start_date: '2024-03-01T20:00:00Z',
-    end_date: '2024-03-07T23:59:59Z',
-    state: 'planned',
-    created_date: '2024-01-12T11:45:00Z',
-    creators: [
-      {
-        id: 4,
-        name: 'EliteSurvivor',
-        slug: 'elitesurvivor',
-        twitch: 'https://twitch.tv/elitesurvivor'
-      }
-    ]
-  }
-];
-
-const filterGroups = [
-  {
-    id: 'status',
-    label: 'Status',
-    options: [
-      { id: 'planned', label: 'Planned', count: 2 },
-      { id: 'active', label: 'Active', count: 1 },
-      { id: 'completed', label: 'Completed', count: 1 }
-    ]
-  },
-  {
-    id: 'creator',
-    label: 'Creator',
-    options: [
-      { id: 'tldesports', label: 'TLD Esports', count: 1 },
-      { id: 'buildmaster', label: 'BuildMaster', count: 1 },
-      { id: 'newplayer', label: 'NewPlayerGuide', count: 1 },
-      { id: 'elite', label: 'EliteSurvivor', count: 1 }
-    ]
-  }
-];
-
-const sortOptions = [
-  { id: 'newest', label: 'Newest First' },
-  { id: 'oldest', label: 'Oldest First' },
-  { id: 'startdate', label: 'Start Date' },
-  { id: 'name', label: 'Alphabetical' }
-];
+import { useTournaments } from '@/hooks/api';
+import { Tournament } from '@/types/api';
 
 export const TournamentsPage: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('newest');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [viewMode] = useState<'grid' | 'list'>('grid');
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
-  const [isLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 12; // 12 tournaments per page
+  
+  // API call for tournaments using React Query with pagination
+  const { data: apiResponse, isLoading, error } = useTournaments(
+    undefined, // no filters for now
+    { page: currentPage, pageSize }
+  );
+  
+  // Handle Strapi response structure: { data: [...], meta: { pagination: {...} } }
+  const tournaments: Tournament[] = apiResponse?.data || [];
+  const totalCount = apiResponse?.meta?.pagination?.total || 0;
+  const totalPages = Math.ceil(totalCount / pageSize);
+
+  // Dynamic filter groups based on available data
+  const filterGroups = [
+    {
+      id: 'status',
+      label: 'Status',
+      options: Array.from(
+        new Set(tournaments.map(tournament => tournament.attributes.state))
+      ).map(state => ({
+        id: state,
+        label: state.charAt(0).toUpperCase() + state.slice(1),
+        count: tournaments.filter(tournament => tournament.attributes.state === state).length
+      }))
+    },
+    {
+      id: 'creator',
+      label: 'Creator',
+      options: Array.from(
+        new Set(
+          tournaments.flatMap(tournament => 
+            tournament.attributes.creators?.data?.map(creator => creator.attributes.name) || []
+          )
+        )
+      ).map(name => ({
+        id: name.toLowerCase().replace(/\s+/g, ''),
+        label: name,
+        count: tournaments.filter(tournament => 
+          tournament.attributes.creators?.data?.some(creator => creator.attributes.name === name)
+        ).length
+      }))
+    }
+  ];
 
   const handleFilterChange = (groupId: string, optionId: string, checked: boolean) => {
     setActiveFilters(prev => {
@@ -156,82 +76,60 @@ export const TournamentsPage: React.FC = () => {
     setActiveFilters({});
   };
 
-  const getActiveFilterCount = () => {
-    return Object.values(activeFilters).reduce((count, filters) => count + filters.length, 0);
-  };
-
-  // Filter and sort logic (updated for simplified mock format)
-  const getFilteredAndSortedTournaments = () => {
-    let filtered = [...mockTournaments];
-
-    // Apply search filter
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(tournament => 
-        tournament.name.toLowerCase().includes(query) ||
-        tournament.description.toLowerCase().includes(query) ||
-        tournament.creators.some(creator => 
-          creator.name.toLowerCase().includes(query)
-        )
-      );
-    }
+  // Filter logic
+  const getFilteredTournaments = () => {
+    let filtered = [...tournaments];
 
     // Apply status filter
     if (activeFilters.status?.length) {
       filtered = filtered.filter(tournament => 
-        activeFilters.status!.includes(tournament.state)
+        activeFilters.status!.includes(tournament.attributes.state)
       );
     }
 
     // Apply creator filter
     if (activeFilters.creator?.length) {
       filtered = filtered.filter(tournament => {
-        const creatorNames = tournament.creators.map(creator => 
-          creator.name.toLowerCase()
-        );
+        const creatorNames = tournament.attributes.creators?.data?.map(creator => 
+          creator.attributes.name.toLowerCase()
+        ) || [];
         return activeFilters.creator!.some(filterId => {
-          const creatorMap: Record<string, string> = {
-            'tldesports': 'tld esports',
-            'buildmaster': 'buildmaster',
-            'newplayer': 'newplayerguide',
-            'elite': 'elitesurvivor'
-          };
-          const creatorName = creatorMap[filterId];
-          return creatorName && creatorNames.some(name => name.includes(creatorName));
+          const creatorName = filterId.toLowerCase();
+          return creatorNames.some(name => name.replace(/\s+/g, '') === creatorName);
         });
       });
-    }
-
-    // Apply sorting
-    switch (sortBy) {
-      case 'newest':
-        filtered.sort((a, b) => {
-          const dateA = a.created_date;
-          const dateB = b.created_date;
-          return new Date(dateB).getTime() - new Date(dateA).getTime();
-        });
-        break;
-      case 'oldest':
-        filtered.sort((a, b) => {
-          const dateA = a.created_date;
-          const dateB = b.created_date;
-          return new Date(dateA).getTime() - new Date(dateB).getTime();
-        });
-        break;
-      case 'startdate':
-        filtered.sort((a, b) => 
-          new Date(a.start_date).getTime() - new Date(b.start_date).getTime()
-        );
-        break;
-      case 'name':
-        filtered.sort((a, b) => a.name.localeCompare(b.name));
-        break;
     }
 
     return filtered;
   };
 
-  const filteredTournaments = getFilteredAndSortedTournaments();
+  const filteredTournaments = getFilteredTournaments();
+
+  // Show error state if API call failed
+  if (error) {
+    return (
+      <PageLayout>
+        <div className="min-h-screen bg-background">
+          <PageHero
+            title="Tournaments"
+            description="Join competitive events and tournaments created by the community. Test your skills and compete for prizes."
+            backgroundImage="/src/assets/homepage_hero.png"
+            contactMessage="Host Your Tournament!"
+            contactSubtext="Organize competitive events for the community"
+          />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <ErrorDisplay
+              title="Unable to load tournaments"
+              message={error?.message || 'An unexpected error occurred'}
+              showRetry={true}
+              retryText="Try Again"
+              onRetry={() => window.location.reload()}
+            />
+          </div>
+        </div>
+      </PageLayout>
+    );
+  }
 
   const getStatusColor = (state: string) => {
     switch (state) {
@@ -285,23 +183,8 @@ export const TournamentsPage: React.FC = () => {
 
             {/* Content Area */}
             <main className="flex-1 min-w-0">
-              {/* Results Header */}
-              <ResultsHeader
-                totalCount={mockTournaments.length}
-                {...(getActiveFilterCount() > 0 && { filteredCount: filteredTournaments.length })}
-                isLoading={isLoading}
-                searchValue={searchQuery}
-                onSearchChange={setSearchQuery}
-                currentSort={sortBy}
-                onSortChange={setSortBy}
-                viewMode={viewMode}
-                onViewModeChange={setViewMode}
-                showViewToggle={true}
-                sortOptions={sortOptions}
-              />
-
               {/* Content Grid */}
-              <div className="mt-6">
+              <div className="">
                 <ContentGrid
                   viewMode={viewMode}
                   isLoading={isLoading}
@@ -317,7 +200,7 @@ export const TournamentsPage: React.FC = () => {
                         No tournaments found
                       </h3>
                       <p className="text-secondary max-w-md mx-auto mb-6">
-                        Try adjusting your search query or filters to find tournaments that match your interests.
+                        Try adjusting your filters to find tournaments that match your interests.
                       </p>
                       <button 
                         onClick={clearAllFilters}
@@ -333,29 +216,33 @@ export const TournamentsPage: React.FC = () => {
                       {/* Tournament Header */}
                       <div className="flex items-start justify-between mb-4">
                         <h3 className="text-lg font-semibold text-primary">
-                          {tournament.name}
+                          {tournament.attributes.name}
                         </h3>
                         <span className={`
                           px-2 py-1 rounded-full text-xs font-medium
-                          ${getStatusColor(tournament.state)}
+                          ${getStatusColor(tournament.attributes.state)}
                         `}>
-                          {tournament.state.charAt(0).toUpperCase() + tournament.state.slice(1)}
+                          {tournament.attributes.state.charAt(0).toUpperCase() + tournament.attributes.state.slice(1)}
                         </span>
                       </div>
                       
                       {/* Description */}
-                      <p className="text-secondary text-sm mb-4 line-clamp-3">
-                        {tournament.description}
-                      </p>
+                      {tournament.attributes.description && (
+                        <p className="text-secondary text-sm mb-4 line-clamp-3">
+                          {typeof tournament.attributes.description === 'string' 
+                            ? tournament.attributes.description 
+                            : 'Tournament description'}
+                        </p>
+                      )}
                       
                       {/* Dates */}
                       <div className="flex items-center justify-between text-xs text-secondary mb-4">
                         <div className="flex items-center space-x-4">
                           <span>
-                            Start: {formatDate(tournament.start_date)}
+                            Start: {formatDate(tournament.attributes.start_date)}
                           </span>
                           <span>
-                            End: {formatDate(tournament.end_date)}
+                            End: {formatDate(tournament.attributes.end_date)}
                           </span>
                         </div>
                       </div>
@@ -363,12 +250,14 @@ export const TournamentsPage: React.FC = () => {
                       {/* Metadata */}
                       <div className="flex items-center justify-between text-xs text-secondary">
                         <div className="flex items-center space-x-4">
-                          <span>
-                            Created: {formatDate(tournament.created_date)}
-                          </span>
-                          {tournament.creators.length > 0 && (
+                          {tournament.attributes.created_date && (
                             <span>
-                              By: {tournament.creators.map(c => c.name).join(', ')}
+                              Created: {formatDate(tournament.attributes.created_date)}
+                            </span>
+                          )}
+                          {tournament.attributes.creators?.data && tournament.attributes.creators.data.length > 0 && (
+                            <span>
+                              By: {tournament.attributes.creators.data.map(creator => creator.attributes.name).join(', ')}
                             </span>
                           )}
                         </div>
@@ -376,6 +265,29 @@ export const TournamentsPage: React.FC = () => {
                     </div>
                   ))}
                 </ContentGrid>
+                
+                {/* Pagination Controls */}
+                {totalCount > pageSize && (
+                  <div className="mt-8 flex justify-center items-center space-x-4">
+                    <button
+                      onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                      disabled={currentPage === 1}
+                      className="btn-secondary px-4 py-2 rounded-md disabled:opacity-50"
+                    >
+                      Previous
+                    </button>
+                    <span className="text-secondary">
+                      Page {currentPage} of {totalPages} (Total: {totalCount} items)
+                    </span>
+                    <button
+                      onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                      disabled={currentPage >= totalPages}
+                      className="btn-secondary px-4 py-2 rounded-md disabled:opacity-50"
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
               </div>
             </main>
           </div>

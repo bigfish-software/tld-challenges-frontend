@@ -18,7 +18,38 @@ export interface StrapiCollection<T> {
   data: T[];
 }
 
-// Content Type: Challenge
+// Direct API Response interfaces (without Strapi wrapper)
+export interface ChallengeResponse {
+  id: number;
+  documentId: string;
+  name: string;
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  description_long?: any; // Rich text blocks or null
+  description_short?: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard' | 'Extreme'; // Actual values from API
+  is_featured: boolean;
+  
+  // Direct relations (not wrapped)
+  creators: SimpleCreator[];
+  custom_code?: {
+    id: number;
+    documentId: string;
+    name: string;
+    slug: string;
+    code: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    description_short?: string;
+    description_long?: any;
+    is_featured: boolean;
+  } | null;
+}
+
+// Content Type: Challenge (Legacy - keeping for compatibility)
 export interface Challenge extends StrapiEntity {
   attributes: {
     name: string;

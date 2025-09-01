@@ -104,12 +104,30 @@ export const useCreateSubmission = () => {
 };
 
 // Tournaments
-export const useTournaments = (filters?: TournamentFilters) => {
-  return useQuery({
-    queryKey: [...queryKeys.tournaments, filters],
-    queryFn: () => apiService.tournaments.getAll({ 
-      filters: filters as Record<string, any> 
-    }),
+export const useTournaments = (filters?: TournamentFilters, pagination?: { page?: number; pageSize?: number }) => {
+  return useQuery<StrapiCollectionResponse<Tournament>>({
+    queryKey: [...queryKeys.tournaments, filters, pagination],
+    queryFn: () => {
+      const options: {
+        filters?: Record<string, any>;
+        populate?: string;
+        sort?: string;
+        pagination?: { page?: number; pageSize?: number };
+      } = {
+        populate: 'creators',
+        sort: 'createdAt:desc',
+      };
+      
+      if (filters) {
+        options.filters = filters as Record<string, any>;
+      }
+      
+      if (pagination) {
+        options.pagination = pagination;
+      }
+      
+      return apiService.tournaments.getAll(options);
+    },
     staleTime: 10 * 60 * 1000, // 10 minutes
   });
 };

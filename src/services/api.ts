@@ -143,12 +143,16 @@ export const apiService = {
       populate?: string;
       filters?: Record<string, any>;
       sort?: string;
-      pagination?: { page?: number; pageSize?: number };
-    }) => {
+      pagination?: { start?: number; limit?: number };
+    }): Promise<{ data: any[]; meta?: { pagination?: { start: number; limit: number; total: number; } } }> => {
       const params: Record<string, any> = {};
       
+      // Handle population with bracket notation for multiple relations
       if (options?.populate) {
-        params.populate = options.populate;
+        const populateFields = options.populate.split(',');
+        populateFields.forEach(field => {
+          params[`populate[${field.trim()}]`] = true;
+        });
       }
       
       if (options?.filters) {
@@ -161,12 +165,13 @@ export const apiService = {
         params.sort = options.sort;
       }
       
+      // Use start/limit pagination format as expected by Strapi
       if (options?.pagination) {
-        if (options.pagination.page) {
-          params['pagination[page]'] = options.pagination.page;
+        if (options.pagination.start !== undefined) {
+          params['pagination[start]'] = options.pagination.start;
         }
-        if (options.pagination.pageSize) {
-          params['pagination[pageSize]'] = options.pagination.pageSize;
+        if (options.pagination.limit !== undefined) {
+          params['pagination[limit]'] = options.pagination.limit;
         }
       }
       
@@ -221,7 +226,7 @@ export const apiService = {
       filters?: Record<string, any>;
       sort?: string;
       pagination?: { page?: number; pageSize?: number };
-    }) => {
+    }): Promise<{ data: any[]; meta?: { pagination?: { page: number; pageSize: number; pageCount: number; total: number; } } }> => {
       const params: Record<string, any> = {};
       
       if (options?.populate) {
