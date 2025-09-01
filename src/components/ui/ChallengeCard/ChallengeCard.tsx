@@ -203,7 +203,7 @@ export const ChallengeCard = ({
           )}
 
           {/* Custom Code section and View Details button on same line */}
-          <div className="flex items-end justify-between gap-4 mt-6 mb-6">
+          <div className="flex items-end gap-4 mt-6 mb-6">
             {/* Custom Code section */}
             {custom_code && custom_code.data && (
               <div className="flex justify-start flex-1">
@@ -248,7 +248,10 @@ export const ChallengeCard = ({
               </div>
             )}
             
-            {/* View Details Button */}
+            {/* Spacer to push button to the right when no custom code */}
+            {!custom_code?.data && <div className="flex-1"></div>}
+            
+            {/* View Details Button - always on the right */}
             <div className="flex-shrink-0">
               <button
                 onClick={handleJoinChallenge}
