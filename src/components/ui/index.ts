@@ -10,4 +10,5 @@ export * from './ChallengeCard';
 export * from './TournamentCard';
 export * from './RichTextRenderer';
 export * from './ResultsHeader';
+export * from './ErrorDisplay';
 export * from './icons';
