@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PageHero, FilterPanel, ChallengeCard, ErrorDisplay } from '@/components/ui';
+import { PageHero, FilterPanel, ChallengeCard, ErrorDisplay, NoDataDisplay } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { PageLayout } from '@/components/layout';
 import { useQuery } from '@tanstack/react-query';
@@ -185,25 +185,12 @@ export const ChallengesPage: React.FC = () => {
                   isLoading={isLoading}
                   isEmpty={filteredChallenges.length === 0}
                   emptyStateComponent={
-                    <div className="text-center py-16">
-                      <div className="mx-auto h-24 w-24 text-secondary mb-6">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="h-full w-full">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                      <h3 className="text-lg font-medium text-primary mb-2">
-                        No challenges found
-                      </h3>
-                      <p className="text-secondary max-w-md mx-auto mb-6">
-                        Try adjusting your filters to find the perfect challenge for your skill level.
-                      </p>
-                      <button 
-                        onClick={clearAllFilters}
-                        className="btn-primary px-4 py-2 rounded-md"
-                      >
-                        Clear Filters
-                      </button>
-                    </div>
+                    <NoDataDisplay
+                      title="No challenges found"
+                      description="Try adjusting your filters to find the perfect challenge for your skill level."
+                      actionText="Clear Filters"
+                      onAction={clearAllFilters}
+                    />
                   }
                 >
                   {filteredChallenges.map(challenge => (
