@@ -104,7 +104,7 @@ export const CustomCodesPage: React.FC = () => {
       <PageLayout>
         <div className="min-h-screen bg-background-primary">
           <PageHero
-            title="Custom Game Codes"
+            title="Custom Codes"
             description="Discover and share custom game configurations to enhance your survival experience"
             backgroundImage="/src/assets/custom_code_hero.png"
             contactMessage="Submit your Custom Code"
@@ -130,7 +130,7 @@ export const CustomCodesPage: React.FC = () => {
       <div className="min-h-screen bg-background-primary">
         {/* Hero Section */}
         <PageHero
-          title="Custom Game Codes"
+          title="Custom Codes"
           description="Discover and share custom game configurations to enhance your survival experience"
           backgroundImage="/src/assets/custom_code_hero.png"
           contactMessage="Submit your Custom Code"
