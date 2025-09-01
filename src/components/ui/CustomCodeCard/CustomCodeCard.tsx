@@ -73,7 +73,7 @@ export const CustomCodeCard = ({
               {/* Header with title and creators */}
               <div className="mb-4">
                 <h3 className="text-xl font-semibold font-headline text-primary group-hover:text-secondary transition-colors mb-2">
-                  {name}
+                  {name.toUpperCase()}
                 </h3>
                 {creators && creators.length > 0 && (
                   <div className="mt-1">
@@ -151,7 +151,7 @@ export const CustomCodeCard = ({
         <div className="flex items-start justify-between mb-3">
           <div className="flex-1 min-w-0 mr-3">
             <h3 className="text-lg font-semibold font-headline text-primary group-hover:text-secondary transition-colors line-clamp-1">
-              {name}
+              {name.toUpperCase()}
             </h3>
             {creators && creators.length > 0 && (
               <div className="mt-1">
