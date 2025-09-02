@@ -2,10 +2,11 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/Button';
 import { TldLogoIcon } from '@/components/ui/icons';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export const Header = () => {
   const { toggleTheme, isDark } = useTheme();
+  const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -15,6 +16,19 @@ export const Header = () => {
   const handleBrandClick = () => {
     // Scroll to top when navigating to homepage
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Helper function to determine if a navigation link is active
+  const isActiveLink = (path: string) => {
+    return location.pathname === path;
+  };
+
+  // Helper function to get navigation link classes
+  const getNavLinkClasses = (path: string) => {
+    const baseClasses = "text-base nav-link transition-colors duration-200";
+    return isActiveLink(path)
+      ? `${baseClasses} text-secondary-color`
+      : `${baseClasses} text-primary hover:text-secondary-color`;
   };
 
   return (
@@ -46,19 +60,19 @@ export const Header = () => {
           <nav className="hidden md:flex items-center space-x-6">
             <Link
               to="/custom-codes"
-              className="text-base text-primary nav-link"
+              className={getNavLinkClasses("/custom-codes")}
             >
               Custom Codes
             </Link>
             <Link
               to="/challenges"
-              className="text-base text-primary nav-link"
+              className={getNavLinkClasses("/challenges")}
             >
               Challenges
             </Link>
             <Link
               to="/tournaments"
-              className="text-base text-primary nav-link"
+              className={getNavLinkClasses("/tournaments")}
             >
               Tournaments
             </Link>
@@ -168,21 +182,21 @@ export const Header = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 border-t border-default bg-background">
               <Link
                 to="/custom-codes"
-                className="block px-3 py-2 text-base text-primary nav-link hover:bg-surface-raised rounded-md"
+                className={`block px-3 py-2 ${getNavLinkClasses("/custom-codes")} hover:bg-surface-raised rounded-md`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Custom Codes
               </Link>
               <Link
                 to="/challenges"
-                className="block px-3 py-2 text-base text-primary nav-link hover:bg-surface-raised rounded-md"
+                className={`block px-3 py-2 ${getNavLinkClasses("/challenges")} hover:bg-surface-raised rounded-md`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Challenges
               </Link>
               <Link
                 to="/tournaments"
-                className="block px-3 py-2 text-base text-primary nav-link hover:bg-surface-raised rounded-md"
+                className={`block px-3 py-2 ${getNavLinkClasses("/tournaments")} hover:bg-surface-raised rounded-md`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Tournaments
