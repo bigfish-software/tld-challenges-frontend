@@ -210,8 +210,8 @@ export const ChallengeCard = ({
             </p>
           )}
 
-          {/* Custom Code section and View Details button on same line */}
-          <div className="flex items-end gap-4 mt-6 mb-6">
+          {/* Custom Code section and View Details button responsive layout */}
+          <div className="flex flex-col lg:flex-row lg:items-end gap-4 mt-6 mb-6">
             {/* Custom Code section */}
             {custom_code && custom_code.data && (
               <div className="flex justify-start flex-1">
@@ -256,20 +256,20 @@ export const ChallengeCard = ({
               </div>
             )}
             
-            {/* Spacer to push buttons to the right when no custom code */}
-            {!custom_code?.data && <div className="flex-1"></div>}
+            {/* Spacer to push buttons to the right when no custom code on desktop */}
+            {!custom_code?.data && <div className="hidden lg:block flex-1"></div>}
             
-            {/* Action Buttons - always on the right */}
-            <div className="flex-shrink-0 flex flex-col space-y-2">
+            {/* Action Buttons - responsive positioning */}
+            <div className="flex-shrink-0 flex flex-col space-y-2 items-end w-full lg:w-auto">
               <button
                 onClick={handleJoinChallenge}
-                className="btn-primary px-4 py-2 text-sm font-medium rounded-md"
+                className="btn-primary px-4 py-2 text-sm font-medium rounded-md w-28"
               >
                 View Details
               </button>
               <button
                 onClick={handleSubmitRun}
-                className="btn-secondary px-4 py-2 text-sm font-medium rounded-md"
+                className="btn-secondary px-4 py-2 text-sm font-medium rounded-md w-28"
               >
                 Submit Run
               </button>
