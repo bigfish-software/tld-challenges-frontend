@@ -3,7 +3,7 @@ import { PageHero, FilterPanel, ErrorDisplay } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { PageLayout } from '@/components/layout';
 import { useTournaments } from '@/hooks/api';
-import { Tournament } from '@/types/api';
+import { Tournament, SimpleCreator } from '@/types/api';
 
 export const TournamentsPage: React.FC = () => {
   const [viewMode] = useState<'grid' | 'list'>('grid');
@@ -28,11 +28,11 @@ export const TournamentsPage: React.FC = () => {
       id: 'status',
       label: 'Status',
       options: Array.from(
-        new Set(tournaments.map(tournament => tournament.attributes.state))
+        new Set(tournaments.map(tournament => tournament.state))
       ).map(state => ({
         id: state,
         label: state.charAt(0).toUpperCase() + state.slice(1),
-        count: tournaments.filter(tournament => tournament.attributes.state === state).length
+        count: tournaments.filter(tournament => tournament.state === state).length
       }))
     },
     {
@@ -41,14 +41,14 @@ export const TournamentsPage: React.FC = () => {
       options: Array.from(
         new Set(
           tournaments.flatMap(tournament => 
-            tournament.attributes.creators?.data?.map(creator => creator.attributes.name) || []
+            tournament.creators?.map(creator => creator.name) || []
           )
         )
       ).map(name => ({
         id: name.toLowerCase().replace(/\s+/g, ''),
         label: name,
         count: tournaments.filter(tournament => 
-          tournament.attributes.creators?.data?.some(creator => creator.attributes.name === name)
+          tournament.creators?.some(creator => creator.name === name)
         ).length
       }))
     }
@@ -83,19 +83,19 @@ export const TournamentsPage: React.FC = () => {
     // Apply status filter
     if (activeFilters.status?.length) {
       filtered = filtered.filter(tournament => 
-        activeFilters.status!.includes(tournament.attributes.state)
+        activeFilters.status!.includes(tournament.state)
       );
     }
 
     // Apply creator filter
     if (activeFilters.creator?.length) {
       filtered = filtered.filter(tournament => {
-        const creatorNames = tournament.attributes.creators?.data?.map(creator => 
-          creator.attributes.name.toLowerCase()
+        const creatorNames = tournament.creators?.map((creator: SimpleCreator) => 
+          creator.name.toLowerCase()
         ) || [];
         return activeFilters.creator!.some(filterId => {
           const creatorName = filterId.toLowerCase();
-          return creatorNames.some(name => name.replace(/\s+/g, '') === creatorName);
+          return creatorNames.some((name: string) => name.replace(/\s+/g, '') === creatorName);
         });
       });
     }
@@ -216,22 +216,20 @@ export const TournamentsPage: React.FC = () => {
                       {/* Tournament Header */}
                       <div className="flex items-start justify-between mb-4">
                         <h3 className="text-lg font-semibold text-primary">
-                          {tournament.attributes.name}
+                          {tournament.name}
                         </h3>
                         <span className={`
                           px-2 py-1 rounded-full text-xs font-medium
-                          ${getStatusColor(tournament.attributes.state)}
+                          ${getStatusColor(tournament.state)}
                         `}>
-                          {tournament.attributes.state.charAt(0).toUpperCase() + tournament.attributes.state.slice(1)}
+                          {tournament.state.charAt(0).toUpperCase() + tournament.state.slice(1)}
                         </span>
                       </div>
                       
                       {/* Description */}
-                      {tournament.attributes.description && (
+                      {tournament.description_short && (
                         <p className="text-secondary text-sm mb-4 line-clamp-3">
-                          {typeof tournament.attributes.description === 'string' 
-                            ? tournament.attributes.description 
-                            : 'Tournament description'}
+                          {tournament.description_short}
                         </p>
                       )}
                       
@@ -239,10 +237,10 @@ export const TournamentsPage: React.FC = () => {
                       <div className="flex items-center justify-between text-xs text-secondary mb-4">
                         <div className="flex items-center space-x-4">
                           <span>
-                            Start: {formatDate(tournament.attributes.start_date)}
+                            Start: {formatDate(tournament.start_date)}
                           </span>
                           <span>
-                            End: {formatDate(tournament.attributes.end_date)}
+                            End: {formatDate(tournament.end_date)}
                           </span>
                         </div>
                       </div>
@@ -250,14 +248,12 @@ export const TournamentsPage: React.FC = () => {
                       {/* Metadata */}
                       <div className="flex items-center justify-between text-xs text-secondary">
                         <div className="flex items-center space-x-4">
-                          {tournament.attributes.created_date && (
+                          <span>
+                            Created: {formatDate(tournament.createdAt)}
+                          </span>
+                          {tournament.creators && tournament.creators.length > 0 && (
                             <span>
-                              Created: {formatDate(tournament.attributes.created_date)}
-                            </span>
-                          )}
-                          {tournament.attributes.creators?.data && tournament.attributes.creators.data.length > 0 && (
-                            <span>
-                              By: {tournament.attributes.creators.data.map(creator => creator.attributes.name).join(', ')}
+                              By: {tournament.creators.map((creator: SimpleCreator) => creator.name).join(', ')}
                             </span>
                           )}
                         </div>

@@ -85,23 +85,24 @@ export interface Submission extends StrapiEntity {
   };
 }
 
-// Content Type: Tournament
-export interface Tournament extends StrapiEntity {
-  attributes: {
-    name: string;
-    description?: StrapiRichTextBlocks; // Rich text (Blocks)
-    slug: string;
-    start_date: string;
-    end_date: string;
-    state: 'planned' | 'active' | 'completed' | 'cancelled';
-    created_date?: string;
-    updated_date?: string;
-    
-    // Relations
-    challenges?: StrapiCollection<Challenge>;
-    creators?: StrapiCollection<Creator>;
-    faqs?: StrapiCollection<FAQ>;
-  };
+// Content Type: Tournament (Updated to match actual API response)
+export interface Tournament {
+  id: number;
+  documentId: string;
+  name: string;
+  slug: string | null;
+  start_date: string;
+  end_date: string;
+  state: 'planned' | 'active' | 'completed' | 'cancelled';
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  description_short?: string;
+  description_long?: any; // Rich text blocks or null
+  is_featured: boolean;
+
+  // Direct relations (not wrapped)
+  creators: SimpleCreator[];
 }
 
 // Simple creator type as returned in relations (not full Strapi entity)
