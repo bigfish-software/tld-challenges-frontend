@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { PageHero, FilterPanel, ErrorDisplay } from '@/components/ui';
+import { PageHero, FilterPanel, ErrorDisplay, TournamentCard } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { PageLayout } from '@/components/layout';
 import { useTournaments } from '@/hooks/api';
 import { Tournament, SimpleCreator } from '@/types/api';
 
 export const TournamentsPage: React.FC = () => {
-  const [viewMode] = useState<'grid' | 'list'>('grid');
+  const [viewMode] = useState<'grid' | 'list'>('list');
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 12; // 12 tournaments per page
@@ -131,29 +131,6 @@ export const TournamentsPage: React.FC = () => {
     );
   }
 
-  const getStatusColor = (state: string) => {
-    switch (state) {
-      case 'active':
-        return 'badge-success';
-      case 'planned':
-        return 'badge-info';
-      case 'completed':
-        return 'badge-neutral';
-      case 'cancelled':
-        return 'badge-error';
-      default:
-        return 'badge-neutral';
-    }
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    });
-  };
-
   return (
     <PageLayout>
       <div className="min-h-screen bg-background">
@@ -212,53 +189,18 @@ export const TournamentsPage: React.FC = () => {
                   }
                 >
                   {filteredTournaments.map(tournament => (
-                    <div key={tournament.id} className="card-surface rounded-lg shadow-md p-6 border-default">
-                      {/* Tournament Header */}
-                      <div className="flex items-start justify-between mb-4">
-                        <h3 className="text-lg font-semibold text-primary">
-                          {tournament.name}
-                        </h3>
-                        <span className={`
-                          px-2 py-1 rounded-full text-xs font-medium
-                          ${getStatusColor(tournament.state)}
-                        `}>
-                          {tournament.state.charAt(0).toUpperCase() + tournament.state.slice(1)}
-                        </span>
-                      </div>
-                      
-                      {/* Description */}
-                      {tournament.description_short && (
-                        <p className="text-secondary text-sm mb-4 line-clamp-3">
-                          {tournament.description_short}
-                        </p>
-                      )}
-                      
-                      {/* Dates */}
-                      <div className="flex items-center justify-between text-xs text-secondary mb-4">
-                        <div className="flex items-center space-x-4">
-                          <span>
-                            Start: {formatDate(tournament.start_date)}
-                          </span>
-                          <span>
-                            End: {formatDate(tournament.end_date)}
-                          </span>
-                        </div>
-                      </div>
-                      
-                      {/* Metadata */}
-                      <div className="flex items-center justify-between text-xs text-secondary">
-                        <div className="flex items-center space-x-4">
-                          <span>
-                            Created: {formatDate(tournament.createdAt)}
-                          </span>
-                          {tournament.creators && tournament.creators.length > 0 && (
-                            <span>
-                              By: {tournament.creators.map((creator: SimpleCreator) => creator.name).join(', ')}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
+                    <TournamentCard
+                      key={tournament.id}
+                      tournament={tournament}
+                      variant={viewMode === 'list' ? 'list' : 'default'}
+                      onCardClick={(id) => window.location.href = `/tournaments/${tournament.slug || id}`}
+                      onJoinTournament={(id) => window.location.href = `/tournaments/${tournament.slug || id}/join`}
+                      onOrganizerClick={(_organizerName, organizerUrl) => {
+                        if (organizerUrl) {
+                          window.open(organizerUrl, '_blank');
+                        }
+                      }}
+                    />
                   ))}
                 </ContentGrid>
                 

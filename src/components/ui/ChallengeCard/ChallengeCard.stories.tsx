@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ChallengeCard } from './ChallengeCard';
-import type { MockChallenge } from '@/types/common';
+import type { ChallengeResponse } from '@/types/api';
 
 const meta: Meta<typeof ChallengeCard> = {
   title: 'UI/ChallengeCard',
@@ -52,126 +52,151 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Sample challenge data
-const activeChallenge: MockChallenge = {
+const activeChallenge: ChallengeResponse = {
   id: 1,
-  title: 'The 30-Day Nomad Challenge',
-  description: 'Survive 30 days without establishing a permanent base. Move every 3 days and visit all major regions. Test your adaptability and resource management skills.',
-  rules: [
-    'No sleeping in the same location for more than 3 consecutive days',
-    'Must visit at least 5 different regions',
-    'Cannot store items in containers for more than 24 hours',
-    'Must craft at least one item in each region visited'
-  ],
-  creator: {
-    name: 'WildernessGuide',
-    url: 'https://twitch.tv/wildernessguide'
-  },
-  difficulty: 'Hard' as const,
-  duration: '30 days',
-  region: 'All Regions',
-  tags: ['Nomadic', 'Exploration', 'Resource Management', 'Crafting'],
-  submissions: 47,
-  participants: 156,
-  status: 'Active' as const,
+  documentId: 'challenge_1',
+  name: 'The 30-Day Nomad Challenge',
+  slug: 'nomad-challenge',
   createdAt: '2024-01-10T08:00:00Z',
-  endDate: '2024-02-15T23:59:59Z'
+  updatedAt: '2024-01-12T10:30:00Z',
+  publishedAt: '2024-01-10T08:00:00Z',
+  description_short: 'Survive 30 days without establishing a permanent base. Move every 3 days and visit all major regions. Test your adaptability and resource management skills.',
+  difficulty: 'Hard',
+  is_featured: true,
+  creators: [
+    {
+      id: 1,
+      documentId: 'creator_1',
+      name: 'WildernessGuide',
+      slug: 'wildernessguide',
+      twitch: 'https://twitch.tv/wildernessguide',
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z',
+      publishedAt: '2024-01-01T00:00:00Z'
+    }
+  ],
+  custom_code: {
+    id: 1,
+    documentId: 'code_1',
+    name: 'Nomad Settings',
+    slug: 'nomad-settings',
+    code: 'NOMAD-2024-CHALLENGE',
+    createdAt: '2024-01-10T08:00:00Z',
+    updatedAt: '2024-01-10T08:00:00Z',
+    publishedAt: '2024-01-10T08:00:00Z',
+    description_short: 'Special settings for nomad challenge',
+    is_featured: false
+  }
 };
 
-const completedChallenge: MockChallenge = {
+const completedChallenge: ChallengeResponse = {
   id: 2,
-  title: 'Blizzard Survivor',
-  description: 'Survive a continuous blizzard for 7 days in the most challenging weather conditions. Only the strongest will emerge victorious.',
-  rules: [
-    'Weather must be set to maximum blizzard intensity',
-    'No indoor shelter allowed during storm',
-    'Must maintain body temperature above freezing',
-    'No pre-gathered supplies allowed'
-  ],
-  creator: {
-    name: 'IceQueen',
-    url: 'https://youtube.com/@icequeen'
-  },
-  difficulty: 'Extreme' as const,
-  duration: '7 days',
-  region: 'Bleak Inlet',
-  tags: ['Weather', 'Extreme', 'Temperature Management'],
-  submissions: 23,
-  participants: 89,
-  status: 'Completed' as const,
+  documentId: 'challenge_2',
+  name: 'Blizzard Survivor',
+  slug: 'blizzard-survivor',
   createdAt: '2024-01-01T00:00:00Z',
-  endDate: '2024-01-08T23:59:59Z'
+  updatedAt: '2024-01-08T23:59:59Z',
+  publishedAt: '2024-01-01T00:00:00Z',
+  description_short: 'Survive a continuous blizzard for 7 days in the most challenging weather conditions. Only the strongest will emerge victorious.',
+  difficulty: 'Extreme',
+  is_featured: false,
+  creators: [
+    {
+      id: 2,
+      documentId: 'creator_2',
+      name: 'IceQueen',
+      slug: 'icequeen',
+      youtube: 'https://youtube.com/@icequeen',
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z',
+      publishedAt: '2024-01-01T00:00:00Z'
+    }
+  ]
 };
 
-const upcomingChallenge: MockChallenge = {
+const upcomingChallenge: ChallengeResponse = {
   id: 3,
-  title: 'Wolf Pack Encounter',
-  description: 'Face enhanced wolf AI in a special challenge where wolves hunt in coordinated packs. Survive encounters with multiple wolf packs.',
-  rules: [
-    'Wolf spawn rate increased by 300%',
-    'Wolves hunt in packs of 3-5',
-    'Enhanced AI coordination and pack behavior',
-    'Must survive at least 3 pack encounters'
-  ],
-  creator: {
-    name: 'AlphaWolf'
-  },
-  difficulty: 'Medium' as const,
-  duration: '14 days',
-  region: 'Mystery Lake',
-  tags: ['Wildlife', 'AI Enhanced', 'Survival Combat'],
-  submissions: 0,
-  participants: 234,
-  status: 'Upcoming' as const,
+  documentId: 'challenge_3',
+  name: 'Wolf Pack Encounter',
+  slug: 'wolf-pack-encounter',
   createdAt: '2024-01-25T12:00:00Z',
-  endDate: '2024-03-01T23:59:59Z'
+  updatedAt: '2024-01-25T12:00:00Z',
+  publishedAt: '2024-01-25T12:00:00Z',
+  description_short: 'Face enhanced wolf AI in a special challenge where wolves hunt in coordinated packs. Survive encounters with multiple wolf packs.',
+  difficulty: 'Medium',
+  is_featured: true,
+  creators: [
+    {
+      id: 3,
+      documentId: 'creator_3',
+      name: 'AlphaWolf',
+      slug: 'alphawolf',
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z',
+      publishedAt: '2024-01-01T00:00:00Z'
+    }
+  ]
 };
 
-const easyChallenge: MockChallenge = {
+const easyChallenge: ChallengeResponse = {
   id: 4,
-  title: 'Foragers Paradise',
-  description: 'A beginner-friendly challenge focused on gathering, crafting, and exploring. Perfect for new players to learn the ropes.',
-  rules: [
-    'Abundant plant spawns and crafting materials',
-    'Reduced wildlife aggression',
-    'Weather conditions set to mild',
-    'Must craft 50 different items'
-  ],
-  creator: {
-    name: 'CraftMaster',
-    url: 'https://twitch.tv/craftmaster'
-  },
-  difficulty: 'Easy' as const,
-  duration: '10 days',
-  region: 'Coastal Highway',
-  tags: ['Beginner Friendly', 'Crafting', 'Exploration'],
-  submissions: 145,
-  participants: 412,
-  status: 'Active' as const,
+  documentId: 'challenge_4',
+  name: 'Foragers Paradise',
+  slug: 'foragers-paradise',
   createdAt: '2024-01-20T10:30:00Z',
-  endDate: '2024-02-10T23:59:59Z'
+  updatedAt: '2024-01-20T10:30:00Z',
+  publishedAt: '2024-01-20T10:30:00Z',
+  description_short: 'A beginner-friendly challenge focused on gathering, crafting, and exploring. Perfect for new players to learn the ropes.',
+  difficulty: 'Easy',
+  is_featured: false,
+  creators: [
+    {
+      id: 4,
+      documentId: 'creator_4',
+      name: 'CraftMaster',
+      slug: 'craftmaster',
+      twitch: 'https://twitch.tv/craftmaster',
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z',
+      publishedAt: '2024-01-01T00:00:00Z'
+    }
+  ],
+  custom_code: {
+    id: 2,
+    documentId: 'code_2',
+    name: 'Forager Settings',
+    slug: 'forager-settings',
+    code: 'FORAGE-EASY-2024',
+    createdAt: '2024-01-20T10:30:00Z',
+    updatedAt: '2024-01-20T10:30:00Z',
+    publishedAt: '2024-01-20T10:30:00Z',
+    description_short: 'Beginner-friendly settings',
+    is_featured: false
+  }
 };
 
-const compactChallenge = {
+const compactChallenge: ChallengeResponse = {
   id: 5,
-  title: 'Speed Run Challenge',
-  description: 'Complete specific objectives as quickly as possible. Time is everything in this fast-paced challenge.',
-  rules: [
-    'Must reach all major landmarks',
-    'No resting for more than 2 hours',
-    'Time penalties for using certain items'
-  ],
-  creator: {
-    name: 'SpeedRunner'
-  },
-  difficulty: 'Medium' as const,
-  duration: '3 days',
-  region: 'Great Bear Island',
-  tags: ['Speed', 'Time Attack'],
-  submissions: 67,
-  participants: 203,
-  status: 'Active' as const,
+  documentId: 'challenge_5',
+  name: 'Speed Run Challenge',
+  slug: 'speed-run-challenge',
   createdAt: '2024-01-22T14:00:00Z',
-  endDate: '2024-02-05T23:59:59Z'
+  updatedAt: '2024-01-22T14:00:00Z',
+  publishedAt: '2024-01-22T14:00:00Z',
+  description_short: 'Complete specific objectives as quickly as possible. Time is everything in this fast-paced challenge.',
+  difficulty: 'Medium',
+  is_featured: false,
+  creators: [
+    {
+      id: 5,
+      documentId: 'creator_5',
+      name: 'SpeedRunner',
+      slug: 'speedrunner',
+      createdAt: '2024-01-01T00:00:00Z',
+      updatedAt: '2024-01-01T00:00:00Z',
+      publishedAt: '2024-01-01T00:00:00Z'
+    }
+  ]
 };
 
 // Default active challenge
@@ -252,16 +277,7 @@ export const ManyRules: Story = {
   args: {
     challenge: {
       ...activeChallenge,
-      rules: [
-        'No sleeping in the same location for more than 3 consecutive days',
-        'Must visit at least 5 different regions',
-        'Cannot store items in containers for more than 24 hours',
-        'Must craft at least one item in each region visited',
-        'No using pre-existing shelters',
-        'Must maintain journal entries for each day',
-        'Cannot use imported custom codes',
-        'Must document all wildlife encounters'
-      ]
+      description_short: 'This comprehensive survival challenge tests every aspect of your wilderness skills. You must demonstrate mastery of resource management, weather survival, wildlife encounters, and navigation across the entire Great Bear Island. The challenge incorporates multiple difficulty layers and requires both physical survival and strategic planning to complete successfully.'
     }
   }
 };
@@ -269,10 +285,7 @@ export const ManyRules: Story = {
 // No rules preview
 export const NoRules: Story = {
   args: {
-    challenge: {
-      ...activeChallenge,
-      rules: []
-    }
+    challenge: activeChallenge
   }
 };
 
@@ -281,7 +294,7 @@ export const LongDescription: Story = {
   args: {
     challenge: {
       ...activeChallenge,
-      description: 'This comprehensive survival challenge tests every aspect of your wilderness skills. You must demonstrate mastery of resource management, weather survival, wildlife encounters, and navigation across the entire Great Bear Island. The challenge incorporates multiple difficulty layers and requires both physical survival and strategic planning to complete successfully.'
+      description_short: 'This comprehensive survival challenge tests every aspect of your wilderness skills. You must demonstrate mastery of resource management, weather survival, wildlife encounters, and navigation across the entire Great Bear Island. The challenge incorporates multiple difficulty layers and requires both physical survival and strategic planning to complete successfully.'
     }
   }
 };
@@ -289,10 +302,7 @@ export const LongDescription: Story = {
 // No end date
 export const NoEndDate: Story = {
   args: {
-    challenge: {
-      ...activeChallenge,
-      endDate: undefined
-    }
+    challenge: activeChallenge
   }
 };
 
@@ -311,14 +321,14 @@ export const GridLayout: Story = {
       <ChallengeCard challenge={completedChallenge} />
       <ChallengeCard challenge={upcomingChallenge} />
       <ChallengeCard challenge={easyChallenge} />
-      <ChallengeCard challenge={{...compactChallenge, id: 6}} />
-      <ChallengeCard challenge={{...activeChallenge, id: 7, status: 'Upcoming'}} />
+      <ChallengeCard challenge={{...compactChallenge, id: 6, documentId: 'challenge_6'}} />
+      <ChallengeCard challenge={{...activeChallenge, id: 7, documentId: 'challenge_7', is_featured: false}} />
     </div>
   ),
   parameters: {
     docs: {
       description: {
-        story: 'Example of multiple challenge cards in a responsive grid layout showing different statuses'
+        story: 'Example of multiple challenge cards in a responsive grid layout showing different difficulty levels'
       }
     }
   }

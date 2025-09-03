@@ -205,24 +205,17 @@ export const HomePageContent = () => {
 
             <div className="max-w-5xl mx-auto space-y-6">
               {activeTournaments.map((tournament) => {
-                // The data appears to be flat (not nested under attributes)
-                // Handle both possible structures: flat or Strapi-style with attributes
-                const tournamentData = tournament?.attributes || tournament;
-                if (!tournamentData) {
-                  return null;
-                }
-
                 return (
                   <TournamentSection 
                     key={tournament.id} 
                     tournament={{
                       id: tournament.id,
-                      title: (tournamentData as any).name || 'Unnamed Tournament',
-                      description: (tournamentData as any).description_short || (tournamentData as any).description || 'No description available',
+                      title: tournament.name || 'Unnamed Tournament',
+                      description: tournament.description_short || 'No description available',
                       status: 'active',
-                      startDate: (tournamentData as any).start_date || '',
-                      endDate: (tournamentData as any).end_date || '',
-                      slug: (tournamentData as any).slug || '',
+                      startDate: tournament.start_date || '',
+                      endDate: tournament.end_date || '',
+                      slug: tournament.slug || '',
                     }}
                   />
                 );

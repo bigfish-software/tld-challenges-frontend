@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import type { Challenge, ChallengeResponse } from '@/types/api';
-import type { MockChallenge } from '@/types/common';
+import type { ChallengeResponse } from '@/types/api';
 
 export interface ChallengeCardProps {
-  /** The challenge object from the API or mock data */
-  challenge: Challenge | MockChallenge | ChallengeResponse;
+  /** The challenge object from the API */
+  challenge: ChallengeResponse;
   /** Display variant */
   variant?: 'default' | 'compact' | 'list';
   /** Callback when card is clicked */
@@ -19,16 +18,6 @@ export interface ChallengeCardProps {
   className?: string;
 }
 
-// Type guard to check if challenge is a Strapi Challenge
-function isStrapiChallenge(challenge: Challenge | MockChallenge | ChallengeResponse): challenge is Challenge {
-  return 'attributes' in challenge;
-}
-
-// Type guard to check if challenge is a Direct API Response
-function isDirectApiChallenge(challenge: Challenge | MockChallenge | ChallengeResponse): challenge is ChallengeResponse {
-  return 'documentId' in challenge && !('attributes' in challenge);
-}
-
 export const ChallengeCard = ({
   challenge,
   variant = 'default',
@@ -41,44 +30,16 @@ export const ChallengeCard = ({
   // State for copy confirmation
   const [isCopied, setIsCopied] = useState(false);
   
-  // Extract data based on challenge type
-  const id = challenge.id;
-  
-  let name: string, description_short: string, difficulty: string, is_featured: boolean;
-  let creators: any, rules: any, tournament: any, custom_code: any;
-  
-  if (isStrapiChallenge(challenge)) {
-    // Handle Strapi Challenge structure
-    const { attributes } = challenge;
-    name = attributes.name;
-    description_short = typeof attributes.description === 'string' ? attributes.description : '';
-    difficulty = attributes.difficulty;
-    is_featured = false; // Legacy challenges don't have featured status
-    creators = attributes.creators;
-    rules = attributes.rules;
-    tournament = attributes.tournament;
-    custom_code = attributes.custom_code;
-  } else if (isDirectApiChallenge(challenge)) {
-    // Handle Direct API Response structure
-    name = challenge.name;
-    description_short = challenge.description_short || '';
-    difficulty = challenge.difficulty;
-    is_featured = challenge.is_featured;
-    creators = { data: challenge.creators.map(creator => ({ attributes: creator })) };
-    rules = { data: [] }; // Not in the API response yet
-    tournament = null; // Not in the API response yet
-    custom_code = challenge.custom_code ? { data: { attributes: challenge.custom_code } } : null;
-  } else {
-    // Handle MockChallenge structure
-    name = challenge.title;
-    description_short = challenge.description;
-    difficulty = challenge.difficulty;
-    is_featured = false; // Mock challenges don't have featured status
-    creators = { data: [{ attributes: challenge.creator }] };
-    rules = { data: challenge.rules.map((rule: string, index: number) => ({ id: index, attributes: { description: rule } })) };
-    tournament = null;
-    custom_code = null;
-  }
+  // Extract data from ChallengeResponse structure
+  const {
+    id,
+    name,
+    description_short,
+    difficulty,
+    is_featured,
+    creators,
+    custom_code
+  } = challenge;
 
   const handleCardClick = () => {
     onCardClick?.(id);
@@ -96,7 +57,7 @@ export const ChallengeCard = ({
 
   const handleCreatorClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const creator = creators?.data?.[0]?.attributes;
+    const creator = creators?.[0];
     if (creator) {
       const creatorUrl = creator.twitch || creator.youtube;
       onCreatorClick?.(creator.name, creatorUrl);
@@ -107,21 +68,14 @@ export const ChallengeCard = ({
   const getDifficultyColor = (diff: typeof difficulty) => {
     switch (diff) {
       case 'Easy':
-      case 'Pilgrim':
-      case 'Voyager':
         return 'badge-success'; // Easy - Green
       case 'Medium':
-      case 'Stalker':
         return 'badge-info'; // Medium - Blue  
       case 'Hard':
-      case 'Interloper':
         return 'badge-warning'; // Hard - Orange/Amber
       case 'Very Hard':
-      case 'Misery':
-      case 'Nogoa':
+      case 'Extreme':
         return 'badge-error'; // Very Hard - Red
-      case 'Custom':
-        return 'badge-neutral';
       default:
         return 'badge-neutral';
     }
@@ -186,10 +140,10 @@ export const ChallengeCard = ({
               <h3 className="text-xl font-semibold font-headline text-primary group-hover:text-secondary transition-colors mb-2">
                 {name.toUpperCase()}
               </h3>
-              {creators && creators.data && creators.data.length > 0 && (
+              {creators && creators.length > 0 && (
                 <div className="mt-1">
                   <span className="text-sm text-tertiary">
-                    by {creators.data.map((creator: any) => creator.attributes.name).join(', ')}
+                    by {creators.map((creator: any) => creator.name).join(', ')}
                   </span>
                 </div>
               )}
@@ -213,7 +167,7 @@ export const ChallengeCard = ({
           {/* Custom Code section and View Details button responsive layout */}
           <div className="flex flex-col lg:flex-row lg:items-end gap-4 mt-6 mb-6">
             {/* Custom Code section */}
-            {custom_code && custom_code.data && (
+            {custom_code && (
               <div className="flex justify-start flex-1">
                 <div className="bg-surface border border-default rounded-lg p-4 w-full max-w-2xl">
                   <div className="flex items-center justify-between mb-3">
@@ -224,7 +178,7 @@ export const ChallengeCard = ({
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          navigator.clipboard.writeText(custom_code.data.attributes.code || '');
+                          navigator.clipboard.writeText(custom_code.code || '');
                           setIsCopied(true);
                           setTimeout(() => setIsCopied(false), 2000); // Hide confirmation after 2 seconds
                         }}
@@ -250,14 +204,14 @@ export const ChallengeCard = ({
                     </div>
                   </div>
                   <code className="text-sm font-mono text-primary block whitespace-nowrap">
-                    {custom_code.data.attributes.code}
+                    {custom_code.code}
                   </code>
                 </div>
               </div>
             )}
             
             {/* Spacer to push buttons to the right when no custom code on desktop */}
-            {!custom_code?.data && <div className="hidden lg:block flex-1"></div>}
+            {!custom_code && <div className="hidden lg:block flex-1"></div>}
             
             {/* Action Buttons - responsive positioning */}
             <div className="flex-shrink-0 flex flex-col space-y-2 items-end w-full lg:w-auto">
@@ -300,12 +254,12 @@ export const ChallengeCard = ({
             <h3 className="text-lg font-semibold text-primary group-hover:text-primary-hover transition-colors truncate">
               {name.toUpperCase()}
             </h3>
-            {creators?.data?.[0] && (
+            {creators?.[0] && (
               <button
                 onClick={handleCreatorClick}
                 className="text-sm text-secondary hover:text-primary transition-colors mt-1"
               >
-                by {creators.data[0].attributes.name}
+                by {creators[0].name}
               </button>
             )}
           </div>
@@ -329,50 +283,19 @@ export const ChallengeCard = ({
           <div className="space-y-3 mb-4">
             {/* Tournament and Custom Code */}
             <div className="flex items-center space-x-4 text-sm text-secondary">
-              {tournament?.data && (
-                <div className="flex items-center space-x-1">
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>Tournament: {tournament.data.attributes.name}</span>
-                </div>
-              )}
-              {custom_code?.data && (
+              {/* Tournament info not available in current API structure */}
+              {custom_code && (
                 <div className="flex items-center space-x-1">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
-                  <span>Code: {custom_code.data.attributes.name}</span>
+                  <span>Code: {custom_code.name}</span>
                 </div>
               )}
             </div>
 
-            {/* Rules Preview */}
-            {rules?.data && rules.data.length > 0 && (
-              <div className="card-surface-raised p-3">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-medium text-secondary uppercase tracking-wide">
-                    Key Rules
-                  </span>
-                  <span className="text-xs text-secondary">
-                    {rules.data.length} rule{rules.data.length !== 1 ? 's' : ''}
-                  </span>
-                </div>
-                <ul className="space-y-1">
-                  {rules.data.slice(0, 2).map((rule: any, index: number) => (
-                    <li key={index} className="text-xs text-secondary flex items-start space-x-2">
-                      <span className="text-primary-color mt-1">•</span>
-                      <span className="flex-1">{rule.attributes.description}</span>
-                    </li>
-                  ))}
-                  {rules.data.length > 2 && (
-                    <li className="text-xs text-secondary italic">
-                      +{rules.data.length - 2} more rules...
-                    </li>
-                  )}
-                </ul>
-              </div>
-            )}
+            {/* Rules Preview - Not available in current API structure */}
+            {/* Rules would be displayed here when API support is added */}
           </div>
         )}
 
