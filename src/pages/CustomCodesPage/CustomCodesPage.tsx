@@ -109,7 +109,7 @@ export const CustomCodesPage: React.FC = () => {
             backgroundImage="/src/assets/custom_code_hero.png"
             contactMessage="Submit your Custom Code"
             contactSubtext="Share your custom settings with players around the world and join our community of creators"
-            buttonText="Submit Code"
+            buttonText="Submit your Idea"
           />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <ErrorDisplay
@@ -135,7 +135,7 @@ export const CustomCodesPage: React.FC = () => {
           backgroundImage="/src/assets/custom_code_hero.png"
           contactMessage="Submit your Custom Code"
           contactSubtext="Share your custom settings with players around the world and join our community of creators"
-          buttonText="Submit Code"
+          buttonText="Submit your Idea"
         />
 
       {/* Main Content */}

@@ -112,7 +112,7 @@ export const TournamentsPage: React.FC = () => {
         <div className="min-h-screen bg-background">
           <PageHero
             title="Tournaments"
-            description="Join competitive events and tournaments created by the community. Test your skills and compete for prizes."
+            description="Join competitive events and tournaments created by the community."
             backgroundImage="/src/assets/homepage_hero.png"
             contactMessage="Host Your Tournament!"
             contactSubtext="Organize competitive events for the community"
@@ -137,10 +137,11 @@ export const TournamentsPage: React.FC = () => {
         {/* Hero Section */}
         <PageHero
           title="Tournaments"
-          description="Join competitive events and tournaments created by the community. Test your skills and compete for prizes."
+          description="Join competitive events and tournaments created by the community."
           backgroundImage="/src/assets/homepage_hero.png"
           contactMessage="Host Your Tournament!"
           contactSubtext="Organize competitive events for the community"
+          buttonText="Submit your Idea"
         />
 
         {/* Main Content */}
