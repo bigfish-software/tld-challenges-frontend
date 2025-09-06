@@ -1,2 +1,3 @@
 export * from './api';
-export { useErrorHandler } from './useErrorHandler';
+export * from './api';
+export * from './useErrorHandler';

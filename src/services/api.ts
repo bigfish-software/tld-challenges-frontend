@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosRequestConfig } from 'axios';
-import type { StatsOverview } from '@/types/api';
+import type { StatsOverview, Tournament, CustomCode } from '@/types/api';
 
 // API Error class definition
 export class APIError extends Error {
@@ -258,7 +258,7 @@ export const apiService = {
     /**
      * Get tournament by slug
      */
-    getBySlug: (slug: string, populate?: string) => {
+    getBySlug: (slug: string, populate?: string): Promise<{data: Tournament}> => {
       const params: Record<string, any> = {};
       if (populate) {
         params.populate = populate;
@@ -339,15 +339,10 @@ export const apiService = {
     
     /**
      * Get custom code by slug
+     * Note: This is a custom endpoint that returns populated data by default
      */
-    getBySlug: (slug: string, populate?: string) => {
-      const params: Record<string, any> = {};
-      if (populate) {
-        params.populate = populate;
-      } else {
-        params.populate = 'creators'; // Always populate creators
-      }
-      return apiClient.get(`${ENDPOINTS.CUSTOM_CODES}/slug/${slug}`, { params });
+    getBySlug: (slug: string): Promise<CustomCode> => {
+      return apiClient.get(`${ENDPOINTS.CUSTOM_CODES}/slug/${slug}`);
     },
     
     /**

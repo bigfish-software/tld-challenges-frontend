@@ -6,8 +6,8 @@ export interface CustomCodeCardProps {
   customCode: CustomCode;
   /** Display variant */
   variant?: 'default' | 'compact' | 'list';
-  /** Callback when card is clicked */
-  onCardClick?: (id: number) => void;
+  /** Callback when card is clicked with slug */
+  onCardClick?: (slug: string) => void;
   /** Additional CSS classes */
   className?: string;
 }
@@ -19,7 +19,7 @@ export const CustomCodeCard = ({
   className = ''
 }: CustomCodeCardProps) => {
   // Extract data from CustomCode API structure
-  const { id, name, description_short, code, creators, is_featured } = customCode;
+  const { name, description_short, code, creators, is_featured, slug } = customCode;
   
   // State for copy confirmation
   const [isCopied, setIsCopied] = useState(false);
@@ -33,7 +33,7 @@ export const CustomCodeCard = ({
 
   const handleViewDetails = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onCardClick?.(id);
+    onCardClick?.(slug);
   };
 
   const baseClasses = `

@@ -132,8 +132,9 @@ const sampleCustomCode: CustomCode = {
       id: 1,
       documentId: 'creator-1',
       name: 'BigFishSoftware',
+      username: 'bigfishsoftware',
       slug: 'bigfishsoftware',
-      twitch: 'https://twitch.tv/bigfishsoftware',
+      twitch_url: 'https://twitch.tv/bigfishsoftware',
       createdAt: '2024-01-15T10:30:00Z',
       updatedAt: '2024-01-20T09:15:00Z',
       publishedAt: '2024-01-15T10:30:00Z'
@@ -158,8 +159,9 @@ const extremeCustomCode: CustomCode = {
       id: 2,
       documentId: 'creator-2',
       name: 'ChefMaria',
+      username: 'chefmaria_tld',
       slug: 'chefmaria',
-      twitch: 'https://twitch.tv/chefmaria',
+      twitch_url: 'https://twitch.tv/chefmaria',
       createdAt: '2024-01-12T14:45:00Z',
       updatedAt: '2024-01-18T16:30:00Z',
       publishedAt: '2024-01-12T14:45:00Z'
@@ -184,8 +186,9 @@ const detailedCustomCode: CustomCode = {
       id: 3,
       documentId: 'creator-3',
       name: 'ModCommunity',
+      username: 'modcommunity_tld',
       slug: 'modcommunity',
-      youtube: 'https://youtube.com/modcommunity',
+      youtube_url: 'https://youtube.com/modcommunity',
       createdAt: '2024-01-20T16:20:00Z',
       updatedAt: '2024-01-25T13:10:00Z',
       publishedAt: '2024-01-20T16:20:00Z'

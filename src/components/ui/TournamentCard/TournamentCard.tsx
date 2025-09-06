@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import type { Tournament } from '@/types/api';
 
 export interface TournamentCardProps {
@@ -8,8 +9,6 @@ export interface TournamentCardProps {
   variant?: 'default' | 'compact' | 'list';
   /** Callback when card is clicked */
   onCardClick?: (id: number) => void;
-  /** Callback when join/register is clicked */
-  onJoinTournament?: (id: number) => void;
   /** Callback when organizer is clicked */
   onOrganizerClick?: (organizerName: string, organizerUrl?: string) => void;
   /** Additional CSS classes */
@@ -20,10 +19,10 @@ export const TournamentCard = ({
   tournament,
   variant = 'default',
   onCardClick,
-  onJoinTournament,
   onOrganizerClick,
   className = ''
 }: TournamentCardProps) => {
+  
   // Extract data from Tournament API structure
   const { 
     id, 
@@ -40,16 +39,11 @@ export const TournamentCard = ({
     onCardClick?.(id);
   };
 
-  const handleJoinTournament = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onJoinTournament?.(id);
-  };
-
   const handleOrganizerClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     const creator = creators?.[0];
     if (creator) {
-      const creatorUrl = creator.twitch || creator.youtube;
+      const creatorUrl = creator.twitch_url || creator.youtube_url;
       onOrganizerClick?.(creator.name, creatorUrl);
     }
   };
@@ -199,12 +193,12 @@ export const TournamentCard = ({
 
             {/* Action Buttons - responsive positioning */}
             <div className="flex-shrink-0 flex flex-col space-y-2 items-end w-full lg:w-auto">
-              <button
-                onClick={handleJoinTournament}
-                className="btn-primary px-4 py-2 text-sm font-medium rounded-md w-32"
+              <Link
+                to={`/tournaments/${tournament.slug}`}
+                className="btn-primary px-4 py-2 text-sm font-medium rounded-md w-32 text-center"
               >
                 View Details
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -322,12 +316,12 @@ export const TournamentCard = ({
         {/* Footer */}
         <div className="flex justify-end pt-3">
           <div className="flex flex-col space-y-2">
-            <button
-              onClick={handleJoinTournament}
-              className={`${actionButton.color} px-4 py-2 text-sm font-medium rounded-md`}
+            <Link
+              to={`/tournaments/${tournament.slug}`}
+              className={`${actionButton.color} px-4 py-2 text-sm font-medium rounded-md text-center`}
             >
               {actionButton.text}
-            </button>
+            </Link>
           </div>
         </div>
       </div>

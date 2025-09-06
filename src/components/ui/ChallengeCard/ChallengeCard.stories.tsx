@@ -37,9 +37,9 @@ A card component for displaying challenge information with:
       action: 'card-clicked',
       description: 'Callback when card is clicked'
     },
-    onJoinChallenge: {
-      action: 'join-challenge-clicked',
-      description: 'Callback when join/submit is clicked'
+    onSubmitRun: {
+      action: 'submit-run-clicked',
+      description: 'Callback when submit run is clicked'
     },
     onCreatorClick: {
       action: 'creator-clicked',
@@ -68,8 +68,9 @@ const activeChallenge: ChallengeResponse = {
       id: 1,
       documentId: 'creator_1',
       name: 'WildernessGuide',
+      username: 'wildernessguide',
       slug: 'wildernessguide',
-      twitch: 'https://twitch.tv/wildernessguide',
+      twitch_url: 'https://twitch.tv/wildernessguide',
       createdAt: '2024-01-01T00:00:00Z',
       updatedAt: '2024-01-01T00:00:00Z',
       publishedAt: '2024-01-01T00:00:00Z'
@@ -105,8 +106,9 @@ const completedChallenge: ChallengeResponse = {
       id: 2,
       documentId: 'creator_2',
       name: 'IceQueen',
+      username: 'icequeen_tld',
       slug: 'icequeen',
-      youtube: 'https://youtube.com/@icequeen',
+      youtube_url: 'https://youtube.com/@icequeen',
       createdAt: '2024-01-01T00:00:00Z',
       updatedAt: '2024-01-01T00:00:00Z',
       publishedAt: '2024-01-01T00:00:00Z'
@@ -130,6 +132,7 @@ const upcomingChallenge: ChallengeResponse = {
       id: 3,
       documentId: 'creator_3',
       name: 'AlphaWolf',
+      username: 'alphawolf_survival',
       slug: 'alphawolf',
       createdAt: '2024-01-01T00:00:00Z',
       updatedAt: '2024-01-01T00:00:00Z',
@@ -154,8 +157,9 @@ const easyChallenge: ChallengeResponse = {
       id: 4,
       documentId: 'creator_4',
       name: 'CraftMaster',
+      username: 'craftmaster_tld',
       slug: 'craftmaster',
-      twitch: 'https://twitch.tv/craftmaster',
+      twitch_url: 'https://twitch.tv/craftmaster',
       createdAt: '2024-01-01T00:00:00Z',
       updatedAt: '2024-01-01T00:00:00Z',
       publishedAt: '2024-01-01T00:00:00Z'
@@ -191,6 +195,7 @@ const compactChallenge: ChallengeResponse = {
       id: 5,
       documentId: 'creator_5',
       name: 'SpeedRunner',
+      username: 'speedrunner_tld',
       slug: 'speedrunner',
       createdAt: '2024-01-01T00:00:00Z',
       updatedAt: '2024-01-01T00:00:00Z',

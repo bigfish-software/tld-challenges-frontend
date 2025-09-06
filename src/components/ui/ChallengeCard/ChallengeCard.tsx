@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import type { ChallengeResponse } from '@/types/api';
 
 export interface ChallengeCardProps {
@@ -8,8 +9,6 @@ export interface ChallengeCardProps {
   variant?: 'default' | 'compact' | 'list';
   /** Callback when card is clicked */
   onCardClick?: (id: number) => void;
-  /** Callback when join/submit is clicked */
-  onJoinChallenge?: (id: number) => void;
   /** Callback when submit run is clicked */
   onSubmitRun?: (id: number) => void;
   /** Callback when creator is clicked */
@@ -22,7 +21,6 @@ export const ChallengeCard = ({
   challenge,
   variant = 'default',
   onCardClick,
-  onJoinChallenge,
   onSubmitRun,
   onCreatorClick,
   className = ''
@@ -45,11 +43,6 @@ export const ChallengeCard = ({
     onCardClick?.(id);
   };
 
-  const handleJoinChallenge = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onJoinChallenge?.(id);
-  };
-
   const handleSubmitRun = (e: React.MouseEvent) => {
     e.stopPropagation();
     onSubmitRun?.(id);
@@ -59,7 +52,7 @@ export const ChallengeCard = ({
     e.stopPropagation();
     const creator = creators?.[0];
     if (creator) {
-      const creatorUrl = creator.twitch || creator.youtube;
+      const creatorUrl = creator.twitch_url || creator.youtube_url;
       onCreatorClick?.(creator.name, creatorUrl);
     }
   };
@@ -215,12 +208,12 @@ export const ChallengeCard = ({
             
             {/* Action Buttons - responsive positioning */}
             <div className="flex-shrink-0 flex flex-col space-y-2 items-end w-full lg:w-auto">
-              <button
-                onClick={handleJoinChallenge}
-                className="btn-primary px-4 py-2 text-sm font-medium rounded-md w-28"
+              <Link
+                to={`/challenges/${challenge.slug}`}
+                className="btn-primary px-4 py-2 text-sm font-medium rounded-md w-28 text-center"
               >
                 View Details
-              </button>
+              </Link>
               <button
                 onClick={handleSubmitRun}
                 className="btn-secondary px-4 py-2 text-sm font-medium rounded-md w-28"
@@ -302,12 +295,12 @@ export const ChallengeCard = ({
         {/* Footer */}
         <div className="flex justify-end pt-3">
           <div className="flex flex-col space-y-2">
-            <button
-              onClick={handleJoinChallenge}
-              className="btn-primary px-4 py-2 text-sm font-medium rounded-md"
+            <Link
+              to={`/challenges/${challenge.slug}`}
+              className="btn-primary px-4 py-2 text-sm font-medium rounded-md text-center"
             >
               View Details
-            </button>
+            </Link>
             <button
               onClick={handleSubmitRun}
               className="btn-secondary px-4 py-2 text-sm font-medium rounded-md"

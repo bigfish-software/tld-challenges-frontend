@@ -196,7 +196,6 @@ export const TournamentsPage: React.FC = () => {
                       tournament={tournament}
                       variant={viewMode === 'list' ? 'list' : 'default'}
                       onCardClick={(id) => window.location.href = `/tournaments/${tournament.slug || id}`}
-                      onJoinTournament={(id) => window.location.href = `/tournaments/${tournament.slug || id}/join`}
                       onOrganizerClick={(_organizerName, organizerUrl) => {
                         if (organizerUrl) {
                           window.open(organizerUrl, '_blank');

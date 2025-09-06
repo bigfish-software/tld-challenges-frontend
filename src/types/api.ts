@@ -32,8 +32,8 @@ export interface ChallengeResponse {
   difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard' | 'Extreme'; // Actual values from API
   is_featured: boolean;
   
-  // Direct relations (not wrapped)
-  creators: SimpleCreator[];
+  // Direct relations (populated by backend slug endpoint)
+  creators?: SimpleCreator[];
   custom_code?: {
     id: number;
     documentId: string;
@@ -47,6 +47,42 @@ export interface ChallengeResponse {
     description_long?: any;
     is_featured: boolean;
   } | null;
+  tournament?: {
+    id: number;
+    documentId: string;
+    name: string;
+    slug: string;
+    start_date: string;
+    end_date: string;
+    state: 'planned' | 'active' | 'completed' | 'cancelled';
+    description_short?: string;
+    description_long?: any;
+    is_featured: boolean;
+  } | null;
+  rules?: {
+    id: number;
+    documentId: string;
+    name?: string;
+    description: any; // Rich text blocks
+  }[];
+  faqs?: {
+    id: number;
+    documentId: string;
+    question: string;
+    answer: any; // Rich text blocks
+    name?: string;
+  }[];
+  submissions?: {
+    id: number;
+    documentId: string;
+    runner: string;
+    runner_url?: string;
+    video_url?: string;
+    note?: string;
+    result?: string;
+    submitted_date?: string;
+    createdAt: string;
+  }[];
 }
 
 // Content Type: Challenge (Legacy - keeping for compatibility)
@@ -101,8 +137,16 @@ export interface Tournament {
   description_long?: any; // Rich text blocks or null
   is_featured: boolean;
 
-  // Direct relations (not wrapped)
-  creators: SimpleCreator[];
+  // Direct relations (populated by backend slug endpoint)
+  creators?: SimpleCreator[];
+  challenges?: ChallengeResponse[];
+  faqs?: {
+    id: number;
+    documentId: string;
+    question: string;
+    answer: any; // Rich text blocks
+    name?: string;
+  }[];
 }
 
 // Simple creator type as returned in relations (not full Strapi entity)
@@ -110,9 +154,12 @@ export interface SimpleCreator {
   id: number;
   documentId?: string;
   name: string;
+  username: string;
+  display_name?: string;
   slug: string;
-  twitch?: string;
-  youtube?: string;
+  twitch_url?: string;
+  youtube_url?: string;
+  twitter_url?: string;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;

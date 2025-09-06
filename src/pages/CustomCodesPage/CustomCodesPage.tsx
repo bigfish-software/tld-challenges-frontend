@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PageHero, FilterPanel, CustomCodeCard, ErrorDisplay } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { PageLayout } from '@/components/layout';
@@ -6,6 +7,7 @@ import { useCustomCodes } from '@/hooks/api';
 import { CustomCode } from '@/types/api';
 
 export const CustomCodesPage: React.FC = () => {
+  const navigate = useNavigate();
   const [viewMode] = useState<'grid' | 'list'>('list');
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
   const [currentPage, setCurrentPage] = useState(0);
@@ -22,8 +24,10 @@ export const CustomCodesPage: React.FC = () => {
   const totalCount = apiResponse?.meta?.pagination?.total || 0;
   const totalPages = Math.ceil(totalCount / pageSize);
   
-  console.log('API Response:', apiResponse); // Debug log to see the response structure
-  console.log('Custom codes:', customCodes); // Debug log to see the extracted data
+  // Handle card click to navigate to detail page
+  const handleCardClick = (slug: string) => {
+    navigate(`/custom-codes/${slug}`);
+  };
 
   // Dynamic filter groups based on available data
   const filterGroups = [
@@ -188,6 +192,7 @@ export const CustomCodesPage: React.FC = () => {
                     key={code.id} 
                     customCode={code} 
                     variant={viewMode === 'list' ? 'list' : 'default'}
+                    onCardClick={handleCardClick}
                   />
                 ))}
               </ContentGrid>
