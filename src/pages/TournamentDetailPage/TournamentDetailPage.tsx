@@ -3,6 +3,7 @@ import { useTournament } from '@/hooks/api';
 import { PageLayout } from '@/components/layout';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { ErrorDisplay } from '@/components/ui/ErrorDisplay';
+import { Breadcrumb } from '@/components/ui/Breadcrumb';
 import { TournamentDetail } from './TournamentDetail';
 
 export const TournamentDetailPage = () => {
@@ -50,25 +51,16 @@ export const TournamentDetailPage = () => {
   return (
     <PageLayout>
       {/* Breadcrumb Navigation */}
-      <div className="bg-surface border-b border-default">
-        <div className="container mx-auto px-4 py-3">
-          <nav className="flex space-x-2 text-sm">
-            <a 
-              href="/tournaments" 
-              className="text-primary-color nav-link"
-            >
-              Tournaments
-            </a>
-            <span className="text-tertiary">/</span>
-            <span className="text-primary font-medium">
-              {tournament.data.name}
-            </span>
-          </nav>
-        </div>
-      </div>
+      <Breadcrumb 
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Tournaments', href: '/tournaments' },
+          { label: tournament.data.name, current: true }
+        ]}
+      />
 
       {/* Tournament Detail Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <TournamentDetail tournament={tournament.data} />
       </div>
     </PageLayout>
