@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageHero, FilterPanel, ErrorDisplay, TournamentCard, Breadcrumb } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { useTournaments } from '@/hooks/api';
@@ -6,7 +6,25 @@ import { Tournament, SimpleCreator } from '@/types/api';
 import tournamentsHeroImage from '@/assets/tournaments_hero.png';
 
 export const TournamentsPageContent: React.FC = () => {
-  const [viewMode] = useState<'grid' | 'list'>('list');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
+  
+  // Responsive viewMode based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      // Switch to compact on mobile (< 768px), list on desktop
+      setViewMode(window.innerWidth < 768 ? 'grid' : 'list');
+    };
+    
+    // Set initial viewMode
+    handleResize();
+    
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 12; // 12 tournaments per page
@@ -198,8 +216,7 @@ export const TournamentsPageContent: React.FC = () => {
                   <TournamentCard
                     key={tournament.id}
                     tournament={tournament}
-                    variant={viewMode === 'list' ? 'list' : 'default'}
-                    onCardClick={(id) => window.location.href = `/tournaments/${tournament.slug || id}`}
+                    variant={viewMode === 'list' ? 'list' : 'compact'}
                     onOrganizerClick={(_organizerName, organizerUrl) => {
                       if (organizerUrl) {
                         window.open(organizerUrl, '_blank');

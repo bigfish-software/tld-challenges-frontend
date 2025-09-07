@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageHero, FilterPanel, ChallengeCard, ErrorDisplay, NoDataDisplay, Breadcrumb } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { useQuery } from '@tanstack/react-query';
@@ -6,7 +6,25 @@ import { apiService } from '@/services/api';
 import { ChallengeResponse } from '@/types/api';
 
 export const ChallengesPageContent: React.FC = () => {
-  const [viewMode] = useState<'grid' | 'list'>('list');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
+  
+  // Responsive viewMode based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      // Switch to compact on mobile (< 768px), list on desktop
+      setViewMode(window.innerWidth < 768 ? 'grid' : 'list');
+    };
+    
+    // Set initial viewMode
+    handleResize();
+    
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
   const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 8; // 8 challenges per page
@@ -203,7 +221,7 @@ export const ChallengesPageContent: React.FC = () => {
                   <ChallengeCard 
                     key={challenge.id} 
                     challenge={challenge} 
-                    variant={viewMode === 'list' ? 'list' : 'default'}
+                    variant={viewMode === 'list' ? 'list' : 'compact'}
                   />
                 ))}
               </ContentGrid>

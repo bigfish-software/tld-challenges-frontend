@@ -237,20 +237,36 @@
   border: 1px solid var(--color-border-light);
 }
 
-.feature-card {
+.card-base {
   background-color: var(--color-background-primary);
   border: 1px solid var(--color-border);
   transition: all 0.2s ease;
 }
 
-.feature-card:hover {
+/* Featured card styling - same size as regular cards */
+.featured-card {
+  border: 2px solid #8B5A5C !important;
+  box-shadow: 0 4px 12px rgba(139, 90, 92, 0.2);
+  padding-bottom: 16px;
+}
+
+/* Desktop featured card styling */
+@media (min-width: 768px) {
+  .featured-card {
+    border: 2px solid #8B5A5C !important;
+    box-shadow: 0 6px 20px rgba(139, 90, 92, 0.25);
+    padding-bottom: 16px;
+  }
+}
+
+.card-base:hover {
   background-color: var(--color-surface-raised);
   border-color: var(--color-border-section);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-[data-theme="dark"] .feature-card:hover {
+[data-theme="dark"] .card-base:hover {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
@@ -260,11 +276,11 @@
 }
 
 /* Feature Card Button Hover Effects - Specific overrides */
-.feature-card button[class*="outline"]:hover {
+.card-base button[class*="outline"]:hover {
   color: var(--color-secondary) !important;
 }
 
-.feature-card button[class*="ghost"]:hover {
+.card-base button[class*="ghost"]:hover {
   color: var(--color-secondary) !important;
 }
 
