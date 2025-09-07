@@ -17,7 +17,7 @@ class ApiClient {
   private instance: AxiosInstance;
 
   constructor() {
-    // ⚠️ IMPORTANT: baseURL includes /api prefix, so endpoints should NOT include /api/
+    // Get base URL and ensure it has /api suffix for API calls
     const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:1337';
     const apiBaseURL = baseURL.endsWith('/api') ? baseURL : `${baseURL}/api`;
     
@@ -111,7 +111,7 @@ export const apiClient = new ApiClient();
  * Based on Postman collection and API reference documentation
  * 
  * ⚠️  IMPORTANT: DO NOT ADD /api/ PREFIX TO ENDPOINTS!
- * ⚠️  The baseURL is already configured as http://localhost:1337/api
+ * ⚠️  The baseURL is automatically configured with /api suffix
  * ⚠️  Endpoints should start with / (e.g., '/custom-codes', '/challenges')
  * ⚠️  Adding /api/ will result in duplicate /api/api/ in the URL
  * 

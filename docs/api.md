@@ -10,7 +10,7 @@ This document provides comprehensive guidance for integrating with the TLD Chall
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:1337',
+  baseURL: import.meta.env.VITE_API_BASE_URL ? `${import.meta.env.VITE_API_BASE_URL}/api` : 'http://localhost:1337/api',
   headers: {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${import.meta.env.VITE_API_TOKEN}`,

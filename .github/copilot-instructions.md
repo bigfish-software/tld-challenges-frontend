@@ -181,6 +181,52 @@ interface SubmissionForm {
 
 **THIS PROTOCOL IS NON-NEGOTIABLE** - Violating it is completely unacceptable and causes significant user frustration.
 
+### Development Server Verification Protocol - MANDATORY CHECKS
+
+**BEFORE starting any development server, ALWAYS verify current state:**
+
+#### Pre-Server Startup Checks (REQUIRED)
+
+1. **Check Port Availability**: 
+   - **Windows**: `netstat -ano | findstr :3000`
+   - **macOS/Linux**: `lsof -i :3000`
+   - If server is running, verify accessibility instead of starting new instance
+
+2. **Server Health Check** (if already running):
+   ```bash
+   curl -I http://localhost:3000
+   ```
+   - Verify HTTP 200 response before proceeding
+   - Test actual functionality rather than assuming server works
+
+3. **TypeScript Validation** (before any major changes):
+   ```bash
+   npm run type-check
+   ```
+   - Use the TypeScript protocol above (ALWAYS `isBackground: true`)
+   - Catch compilation errors early in development cycle
+
+4. **API Connectivity Test**:
+   ```bash
+   curl -H "Authorization: Bearer $VITE_API_TOKEN" -I $VITE_API_BASE_URL/api/challenges
+   ```
+   - Verify backend connection with current environment variables
+   - Test actual API endpoints that frontend depends on
+
+#### Benefits of This Protocol
+- **Prevents Unnecessary Server Restarts**: Saves development time and avoids port conflicts
+- **Early Error Detection**: Catches configuration and compilation issues immediately  
+- **Environment Validation**: Ensures all environment variables are properly configured
+- **Reliable Development Workflow**: Consistent verification reduces debugging time
+
+#### FORBIDDEN Practices
+- ❌ Starting dev server without checking if it's already running
+- ❌ Assuming server works without HTTP health check
+- ❌ Skipping TypeScript validation before major changes
+- ❌ Not testing API connectivity when debugging frontend issues
+
+**This verification protocol is MANDATORY and saves significant development time.**
+
 ### Color Visualization in Markdown Documentation
 
 **IMPORTANT**: When creating color documentation or visualizing colors in markdown files, always use shields.io as the first approach:

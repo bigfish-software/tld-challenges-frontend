@@ -2,7 +2,7 @@
 // Copy this file to test-api.js and replace with your actual API token
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:1337/api';
+const API_BASE_URL = process.env.VITE_API_BASE_URL ? `${process.env.VITE_API_BASE_URL}/api` : 'http://localhost:1337/api';
 const API_TOKEN = 'your-jwt-token-here'; // Replace with actual token from your .env.local
 
 const apiClient = axios.create({

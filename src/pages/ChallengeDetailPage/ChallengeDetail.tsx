@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChallengeResponse } from '@/types/api';
+import type { ChallengeResponse } from '@/types/api';
 import { RichTextRenderer } from '@/components/ui/RichTextRenderer';
 import { CustomCodeCard } from '@/components/ui/CustomCodeCard';
+import { getImageUrl, getImageAltText } from '@/utils/images';
 
 interface ChallengeDetailProps {
   challenge: ChallengeResponse;
@@ -37,18 +38,6 @@ export const ChallengeDetail: React.FC<ChallengeDetailProps> = ({ challenge }) =
     });
   };
 
-  // Get responsive image URL
-  const getImageUrl = (thumbnail: ChallengeResponse['thumbnail'], size: 'thumbnail' | 'small' | 'medium' | 'large' | 'original' = 'medium'): string | undefined => {
-    if (!thumbnail) return undefined;
-    
-    if (size === 'original') return `http://localhost:1337${thumbnail.url}`;
-    
-    const format = thumbnail.formats?.[size];
-    if (format) return `http://localhost:1337${format.url}`;
-    
-    return `http://localhost:1337${thumbnail.url}`;
-  };
-
   return (
     <div className="space-y-8">
       {/* Hero Section with Thumbnail */}
@@ -57,7 +46,7 @@ export const ChallengeDetail: React.FC<ChallengeDetailProps> = ({ challenge }) =
           <div className="relative h-64 md:h-96 lg:h-[500px] overflow-hidden">
             <img
               src={getImageUrl(challenge.thumbnail, 'large')}
-              alt={challenge.thumbnail.alternativeText || challenge.name}
+              alt={getImageAltText(challenge.thumbnail, challenge.name)}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
