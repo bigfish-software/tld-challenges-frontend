@@ -1,2 +1,2 @@
 export { ChallengeDetailPage } from './ChallengeDetailPage';
-export { ChallengeDetail } from './ChallengeDetail';
+export { ChallengeDetailPageContent } from './ChallengeDetailPageContent';

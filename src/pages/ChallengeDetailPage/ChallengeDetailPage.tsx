@@ -5,7 +5,7 @@ import { PageLayout } from '@/components/layout/PageLayout';
 import { LoadingSpinner } from '@/components/ui';
 import { ErrorDisplay } from '@/components/ui/ErrorDisplay';
 import { Breadcrumb } from '@/components/ui/Breadcrumb';
-import { ChallengeDetail } from './ChallengeDetail';
+import { ChallengeDetailPageContent } from './ChallengeDetailPageContent';
 
 export const ChallengeDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -80,10 +80,8 @@ export const ChallengeDetailPage: React.FC = () => {
         ]}
       />
 
-      {/* Main content with top spacing to account for sticky breadcrumb */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <ChallengeDetail challenge={challenge} />
-      </div>
+      {/* Page Content */}
+      <ChallengeDetailPageContent challenge={challenge} />
     </PageLayout>
   );
 };

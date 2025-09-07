@@ -89,7 +89,7 @@ export interface ChallengeResponse {
     description_long?: StrapiRichTextBlocks | null;
     is_featured: boolean;
   } | null;
-  tournament?: {
+  tournaments?: {
     id: number;
     documentId: string;
     name: string;
@@ -103,7 +103,7 @@ export interface ChallengeResponse {
     description_short?: string;
     description_long?: StrapiRichTextBlocks | null;
     is_featured: boolean;
-  } | null;
+  }[];
   rules?: {
     id: number;
     documentId: string;
