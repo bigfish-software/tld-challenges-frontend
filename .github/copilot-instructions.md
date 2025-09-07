@@ -20,7 +20,7 @@ If the input is merely standard or underdeveloped, your response should be to an
 - **Verification First**: Before making claims about implementation status, verify the actual code using search tools.
 - **Systematic Documentation Updates**: When updating documentation, search for ALL instances of outdated information before making changes.
 - **Code-Based Truth**: Use semantic_search, grep_search, and read_file tools to understand current implementation rather than assuming based on previous conversations.
-- **CRITICAL: TypeScript Type Check Protocol**: When running `npm run type-check`, this command takes 30-60+ seconds to complete and processes the entire codebase. NEVER assume it has finished until you see the complete output including any error messages or successful completion. ALWAYS wait for the full completion before proceeding with any response or other actions. This is NON-NEGOTIABLE to prevent false positive reports and credit farming.
+- **CRITICAL: TypeScript Type Check Protocol**: MANDATORY - Use `isBackground: true` for `npm run type-check` commands, then monitor with `get_terminal_output` until command prompt returns. NEVER use `isBackground: false` or assume immediate completion. This protocol is NON-NEGOTIABLE and violations cause significant user frustration.
 
 ## Project Overview
 
@@ -160,9 +160,26 @@ interface SubmissionForm {
 
 ## Development Guidelines
 
-### TypeScript Type Checking - CRITICAL TIMING NOTE
+### TypeScript Type Checking - CRITICAL EXECUTION PROTOCOL
 
-**IMPORTANT**: When running `npm run type-check`, this command takes 30-60+ seconds to complete and processes the entire codebase. DO NOT assume it has finished until you see the complete output including any error messages. Always wait for the full completion before proceeding with any other actions.
+**MANDATORY PROTOCOL - NEVER VIOLATE THIS**: When running `npm run type-check`:
+
+1. **ALWAYS use `isBackground: true`** - NEVER use `isBackground: false` for type-check commands
+2. **ALWAYS monitor with `get_terminal_output`** - Check the terminal output until you see the command prompt return
+3. **NEVER proceed until completion** - Wait for either error messages OR clean command prompt return
+4. **NEVER claim success based on partial output** - Only proceed when you see complete results
+
+**CORRECT EXECUTION PATTERN**:
+```
+1. run_in_terminal with isBackground: true
+2. get_terminal_output to monitor progress  
+3. Wait until you see command prompt (C:\path>) return
+4. Only then analyze results and proceed
+```
+
+**FORBIDDEN**: Using `isBackground: false` and assuming immediate completion. This ALWAYS fails and wastes user time.
+
+**THIS PROTOCOL IS NON-NEGOTIABLE** - Violating it is completely unacceptable and causes significant user frustration.
 
 ### Color Visualization in Markdown Documentation
 
@@ -422,6 +439,35 @@ const TournamentView = lazy(() => import('./TournamentView'));
 ```
 
 ### Tailwind CSS Best Practices
+
+#### CRITICAL: Custom Color System Enforcement
+
+**MANDATORY RULE**: NEVER use Tailwind's built-in color classes. ALWAYS use our custom color system.
+
+```typescript
+// ❌ FORBIDDEN: Tailwind color classes
+className="text-gray-900 bg-blue-600 border-red-500"
+
+// ✅ REQUIRED: Custom color system classes
+className="text-primary bg-primary-color border-error"
+```
+
+**Available Custom Color Classes**:
+- `text-primary` - Main text color (theme-aware)
+- `text-secondary` - Secondary text color
+- `text-primary-color` - Brand primary color
+- `text-secondary-color` - Brand secondary color
+- `text-accent-color` - Brand accent color
+- `bg-surface` - Surface background
+- `bg-background-primary` - Primary background
+- `border-default` - Default border color
+- `border-primary` - Primary border color
+
+**Why This Rule Exists**:
+- Tailwind colors override our custom CSS variables
+- Our color system provides proper theme support (light/dark)
+- Ensures brand consistency across the entire application
+- Prevents color conflicts and styling issues
 
 #### Design System and Utility Classes
 ```typescript

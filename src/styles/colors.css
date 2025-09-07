@@ -14,10 +14,10 @@
   --color-neutral-dark: #404040;     /* Dark variant */
 
   /* Semantic Colors - Single shade each */
-  --color-success: #16A34A;          /* Green */
-  --color-warning: #F59E0B;          /* Amber */
-  --color-error: #DC2626;            /* Red */
-  --color-info: #2563EB;             /* Blue */
+  --color-success: #065F46;          /* Darker forest green - less vibrant, professional */
+  --color-warning: #D97706;          /* Darker amber - warmer, less harsh */
+  --color-error: #991B1B;            /* Darker burgundy red - aligns with brand, less vibrant */
+  --color-info: #1E40AF;             /* Darker blue - professional, readable */
 
   /* Background System - Simplified 2-color hierarchy */
   --color-background-primary: #FAFAFA;    /* Page, header, footer, normal sections */
@@ -47,10 +47,10 @@
   --color-on-primary: #FFFFFF;
   --color-on-secondary: #FFFFFF;
   --color-on-accent: #2B1819;
-  --color-on-success: #FFFFFF;
-  --color-on-warning: #1F2937;
-  --color-on-error: #FFFFFF;
-  --color-on-info: #FFFFFF;
+  --color-on-success: #FFFFFF;      /* White text on dark forest green */
+  --color-on-warning: #FFFFFF;      /* White text on darker amber */
+  --color-on-error: #FFFFFF;        /* White text on dark burgundy red */
+  --color-on-info: #FFFFFF;         /* White text on dark blue */
 }
 
 /* Dark Theme - Simplified */

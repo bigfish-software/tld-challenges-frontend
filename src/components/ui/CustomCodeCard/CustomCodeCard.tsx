@@ -147,9 +147,9 @@ export const CustomCodeCard = ({
       )}
 
       <div className={contentClasses}>
-        {/* Header with title and view button */}
-        <div className="flex items-start justify-between mb-3">
-          <div className="flex-1 min-w-0 mr-3">
+        {/* Header with title */}
+        <div className="mb-3">
+          <div className="flex-1 min-w-0">
             <h3 className="text-lg font-semibold font-headline text-primary group-hover:text-secondary transition-colors line-clamp-1">
               {name.toUpperCase()}
             </h3>
@@ -161,12 +161,6 @@ export const CustomCodeCard = ({
               </div>
             )}
           </div>
-          <button
-            onClick={handleViewDetails}
-            className="btn-primary px-3 py-1.5 text-xs font-medium rounded-md flex-shrink-0"
-          >
-            View Details
-          </button>
         </div>
 
         {/* Short Description */}
@@ -178,7 +172,7 @@ export const CustomCodeCard = ({
 
         {/* Code Display */}
         {code && (
-          <div className="bg-surface border border-default rounded-lg p-3">
+          <div className="bg-surface border border-default rounded-lg p-3 mb-4">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-medium text-secondary uppercase tracking-wide">
                 Custom Code
@@ -198,6 +192,16 @@ export const CustomCodeCard = ({
             </code>
           </div>
         )}
+
+        {/* View Details Button */}
+        <div className="flex justify-end mt-4">
+          <button
+            onClick={handleViewDetails}
+            className="btn-primary px-4 py-2 text-sm font-medium rounded-md"
+          >
+            View Details
+          </button>
+        </div>
       </div>
     </div>
   );

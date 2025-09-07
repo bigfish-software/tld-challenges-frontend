@@ -1,5 +1,4 @@
 import React from 'react';
-import { createComponentLogger } from '@/utils/logger';
 import { 
   StrapiRichTextBlocks, 
   StrapiRichTextNode, 
@@ -29,17 +28,8 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
   variant = 'default',
   maxLength = 200
 }) => {
-  const logger = createComponentLogger('RichTextRenderer');
-
-  logger.debug('Processing rich text blocks', { variant }, {
-    isValidBlocks: isStrapiRichTextBlocks(blocks),
-    blocksLength: Array.isArray(blocks) ? blocks.length : 0,
-    firstBlockType: Array.isArray(blocks) && blocks.length > 0 ? blocks[0]?.type : 'none'
-  });
-
   // Validate input using type guard
   if (!isStrapiRichTextBlocks(blocks)) {
-    logger.debug('No valid blocks found, returning null');
     return null;
   }
 
@@ -93,7 +83,7 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
       case 'paragraph':
         if (isParagraphNode(block)) {
           return (
-            <p key={key} className="mb-4 last:mb-0">
+            <p key={key} className="mb-4 last:mb-0 text-secondary">
               {block.children.map((child, childIndex) => 
                 renderInlineElement(child, childIndex)
               )}
@@ -180,7 +170,6 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
         break;
 
       default:
-        logger.debug('Unknown block type encountered', { type: block.type });
         return null;
     }
     

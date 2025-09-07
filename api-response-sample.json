@@ -1,0 +1,211 @@
+{
+  "data": {
+    "id": 8,
+    "documentId": "hdhu6v03qrphyn9f0ya47pig",
+    "name": "Furry, then silence - NOGOA lite",
+    "slug": "furry-then-silence-nogoa-lite",
+    "createdAt": "2025-08-30T07:51:58.245Z",
+    "updatedAt": "2025-09-06T06:48:21.268Z",
+    "publishedAt": null,
+    "description_long": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "text": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "type": "list",
+        "format": "unordered",
+        "children": [
+          {
+            "type": "list-item",
+            "children": [
+              {
+                "text": "list item 1",
+                "type": "text"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "description_short": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
+    "difficulty": "Very Hard",
+    "is_featured": true,
+    "thumbnail": {
+      "id": 3,
+      "documentId": "h1gkkxhmdxgc9ubbffqojm48",
+      "name": "screen_a32f67da-3947-4a11-b1b7-8933f8d9b9d0_hi.png",
+      "alternativeText": null,
+      "caption": null,
+      "width": 3840,
+      "height": 2160,
+      "formats": {
+        "large": {
+          "ext": ".png",
+          "url": "/uploads/large_screen_a32f67da_3947_4a11_b1b7_8933f8d9b9d0_hi_5a7b1c49da.png",
+          "hash": "large_screen_a32f67da_3947_4a11_b1b7_8933f8d9b9d0_hi_5a7b1c49da",
+          "mime": "image/png",
+          "name": "large_screen_a32f67da-3947-4a11-b1b7-8933f8d9b9d0_hi.png",
+          "path": null,
+          "size": 833.39,
+          "width": 1000,
+          "height": 563,
+          "sizeInBytes": 833386
+        },
+        "small": {
+          "ext": ".png",
+          "url": "/uploads/small_screen_a32f67da_3947_4a11_b1b7_8933f8d9b9d0_hi_5a7b1c49da.png",
+          "hash": "small_screen_a32f67da_3947_4a11_b1b7_8933f8d9b9d0_hi_5a7b1c49da",
+          "mime": "image/png",
+          "name": "small_screen_a32f67da-3947-4a11-b1b7-8933f8d9b9d0_hi.png",
+          "path": null,
+          "size": 234.19,
+          "width": 500,
+          "height": 281,
+          "sizeInBytes": 234188
+        },
+        "medium": {
+          "ext": ".png",
+          "url": "/uploads/medium_screen_a32f67da_3947_4a11_b1b7_8933f8d9b9d0_hi_5a7b1c49da.png",
+          "hash": "medium_screen_a32f67da_3947_4a11_b1b7_8933f8d9b9d0_hi_5a7b1c49da",
+          "mime": "image/png",
+          "name": "medium_screen_a32f67da-3947-4a11-b1b7_8933f8d9b9d0_hi.png",
+          "path": null,
+          "size": 494.04,
+          "width": 750,
+          "height": 422,
+          "sizeInBytes": 494035
+        },
+        "thumbnail": {
+          "ext": ".png",
+          "url": "/uploads/thumbnail_screen_a32f67da_3947_4a11_b1b7_8933f8d9b9d0_hi_5a7b1c49da.png",
+          "hash": "thumbnail_screen_a32f67da_3947_4a11_b1b7_8933f8d9b9d0_hi_5a7b1c49da",
+          "mime": "image/png",
+          "name": "thumbnail_screen_a32f67da-3947-4a11-b1b7-8933f8d9b9d0_hi.png",
+          "path": null,
+          "size": 65.09,
+          "width": 245,
+          "height": 138,
+          "sizeInBytes": 65089
+        }
+      },
+      "hash": "screen_a32f67da_3947_4a11_b1b7_8933f8d9b9d0_hi_5a7b1c49da",
+      "ext": ".png",
+      "mime": "image/png",
+      "size": 2597.81,
+      "url": "/uploads/screen_a32f67da_3947_4a11_b1b7_8933f8d9b9d0_hi_5a7b1c49da.png",
+      "previewUrl": null,
+      "provider": "local",
+      "provider_metadata": null,
+      "createdAt": "2025-09-06T06:45:42.690Z",
+      "updatedAt": "2025-09-06T06:45:42.690Z",
+      "publishedAt": "2025-09-06T06:45:42.691Z"
+    },
+    "submissions": [],
+    "creators": [
+      {
+        "id": 4,
+        "documentId": "s5dpeov1p516lnlwgw3soda9",
+        "name": "ChefMaria",
+        "twitch": "https://www.twitch.tv/chefmaria",
+        "youtube": "https://www.youtube.com/@chefmaria7464",
+        "createdAt": "2025-08-30T07:44:23.415Z",
+        "updatedAt": "2025-08-30T07:44:25.627Z",
+        "publishedAt": null,
+        "slug": "chef-maria",
+        "description_short": null,
+        "description_long": null
+      },
+      {
+        "id": 1,
+        "documentId": "uae3ap4zc9tfsk4k03wgkc0v",
+        "name": "PerfectTrip",
+        "twitch": "https://www.twitch.tv/perfecttrip",
+        "youtube": "https://www.youtube.com/@PerfectTrip0",
+        "createdAt": "2025-08-28T18:27:15.974Z",
+        "updatedAt": "2025-08-30T07:30:38.456Z",
+        "publishedAt": null,
+        "slug": "perfect-trip",
+        "description_short": null,
+        "description_long": null
+      }
+    ],
+    "faqs": [
+      {
+        "id": 1,
+        "documentId": "s831tv1dxx8948f301r7r740",
+        "question": "Does a submission require proof?",
+        "answer": [
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "text": "Yes, every submission requires a link to a publicly available recording of the run.",
+                "type": "text"
+              }
+            ]
+          }
+        ],
+        "createdAt": "2025-08-30T08:15:40.231Z",
+        "updatedAt": "2025-08-30T08:28:08.259Z",
+        "publishedAt": null,
+        "name": "Submission proof"
+      }
+    ],
+    "custom_code": {
+      "id": 7,
+      "documentId": "a8y1lmo141rjzlo1wvaqbkkt",
+      "name": "N.O.G.O.A. lite",
+      "slug": "n-o-g-o-a-lite",
+      "code": "8sHM-/z8P-Dz+3-waim-XRYC",
+      "createdAt": "2025-08-30T07:58:21.976Z",
+      "updatedAt": "2025-09-01T10:30:42.610Z",
+      "publishedAt": null,
+      "description_short": "No one gets out alive, with birch bark tea enabled.",
+      "description_long": null,
+      "is_featured": false
+    },
+    "rules": [
+      {
+        "id": 1,
+        "documentId": "v5f2jnbllenc0201x9kxdcf4",
+        "description": [
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "text": "Make it to 50 days survived on the stats page.",
+                "type": "text"
+              }
+            ]
+          }
+        ],
+        "createdAt": "2025-08-30T07:55:30.757Z",
+        "updatedAt": "2025-08-30T08:06:08.309Z",
+        "publishedAt": null,
+        "name": "50 days survived"
+      }
+    ],
+    "tournament": {
+      "id": 1,
+      "documentId": "da8eflxr52n3lcbvfcagse8c",
+      "name": "Furry, then silence",
+      "slug": "furry-then-silence",
+      "start_date": "2025-09-13T22:00:00.000Z",
+      "end_date": "2025-12-30T23:00:00.000Z",
+      "state": "active",
+      "createdAt": "2025-08-30T07:40:16.170Z",
+      "updatedAt": "2025-08-31T16:09:34.485Z",
+      "publishedAt": null,
+      "description_short": "Part 2 of the famous hunting tourney \"Fury, then silence\". Get points for every kill, get rewarded for high accuracy and compete with players around the world.",
+      "description_long": null,
+      "is_featured": true
+    }
+  },
+  "meta": {}
+}

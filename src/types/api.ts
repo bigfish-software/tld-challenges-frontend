@@ -18,6 +18,47 @@ export interface StrapiCollection<T> {
   data: T[];
 }
 
+// Strapi Media Object (for thumbnails and other media)
+export interface StrapiMedia {
+  id: number;
+  documentId: string;
+  name: string;
+  alternativeText?: string | null;
+  caption?: string | null;
+  width: number;
+  height: number;
+  formats?: {
+    large?: StrapiMediaFormat;
+    medium?: StrapiMediaFormat;
+    small?: StrapiMediaFormat;
+    thumbnail?: StrapiMediaFormat;
+  };
+  hash: string;
+  ext: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl?: string | null;
+  provider: string;
+  provider_metadata?: any;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt?: string;
+}
+
+export interface StrapiMediaFormat {
+  ext: string;
+  url: string;
+  hash: string;
+  mime: string;
+  name: string;
+  path?: string | null;
+  size: number;
+  width: number;
+  height: number;
+  sizeInBytes: number;
+}
+
 // Direct API Response interfaces (without Strapi wrapper)
 export interface ChallengeResponse {
   id: number;
@@ -26,11 +67,12 @@ export interface ChallengeResponse {
   slug: string;
   createdAt: string;
   updatedAt: string;
-  publishedAt: string;
-  description_long?: any; // Rich text blocks or null
+  publishedAt: string | null;
+  description_long?: StrapiRichTextBlocks; // Rich text blocks
   description_short?: string;
   difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard' | 'Extreme'; // Actual values from API
   is_featured: boolean;
+  thumbnail?: StrapiMedia | null;
   
   // Direct relations (populated by backend slug endpoint)
   creators?: SimpleCreator[];
@@ -42,9 +84,9 @@ export interface ChallengeResponse {
     code: string;
     createdAt: string;
     updatedAt: string;
-    publishedAt: string;
+    publishedAt: string | null;
     description_short?: string;
-    description_long?: any;
+    description_long?: StrapiRichTextBlocks | null;
     is_featured: boolean;
   } | null;
   tournament?: {
@@ -55,22 +97,31 @@ export interface ChallengeResponse {
     start_date: string;
     end_date: string;
     state: 'planned' | 'active' | 'completed' | 'cancelled';
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string | null;
     description_short?: string;
-    description_long?: any;
+    description_long?: StrapiRichTextBlocks | null;
     is_featured: boolean;
   } | null;
   rules?: {
     id: number;
     documentId: string;
     name?: string;
-    description: any; // Rich text blocks
+    description: StrapiRichTextBlocks; // Rich text blocks
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string | null;
   }[];
   faqs?: {
     id: number;
     documentId: string;
     question: string;
-    answer: any; // Rich text blocks
+    answer: StrapiRichTextBlocks; // Rich text blocks
     name?: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string | null;
   }[];
   submissions?: {
     id: number;
@@ -82,6 +133,8 @@ export interface ChallengeResponse {
     result?: string;
     submitted_date?: string;
     createdAt: string;
+    updatedAt: string;
+    publishedAt: string | null;
   }[];
 }
 
@@ -150,19 +203,25 @@ export interface Tournament {
 }
 
 // Simple creator type as returned in relations (not full Strapi entity)
+// KEEPING ORIGINAL WORKING VERSION - DO NOT CHANGE
 export interface SimpleCreator {
   id: number;
   documentId?: string;
   name: string;
-  username: string;
+  username?: string;
   display_name?: string;
   slug: string;
   twitch_url?: string;
   youtube_url?: string;
   twitter_url?: string;
+  // NEW: Support both old and new field names for compatibility
+  twitch?: string;
+  youtube?: string;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
+  description_short?: string | null;
+  description_long?: StrapiRichTextBlocks | null;
 }
 
 // Content Type: CustomCode (actual API response structure)

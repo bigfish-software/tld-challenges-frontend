@@ -195,7 +195,7 @@ export const CustomCodesPageContent: React.FC = () => {
                   <CustomCodeCard 
                     key={code.id} 
                     customCode={code} 
-                    variant={viewMode === 'list' ? 'list' : 'default'}
+                    variant={viewMode === 'list' ? 'list' : 'compact'}
                     onCardClick={handleCardClick}
                   />
                 ))}
