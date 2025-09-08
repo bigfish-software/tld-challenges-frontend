@@ -5,6 +5,7 @@ import { RichTextRenderer } from '@/components/ui/RichTextRenderer';
 import { CustomCodeCard } from '@/components/ui/CustomCodeCard';
 import { TournamentCard } from '@/components/ui/TournamentCard';
 import { Accordion } from '@/components/ui/Accordion';
+import { Button } from '@/components/ui/Button';
 import { getImageUrl, getImageAltText } from '@/utils/images';
 
 interface ChallengeDetailPageContentProps {
@@ -208,6 +209,57 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
 
             {/* Sidebar Column */}
             <div className="space-y-6">
+              {/* Challenge Stats */}
+              <div className="bg-surface border border-default rounded-lg p-6">
+                <h3 className="text-xl font-bold font-headline text-primary mb-4">
+                  CHALLENGE STATS
+                </h3>
+                <div className="space-y-3 text-sm mb-6">
+                  <div className="flex justify-between">
+                    <span className="text-tertiary">Submissions:</span>
+                    <span className="font-medium text-primary">
+                      {challenge.submissions?.length || 0}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-tertiary">Difficulty:</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(challenge.difficulty)}`}>
+                      {challenge.difficulty}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-tertiary">Created:</span>
+                    <span className="font-medium text-primary">
+                      {formatDate(challenge.createdAt)}
+                    </span>
+                  </div>
+                  {challenge.updatedAt !== challenge.createdAt && (
+                    <div className="flex justify-between">
+                      <span className="text-tertiary">Updated:</span>
+                      <span className="font-medium text-primary">
+                        {formatDate(challenge.updatedAt)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Submit Run Button */}
+                <Button
+                  variant="secondary"
+                  size="md"
+                  fullWidth
+                  shadow="lg"
+                  hoverEffect="both"
+                  onClick={() => {
+                    // TODO: Implement submit run functionality
+                    // This could either open a modal or navigate to a submission form
+                    console.log('Submit run clicked for challenge:', challenge.id);
+                  }}
+                >
+                  Submit Run
+                </Button>
+              </div>
+
               {/* Custom Code Section */}
               {challenge.custom_code && (
                 <div className="w-full">
@@ -255,41 +307,6 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
                   </div>
                 </div>
               )}
-
-              {/* Challenge Stats */}
-              <div className="bg-surface border border-default rounded-lg p-6">
-                <h3 className="text-xl font-bold font-headline text-primary mb-4">
-                  CHALLENGE STATS
-                </h3>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-tertiary">Submissions:</span>
-                    <span className="font-medium text-primary">
-                      {challenge.submissions?.length || 0}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-tertiary">Difficulty:</span>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(challenge.difficulty)}`}>
-                      {challenge.difficulty}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-tertiary">Created:</span>
-                    <span className="font-medium text-primary">
-                      {formatDate(challenge.createdAt)}
-                    </span>
-                  </div>
-                  {challenge.updatedAt !== challenge.createdAt && (
-                    <div className="flex justify-between">
-                      <span className="text-tertiary">Updated:</span>
-                      <span className="font-medium text-primary">
-                        {formatDate(challenge.updatedAt)}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </div>
             </div>
           </div>
 
