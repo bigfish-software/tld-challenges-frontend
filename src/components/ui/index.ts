@@ -14,4 +14,5 @@ export * from './ResultsHeader';
 export * from './ErrorDisplay';
 export * from './NoDataDisplay';
 export * from './LoadingSpinner';
+export * from './Accordion';
 export * from './icons';

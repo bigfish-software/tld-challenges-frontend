@@ -4,6 +4,7 @@ import type { ChallengeResponse } from '@/types/api';
 import { RichTextRenderer } from '@/components/ui/RichTextRenderer';
 import { CustomCodeCard } from '@/components/ui/CustomCodeCard';
 import { TournamentCard } from '@/components/ui/TournamentCard';
+import { Accordion } from '@/components/ui/Accordion';
 import { getImageUrl, getImageAltText } from '@/utils/images';
 
 interface ChallengeDetailPageContentProps {
@@ -188,18 +189,19 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
                   <h2 className="text-2xl font-bold font-headline text-primary mb-6">
                     FREQUENTLY ASKED QUESTIONS
                   </h2>
-                  <div className="space-y-6">
-                    {challenge.faqs.map((faq, index) => (
-                      <div key={faq.id} className="border-b border-default pb-6 last:border-b-0">
-                        <h3 className="text-lg font-semibold text-primary mb-3">
-                          Q{index + 1}: {faq.question}
-                        </h3>
-                        <div className="prose dark:prose-invert prose-sm prose-headings:text-secondary prose-links:text-primary prose-links:no-underline hover:prose-links:text-secondary-color bg-background-primary p-4 rounded-lg">
+                  <Accordion allowMultiple={true} className="space-y-3">
+                    {challenge.faqs.map((faq) => (
+                      <Accordion.Item 
+                        key={faq.id} 
+                        id={`faq-${faq.id}`} 
+                        title={faq.question}
+                      >
+                        <div className="prose dark:prose-invert prose-sm prose-headings:text-secondary prose-links:text-primary prose-links:no-underline hover:prose-links:text-secondary-color max-w-none">
                           <RichTextRenderer blocks={faq.answer} />
                         </div>
-                      </div>
+                      </Accordion.Item>
                     ))}
-                  </div>
+                  </Accordion>
                 </div>
               )}
             </div>
