@@ -31,7 +31,7 @@ export const FeatureCard = ({
       flex
       flex-col
       h-full
-      feature-card 
+      home-feature-card 
       rounded-lg 
       shadow-sm
       p-6

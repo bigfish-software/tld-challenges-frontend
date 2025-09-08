@@ -516,6 +516,12 @@ className="text-primary bg-primary-color border-error"
 - Ensures brand consistency across the entire application
 - Prevents color conflicts and styling issues
 
+**CRITICAL: CSS Class Verification**:
+- **NEVER use undefined CSS classes** - Always verify classes exist in `src/styles/colors.css`
+- **CHECK before using** - If a class doesn't exist, either use existing classes or add it properly to the color system
+- **USE semantic naming** - Component-specific classes should be descriptive (e.g., `home-feature-card` instead of generic `feature-card`)
+- **MAINTAIN consistency** - All new CSS classes must follow our color system patterns with CSS variables
+
 #### Design System and Utility Classes
 ```typescript
 // Use consistent spacing scale
