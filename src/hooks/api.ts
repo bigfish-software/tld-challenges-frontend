@@ -155,9 +155,12 @@ export const useCustomCodes = (filters?: CustomCodeFilters, pagination?: { start
 };
 
 export const useCustomCode = (slug: string) => {
-  return useQuery({
+  return useQuery<CustomCode>({
     queryKey: queryKeys.customCode(slug),
-    queryFn: () => apiService.customCodes.getBySlug(slug),
+    queryFn: async () => {
+      const response = await apiService.customCodes.getBySlug(slug);
+      return response.data; // Extract data from Strapi response wrapper
+    },
     staleTime: 15 * 60 * 1000, // 15 minutes
     enabled: !!slug,
   });

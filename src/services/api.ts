@@ -341,7 +341,7 @@ export const apiService = {
      * Get custom code by slug
      * Note: This is a custom endpoint that returns populated data by default
      */
-    getBySlug: (slug: string): Promise<CustomCode> => {
+    getBySlug: (slug: string): Promise<{ data: CustomCode; meta: {} }> => {
       return apiClient.get(`${ENDPOINTS.CUSTOM_CODES}/slug/${slug}`);
     },
     

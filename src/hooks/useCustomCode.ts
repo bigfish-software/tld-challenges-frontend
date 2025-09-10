@@ -9,7 +9,10 @@ import type { CustomCode } from '@/types/api';
 export const useCustomCode = (slug: string) => {
   return useQuery<CustomCode>({
     queryKey: ['custom-code', slug],
-    queryFn: () => apiService.customCodes.getBySlug(slug),
+    queryFn: async () => {
+      const response = await apiService.customCodes.getBySlug(slug);
+      return response.data; // Extract data from Strapi response wrapper
+    },
     enabled: !!slug,
     staleTime: 10 * 60 * 1000, // 10 minutes
     retry: (failureCount, error: any) => {

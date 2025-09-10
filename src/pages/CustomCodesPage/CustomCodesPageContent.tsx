@@ -109,8 +109,8 @@ export const CustomCodesPageContent: React.FC = () => {
 
     // Default sorting by newest
     filtered.sort((a, b) => {
-      const dateA = a.created_date || a.createdAt;
-      const dateB = b.created_date || b.createdAt;
+      const dateA = a.createdAt;
+      const dateB = b.createdAt;
       return new Date(dateB).getTime() - new Date(dateA).getTime();
     });
 

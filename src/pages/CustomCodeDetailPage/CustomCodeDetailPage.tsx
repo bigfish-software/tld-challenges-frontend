@@ -16,7 +16,7 @@ export const CustomCodeDetailPage: React.FC = () => {
   }
 
   const { 
-    data: response, 
+    data: customCode, 
     isLoading, 
     error 
   } = useCustomCode(slug);
@@ -33,28 +33,7 @@ export const CustomCodeDetailPage: React.FC = () => {
     );
   }
 
-  if (error) {
-    return (
-      <PageLayout>
-        <div className="container mx-auto px-4 py-8">
-          <ErrorDisplay
-            title="Custom Code Not Found"
-            message="The custom code you're looking for doesn't exist or has been removed."
-            onRetry={() => window.location.href = '/custom-codes'}
-            retryText="Browse Custom Codes"
-          />
-        </div>
-      </PageLayout>
-    );
-  }
-
-  // Handle different possible response structures from the API
-  let customCode: any;
-  if (response && typeof response === 'object' && 'data' in response) {
-    customCode = (response as any).data;
-  } else if (response && typeof response === 'object' && 'id' in response) {
-    customCode = response; // Direct CustomCode object
-  } else {
+  if (error || !customCode) {
     return (
       <PageLayout>
         <div className="container mx-auto px-4 py-8">

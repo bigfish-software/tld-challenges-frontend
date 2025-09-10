@@ -1,19 +1,19 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import type { CustomCode } from '@/types/api';
 import { RichTextRenderer } from '@/components/ui/RichTextRenderer';
+import { Accordion } from '@/components/ui/Accordion';
+import { Button } from '@/components/ui/Button';
 
 export interface CustomCodeDetailProps {
   /** The custom code object from the API */
   customCode: CustomCode;
-  /** Additional CSS classes */
-  className?: string;
 }
 
 export const CustomCodeDetail = ({
-  customCode,
-  className = ''
+  customCode
 }: CustomCodeDetailProps) => {
+  const navigate = useNavigate();
   // State for copy confirmation
   const [isCopied, setIsCopied] = useState(false);
 
@@ -21,11 +21,13 @@ export const CustomCodeDetail = ({
     name,
     code,
     description_short,
-    description, // Rich text description
+    description_long, // Rich text description
     creators,
     is_featured,
     createdAt,
-    updatedAt
+    updatedAt,
+    challenges, // Related challenges if available
+    faqs // FAQs if available
   } = customCode;
 
   const handleCopyCode = () => {
@@ -34,6 +36,7 @@ export const CustomCodeDetail = ({
     setTimeout(() => setIsCopied(false), 2000);
   };
 
+  // Format date helper (matching ChallengeDetailPage)
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -43,133 +46,244 @@ export const CustomCodeDetail = ({
   };
 
   return (
-    <div className={`space-y-8 ${className}`}>
-      {/* Header Section */}
-      <div className="feature-card p-8">
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
-          <div className="flex-1">
-            {/* Title */}
-            <div className="flex items-start gap-4 mb-4">
-              <h1 className="text-3xl lg:text-4xl font-bold font-headline text-primary">
+    <div className="min-h-screen bg-background">
+      {/* Main Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="space-y-8">
+          {/* Hero Section (matching ChallengeDetailPage structure) */}
+          <div className="bg-surface border border-default rounded-lg overflow-hidden">
+            {/* Header Section */}
+            <div className="p-8">
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                {is_featured && (
+                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-secondary text-light-primary">
+                    Featured
+                  </span>
+                )}
+                <span className="px-3 py-1 rounded-full text-sm font-medium bg-primary-color text-white">
+                  Custom Code
+                </span>
+              </div>
+              
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-headline text-primary mb-4">
                 {name.toUpperCase()}
               </h1>
-              {is_featured && (
-                <div className="bg-secondary text-light-primary px-3 py-1 text-sm font-semibold rounded-full flex-shrink-0">
-                  FEATURED
-                </div>
+
+              {description_short && (
+                <p className="text-lg md:text-xl text-secondary leading-relaxed max-w-3xl">
+                  {description_short}
+                </p>
               )}
             </div>
 
-            {/* Creators */}
-            {creators && creators.length > 0 && (
-              <div className="mb-4">
-                <span className="text-sm text-tertiary mr-2">Created by</span>
-                <div className="inline-flex flex-wrap gap-2">
-                  {creators.map((creator, index) => (
-                    <span key={creator.id} className="text-secondary">
-                      <Link
-                        to={`/creators/${creator.slug}`}
-                        className="hover:text-primary transition-colors"
+            {/* Meta Information Bar (matching ChallengeDetailPage) */}
+            <div className="border-t border-default bg-background-primary p-6">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-wrap gap-6 text-sm text-tertiary">
+                  <div>
+                    <span className="font-medium">Created:</span>
+                    <span className="ml-1">{formatDate(createdAt)}</span>
+                  </div>
+                  <div>
+                    <span className="font-medium">Updated:</span>
+                    <span className="ml-1">{formatDate(updatedAt)}</span>
+                  </div>
+                </div>
+
+                {/* Creators Section (matching ChallengeDetailPage) */}
+                {creators && creators.length > 0 && (
+                  <div className="flex items-center gap-4">
+                    <span className="text-sm text-tertiary font-medium">Created by:</span>
+                    <div className="flex flex-wrap items-center gap-3">
+                      {creators.map((creator) => (
+                        <div key={creator.id} className="flex items-center gap-2">
+                          <Link
+                            to={`/creators/${creator.slug}`}
+                            className="text-primary nav-link hover:text-secondary-color transition-colors font-medium text-sm"
+                          >
+                            {creator.name}
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Main Content Grid (matching ChallengeDetailPage layout) */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Content Column */}
+            <div className="lg:col-span-2 space-y-8">
+              {/* Custom Code Display Section */}
+              <div className="bg-surface border border-default rounded-lg p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold font-headline text-primary uppercase">
+                    Custom Game Code
+                  </h2>
+                  <Button
+                    variant="primary"
+                    size="md"
+                    onClick={handleCopyCode}
+                    className="flex items-center gap-2"
+                  >
+                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                    </svg>
+                    <span>{isCopied ? 'Copied!' : 'Copy Code'}</span>
+                  </Button>
+                </div>
+
+                {code ? (
+                  <div className="bg-background-primary border border-default rounded-lg p-8">
+                    <code className="text-3xl md:text-4xl font-mono font-bold text-primary block text-center py-8 tracking-widest break-all">
+                      {code}
+                    </code>
+                  </div>
+                ) : (
+                  <div className="bg-background-primary border border-default rounded-lg p-8">
+                    <p className="text-center text-secondary text-lg">No custom code available</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Detailed Description (matching ChallengeDetailPage) */}
+              {description_long && (
+                <div className="bg-surface border border-default rounded-lg p-8">
+                  <h2 className="text-2xl font-bold font-headline text-primary mb-6 uppercase">
+                    Description
+                  </h2>
+                  <div className="max-w-none text-primary">
+                    <RichTextRenderer blocks={description_long} />
+                  </div>
+                </div>
+              )}
+
+              {/* FAQ Section (matching ChallengeDetailPage) */}
+              {faqs && faqs.length > 0 && (
+                <div className="bg-surface border border-default rounded-lg p-8">
+                  <h2 className="text-2xl font-bold font-headline text-primary mb-6 uppercase">
+                    Frequently Asked Questions
+                  </h2>
+                  <Accordion allowMultiple={true} className="space-y-3">
+                    {faqs.map((faq) => (
+                      <Accordion.Item 
+                        key={faq.id} 
+                        id={`faq-${faq.id}`} 
+                        title={faq.attributes?.question || 'Question'}
                       >
-                        {creator.name}
-                      </Link>
-                      {index < creators.length - 1 && <span className="text-tertiary ml-2">,</span>}
-                    </span>
-                  ))}
+                        <div className="prose dark:prose-invert prose-sm prose-headings:text-secondary prose-links:text-primary prose-links:no-underline hover:prose-links:text-secondary-color max-w-none">
+                          {faq.attributes?.answer && <RichTextRenderer blocks={faq.attributes.answer} />}
+                        </div>
+                      </Accordion.Item>
+                    ))}
+                  </Accordion>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
 
-            {/* Short Description */}
-            {description_short && (
-              <p className="text-lg text-secondary leading-relaxed">
-                {description_short}
-              </p>
-            )}
+            {/* Sidebar Column (matching ChallengeDetailPage) */}
+            <div className="space-y-6">
+              {/* Custom Code Stats (matching Challenge Stats) */}
+              <div className="bg-surface border border-default rounded-lg p-6">
+                <h3 className="text-xl font-bold font-headline text-primary mb-4 uppercase">
+                  Code Info
+                </h3>
+                <div className="space-y-3 text-sm mb-6">
+                  <div className="flex justify-between">
+                    <span className="text-tertiary">Related Challenges:</span>
+                    <span className="font-medium text-primary">
+                      {challenges?.length || 0}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-tertiary">Created:</span>
+                    <span className="font-medium text-primary">
+                      {formatDate(createdAt)}
+                    </span>
+                  </div>
+                  {updatedAt !== createdAt && (
+                    <div className="flex justify-between">
+                      <span className="text-tertiary">Updated:</span>
+                      <span className="font-medium text-primary">
+                        {formatDate(updatedAt)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Copy Code Button */}
+                <Button
+                  variant="secondary"
+                  size="md"
+                  fullWidth
+                  shadow="lg"
+                  hoverEffect="both"
+                  onClick={handleCopyCode}
+                  className="mb-4"
+                >
+                  {isCopied ? 'Code Copied!' : 'Copy Custom Code'}
+                </Button>
 
-            {/* Metadata */}
-            <div className="flex flex-wrap gap-6 text-sm text-tertiary mt-6">
-              <div>
-                <span className="font-medium">Created:</span> {formatDate(createdAt)}
+                {/* Browse Challenges Button */}
+                <Button
+                  variant="outline"
+                  size="md"
+                  fullWidth
+                  onClick={() => navigate('/challenges')}
+                >
+                  Browse Challenges
+                </Button>
               </div>
-              {updatedAt !== createdAt && (
-                <div>
-                  <span className="font-medium">Updated:</span> {formatDate(updatedAt)}
+
+              {/* Related Challenges Section */}
+              {challenges && challenges.length > 0 && (
+                <div className="w-full">
+                  <h3 className="text-lg font-bold font-headline text-primary mb-4 uppercase">
+                    Challenges Using This Code
+                  </h3>
+                  <div className="space-y-4">
+                    {challenges.slice(0, 3).map((challenge) => (
+                      <div key={challenge.id} className="bg-surface border border-default rounded-lg p-4 hover:border-secondary-color transition-colors">
+                        <h4 className="font-semibold text-primary mb-2">
+                          <Link
+                            to={`/challenges/${challenge.slug}`}
+                            className="hover:text-secondary-color transition-colors"
+                          >
+                            {challenge.name}
+                          </Link>
+                        </h4>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-tertiary">
+                            Difficulty: {challenge.difficulty}
+                          </span>
+                          <Link
+                            to={`/challenges/${challenge.slug}`}
+                            className="text-xs text-primary hover:text-secondary-color transition-colors font-medium"
+                          >
+                            View Challenge →
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  {challenges.length > 3 && (
+                    <div className="mt-4 text-center">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => navigate('/challenges')} // TODO: Add filter for this custom code
+                      >
+                        View All {challenges.length} Challenges
+                      </Button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Custom Code Display Section */}
-      <div className="feature-card p-8">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold font-headline text-primary">
-            CUSTOM GAME CODE
-          </h2>
-          <button
-            onClick={handleCopyCode}
-            className="btn-primary px-4 py-2 flex items-center space-x-2"
-          >
-            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-            </svg>
-            <span>{isCopied ? 'Copied!' : 'Copy Code'}</span>
-          </button>
-        </div>
-
-        {code ? (
-          <div className="bg-surface border border-default rounded-lg p-6">
-            <code className="text-2xl font-mono font-bold text-primary block text-center py-8 tracking-widest">
-              {code}
-            </code>
-          </div>
-        ) : (
-          <div className="bg-surface border border-default rounded-lg p-6">
-            <p className="text-center text-secondary">No custom code available</p>
-          </div>
-        )}
-
-        {/* Instructions */}
-        <div className="mt-6 bg-surface border border-default rounded-lg p-4">
-          <h3 className="font-semibold text-primary mb-2">How to Use</h3>
-          <ol className="list-decimal list-inside text-sm text-secondary space-y-1">
-            <li>Copy the custom code above</li>
-            <li>Start The Long Dark game</li>
-            <li>Go to "Custom Game" mode</li>
-            <li>Click "Share/Code" button</li>
-            <li>Paste the code and click "Use Code"</li>
-          </ol>
-        </div>
-      </div>
-
-      {/* Long Description Section */}
-      {description && (
-        <div className="feature-card p-8">
-          <h2 className="text-2xl font-bold font-headline text-primary mb-6">
-            DESCRIPTION
-          </h2>
-          <div className="prose prose-lg max-w-none">
-            <RichTextRenderer blocks={description} />
-          </div>
-        </div>
-      )}
-
-      {/* Related Challenges Section */}
-      {/* TODO: This would be populated when challenges relation is available */}
-      
-      {/* Back to Custom Codes */}
-      <div className="text-center pt-8">
-        <Link
-          to="/custom-codes"
-          className="btn-secondary px-6 py-3 inline-flex items-center space-x-2"
-        >
-          <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          <span>Back to Custom Codes</span>
-        </Link>
       </div>
     </div>
   );

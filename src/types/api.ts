@@ -158,6 +158,21 @@ export interface Challenge extends StrapiEntity {
   };
 }
 
+// Simple challenge type as returned in relations (not full Strapi entity)
+export interface SimpleChallenge {
+  id: number;
+  documentId: string;
+  name: string;
+  slug: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard' | 'Extreme';
+  description_short?: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string | null;
+  is_featured?: boolean;
+  thumbnail?: StrapiMedia | null;
+}
+
 // Content Type: Submission
 export interface Submission extends StrapiEntity {
   attributes: {
@@ -231,18 +246,17 @@ export interface CustomCode {
   name: string;
   slug: string;
   code: string;
-  description?: StrapiRichTextBlocks; // Rich text blocks - structured content from Strapi
+  description_long?: StrapiRichTextBlocks | null; // Rich text blocks - can be null
   description_short?: string; // Short description for cards
   is_featured?: boolean; // Whether this is a featured custom code
   createdAt: string;
   updatedAt: string;
-  publishedAt: string;
-  created_date?: string;
-  updated_date?: string;
+  publishedAt: string | null;
+  thumbnail?: StrapiMedia | null;
   
   // Relations - Direct arrays as returned by Strapi populate
   creators: SimpleCreator[];
-  challenges?: Challenge[];
+  challenges?: SimpleChallenge[];
   faqs?: FAQ[];
 }
 
