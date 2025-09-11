@@ -4,6 +4,7 @@ import type { CustomCode } from '@/types/api';
 import { RichTextRenderer } from '@/components/ui/RichTextRenderer';
 import { Accordion } from '@/components/ui/Accordion';
 import { Button } from '@/components/ui/Button';
+import { ChallengeCard } from '@/components/ui/ChallengeCard';
 import { getImageUrl, getImageAltText, getResponsiveImageProps } from '@/utils/images';
 
 export interface CustomCodeDetailProps {
@@ -239,12 +240,12 @@ export const CustomCodeDetail = ({
             {/* Sidebar Column (matching ChallengeDetailPage) */}
             <div className="space-y-6">
               {/* Custom Code Stats (matching Challenge Stats) */}
-              <div className="bg-surface border border-default rounded-lg p-6">
-                <h3 className="text-xl font-bold font-headline text-primary mb-4 uppercase">
+              <div className="bg-surface border border-default rounded-lg p-4">
+                <h3 className="text-xl font-bold font-headline text-primary mb-3 uppercase">
                   Code Info
                 </h3>
                 
-                <div className="space-y-3 text-sm mb-6">
+                <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-tertiary">Related Challenges:</span>
                     <span className="font-medium text-primary">
@@ -266,29 +267,6 @@ export const CustomCodeDetail = ({
                     </div>
                   )}
                 </div>
-                
-                {/* Copy Code Button */}
-                <Button
-                  variant="secondary"
-                  size="md"
-                  fullWidth
-                  shadow="lg"
-                  hoverEffect="both"
-                  onClick={handleCopyCode}
-                  className="mb-4"
-                >
-                  {isCopied ? 'Code Copied!' : 'Copy Custom Code'}
-                </Button>
-
-                {/* Browse Challenges Button */}
-                <Button
-                  variant="outline"
-                  size="md"
-                  fullWidth
-                  onClick={() => navigate('/challenges')}
-                >
-                  Browse Challenges
-                </Button>
               </div>
 
               {/* Related Challenges Section */}
@@ -299,27 +277,32 @@ export const CustomCodeDetail = ({
                   </h3>
                   <div className="space-y-4">
                     {challenges.slice(0, 3).map((challenge) => (
-                      <div key={challenge.id} className="bg-surface border border-default rounded-lg p-4 hover:border-secondary-color transition-colors">
-                        <h4 className="font-semibold text-primary mb-2">
-                          <Link
-                            to={`/challenges/${challenge.slug}`}
-                            className="hover:text-secondary-color transition-colors"
-                          >
-                            {challenge.name}
-                          </Link>
-                        </h4>
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-tertiary">
-                            Difficulty: {challenge.difficulty}
-                          </span>
-                          <Link
-                            to={`/challenges/${challenge.slug}`}
-                            className="text-xs text-primary hover:text-secondary-color transition-colors font-medium"
-                          >
-                            View Challenge →
-                          </Link>
-                        </div>
-                      </div>
+                      <ChallengeCard
+                        key={challenge.id}
+                        challenge={{
+                          ...challenge,
+                          is_featured: !!challenge.is_featured, // Convert undefined to false
+                          // Add required properties from ChallengeResponse that SimpleChallenge doesn't have
+                          custom_code: customCode ? {
+                            id: customCode.id,
+                            documentId: customCode.documentId,
+                            name: customCode.name,
+                            slug: customCode.slug,
+                            code: customCode.code,
+                            createdAt: customCode.createdAt,
+                            updatedAt: customCode.updatedAt,
+                            publishedAt: customCode.publishedAt,
+                            is_featured: !!customCode.is_featured
+                          } : null,
+                          creators: [],
+                          tournaments: [],
+                          rules: [],
+                          faqs: [],
+                          submissions: []
+                        }}
+                        variant="compact"
+                        className="bg-surface border border-default hover:border-secondary-color transition-colors"
+                      />
                     ))}
                   </div>
                   {challenges.length > 3 && (
