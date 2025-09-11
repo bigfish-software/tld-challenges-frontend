@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import { ScrollToTop } from '@/components/layout';
 import { HomePage } from '@/pages/HomePage';
 import { NotFoundPageLayout } from '@/pages/NotFoundPage';
 import { PrivacyPolicyPage } from '@/pages/PrivacyPolicyPage';
@@ -35,6 +36,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <Router>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/custom-codes" element={<CustomCodesPage />} />

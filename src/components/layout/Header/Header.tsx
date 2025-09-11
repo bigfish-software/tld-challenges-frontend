@@ -13,10 +13,8 @@ export const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const handleBrandClick = () => {
-    // Scroll to top when navigating to homepage
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  // No longer needed - ScrollToTop component handles this automatically
+  const handleBrandClick = () => {};
 
   // Helper function to determine if a navigation link is active
   const isActiveLink = (path: string) => {

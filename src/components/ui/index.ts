@@ -16,3 +16,4 @@ export * from './NoDataDisplay';
 export * from './LoadingSpinner';
 export * from './Accordion';
 export * from './icons';
+export * from './Link';
