@@ -4,6 +4,7 @@ import type { CustomCode } from '@/types/api';
 import { RichTextRenderer } from '@/components/ui/RichTextRenderer';
 import { Accordion } from '@/components/ui/Accordion';
 import { Button } from '@/components/ui/Button';
+import { getImageUrl, getImageAltText } from '@/utils/images';
 
 export interface CustomCodeDetailProps {
   /** The custom code object from the API */
@@ -27,7 +28,8 @@ export const CustomCodeDetail = ({
     createdAt,
     updatedAt,
     challenges, // Related challenges if available
-    faqs // FAQs if available
+    faqs, // FAQs if available
+    thumbnail // Image for the header
   } = customCode;
 
   const handleCopyCode = () => {
@@ -52,29 +54,67 @@ export const CustomCodeDetail = ({
         <div className="space-y-8">
           {/* Hero Section (matching ChallengeDetailPage structure) */}
           <div className="bg-surface border border-default rounded-lg overflow-hidden">
-            {/* Header Section */}
-            <div className="p-8">
-              <div className="flex flex-wrap items-center gap-3 mb-4">
-                {is_featured && (
-                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-secondary text-light-primary">
-                    Featured
-                  </span>
-                )}
-                <span className="px-3 py-1 rounded-full text-sm font-medium bg-primary-color text-white">
-                  Custom Code
-                </span>
-              </div>
-              
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-headline text-primary mb-4">
-                {name.toUpperCase()}
-              </h1>
+            {/* Thumbnail Image Section */}
+            {thumbnail && (
+              <div className="relative h-64 md:h-96 lg:h-[500px] overflow-hidden">
+                <img
+                  src={getImageUrl(thumbnail, 'large')}
+                  alt={getImageAltText(thumbnail, name)}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                
+                {/* Hero Content Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                  <div className="flex flex-wrap items-center gap-3 mb-4">
+                    {is_featured && (
+                      <span className="px-3 py-1 rounded-full text-sm font-medium bg-secondary text-light-primary">
+                        Featured
+                      </span>
+                    )}
+                    <span className="px-3 py-1 rounded-full text-sm font-medium bg-primary-color text-white">
+                      Custom Code
+                    </span>
+                  </div>
+                  
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-headline text-white mb-4 drop-shadow-lg">
+                    {name.toUpperCase()}
+                  </h1>
 
-              {description_short && (
-                <p className="text-lg md:text-xl text-secondary leading-relaxed max-w-3xl">
-                  {description_short}
-                </p>
-              )}
-            </div>
+                  {description_short && (
+                    <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl drop-shadow">
+                      {description_short}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+            
+            {/* Header Section (fallback if no thumbnail) */}
+            {!thumbnail && (
+              <div className="p-8">
+                <div className="flex flex-wrap items-center gap-3 mb-4">
+                  {is_featured && (
+                    <span className="px-3 py-1 rounded-full text-sm font-medium bg-secondary text-light-primary">
+                      Featured
+                    </span>
+                  )}
+                  <span className="px-3 py-1 rounded-full text-sm font-medium bg-primary-color text-white">
+                    Custom Code
+                  </span>
+                </div>
+                
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-headline text-primary mb-4">
+                  {name.toUpperCase()}
+                </h1>
+
+                {description_short && (
+                  <p className="text-lg md:text-xl text-secondary leading-relaxed max-w-3xl">
+                    {description_short}
+                  </p>
+                )}
+              </div>
+            )}
 
             {/* Meta Information Bar (matching ChallengeDetailPage) */}
             <div className="border-t border-default bg-background-primary p-6">
@@ -171,10 +211,10 @@ export const CustomCodeDetail = ({
                       <Accordion.Item 
                         key={faq.id} 
                         id={`faq-${faq.id}`} 
-                        title={faq.attributes?.question || 'Question'}
+                        title={faq.question}
                       >
                         <div className="prose dark:prose-invert prose-sm prose-headings:text-secondary prose-links:text-primary prose-links:no-underline hover:prose-links:text-secondary-color max-w-none">
-                          {faq.attributes?.answer && <RichTextRenderer blocks={faq.attributes.answer} />}
+                          <RichTextRenderer blocks={faq.answer} />
                         </div>
                       </Accordion.Item>
                     ))}
@@ -190,6 +230,7 @@ export const CustomCodeDetail = ({
                 <h3 className="text-xl font-bold font-headline text-primary mb-4 uppercase">
                   Code Info
                 </h3>
+                
                 <div className="space-y-3 text-sm mb-6">
                   <div className="flex justify-between">
                     <span className="text-tertiary">Related Challenges:</span>

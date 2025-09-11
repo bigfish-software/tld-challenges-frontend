@@ -257,7 +257,16 @@ export interface CustomCode {
   // Relations - Direct arrays as returned by Strapi populate
   creators: SimpleCreator[];
   challenges?: SimpleChallenge[];
-  faqs?: FAQ[];
+  faqs?: {
+    id: number;
+    documentId: string;
+    question: string;
+    answer: StrapiRichTextBlocks; // Rich text blocks
+    name?: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string | null;
+  }[];
 }
 
 // Content Type: Rule
