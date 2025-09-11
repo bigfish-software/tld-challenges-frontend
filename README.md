@@ -78,6 +78,8 @@ For more detailed information, please refer to the following documentation:
 - [Component Development](docs/component-development.md) - Storybook development workflow
 - [Components Guide](docs/components.md) - Reusable component documentation
 - [Colors & Theme System](docs/colors.md) - Color palette and theme implementation
+- [Responsive Images](docs/responsive-images.md) - Image optimization strategies
+- [Deployment Guide](docs/deployment.md) - Production deployment instructions
 - [Deployment Guide](docs/deployment.md) - Production deployment instructions
 - [Development Summary](docs/development-summary.md) - Project overview
 - [External Links Configuration](docs/external-links.md) - Link management system

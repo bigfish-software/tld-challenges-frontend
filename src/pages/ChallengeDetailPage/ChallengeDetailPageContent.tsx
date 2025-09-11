@@ -6,7 +6,7 @@ import { CustomCodeCard } from '@/components/ui/CustomCodeCard';
 import { TournamentCard } from '@/components/ui/TournamentCard';
 import { Accordion } from '@/components/ui/Accordion';
 import { Button } from '@/components/ui/Button';
-import { getImageUrl, getImageAltText } from '@/utils/images';
+import { getImageUrl, getImageAltText, getResponsiveImageProps } from '@/utils/images';
 
 interface ChallengeDetailPageContentProps {
   challenge: ChallengeResponse;
@@ -50,11 +50,24 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
           <div className="bg-surface border border-default rounded-lg overflow-hidden">
             {challenge.thumbnail && (
               <div className="relative h-64 md:h-96 lg:h-[500px] overflow-hidden">
-                <img
-                  src={getImageUrl(challenge.thumbnail, 'large')}
-                  alt={getImageAltText(challenge.thumbnail, challenge.name)}
-                  className="w-full h-full object-cover"
-                />
+                {(() => {
+                  const imageProps = getResponsiveImageProps(challenge.thumbnail);
+                  return imageProps ? (
+                    <img
+                      src={imageProps.src}
+                      srcSet={imageProps.srcSet}
+                      sizes={imageProps.sizes}
+                      alt={getImageAltText(challenge.thumbnail, challenge.name)}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <img
+                      src={getImageUrl(challenge.thumbnail, 'large')}
+                      alt={getImageAltText(challenge.thumbnail, challenge.name)}
+                      className="w-full h-full object-cover"
+                    />
+                  );
+                })()}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 
                 {/* Hero Content Overlay */}

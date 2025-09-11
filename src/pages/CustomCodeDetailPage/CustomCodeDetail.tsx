@@ -4,7 +4,7 @@ import type { CustomCode } from '@/types/api';
 import { RichTextRenderer } from '@/components/ui/RichTextRenderer';
 import { Accordion } from '@/components/ui/Accordion';
 import { Button } from '@/components/ui/Button';
-import { getImageUrl, getImageAltText } from '@/utils/images';
+import { getImageUrl, getImageAltText, getResponsiveImageProps } from '@/utils/images';
 
 export interface CustomCodeDetailProps {
   /** The custom code object from the API */
@@ -57,11 +57,24 @@ export const CustomCodeDetail = ({
             {/* Thumbnail Image Section */}
             {thumbnail && (
               <div className="relative h-64 md:h-96 lg:h-[500px] overflow-hidden">
-                <img
-                  src={getImageUrl(thumbnail, 'large')}
-                  alt={getImageAltText(thumbnail, name)}
-                  className="w-full h-full object-cover"
-                />
+                {(() => {
+                  const imageProps = getResponsiveImageProps(thumbnail);
+                  return imageProps ? (
+                    <img
+                      src={imageProps.src}
+                      srcSet={imageProps.srcSet}
+                      sizes={imageProps.sizes}
+                      alt={getImageAltText(thumbnail, name)}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <img
+                      src={getImageUrl(thumbnail, 'large')}
+                      alt={getImageAltText(thumbnail, name)}
+                      className="w-full h-full object-cover"
+                    />
+                  );
+                })()}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 
                 {/* Hero Content Overlay */}

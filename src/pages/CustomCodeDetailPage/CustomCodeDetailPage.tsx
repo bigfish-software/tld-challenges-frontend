@@ -59,10 +59,8 @@ export const CustomCodeDetailPage: React.FC = () => {
         ]}
       />
 
-      {/* Main content with top spacing to account for sticky breadcrumb */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <CustomCodeDetail customCode={customCode} />
-      </div>
+      {/* Main content */}
+      <CustomCodeDetail customCode={customCode} />
     </PageLayout>
   );
 };
