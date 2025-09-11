@@ -1,11 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { 
-  Challenge, 
+  ChallengeResponse, 
   CustomCode, 
   Tournament, 
-  Creator, 
-  Submission, 
-  Idea,
+  SimpleCreator,
   StatsOverview,
   ChallengeFilters,
   SubmissionFilters,
@@ -224,12 +222,10 @@ export const useStatsOverview = () => {
 
 // Re-export types for convenience
 export type {
-  Challenge,
+  ChallengeResponse,
   CustomCode,
   Tournament,
-  Creator,
-  Submission,
-  Idea,
+  SimpleCreator,
   StatsOverview,
   ChallengeFilters,
   SubmissionFilters,
