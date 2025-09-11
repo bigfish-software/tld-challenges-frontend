@@ -12,6 +12,32 @@ The external links configuration provides a single source of truth for all exter
 
 The configuration is organized into logical categories:
 
+```typescript
+// src/config/externalLinks.ts
+export const externalLinks: ExternalLinksConfig = {
+  community: {
+    github: { url: 'https://github.com/bigfish-software', label: 'GitHub' },
+    discord: { url: 'https://discord.gg/tld-challenges', label: 'Discord' },
+    bigfishTwitch: { url: 'https://twitch.tv/bigfishsoftware', label: 'BigFish Twitch' },
+    chefmariaTwitch: { url: 'https://twitch.tv/chefmaria', label: 'ChefMaria Twitch' },
+    bigfishMods: { url: 'https://github.com/bigfish-software/bigfish-mods', label: 'BigFish Mods' }
+  },
+  support: {
+    githubIssues: { url: 'https://github.com/bigfish-software/tld-challenges-frontend/issues', label: 'GitHub Issues' }
+  },
+  game: {
+    steamStore: { url: 'https://store.steampowered.com/app/305620/The_Long_Dark/', label: 'Steam Store' },
+    officialWebsite: { url: 'https://www.thelongdark.com/', label: 'Official Website' }
+  },
+  social: {
+    youtube: { url: 'https://www.youtube.com/c/TheLongDark', label: 'YouTube' },
+    reddit: { url: 'https://www.reddit.com/r/thelongdark/', label: 'Reddit' }
+  }
+};
+```
+
+The categories include:
+
 ### Community Links
 - **GitHub**: BigFish Software organization
 - **Discord**: TLD Challenges community server
@@ -76,6 +102,23 @@ import { externalLinks } from '@/config/externalLinks';
 >
   {externalLinks.community.github.label}
 </a>
+```
+
+### Usage Examples
+
+```typescript
+// Import the configuration
+import { externalLinks, getExternalUrl, getGitHubUrl, getDiscordUrl } from '@/config/externalLinks';
+
+// Use in components
+<a href={externalLinks.community.github.url} target="_blank" rel="noopener noreferrer">
+  {externalLinks.community.github.label}
+</a>
+
+// Helper functions
+const githubUrl = getExternalUrl('community.github');
+const discordUrl = getDiscordUrl(); // Type-safe helper for Discord
+const githubDirectUrl = getGitHubUrl(); // Type-safe helper for GitHub
 ```
 
 ### Helper Functions

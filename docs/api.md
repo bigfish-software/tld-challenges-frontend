@@ -2,6 +2,10 @@
 
 This document provides comprehensive guidance for integrating with the TLD Challenges Strapi backend API from the React frontend.
 
+## API Documentation
+
+For complete API examples and endpoint references, see the [Postman Collection](https://github.com/bigfish-software/tld-challenges-backend/tree/main/docs/postman) in the backend repository.
+
 ## API Configuration
 
 ### Base Configuration
@@ -399,9 +403,155 @@ export const useCreateSubmission = () => {
 
 ## Error Handling
 
-### API Error Types
+### API Type Definitions
+
+The frontend application uses TypeScript interfaces that match the Strapi backend's content types. Below are the core interfaces used for API responses:
+
 ```typescript
 // src/types/api.ts
+
+// Base Strapi types
+export interface StrapiEntity {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string | null;
+}
+
+export interface StrapiRelation<T> {
+  data: T | null;
+}
+
+export interface StrapiCollection<T> {
+  data: T[];
+}
+
+// Challenge type
+export interface ChallengeResponse {
+  id: number;
+  documentId: string;
+  name: string;
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string | null;
+  description_long?: StrapiRichTextBlocks; 
+  description_short?: string;
+  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard' | 'Extreme';
+  is_featured: boolean;
+  thumbnail?: StrapiMedia | null;
+  
+  // Relations
+  creators?: SimpleCreator[];
+  custom_code?: CustomCode | null;
+  tournaments?: Tournament[];
+  rules?: Rule[];
+  faqs?: FAQ[];
+  submissions?: Submission[];
+}
+
+// Tournament type
+export interface Tournament {
+  id: number;
+  documentId: string;
+  name: string;
+  slug: string | null;
+  start_date: string;
+  end_date: string;
+  state: 'planned' | 'active' | 'completed' | 'cancelled';
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  description_short?: string;
+  description_long?: StrapiRichTextBlocks;
+  is_featured: boolean;
+
+  // Relations
+  creators?: SimpleCreator[];
+  challenges?: ChallengeResponse[];
+  faqs?: FAQ[];
+}
+
+// Custom Code type
+export interface CustomCode {
+  id: number;
+  documentId: string;
+  name: string;
+  slug: string;
+  code: string;
+  description_long?: StrapiRichTextBlocks | null;
+  description_short?: string;
+  is_featured?: boolean;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string | null;
+  thumbnail?: StrapiMedia | null;
+  
+  // Relations
+  creators: SimpleCreator[];
+  challenges?: SimpleChallenge[];
+  faqs?: FAQ[];
+}
+
+// Creator type (simplified version used in relations)
+export interface SimpleCreator {
+  id: number;
+  documentId?: string;
+  name: string;
+  username?: string;
+  display_name?: string;
+  slug: string;
+  twitch_url?: string;
+  youtube_url?: string;
+  twitter_url?: string;
+  twitch?: string;
+  youtube?: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  description_short?: string | null;
+  description_long?: StrapiRichTextBlocks | null;
+}
+
+// Stats Overview type
+export interface StatsOverview {
+  challenges: number;
+  tournaments: number;
+  customCodes: number;
+  submissions: number;
+  creators: number;
+  ideas: number;
+}
+
+// Helper types for API responses
+export interface StrapiResponse<T> {
+  data: T;
+  meta?: {
+    pagination?: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+}
+
+export interface StrapiCollectionResponse<T> {
+  data: T[];
+  meta?: {
+    pagination?: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+}
+```
+
+## API Error Types
+```typescript
+// src/types/errors.ts
 export interface ApiError {
   data: {
     error: {
