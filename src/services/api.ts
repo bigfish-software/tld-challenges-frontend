@@ -180,13 +180,10 @@ export const apiService = {
     
     /**
      * Get challenge by slug (SEO-friendly URLs)
+     * Note: This is a custom endpoint that handles population internally in the backend
      */
-    getBySlug: (slug: string, populate?: string) => {
-      const params: Record<string, any> = {};
-      if (populate) {
-        params.populate = populate;
-      }
-      return apiClient.get(`/challenges/slug/${slug}`, { params });
+    getBySlug: (slug: string) => {
+      return apiClient.get(`/challenges/slug/${slug}`);
     },
     
     /**
@@ -257,13 +254,13 @@ export const apiService = {
     
     /**
      * Get tournament by slug
+     * Note: This is a custom endpoint that handles population internally in the backend
+     * The response includes challenges with their thumbnails and rules
      */
-    getBySlug: (slug: string, populate?: string): Promise<{data: Tournament}> => {
-      const params: Record<string, any> = {};
-      if (populate) {
-        params.populate = populate;
-      }
-      return apiClient.get(`/tournaments/slug/${slug}`, { params });
+    getBySlug: (slug: string): Promise<{data: Tournament}> => {
+      // No need for population parameters as the backend handles it internally
+      // The backend now returns challenges with thumbnails and rules
+      return apiClient.get(`/tournaments/slug/${slug}`);
     },
     
     /**
@@ -391,13 +388,10 @@ export const apiService = {
     
     /**
      * Get creator by slug
+     * Note: This is a custom endpoint that handles population internally in the backend
      */
-    getBySlug: (slug: string, populate?: string) => {
-      const params: Record<string, any> = {};
-      if (populate) {
-        params.populate = populate;
-      }
-      return apiClient.get(`${ENDPOINTS.CREATORS}/slug/${slug}`, { params });
+    getBySlug: (slug: string) => {
+      return apiClient.get(`${ENDPOINTS.CREATORS}/slug/${slug}`);
     },
     
     /**

@@ -133,7 +133,7 @@ export const useTournaments = (filters?: TournamentFilters, pagination?: { page?
 export const useTournament = (slug: string) => {
   return useQuery<{data: Tournament}>({
     queryKey: queryKeys.tournament(slug),
-    queryFn: () => apiService.tournaments.getBySlug(slug, 'creators,challenges.creators,faqs'),
+    queryFn: () => apiService.tournaments.getBySlug(slug),
     staleTime: 15 * 60 * 1000, // 15 minutes
     enabled: !!slug,
   });

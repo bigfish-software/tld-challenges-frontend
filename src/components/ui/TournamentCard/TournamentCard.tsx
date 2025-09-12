@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import type { Tournament } from '@/types/api';
 
 export interface TournamentCardProps {
@@ -18,6 +19,7 @@ export const TournamentCard = ({
   onOrganizerClick,
   className = ''
 }: TournamentCardProps) => {
+  const navigate = useNavigate();
   
   // Extract data from Tournament API structure
   const { 
@@ -27,7 +29,8 @@ export const TournamentCard = ({
     end_date, 
     state, 
     is_featured,
-    creators 
+    creators,
+    slug 
   } = tournament;
 
   const handleOrganizerClick = (e: React.MouseEvent) => {
@@ -169,6 +172,7 @@ export const TournamentCard = ({
                 onClick={(e) => {
                   e.stopPropagation();
                   // Navigate to tournament detail
+                  navigate(`/tournaments/${slug}`);
                 }}
                 className="btn-primary px-4 py-2 text-sm font-medium rounded-md cursor-pointer"
               >
@@ -262,6 +266,7 @@ export const TournamentCard = ({
             onClick={(e) => {
               e.stopPropagation();
               // Navigate to tournament detail
+              navigate(`/tournaments/${slug}`);
             }}
             className="w-full btn-primary px-4 py-2 text-sm font-medium rounded-md cursor-pointer"
           >

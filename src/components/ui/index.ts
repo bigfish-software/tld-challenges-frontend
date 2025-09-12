@@ -8,6 +8,7 @@ export * from './FilterPanel';
 export * from './CustomCodeCard';
 // Re-enabled - now supports both Strapi and Mock types
 export * from './ChallengeCard';
+export * from './ChallengeRow';
 export * from './TournamentCard';
 export * from './RichTextRenderer';
 export * from './ResultsHeader';

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PageHero, FilterPanel, ErrorDisplay, TournamentCard, Breadcrumb } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { useTournaments } from '@/hooks/api';
@@ -6,6 +7,7 @@ import { Tournament, SimpleCreator } from '@/types/api';
 import tournamentsHeroImage from '@/assets/tournaments_hero.png';
 
 export const TournamentsPageContent: React.FC = () => {
+  const navigate = useNavigate();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
   
   // Responsive viewMode based on screen size
@@ -217,9 +219,12 @@ export const TournamentsPageContent: React.FC = () => {
                     key={tournament.id}
                     tournament={tournament}
                     variant={viewMode === 'list' ? 'list' : 'compact'}
-                    onOrganizerClick={(_organizerName, organizerUrl) => {
+                    onOrganizerClick={(organizerName, organizerUrl) => {
                       if (organizerUrl) {
-                        window.open(organizerUrl, '_blank');
+                        window.open(organizerUrl, '_blank', 'noopener,noreferrer');
+                      } else if (organizerName) {
+                        // Navigate to creator page if URL not available
+                        navigate(`/creators/${organizerName.toLowerCase().replace(/\s+/g, '-')}`);
                       }
                     }}
                   />

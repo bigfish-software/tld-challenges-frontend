@@ -168,10 +168,25 @@ export interface Tournament {
   description_short?: string;
   description_long?: any; // Rich text blocks or null
   is_featured: boolean;
+  thumbnail?: StrapiMedia | null;
 
   // Direct relations (populated by backend slug endpoint)
   creators?: SimpleCreator[];
-  challenges?: ChallengeResponse[];
+  
+  // The challenges array may contain ChallengeResponse objects or simpler challenge objects
+  challenges?: (ChallengeResponse | {
+    id: number;
+    documentId: string;
+    name: string;
+    slug?: string | null;
+    difficulty?: string;
+    description_short?: string;
+    is_featured?: boolean;
+    custom_code?: any;
+    creators?: SimpleCreator[];
+    thumbnail?: StrapiMedia | null;
+  })[];
+  
   faqs?: {
     id: number;
     documentId: string;

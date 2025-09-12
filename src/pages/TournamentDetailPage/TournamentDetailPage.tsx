@@ -60,9 +60,7 @@ export const TournamentDetailPage = () => {
       />
 
       {/* Tournament Detail Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <TournamentDetail tournament={tournament.data} />
-      </div>
+      <TournamentDetail tournament={tournament.data} />
     </PageLayout>
   );
 };

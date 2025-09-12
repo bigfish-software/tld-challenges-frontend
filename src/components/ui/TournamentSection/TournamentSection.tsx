@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/Button';
 
 export interface TournamentData {
@@ -22,6 +23,7 @@ export const TournamentSection = ({
   tournament, 
   className = '' 
 }: TournamentSectionProps) => {
+  const navigate = useNavigate();
   // Default tournament data for when no tournament is provided
   const defaultTournament: TournamentData = {
     id: 1,
@@ -149,7 +151,7 @@ export const TournamentSection = ({
                 sm: 'sm:min-w-[140px]',
                 lg: 'lg:w-full'
               }}
-              onClick={() => window.location.href = `/tournaments/${displayTournament.slug || displayTournament.id}`}
+              onClick={() => navigate(`/tournaments/${displayTournament.slug || displayTournament.id}`)}
             >
               View Details
             </Button>
@@ -163,7 +165,7 @@ export const TournamentSection = ({
                 sm: 'sm:min-w-[140px]',
                 lg: 'lg:w-full'
               }}
-              onClick={() => window.location.href = '/submit-run'}
+              onClick={() => navigate('/submit-run')}
             >
               Submit Run
             </Button>
