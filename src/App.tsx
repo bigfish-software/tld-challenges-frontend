@@ -11,6 +11,7 @@ import { ChallengesPage } from '@/pages/ChallengesPage';
 import { ChallengeDetailPage } from '@/pages/ChallengeDetailPage';
 import { TournamentsPage } from '@/pages/TournamentsPage';
 import { TournamentDetailPage } from '@/pages/TournamentDetailPage';
+import { SubmissionPage } from '@/pages/SubmissionPage';
 
 // Create a client
 const queryClient = new QueryClient({
@@ -43,6 +44,8 @@ function App() {
             <Route path="/custom-codes/:slug" element={<CustomCodeDetailPage />} />
             <Route path="/challenges" element={<ChallengesPage />} />
             <Route path="/challenges/:slug" element={<ChallengeDetailPage />} />
+            <Route path="/submissions" element={<SubmissionPage />} />
+            <Route path="/submissions/:challengeId" element={<SubmissionPage />} />
             <Route path="/tournaments" element={<TournamentsPage />} />
             <Route path="/tournaments/:slug" element={<TournamentDetailPage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />

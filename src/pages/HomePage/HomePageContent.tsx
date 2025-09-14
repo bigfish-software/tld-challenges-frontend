@@ -137,7 +137,7 @@ export const HomePageContent = () => {
                 size="lg"
                 shadow="lg"
                 hoverEffect="both"
-                onClick={() => window.location.href = '/submit-run'}
+                onClick={() => window.location.href = '/submissions'}
               >
                 Submit Run
               </Button>

@@ -8,21 +8,17 @@ export interface ChallengeRowProps {
   challenge: ChallengeResponse;
   /** Additional CSS classes */
   className?: string;
-  /** Callback when submit run is clicked */
-  onSubmitRun?: (id: number) => void;
 }
 
 export const ChallengeRow: React.FC<ChallengeRowProps> = ({
   challenge,
-  className = '',
-  onSubmitRun
+  className = ''
 }) => {
   // State for copy confirmation
   const [isCopied, setIsCopied] = useState(false);
   
   // Extract data from ChallengeResponse structure
   const {
-    id,
     name,
     description_short,
     difficulty,
@@ -32,11 +28,6 @@ export const ChallengeRow: React.FC<ChallengeRowProps> = ({
     thumbnail,
     rules
   } = challenge;
-
-  const handleSubmitRun = (e: React.MouseEvent) => {
-    e.preventDefault();
-    onSubmitRun?.(id);
-  };
 
   const handleCopyCode = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -197,12 +188,13 @@ export const ChallengeRow: React.FC<ChallengeRowProps> = ({
             >
               View Details
             </Link>
-            <button
-              onClick={handleSubmitRun}
+            <Link
+              to={`/submissions/${challenge.id}`}
               className="flex-1 sm:flex-initial btn-secondary px-4 py-2 text-sm font-medium rounded-md text-center"
+              onClick={(e) => e.stopPropagation()}
             >
               Submit Run
-            </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -104,7 +104,7 @@ export const NotFoundPageContent = () => {
               </li>
               <li>
                 <Link 
-                  to="/#submit" 
+                  to="/submissions" 
                   className="text-secondary nav-link"
                 >
                   → Submit Run

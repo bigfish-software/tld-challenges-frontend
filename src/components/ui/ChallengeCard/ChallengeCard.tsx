@@ -189,12 +189,13 @@ export const ChallengeCard = ({
               >
                 View Details
               </Link>
-              <button
-                onClick={handleSubmitRun}
-                className="btn-secondary px-4 py-2 text-sm font-medium rounded-md cursor-pointer"
+              <Link
+                to={`/submissions/${challenge.id}`}
+                className="btn-secondary px-4 py-2 text-sm font-medium rounded-md text-center cursor-pointer"
+                onClick={(e) => e.stopPropagation()}
               >
                 Submit Run
-              </button>
+              </Link>
             </div>
           </div>
         </div>

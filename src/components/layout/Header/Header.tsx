@@ -162,15 +162,17 @@ export const Header = () => {
             </Button>
 
             {/* Submit Run CTA - Desktop only */}
-            <Button 
-              variant="secondary" 
-              size="sm" 
-              shadow="lg"
-              hoverEffect="both"
-              className="hidden md:block"
-            >
-              Submit Run
-            </Button>
+            <Link to="/submissions">
+              <Button 
+                variant="secondary" 
+                size="sm" 
+                shadow="lg"
+                hoverEffect="both"
+                className="hidden md:block"
+              >
+                Submit Run
+              </Button>
+            </Link>
           </div>
         </div>
 
@@ -204,13 +206,13 @@ export const Header = () => {
               <div className="border-t border-default my-2"></div>
               
               {/* Submit Run Link - Mobile */}
-              <a
-                href="#submit"
+              <Link
+                to="/submissions"
                 className="block px-3 py-2 text-base text-primary nav-link hover:bg-surface-raised rounded-md"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Submit Run
-              </a>
+              </Link>
               
               {/* Theme Toggle - Mobile */}
               <button

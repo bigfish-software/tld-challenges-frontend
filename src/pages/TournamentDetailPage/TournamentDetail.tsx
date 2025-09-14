@@ -332,7 +332,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
                               View Details
                             </button>
                             <button
-                              onClick={() => navigate(`/challenges/${processedChallenge.slug}/submit`)}
+                              onClick={() => navigate(`/submissions/${processedChallenge.id}`)}
                               className="btn-secondary px-4 py-2 rounded-md text-sm font-medium"
                             >
                               Submit Run

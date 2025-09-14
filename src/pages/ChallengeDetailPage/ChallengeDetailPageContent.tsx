@@ -264,9 +264,8 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
                   shadow="lg"
                   hoverEffect="both"
                   onClick={() => {
-                    // TODO: Implement submit run functionality
-                    // This could either open a modal or navigate to a submission form
-                    console.log('Submit run clicked for challenge:', challenge.id);
+                    // Navigate to submission page with challenge ID
+                    navigate(`/submissions/${challenge.id}`);
                   }}
                 >
                   Submit Run

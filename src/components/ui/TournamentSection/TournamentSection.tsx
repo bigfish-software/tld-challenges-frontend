@@ -165,7 +165,7 @@ export const TournamentSection = ({
                 sm: 'sm:min-w-[140px]',
                 lg: 'lg:w-full'
               }}
-              onClick={() => navigate('/submit-run')}
+              onClick={() => navigate('/submissions')}
             >
               Submit Run
             </Button>
