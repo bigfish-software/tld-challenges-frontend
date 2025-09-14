@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { PageLayout } from '../../components/layout';
-import { PageHero, LoadingSpinner, SubmissionForm } from '../../components/ui';
+import { PageHero, LoadingSpinner, SubmissionForm, Breadcrumb } from '../../components/ui';
 import { apiClient } from '../../services/api';
 import type { ChallengeResponse } from '../../types/api';
 import submissionHeroImage from '../../assets/submission_hero.png';
@@ -41,7 +41,7 @@ export const SubmissionPage = () => {
     
   const title = 'Submit a Run';
   
-  const heroDescription = 'Submit your challenge completion. Select a challenge and provide details about your run.';
+  const heroDescription = 'Submit your challenge completion and climb the leaderboards';
   
   return (
     <PageLayout>
@@ -49,9 +49,23 @@ export const SubmissionPage = () => {
         title={title}
         description={heroDescription}
         backgroundImage={submissionHeroImage}
-        contactMessage="Questions about submissions?"
-        contactSubtext="If you have any questions or issues with the submission process, please contact us."
-        buttonText="Get Help"
+      />
+      
+      {/* Breadcrumb */}
+      <Breadcrumb
+        items={
+          preselectedChallenge
+            ? [
+                { label: 'Home', href: '/' },
+                { label: 'Challenges', href: '/challenges' },
+                { label: preselectedChallenge.name || 'Challenge', href: `/challenges/${preselectedChallenge.id}` },
+                { label: 'Submit a Run', current: true }
+              ]
+            : [
+                { label: 'Home', href: '/' },
+                { label: 'Submit a Run', current: true }
+              ]
+        }
       />
       
       <div className="container mx-auto px-4 py-8">
