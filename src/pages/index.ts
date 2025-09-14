@@ -7,3 +7,4 @@ export * from './ChallengesPage';
 export * from './ChallengeDetailPage';
 export * from './TournamentsPage';
 export * from './TournamentDetailPage';
+export * from './SubmissionPage';
