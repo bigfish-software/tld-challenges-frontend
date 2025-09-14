@@ -4,7 +4,7 @@ import { PageLayout } from '../../components/layout';
 import { PageHero, LoadingSpinner, ErrorDisplay, SubmissionForm } from '../../components/ui';
 import { apiClient } from '../../services/api';
 import type { ChallengeResponse } from '../../types/api';
-import challengesHeroImage from '../../assets/challanges_hero.png';
+import submissionHeroImage from '../../assets/submission_hero.png';
 
 export const SubmissionPage = () => {
   const { challengeId } = useParams<{ challengeId?: string }>();
@@ -38,7 +38,7 @@ export const SubmissionPage = () => {
       <PageHero 
         title={title}
         description={heroDescription}
-        backgroundImage={challengesHeroImage}
+        backgroundImage={submissionHeroImage}
         contactMessage="Questions about submissions?"
         contactSubtext="If you have any questions or issues with the submission process, please contact us."
         buttonText="Get Help"
