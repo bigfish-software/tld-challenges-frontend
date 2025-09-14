@@ -7,7 +7,6 @@ export interface SimpleCaptchaProps {
   onChange: (isValid: boolean) => void;
   error?: string | null;
   size?: 'normal' | 'compact';
-  theme?: 'light' | 'dark' | 'auto'; // auto will use the site's theme
 }
 
 // You'll need to replace this with your own site key in production
@@ -16,28 +15,23 @@ const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LeIxAcTA
 export const SimpleCaptcha = ({ 
   onChange, 
   error, 
-  size = 'normal', 
-  theme = 'auto' 
+  size = 'normal'
 }: SimpleCaptchaProps) => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const { isDark } = useTheme();
-  const [captchaTheme, setCaptchaTheme] = useState<'light' | 'dark'>(isDark ? 'dark' : 'light');
+  // Using a key to force remount when theme changes
+  const [captchaKey, setCaptchaKey] = useState(Date.now());
   
-  // Update captcha theme when site theme changes if set to auto
+  // Force re-render of captcha when theme changes by updating the key
   useEffect(() => {
-    if (theme === 'auto') {
-      setCaptchaTheme(isDark ? 'dark' : 'light');
-    } else {
-      setCaptchaTheme(theme === 'dark' ? 'dark' : 'light');
-    }
-  }, [isDark, theme]);
-
-  // Reset the captcha when theme changes to ensure proper rendering
-  useEffect(() => {
+    // Generate a new key to force the component to remount
+    setCaptchaKey(Date.now());
+    
+    // Also reset if the ref exists (for when toggling quickly)
     if (recaptchaRef.current) {
       recaptchaRef.current.reset();
     }
-  }, [captchaTheme]);
+  }, [isDark]);
 
   const handleCaptchaChange = (token: string | null) => {
     onChange(!!token);
@@ -50,14 +44,17 @@ export const SimpleCaptcha = ({
           Human Verification
           <span className="ml-1 text-error">*</span>
         </label>
-        <div className={`overflow-hidden rounded-md ${error ? 'ring-2 ring-error' : ''}`}>
-          <ReCAPTCHA
-            ref={recaptchaRef}
-            sitekey={RECAPTCHA_SITE_KEY}
-            onChange={handleCaptchaChange}
-            theme={captchaTheme}
-            size={size === 'compact' ? 'compact' : 'normal'}
-          />
+        <div className="flex justify-center">
+          <div className={`captcha-container p-0.5 rounded-md ${isDark ? '' : 'bg-white'}`}>
+            <ReCAPTCHA
+              key={captchaKey}
+              ref={recaptchaRef}
+              sitekey={RECAPTCHA_SITE_KEY}
+              onChange={handleCaptchaChange}
+              theme={isDark ? 'dark' : 'light'}
+              size={size === 'compact' ? 'compact' : 'normal'}
+            />
+          </div>
         </div>
       </div>
       {error && <FieldError error={error} />}

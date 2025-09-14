@@ -251,10 +251,12 @@ export const SubmissionForm = ({
           rows={4}
         />
         
-        <SimpleCaptcha 
-          onChange={handleCaptchaChange}
-          error={errors.captcha || null}
-        />
+        <div className="flex justify-center">
+          <SimpleCaptcha 
+            onChange={handleCaptchaChange}
+            error={errors.captcha || null}
+          />
+        </div>
       </div>
       
       <div className="flex justify-end">

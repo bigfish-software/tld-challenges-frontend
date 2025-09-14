@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom styling for reCAPTCHA to ensure proper theme support */
+.captcha-container {
+  /* Basic styling that applies to both themes */
+  display: inline-block;
+  border-radius: 0.375rem; /* Consistent with form elements */
+}
+
 /* Custom TLD Headline Font */
 @font-face {
   font-family: 'TLD Headline';
