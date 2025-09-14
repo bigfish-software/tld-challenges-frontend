@@ -14,10 +14,10 @@
   --color-neutral-dark: #404040;     /* Dark variant */
 
   /* Semantic Colors - Single shade each */
-  --color-success: #065F46;          /* Darker forest green - less vibrant, professional */
-  --color-warning: #D97706;          /* Darker amber - warmer, less harsh */
-  --color-error: #991B1B;            /* Darker burgundy red - aligns with brand, less vibrant */
-  --color-info: #1E40AF;             /* Darker blue - professional, readable */
+  --color-success: #16733F;          /* Green that complements plum/burgundy colors */
+  --color-warning: #D97706;          /* Amber - kept as is, works well with brand */
+  --color-error: #8B1D1D;            /* Less vibrant burgundy red - aligns better with brand */
+  --color-info: #2563EB;             /* Softened blue that complements brand colors */
 
   /* Background System - Simplified 2-color hierarchy */
   --color-background-primary: #FAFAFA;    /* Page, header, footer, normal sections */
@@ -66,11 +66,11 @@
   --color-neutral-light: #D4D4D4;
   --color-neutral-dark: #525252;
 
-  /* Semantic Colors for dark theme */
-  --color-success: #4ADE80;
-  --color-warning: #FBBF24;
-  --color-error: #F87171;
-  --color-info: #60A5FA;
+  /* Semantic Colors for dark theme - adjusted for better contrast with light text */
+  --color-success: #059669;  /* Darker emerald green for better contrast with white text */
+  --color-warning: #D97706;  /* Medium amber for better contrast with red */
+  --color-error: #9B1C1C;    /* Less vibrant dark red for better contrast */
+  --color-info: #2563EB;     /* Less vibrant blue for better contrast */
 
   /* Background System - Simplified 2-color hierarchy */
   --color-background-primary: #111111;    /* Page, header, footer, normal sections - lighter */
@@ -97,13 +97,13 @@
   --color-accent-hover: var(--color-accent-light);
 
   /* Text on dark theme colored backgrounds */
-  --color-on-primary: #1F2937;
-  --color-on-secondary: #1F2937;
-  --color-on-accent: #1F2937;
-  --color-on-success: #1F2937;
-  --color-on-warning: #1F2937;
-  --color-on-error: #1F2937;
-  --color-on-info: #1F2937;
+  --color-on-primary: #FFFFFF;      /* Light text for better contrast */
+  --color-on-secondary: #FFFFFF;    /* Light text for better contrast */
+  --color-on-accent: #1F2937;       /* Dark text on light accent color */
+  --color-on-success: #FFFFFF;      /* Light text for better contrast */
+  --color-on-warning: #FFFFFF;      /* Light text on darker amber for readability */
+  --color-on-error: #FFFFFF;        /* Light text for better contrast */
+  --color-on-info: #FFFFFF;         /* Light text for better contrast */
 }
 
 /* Simplified Utility Classes */
