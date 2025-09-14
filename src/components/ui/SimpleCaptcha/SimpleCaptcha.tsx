@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { FieldError } from '../ErrorDisplay/FieldError';
@@ -19,21 +19,55 @@ export const SimpleCaptcha = ({
 }: SimpleCaptchaProps) => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const { isDark } = useTheme();
-  // Using a key to force remount when theme changes
   const [captchaKey, setCaptchaKey] = useState(Date.now());
+  const [captchaError, setCaptchaError] = useState<string | null>(null);
+  
+  // Handle reCAPTCHA expiration
+  const handleExpired = useCallback(() => {
+    onChange(false);
+    setCaptchaError('reCAPTCHA verification expired. Please verify again.');
+  }, [onChange]);
+  
+  // Handle reCAPTCHA error
+  const handleError = useCallback(() => {
+    onChange(false);
+    setCaptchaError('reCAPTCHA encountered an error. Please try again.');
+  }, [onChange]);
+  
+  // Handle successful reCAPTCHA load
+  const handleLoad = useCallback(() => {
+    setCaptchaError(null);
+  }, []);
   
   // Force re-render of captcha when theme changes by updating the key
   useEffect(() => {
     // Generate a new key to force the component to remount
     setCaptchaKey(Date.now());
     
-    // Also reset if the ref exists (for when toggling quickly)
+    // Reset if the ref exists (for when toggling quickly)
     if (recaptchaRef.current) {
       recaptchaRef.current.reset();
     }
+    
+    // Clear errors when theme changes
+    setCaptchaError(null);
   }, [isDark]);
+  
+  // Handle cleanup when component unmounts
+  useEffect(() => {
+    return () => {
+      // Attempt to clean up any potential reCAPTCHA resources
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+    };
+  }, []);
 
   const handleCaptchaChange = (token: string | null) => {
+    // Clear any previous errors when verification succeeds
+    if (token) {
+      setCaptchaError(null);
+    }
     onChange(!!token);
   };
 
@@ -51,13 +85,16 @@ export const SimpleCaptcha = ({
               ref={recaptchaRef}
               sitekey={RECAPTCHA_SITE_KEY}
               onChange={handleCaptchaChange}
+              onExpired={handleExpired}
+              onErrored={handleError}
+              onLoad={handleLoad}
               theme={isDark ? 'dark' : 'light'}
               size={size === 'compact' ? 'compact' : 'normal'}
             />
           </div>
         </div>
       </div>
-      {error && <FieldError error={error} />}
+      {(error || captchaError) && <FieldError error={error || captchaError} />}
       {import.meta.env.DEV && !import.meta.env.VITE_RECAPTCHA_SITE_KEY && (
         <p className="text-xs text-tertiary italic">
           Using test reCAPTCHA key. Set VITE_RECAPTCHA_SITE_KEY in .env to remove the test banner.

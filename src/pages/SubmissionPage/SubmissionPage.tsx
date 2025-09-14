@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { PageLayout } from '../../components/layout';
-import { PageHero, LoadingSpinner, ErrorDisplay, SubmissionForm } from '../../components/ui';
+import { PageHero, LoadingSpinner, SubmissionForm } from '../../components/ui';
 import { apiClient } from '../../services/api';
 import type { ChallengeResponse } from '../../types/api';
 import submissionHeroImage from '../../assets/submission_hero.png';
@@ -9,29 +9,39 @@ import submissionHeroImage from '../../assets/submission_hero.png';
 export const SubmissionPage = () => {
   const { challengeId } = useParams<{ challengeId?: string }>();
   
-  // If challengeId is provided, fetch that specific challenge
-  const { data: challenge, isLoading: challengeLoading, error: challengeError } = useQuery({
-    queryKey: ['challenge', challengeId],
-    queryFn: () => challengeId ? apiClient.get<{ data: ChallengeResponse }>(`/challenges/${challengeId}?populate=*`) : null,
-    enabled: !!challengeId
-  });
-  
-  // Fetch all challenges for the dropdown (if no challengeId is provided)
-  const { data: challenges, isLoading: challengesLoading, error: challengesError } = useQuery({
+  // Always fetch all challenges - simpler and more flexible
+  const { data: challenges, isLoading } = useQuery({
     queryKey: ['challenges'],
-    queryFn: () => apiClient.get<{ data: ChallengeResponse[] }>('/challenges?fields=id,name&pagination[limit]=100'),
-    enabled: !challengeId // Only fetch all challenges if no specific challengeId is provided
+    queryFn: () => apiClient.get<{ data: ChallengeResponse[] }>('/challenges?fields=id,name&pagination[limit]=100')
   });
   
-  const isLoading = challengeId ? challengeLoading : challengesLoading;
-  const error = challengeId ? challengeError : challengesError;
-  const title = challengeId && challenge?.data 
-    ? `Submit Run for ${challenge.data.name}` 
-    : 'Submit a Run';
+  // Get challenge name for title if available - more robust challenge ID matching
+  const preselectedChallenge = (() => {
+    if (!challengeId || !challenges?.data) {
+      return undefined;
+    }
+    
+    // Try exact string match first
+    let challenge = challenges.data.find(c => c.id.toString() === challengeId.toString());
+    if (challenge) {
+      return challenge;
+    }
+    
+    // Try to parse as number and match
+    const idAsNumber = parseInt(challengeId, 10);
+    if (!isNaN(idAsNumber)) {
+      challenge = challenges.data.find(c => c.id === idAsNumber);
+      if (challenge) {
+        return challenge;
+      }
+    }
+    
+    return undefined;
+  })();
+    
+  const title = 'Submit a Run';
   
-  const heroDescription = challengeId && challenge?.data
-    ? `Submit your completion for the "${challenge.data.name}" challenge. Please provide accurate information about your run.`
-    : 'Submit your challenge completion. Select a challenge and provide details about your run.';
+  const heroDescription = 'Submit your challenge completion. Select a challenge and provide details about your run.';
   
   return (
     <PageLayout>
@@ -49,12 +59,10 @@ export const SubmissionPage = () => {
           <div className="flex justify-center py-12">
             <LoadingSpinner size="lg" />
           </div>
-        ) : error ? (
-          <ErrorDisplay message="Failed to load challenge data. Please try again later." />
         ) : (
           <SubmissionForm 
-            challenges={challengeId && challenge?.data ? [challenge.data] : challenges?.data || []}
-            preselectedChallengeId={challengeId ? parseInt(challengeId, 10) : undefined}
+            challenges={challenges?.data || []}
+            preselectedChallengeId={preselectedChallenge?.id}
           />
         )}
       </div>

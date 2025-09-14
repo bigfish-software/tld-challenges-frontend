@@ -31,20 +31,30 @@ export const SubmissionForm = ({
   onSuccess
 }: SubmissionFormProps) => {
   const navigate = useNavigate();
+  // This ensures we always have a valid challenge_id (if preselected) or 0
+  const getInitialChallengeId = () => {
+    if (preselectedChallengeId !== undefined && preselectedChallengeId !== null) {
+      // Verify the preselected challenge exists in our list
+      const exists = challenges.some(c => c.id === preselectedChallengeId);
+      return exists ? preselectedChallengeId : 0;
+    }
+    return 0;
+  };
+  
   const [formValues, setFormValues] = useState<SubmissionFormValues>({
     runner: '',
     runner_url: '',
     video_url: '',
     note: '',
     result: '',
-    challenge_id: preselectedChallengeId || 0
+    challenge_id: getInitialChallengeId()
   });
   
   const [errors, setErrors] = useState<FormErrors>({});
   const [isCaptchaValid, setIsCaptchaValid] = useState(false);
 
   const challengeOptions: SelectOption[] = challenges.map(challenge => ({
-    value: challenge.id,
+    value: challenge.id.toString(), // Convert to string for consistent comparison with <select>
     label: challenge.name || `Challenge #${challenge.id}`
   }));
 
@@ -57,7 +67,14 @@ export const SubmissionForm = ({
     mutationFn: (submission: SubmissionFormValues) => {
       // Remove any fields we don't want to send to the API
       const { challenge, ...submissionData } = submission;
-      return apiClient.post('/submissions', { data: submissionData });
+      
+      // Make sure challenge_id is sent as a number
+      const dataToSend = {
+        ...submissionData,
+        challenge_id: Number(submission.challenge_id)
+      };
+      
+      return apiClient.post('/submissions', { data: dataToSend });
     },
     onSuccess: () => {
       // Reset form or navigate away
@@ -87,10 +104,29 @@ export const SubmissionForm = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     
-    setFormValues(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    if (name === 'challenge_id') {
+      // Handle challenge_id special case
+      if (value === '') {
+        setFormValues(prev => ({ ...prev, challenge_id: 0 }));
+      } else {
+        // Try to parse as integer
+        const numericValue = parseInt(value, 10);
+        if (!isNaN(numericValue)) {
+          // Verify this is a valid challenge ID from our list
+          const validChallenge = challenges.find(c => c.id === numericValue);
+          if (validChallenge) {
+            setFormValues(prev => ({ ...prev, challenge_id: numericValue }));
+          } else {
+            setFormValues(prev => ({ ...prev, challenge_id: numericValue }));
+          }
+        } else {
+          setFormValues(prev => ({ ...prev, challenge_id: 0 }));
+        }
+      }
+    } else {
+      // Handle all other fields normally
+      setFormValues(prev => ({ ...prev, [name]: value }));
+    }
     
     // Clear error for this field when user types
     if (errors[name as keyof FormErrors]) {
@@ -167,7 +203,7 @@ export const SubmissionForm = ({
       video_url: '',
       note: '',
       result: '',
-      challenge_id: preselectedChallengeId || 0
+      challenge_id: preselectedChallengeId ? Number(preselectedChallengeId) : 0
     });
     setErrors({});
     setIsCaptchaValid(false);
@@ -193,11 +229,10 @@ export const SubmissionForm = ({
             name="challenge_id"
             label="Challenge"
             options={challengeOptions}
-            value={formValues.challenge_id || ''}
+            value={formValues.challenge_id ? formValues.challenge_id.toString() : ''}
             onChange={handleInputChange}
             error={errors.challenge_id || null}
             required
-            disabled={!!preselectedChallengeId}
           />        <Input
           name="runner"
           label="Runner Name"

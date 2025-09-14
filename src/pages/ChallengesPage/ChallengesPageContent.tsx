@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PageHero, FilterPanel, ChallengeCard, ErrorDisplay, NoDataDisplay, Breadcrumb } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { useQuery } from '@tanstack/react-query';
@@ -6,6 +7,7 @@ import { apiService } from '@/services/api';
 import { ChallengeResponse } from '@/types/api';
 
 export const ChallengesPageContent: React.FC = () => {
+  const navigate = useNavigate();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
   
   // Responsive viewMode based on screen size
@@ -222,6 +224,12 @@ export const ChallengesPageContent: React.FC = () => {
                     key={challenge.id} 
                     challenge={challenge} 
                     variant={viewMode === 'list' ? 'list' : 'compact'}
+                    onCardClick={(_id) => {
+                      navigate(`/challenges/${challenge.slug}`);
+                    }}
+                    onSubmitRun={(_id) => {
+                      navigate(`/submissions/${challenge.id}`);
+                    }}
                   />
                 ))}
               </ContentGrid>
