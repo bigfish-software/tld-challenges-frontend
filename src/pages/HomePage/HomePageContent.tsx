@@ -84,7 +84,7 @@ export const HomePageContent = () => {
         <div className="absolute inset-0 bg-black bg-opacity-40" />
         
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-          <div className="text-center max-w-4xl mx-auto space-y-8">
+          <div className="text-center space-y-8">
             {/* Hero Content */}
             <div className="space-y-6">
               <h1 className="
@@ -112,7 +112,6 @@ export const HomePageContent = () => {
                 sm:text-3xl 
                 text-light-secondary 
                 leading-relaxed 
-                max-w-3xl 
                 mx-auto
                 font-oswald
               ">
@@ -144,7 +143,7 @@ export const HomePageContent = () => {
             </div>
 
             {/* Stats or Quick Info */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto pt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8">
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-light-primary">
                   {statsLoading ? '...' : statsError ? '?' : `${stats?.customCodes || 0}+`}
@@ -193,7 +192,6 @@ export const HomePageContent = () => {
               <p className="
                 text-lg 
                 text-secondary 
-                max-w-2xl 
                 mx-auto
               ">
                 {activeTournaments.length === 1 
@@ -203,7 +201,7 @@ export const HomePageContent = () => {
               </p>
             </div>
 
-            <div className="max-w-5xl mx-auto space-y-6">
+            <div className="space-y-6">
               {activeTournaments.map((tournament) => {
                 return (
                   <TournamentSection 
@@ -243,7 +241,6 @@ export const HomePageContent = () => {
             <p className="
               text-lg 
               text-secondary 
-              max-w-2xl 
               mx-auto
             ">
               Three ways to turn your virtual freezing and starving into bragging rights. 
@@ -251,7 +248,7 @@ export const HomePageContent = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <FeatureCard
                 key={index}
@@ -269,9 +266,7 @@ export const HomePageContent = () => {
       {/* Donation Section */}
       <section className="py-16 sm:py-20 lg:py-24 section-primary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-5xl mx-auto">
-            <DonationSection />
-          </div>
+          <DonationSection />
         </div>
       </section>
     </main>

@@ -10,16 +10,16 @@ import { CustomCodeDetail } from './CustomCodeDetail';
 export const CustomCodeDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   
-  // If no slug provided, redirect to custom codes page
-  if (!slug) {
-    return <Navigate to="/custom-codes" replace />;
-  }
-
   const { 
     data: customCode, 
     isLoading, 
     error 
-  } = useCustomCode(slug);
+  } = useCustomCode(slug || '');
+  
+  // If no slug provided, redirect to custom codes page
+  if (!slug) {
+    return <Navigate to="/custom-codes" replace />;
+  }
   
   if (isLoading) {
     return (

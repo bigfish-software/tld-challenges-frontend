@@ -18,7 +18,7 @@ export const SimpleCaptcha = ({
   size = 'normal'
 }: SimpleCaptchaProps) => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { isDark } = useTheme();
   const [captchaKey, setCaptchaKey] = useState(Date.now());
   const [captchaError, setCaptchaError] = useState<string | null>(null);
@@ -88,15 +88,19 @@ export const SimpleCaptcha = ({
   
   // Handle cleanup when component unmounts
   useEffect(() => {
+    // Capture current refs for cleanup
+    const currentTimeoutRef = timeoutRef.current;
+    const currentRecaptchaRef = recaptchaRef.current;
+    
     return () => {
       // Clear timeout
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
+      if (currentTimeoutRef) {
+        clearTimeout(currentTimeoutRef);
       }
       
       // Attempt to clean up any potential reCAPTCHA resources
-      if (recaptchaRef.current) {
-        recaptchaRef.current.reset();
+      if (currentRecaptchaRef) {
+        currentRecaptchaRef.reset();
       }
     };
   }, []);

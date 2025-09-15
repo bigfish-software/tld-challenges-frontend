@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { Input, Textarea, Select, SimpleCaptcha, Button, ErrorDisplay } from '../';
@@ -69,7 +69,8 @@ export const SubmissionForm = ({
   const submissionMutation = useMutation({
     mutationFn: (submission: SubmissionFormValues) => {
       // Remove any fields we don't want to send to the API
-      const { challenge, ...submissionData } = submission;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { challenge: _, ...submissionData } = submission;
       
       // Match exactly what the backend expects based on working request
       const dataToSend = {

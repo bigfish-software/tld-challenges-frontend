@@ -16,7 +16,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const autofillRef = useTextareaAutofillFix();
     
     // Combine the autofill ref with the forwarded ref
-    useImperativeHandle(ref, () => autofillRef.current!, []);
+    useImperativeHandle(ref, () => autofillRef.current!, [autofillRef]);
     
     return (
       <div className="space-y-2">

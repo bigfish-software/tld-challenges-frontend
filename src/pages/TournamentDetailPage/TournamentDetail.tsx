@@ -149,7 +149,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
                 {/* Creators Section */}
                 {tournament.creators && tournament.creators.length > 0 && (
                   <div className="flex items-center gap-4">
-                    <span className="text-sm text-tertiary font-medium">Organized by:</span>
+                    <span className="text-sm text-tertiary font-medium">Created by:</span>
                     <div className="flex flex-wrap items-center gap-3">
                       {tournament.creators.map((creator) => (
                         <div key={creator.id} className="flex items-center gap-2">

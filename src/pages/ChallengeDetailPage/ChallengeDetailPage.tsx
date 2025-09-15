@@ -10,16 +10,16 @@ import { ChallengeDetailPageContent } from './ChallengeDetailPageContent';
 export const ChallengeDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   
-  // If no slug provided, redirect to challenges page
-  if (!slug) {
-    return <Navigate to="/challenges" replace />;
-  }
-
   const { 
     data: response, 
     isLoading, 
     error 
-  } = useChallenge(slug);
+  } = useChallenge(slug || '');
+  
+  // If no slug provided, redirect to challenges page
+  if (!slug) {
+    return <Navigate to="/challenges" replace />;
+  }
   
   if (isLoading) {
     return (

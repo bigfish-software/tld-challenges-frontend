@@ -16,7 +16,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const autofillRef = useInputAutofillFix();
     
     // Combine the autofill ref with the forwarded ref
-    useImperativeHandle(ref, () => autofillRef.current!, []);
+    useImperativeHandle(ref, () => autofillRef.current!, [autofillRef]);
     
     return (
       <div className="space-y-2">

@@ -9,12 +9,12 @@ import { TournamentDetail } from './TournamentDetail';
 export const TournamentDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
   
+  const { data: tournament, isLoading, error } = useTournament(slug || '');
+  
   // Redirect if no slug provided
   if (!slug) {
     return <Navigate to="/tournaments" replace />;
   }
-
-  const { data: tournament, isLoading, error } = useTournament(slug);
 
   if (isLoading) {
     return (
