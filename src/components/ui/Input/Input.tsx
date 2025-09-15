@@ -1,6 +1,7 @@
-import { forwardRef, InputHTMLAttributes } from 'react';
+import { forwardRef, InputHTMLAttributes, useImperativeHandle } from 'react';
 import { clsx } from 'clsx';
 import { FieldError } from '../ErrorDisplay/FieldError';
+import { useInputAutofillFix } from '../../../hooks/useAutofillFix';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -12,6 +13,10 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, helperText, className, id, required, ...props }, ref) => {
     const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
+    const autofillRef = useInputAutofillFix();
+    
+    // Combine the autofill ref with the forwarded ref
+    useImperativeHandle(ref, () => autofillRef.current!, []);
     
     return (
       <div className="space-y-2">
@@ -27,7 +32,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           </label>
         )}
         <input
-          ref={ref}
+          ref={autofillRef}
           id={inputId}
           required={required}
           className={clsx(

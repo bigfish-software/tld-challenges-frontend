@@ -1,6 +1,7 @@
-import { forwardRef, TextareaHTMLAttributes } from 'react';
+import { forwardRef, TextareaHTMLAttributes, useImperativeHandle } from 'react';
 import { clsx } from 'clsx';
 import { FieldError } from '../ErrorDisplay/FieldError';
+import { useTextareaAutofillFix } from '../../../hooks/useAutofillFix';
 
 export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
@@ -12,6 +13,10 @@ export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ label, error, helperText, className, id, rows = 4, required, ...props }, ref) => {
     const textareaId = id || label?.toLowerCase().replace(/\s+/g, '-');
+    const autofillRef = useTextareaAutofillFix();
+    
+    // Combine the autofill ref with the forwarded ref
+    useImperativeHandle(ref, () => autofillRef.current!, []);
     
     return (
       <div className="space-y-2">
@@ -27,7 +32,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           </label>
         )}
         <textarea
-          ref={ref}
+          ref={autofillRef}
           id={textareaId}
           rows={rows}
           required={required}
