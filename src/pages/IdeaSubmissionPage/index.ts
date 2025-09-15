@@ -1,0 +1,1 @@
+export { IdeaSubmissionPage } from './IdeaSubmissionPage';

@@ -196,13 +196,9 @@ export const useCreateIdea = () => {
   
   return useMutation({
     mutationFn: (data: {
-      title: string;
-      description: string; // Simplified for now
-      author_name: string;
-      social_links?: Array<{
-        platform: string;
-        url: string;
-      }>;
+      type: string;
+      description: string;
+      creator: string;
     }) => apiService.ideas.create(data),
     onSuccess: () => {
       // Invalidate ideas queries to refetch data

@@ -10,6 +10,7 @@ export interface PageHeroProps {
   contactMessage?: string;
   contactSubtext?: string;
   buttonText?: string;
+  onButtonClick?: () => void;
   icon?: ReactNode;
 }
 
@@ -20,10 +21,15 @@ export const PageHero = ({
   contactMessage,
   contactSubtext,
   buttonText = "Contact Us",
+  onButtonClick,
   icon
 }: PageHeroProps) => {
   const handleContactClick = () => {
-    window.open(externalLinks.support.githubIssues.url, '_blank', 'noopener,noreferrer');
+    if (onButtonClick) {
+      onButtonClick();
+    } else {
+      window.open(externalLinks.support.githubIssues.url, '_blank', 'noopener,noreferrer');
+    }
   };
 
   return (

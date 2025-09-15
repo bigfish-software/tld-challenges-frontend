@@ -135,6 +135,8 @@ export const TournamentsPageContent: React.FC = () => {
           backgroundImage="/src/assets/homepage_hero.png"
           contactMessage="Host Your Tournament!"
           contactSubtext="Organize competitive events for the community"
+          buttonText="Submit your Idea"
+          onButtonClick={() => navigate('/idea/submit?type=Tournament&from=tournaments')}
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <ErrorDisplay
@@ -159,6 +161,7 @@ export const TournamentsPageContent: React.FC = () => {
         contactMessage="Host Your Tournament!"
         contactSubtext="Organize competitive events for the community"
         buttonText="Submit your Idea"
+        onButtonClick={() => navigate('/idea/submit?type=Tournament&from=tournaments')}
       />
 
       {/* Breadcrumb */}

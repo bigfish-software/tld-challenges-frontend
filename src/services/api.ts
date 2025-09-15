@@ -519,16 +519,14 @@ export const apiService = {
     },
     
     /**
-     * Submit a new community idea with social links
+     * Submit a new community idea (matches Postman request format)
      */
     create: (data: {
-      title: string;
+      type: string;
       description: string;
-      author_name: string;
-      social_links?: Array<{
-        platform: string;
-        url: string;
-      }>;
+      creator: string;
+      creator_twitch?: string;
+      creator_youtube?: string;
     }) => {
       return apiClient.post(ENDPOINTS.IDEAS, { data });
     },

@@ -9,3 +9,5 @@ export * from './TournamentsPage';
 export * from './TournamentDetailPage';
 export * from './SubmissionPage';
 export * from './SubmissionSuccessPage';
+export * from './IdeaSubmissionPage';
+export * from './IdeaSuccessPage';

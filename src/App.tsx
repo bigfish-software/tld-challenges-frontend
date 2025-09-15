@@ -13,6 +13,8 @@ import { TournamentsPage } from '@/pages/TournamentsPage';
 import { TournamentDetailPage } from '@/pages/TournamentDetailPage';
 import { SubmissionPage } from '@/pages/SubmissionPage';
 import { SubmissionSuccessPage } from '@/pages/SubmissionSuccessPage';
+import { IdeaSubmissionPage } from '@/pages/IdeaSubmissionPage';
+import { IdeaSuccessPage } from '@/pages/IdeaSuccessPage';
 
 // Create a client
 const queryClient = new QueryClient({
@@ -50,6 +52,8 @@ function App() {
             <Route path="/submission/success" element={<SubmissionSuccessPage />} />
             <Route path="/tournaments" element={<TournamentsPage />} />
             <Route path="/tournaments/:slug" element={<TournamentDetailPage />} />
+            <Route path="/idea/submit" element={<IdeaSubmissionPage />} />
+            <Route path="/idea/success" element={<IdeaSuccessPage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
             <Route path="*" element={<NotFoundPageLayout />} />
           </Routes>

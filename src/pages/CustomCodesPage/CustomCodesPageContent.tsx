@@ -130,6 +130,7 @@ export const CustomCodesPageContent: React.FC = () => {
           contactMessage="Submit your Custom Code"
           contactSubtext="Share your custom settings with players around the world and join our community of creators"
           buttonText="Submit your Idea"
+          onButtonClick={() => navigate('/idea/submit?type=CustomCode&from=custom-codes')}
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <ErrorDisplay
@@ -154,6 +155,7 @@ export const CustomCodesPageContent: React.FC = () => {
         contactMessage="Submit your Custom Code"
         contactSubtext="Share your custom settings with players around the world and join our community of creators"
         buttonText="Submit your Idea"
+        onButtonClick={() => navigate('/idea/submit?type=CustomCode&from=custom-codes')}
       />
 
       {/* Breadcrumb */}
