@@ -12,7 +12,7 @@ export const SubmissionPage = () => {
   // Always fetch all challenges - simpler and more flexible
   const { data: challenges, isLoading } = useQuery({
     queryKey: ['challenges'],
-    queryFn: () => apiClient.get<{ data: ChallengeResponse[] }>('/challenges?fields=id,name&pagination[limit]=100')
+    queryFn: () => apiClient.get<{ data: ChallengeResponse[] }>('/challenges?fields=id,name,slug&pagination[limit]=100')
   });
   
   // Get challenge name for title if available - more robust challenge ID matching
@@ -58,7 +58,7 @@ export const SubmissionPage = () => {
             ? [
                 { label: 'Home', href: '/' },
                 { label: 'Challenges', href: '/challenges' },
-                { label: preselectedChallenge.name || 'Challenge', href: `/challenges/${preselectedChallenge.id}` },
+                { label: preselectedChallenge.name || 'Challenge', href: `/challenges/${preselectedChallenge.slug}` },
                 { label: 'Submit a Run', current: true }
               ]
             : [

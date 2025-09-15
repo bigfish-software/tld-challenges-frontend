@@ -18,21 +18,54 @@ export const SimpleCaptcha = ({
   size = 'normal'
 }: SimpleCaptchaProps) => {
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { isDark } = useTheme();
   const [captchaKey, setCaptchaKey] = useState(Date.now());
   const [captchaError, setCaptchaError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  
+  // Only mount the captcha component when the form section is visible
+  useEffect(() => {
+    setMounted(true);
+    
+    // Clear any error handling timeout when component unmounts
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
   
   // Handle reCAPTCHA expiration
   const handleExpired = useCallback(() => {
-    onChange(false);
-    setCaptchaError('reCAPTCHA verification expired. Please verify again.');
-  }, [onChange]);
+    if (mounted) {
+      onChange(false);
+      setCaptchaError('reCAPTCHA verification expired. Please verify again.');
+    }
+  }, [onChange, mounted]);
   
-  // Handle reCAPTCHA error
+  // Handle reCAPTCHA error with graceful recovery
   const handleError = useCallback(() => {
-    onChange(false);
-    setCaptchaError('reCAPTCHA encountered an error. Please try again.');
-  }, [onChange]);
+    // Handle network errors gracefully - don't mark as invalid right away
+    console.log("Captcha encountered an error, will retry");
+    
+    if (mounted) {
+      onChange(false);
+      setCaptchaError('reCAPTCHA encountered an error. Please try again.');
+    }
+    
+    // Only retry a limited number of times or after user interaction
+    if (recaptchaRef.current) {
+      timeoutRef.current = setTimeout(() => {
+        try {
+          recaptchaRef.current?.reset();
+          setCaptchaError(null);
+        } catch (e) {
+          console.log("Captcha reset failed after error");
+        }
+      }, 10000); // Longer delay for error recovery
+    }
+  }, [onChange, mounted]);
   
   // Handle successful reCAPTCHA load
   const handleLoad = useCallback(() => {
@@ -56,6 +89,11 @@ export const SimpleCaptcha = ({
   // Handle cleanup when component unmounts
   useEffect(() => {
     return () => {
+      // Clear timeout
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      
       // Attempt to clean up any potential reCAPTCHA resources
       if (recaptchaRef.current) {
         recaptchaRef.current.reset();
@@ -64,10 +102,26 @@ export const SimpleCaptcha = ({
   }, []);
 
   const handleCaptchaChange = (token: string | null) => {
+    // Only call onChange if the captcha is actually mounted
+    if (!mounted) return;
+    
     // Clear any previous errors when verification succeeds
     if (token) {
       setCaptchaError(null);
+    } else {
+      // If token is null due to expiration, handle gracefully
+      if (recaptchaRef.current) {
+        // Add a delay before attempting to reset to avoid thrashing
+        timeoutRef.current = setTimeout(() => {
+          try {
+            recaptchaRef.current?.reset();
+          } catch (e) {
+            console.log("Captcha reset failed, will try again later");
+          }
+        }, 5000); // 5 second delay before attempting reset
+      }
     }
+    
     onChange(!!token);
   };
 

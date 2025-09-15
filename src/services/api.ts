@@ -449,13 +449,34 @@ export const apiService = {
      * Create a new submission (matches backend field names)
      */
     create: (data: {
-      runner_name: string;
+      runner: string;
+      runner_url?: string;
       result?: string;
       video_url?: string;
-      description?: string;
+      note?: string;
       challenge: number;
     }) => {
-      return apiClient.post(ENDPOINTS.SUBMISSIONS, { data });
+      // Filter out empty optional fields to match exactly what works in Postman
+      const cleanData: any = {
+        runner: data.runner,
+        challenge: data.challenge
+      };
+      
+      // Only include optional fields if they have actual values
+      if (data.runner_url && data.runner_url.trim()) {
+        cleanData.runner_url = data.runner_url.trim();
+      }
+      if (data.video_url && data.video_url.trim()) {
+        cleanData.video_url = data.video_url.trim();
+      }
+      if (data.note && data.note.trim()) {
+        cleanData.note = data.note.trim();
+      }
+      if (data.result && data.result.trim()) {
+        cleanData.result = data.result.trim();
+      }
+      
+      return apiClient.post(ENDPOINTS.SUBMISSIONS, { data: cleanData });
     },
     
     /**

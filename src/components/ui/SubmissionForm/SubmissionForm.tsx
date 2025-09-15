@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { Input, Textarea, Select, SimpleCaptcha, Button, ErrorDisplay } from '../';
-import { apiClient } from '../../../services/api';
+import { apiService } from '../../../services/api';
 import type { SelectOption } from '../Select/Select';
 import type { ChallengeResponse } from '../../../types/api';
 
@@ -20,6 +20,8 @@ export interface SubmissionFormProps {
   challenges?: ChallengeResponse[];
   preselectedChallengeId?: number | undefined;
   onSuccess?: () => void;
+  // Optional challenge name for better UX in success message
+  challengeName?: string;
 }
 
 // Include apiError in the allowed error types
@@ -28,7 +30,8 @@ type FormErrors = Partial<Record<keyof SubmissionFormValues | 'captcha' | 'apiEr
 export const SubmissionForm = ({ 
   challenges = [], 
   preselectedChallengeId,
-  onSuccess
+  onSuccess,
+  challengeName
 }: SubmissionFormProps) => {
   const navigate = useNavigate();
   // This ensures we always have a valid challenge_id (if preselected) or 0
@@ -68,21 +71,34 @@ export const SubmissionForm = ({
       // Remove any fields we don't want to send to the API
       const { challenge, ...submissionData } = submission;
       
-      // Make sure challenge_id is sent as a number
+      // Match exactly what the backend expects based on working request
       const dataToSend = {
-        ...submissionData,
-        challenge_id: Number(submission.challenge_id)
+        runner: submissionData.runner,
+        runner_url: submissionData.runner_url,
+        video_url: submissionData.video_url,
+        note: submissionData.note,
+        result: submissionData.result,
+        challenge: Number(submission.challenge_id)
       };
       
-      return apiClient.post('/submissions', { data: dataToSend });
+      return apiService.submissions.create(dataToSend);
     },
     onSuccess: () => {
-      // Reset form or navigate away
+      // Reset form
       resetForm();
+      
+      // If custom success handler is provided, use that
       if (onSuccess) {
         onSuccess();
       } else {
-        navigate('/challenges'); // Navigate to challenges page after successful submission
+        // Otherwise, navigate to the success page with challenge context
+        const selectedChallenge = challenges.find(c => c.id === formValues.challenge_id);
+        navigate('/submission/success', { 
+          state: { 
+            challengeSlug: selectedChallenge?.slug,
+            challengeName: challengeName || selectedChallenge?.name
+          }
+        });
       }
     },
     onError: (error: any) => {
@@ -165,8 +181,8 @@ export const SubmissionForm = ({
     
     if (!formValues.video_url) {
       newErrors.video_url = 'Video URL is required';
-    } else if (!isValidUrl(formValues.video_url)) {
-      newErrors.video_url = 'Please enter a valid URL';
+    } else if (!isValidVideoUrl(formValues.video_url)) {
+      newErrors.video_url = 'Please enter a valid YouTube or Twitch URL';
     }
     
     if (!formValues.result.trim()) {
@@ -188,12 +204,33 @@ export const SubmissionForm = ({
   };
 
   const isValidUrl = (url: string): boolean => {
+    // If URL doesn't have protocol, add https:// to make it valid for URL constructor
+    let urlToCheck = url;
+    if (url && !url.match(/^https?:\/\//)) {
+      urlToCheck = 'https://' + url;
+    }
+    
     try {
-      new URL(url);
+      new URL(urlToCheck);
       return true;
     } catch (e) {
       return false;
     }
+  };
+  
+  // Check if URL contains YouTube or Twitch
+  const isValidVideoUrl = (url: string): boolean => {
+    // If empty, return false immediately
+    if (!url) return false;
+    
+    // First ensure it's a valid URL format
+    if (!isValidUrl(url)) return false;
+    
+    // Check if URL contains YouTube or Twitch
+    const lowerUrl = url.toLowerCase();
+    return lowerUrl.includes('youtube') || 
+           lowerUrl.includes('youtu.be') || 
+           lowerUrl.includes('twitch');
   };
 
   const resetForm = () => {
@@ -291,6 +328,27 @@ export const SubmissionForm = ({
             onChange={handleCaptchaChange}
             error={errors.captcha || null}
           />
+        </div>
+        
+        <div className="bg-surface border border-border rounded-lg p-4 mt-6 flex items-start">
+          <svg 
+            className="h-5 w-5 text-secondary-color mr-2 flex-shrink-0 mt-0.5" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" 
+            />
+          </svg>
+          <p className="text-sm text-secondary">
+            <strong>Note:</strong> Submissions are manually reviewed by our editors. 
+            This process may take some time, especially during peak periods. Once approved, 
+            your submission will appear on the leaderboard.
+          </p>
         </div>
       </div>
       

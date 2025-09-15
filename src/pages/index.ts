@@ -8,3 +8,4 @@ export * from './ChallengeDetailPage';
 export * from './TournamentsPage';
 export * from './TournamentDetailPage';
 export * from './SubmissionPage';
+export * from './SubmissionSuccessPage';

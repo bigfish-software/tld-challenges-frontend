@@ -77,19 +77,19 @@ export const useCreateSubmission = () => {
     }) => {
       // Map frontend field names to backend expected names
       const backendData: {
-        runner_name: string;
+        runner: string;
         video_url?: string;
-        description?: string;
+        note?: string;
         result?: string;
         challenge: number;
       } = {
-        runner_name: data.runner,
+        runner: data.runner,
         challenge: parseInt(data.challenge, 10),
       };
       
       // Only include optional fields if they have values
       if (data.video_url) backendData.video_url = data.video_url;
-      if (data.note) backendData.description = data.note;
+      if (data.note) backendData.note = data.note;
       if (data.result) backendData.result = data.result;
       
       return apiService.submissions.create(backendData);

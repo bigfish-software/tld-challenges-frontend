@@ -110,6 +110,28 @@
     @apply placeholder:text-slate-500 dark:placeholder:text-slate-400;
     @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500;
     @apply transition-colors duration-200;
+    caret-color: rgb(15 23 42); /* Dark color for light theme */
+  }
+  
+  .dark .gaming-input {
+    caret-color: rgb(241 245 249); /* Light color for dark theme */
+  }
+
+  /* Fix autofill styling for dark theme */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--color-surface) inset !important;
+    -webkit-text-fill-color: var(--color-text-primary) !important;
+    box-shadow: 0 0 0 30px var(--color-surface) inset !important;
+    background-color: var(--color-surface) !important;
+  }
+
+  /* Additional fix for input backgrounds */
+  input[data-filled="true"] {
+    background-color: var(--color-surface) !important;
+    color: var(--color-text-primary) !important;
   }
 }
 
