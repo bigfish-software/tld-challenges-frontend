@@ -171,7 +171,7 @@ export const SubmissionForm = ({
     
     // Required fields
     if (!formValues.runner.trim()) {
-      newErrors.runner = 'Runner name is required';
+      newErrors.runner = 'Name is required';
     }
     
     // Make sure challenge_id is a valid number, not 0
@@ -272,22 +272,12 @@ export const SubmissionForm = ({
             required
           />        <Input
           name="runner"
-          label="Runner Name"
+          label="Name"
           value={formValues.runner}
           onChange={handleInputChange}
           error={errors.runner || null}
           required
           placeholder="Your name or handle"
-        />
-        
-        <Input
-          name="runner_url"
-          label="Runner URL"
-          value={formValues.runner_url}
-          onChange={handleInputChange}
-          error={errors.runner_url || null}
-          placeholder="https://your-social-media.com/profile"
-          helperText="Link to your YouTube, Twitch, or social media profile"
         />
         
         <Input
@@ -310,6 +300,16 @@ export const SubmissionForm = ({
           required
           placeholder="e.g., 45:30 or 150 days"
           helperText="Your completion time or score"
+        />
+
+        <Input
+          name="runner_url"
+          label="Socials URL"
+          value={formValues.runner_url}
+          onChange={handleInputChange}
+          error={errors.runner_url || null}
+          placeholder="https://your-social-media.com/profile"
+          helperText="Link to your YouTube, Twitch, or social media profile"
         />
         
         <Textarea

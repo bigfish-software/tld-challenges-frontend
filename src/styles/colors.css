@@ -26,7 +26,7 @@
   --color-surface-raised: #F8F9FA;        /* Elevated elements */
 
   /* Text System - Simplified 3-color system for both themes */
-  --color-text-primary: #1F1F1F;     /* Main dark text for light backgrounds */
+  --color-text-primary: #2B2B2B;     /* Main dark text for light backgrounds - warm neutral gray */
   --color-text-secondary: #595959;   /* Secondary dark text for light backgrounds */
   --color-text-tertiary: #8A8A8A;    /* Muted grey text for light backgrounds */
   --color-text-light-primary: #FFFFFF;    /* Main light text for dark/colored backgrounds */
@@ -413,11 +413,11 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus,
 select:-webkit-autofill:active {
-  -webkit-text-fill-color: #1F1F1F !important;
+  -webkit-text-fill-color: #2B2B2B !important;
   -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset !important;
   box-shadow: 0 0 0px 1000px #FFFFFF inset !important;
   transition: background-color 5000s ease-in-out 0s !important;
-  caret-color: #1F1F1F !important;
+  caret-color: #2B2B2B !important;
 }
 
 /* Aggressive Chrome autofill override - Dark theme */
@@ -455,6 +455,41 @@ textarea:-webkit-autofill::first-line {
   font-size: inherit !important;
 }
 
+/* Autofill suggestion dropdown styling */
+input::-webkit-list-button,
+input::-webkit-calendar-picker-indicator {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Chrome autofill suggestion dropdown */
+input::-webkit-textfield-decoration-container {
+  background-color: var(--color-surface) !important;
+}
+
+/* Style the autofill suggestion dropdown */
+input[type="text"]::-webkit-list-button,
+input[type="url"]::-webkit-list-button,
+input[type="email"]::-webkit-list-button {
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+}
+
+/* Light theme specific autofill dropdown styling */
+:root input::-webkit-list-button {
+  background-color: #FFFFFF !important;
+  color: #2B2B2B !important;
+  border: 1px solid #E5E7EB !important;
+}
+
+/* Dark theme specific autofill dropdown styling */
+[data-theme="dark"] input::-webkit-list-button {
+  background-color: #1F1F1F !important;
+  color: #FFFFFF !important;
+  border: 1px solid #404040 !important;
+}
+
 /* Firefox autofill styling */
 input:-moz-autofill,
 textarea:-moz-autofill,
@@ -477,6 +512,7 @@ input,
 textarea {
   color: var(--color-text-primary) !important;
   caret-color: var(--color-text-primary) !important;
+  background-color: var(--color-surface) !important;
 }
 
 /* Ensure our custom classes always win */
@@ -485,4 +521,28 @@ textarea {
   background-color: var(--color-surface) !important;
   color: var(--color-text-primary) !important;
   caret-color: var(--color-text-primary) !important;
+}
+
+/* Input focus states to ensure proper theming */
+input:focus,
+textarea:focus {
+  background-color: var(--color-surface) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-border-focus) !important;
+}
+
+/* Specific input background override for light theme */
+:root input,
+:root textarea {
+  background-color: #FFFFFF !important;
+  color: #2B2B2B !important;
+  caret-color: #2B2B2B !important;
+}
+
+/* Specific input background override for dark theme */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea {
+  background-color: #1F1F1F !important;
+  color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
 }
