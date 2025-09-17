@@ -1,14 +1,11 @@
-/* Transition utilities for smooth theme switching */
 .theme-transition {
   transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
-/* Global smooth theme transitions for all text and interactive elements */
 * {
   transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
-/* Text utilities for consistent typography using CSS variables */
 .text-body {
   font-size: 1rem;
   line-height: 1.625;
@@ -75,67 +72,57 @@
   color: var(--color-text-primary);
 }
 
-/* TLD Challenges Color System - Simplified CSS Variables */
-
 :root {
-  /* Base Color Palette - From original design references */
-  --color-primary: #4A2C4A;          /* Dark plum - extracted from original design */
-  --color-secondary: #8B5A5C;        /* Burgundy - extracted from original design */
+  --color-primary: #4A2C4A;
+  --color-secondary: #8B5A5C;
 
-  --color-accent: #E8D5B7;           /* Warm cream - subtle accent */
-  --color-accent-light: #F0E5D0;     /* Light variant */
-  --color-accent-dark: #D4C1A0;      /* Dark variant */
+  --color-accent: #E8D5B7;
+  --color-accent-light: #F0E5D0;
+  --color-accent-dark: #D4C1A0;
 
-  --color-neutral: #7A7A7A;          /* Main gray */
-  --color-neutral-light: #D4D4D4;    /* Light variant */
-  --color-neutral-dark: #404040;     /* Dark variant */
+  --color-neutral: #7A7A7A;
+  --color-neutral-light: #D4D4D4;
+  --color-neutral-dark: #404040;
 
-  /* Semantic Colors - Single shade each */
-  --color-success: #16733F;          /* Green that complements plum/burgundy colors */
-  --color-warning: #D97706;          /* Amber - kept as is, works well with brand */
-  --color-error: #8B1D1D;            /* Less vibrant burgundy red - aligns better with brand */
-  --color-info: #2563EB;             /* Softened blue that complements brand colors */
+  --color-success: #16733F;
+  --color-warning: #D97706;
+  --color-error: #8B1D1D;
+  --color-info: #2563EB;
 
-  /* Background System - Simplified 2-color hierarchy */
-  --color-background-primary: #FAFAFA;    /* Page, header, footer, normal sections */
-  --color-background-secondary: #F1F3F4;  /* Highlighted/alternate sections only */
-  --color-surface: #FFFFFF;               /* Card/component background */
-  --color-surface-raised: #F8F9FA;        /* Elevated elements */
+  --color-background-primary: #FAFAFA;
+  --color-background-secondary: #F1F3F4;
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #F8F9FA;
 
-  /* Text System - Simplified 3-color system for both themes */
-  --color-text-primary: #2B2B2B;     /* Main dark text for light backgrounds - warm neutral gray */
-  --color-text-secondary: #595959;   /* Secondary dark text for light backgrounds */
-  --color-text-tertiary: #8A8A8A;    /* Muted grey text for light backgrounds */
-  --color-text-light-primary: #FFFFFF;    /* Main light text for dark/colored backgrounds */
-  --color-text-light-secondary: #E5E5E5;  /* Secondary light text for dark/colored backgrounds */
+  --color-text-primary: #2B2B2B;
+  --color-text-secondary: #595959;
+  --color-text-tertiary: #8A8A8A;
+  --color-text-light-primary: #FFFFFF;
+  --color-text-light-secondary: #E5E5E5;
 
-  /* Enhanced Border System */
-  --color-border: #E5E7EB;           /* Default borders */
-  --color-border-light: #F3F4F6;     /* Subtle separators */
-  --color-border-section: #D1D5DB;   /* Section dividers */
-  --color-border-focus: var(--color-primary); /* Focus states */
+  --color-border: #E5E7EB;
+  --color-border-light: #F3F4F6;
+  --color-border-section: #D1D5DB;
+  --color-border-focus: var(--color-primary);
 
-  /* Interactive States */
-  --color-primary-hover: #6B4C6B;    /* Lighter hover state */
-  --color-secondary-hover: #A67C7E;  /* Lighter hover state */
+  --color-primary-hover: #6B4C6B;
+  --color-secondary-hover: #A67C7E;
   --color-accent-hover: var(--color-accent-dark);
 
-  /* Text on colored backgrounds */
   --color-on-primary: #FFFFFF;
   --color-on-secondary: #FFFFFF;
   --color-on-accent: #2B1819;
-  --color-on-success: #FFFFFF;      /* White text on dark forest green */
-  --color-on-warning: #FFFFFF;      /* White text on darker amber */
-  --color-on-error: #FFFFFF;        /* White text on dark burgundy red */
-  --color-on-info: #FFFFFF;         /* White text on dark blue */
+  --color-on-success: #FFFFFF;
+  --color-on-warning: #FFFFFF;
+  --color-on-error: #FFFFFF;
+  --color-on-info: #FFFFFF;
 }
 
-/* Dark Theme - Simplified */
 [data-theme="dark"] {
-  --color-primary: #4A2C4A;          /* Same dark plum for both themes */
-  --color-secondary: #8B5A5C;        /* Same burgundy for both themes */
+  --color-primary: #4A2C4A;
+  --color-secondary: #8B5A5C;
 
-  --color-accent: #F0E5D0;           /* Light cream for dark backgrounds */
+  --color-accent: #F0E5D0;
   --color-accent-light: #F7F0E8;
   --color-accent-dark: #E8D5B7;
 
@@ -143,47 +130,40 @@
   --color-neutral-light: #D4D4D4;
   --color-neutral-dark: #525252;
 
-  /* Semantic Colors for dark theme - adjusted for better contrast with light text */
-  --color-success: #059669;  /* Darker emerald green for better contrast with white text */
-  --color-warning: #D97706;  /* Medium amber for better contrast with red */
-  --color-error: #9B1C1C;    /* Less vibrant dark red for better contrast */
-  --color-info: #2563EB;     /* Less vibrant blue for better contrast */
+  --color-success: #059669;
+  --color-warning: #D97706;
+  --color-error: #9B1C1C;
+  --color-info: #2563EB;
 
-  /* Background System - Simplified 2-color hierarchy */
-  --color-background-primary: #111111;    /* Page, header, footer, normal sections - lighter */
-  --color-background-secondary: #1A1A1A;  /* Highlighted/alternate sections - slightly lighter */
-  --color-surface: #1F1F1F;               /* Dark card background - lighter */
-  --color-surface-raised: #2A2A2A;        /* Slightly lighter for elevation */
+  --color-background-primary: #111111;
+  --color-background-secondary: #1A1A1A;
+  --color-surface: #1F1F1F;
+  --color-surface-raised: #2A2A2A;
 
-  /* Dark theme text - Simplified 3-color system with improved contrast */
-  --color-text-primary: #FFFFFF;          /* Main light text for dark backgrounds */
-  --color-text-secondary: #E5E5E5;        /* Secondary light text for dark backgrounds - improved contrast */
-  --color-text-tertiary: #C7C7C7;         /* Muted grey text for dark backgrounds - improved contrast */
-  --color-text-light-primary: #FFFFFF;    /* Main light text (same in dark theme) */
-  --color-text-light-secondary: #E5E5E5;  /* Secondary light text (same in dark theme) */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #E5E5E5;
+  --color-text-tertiary: #C7C7C7;
+  --color-text-light-primary: #FFFFFF;
+  --color-text-light-secondary: #E5E5E5;
 
-  /* Dark theme borders */
-  --color-border: #404040;           /* Visible borders */
-  --color-border-light: #333333;     /* Subtle separators - lighter */
-  --color-border-section: #555555;   /* Section dividers */
-  --color-border-focus: var(--color-primary); /* Focus states */
+  --color-border: #404040;
+  --color-border-light: #333333;
+  --color-border-section: #555555;
+  --color-border-focus: var(--color-primary);
 
-  /* Dark theme hovers */
-  --color-primary-hover: #6B4C6B;    /* Same hover for both themes */
-  --color-secondary-hover: #A67C7E;  /* Same hover for both themes */
+  --color-primary-hover: #6B4C6B;
+  --color-secondary-hover: #A67C7E;
   --color-accent-hover: var(--color-accent-light);
 
-  /* Text on dark theme colored backgrounds */
-  --color-on-primary: #FFFFFF;      /* Light text for better contrast */
-  --color-on-secondary: #FFFFFF;    /* Light text for better contrast */
-  --color-on-accent: #1F2937;       /* Dark text on light accent color */
-  --color-on-success: #FFFFFF;      /* Light text for better contrast */
-  --color-on-warning: #FFFFFF;      /* Light text on darker amber for readability */
-  --color-on-error: #FFFFFF;        /* Light text for better contrast */
-  --color-on-info: #FFFFFF;         /* Light text for better contrast */
+  --color-on-primary: #FFFFFF;
+  --color-on-secondary: #FFFFFF;
+  --color-on-accent: #1F2937;
+  --color-on-success: #FFFFFF;
+  --color-on-warning: #FFFFFF;
+  --color-on-error: #FFFFFF;
+  --color-on-info: #FFFFFF;
 }
 
-/* Simplified Utility Classes */
 .bg-primary { background-color: var(--color-primary); }
 .bg-secondary { background-color: var(--color-secondary); }
 .bg-accent { background-color: var(--color-accent); }
@@ -206,7 +186,6 @@
 
 .border-default { border-color: var(--color-border); }
 
-/* Component Patterns - Clear and consistent */
 .card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -237,7 +216,6 @@
   color: var(--color-text-light-primary);
 }
 
-/* Gaming-specific patterns */
 .difficulty-easy { 
   background-color: var(--color-success);
   color: var(--color-on-success);
@@ -253,7 +231,6 @@
   color: var(--color-on-error);
 }
 
-/* Tournament status badges */
 .badge-success {
   background-color: var(--color-success);
   color: var(--color-on-success);
@@ -289,12 +266,10 @@
   background-color: var(--color-surface-raised);
 }
 
-/* Special gradients */
 .bg-gradient-brand {
   background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
 }
 
-/* Background utility classes */
 .bg-background-primary {
   background-color: var(--color-background-primary);
 }
@@ -303,7 +278,6 @@
   background-color: var(--color-background-secondary);
 }
 
-/* Enhanced Section Utility Classes - 2-color system */
 .section-primary {
   background-color: var(--color-background-primary);
   border: 1px solid var(--color-border-light);
@@ -320,14 +294,12 @@
   transition: all 0.2s ease;
 }
 
-/* Featured card styling - same size as regular cards */
 .featured-card {
   border: 2px solid #8B5A5C !important;
   box-shadow: 0 4px 12px rgba(139, 90, 92, 0.2);
   padding-bottom: 16px;
 }
 
-/* Desktop featured card styling */
 @media (min-width: 768px) {
   .featured-card {
     border: 2px solid #8B5A5C !important;
@@ -336,7 +308,6 @@
   }
 }
 
-/* Apply padding to non-featured cards when there are featured cards in the set */
 .with-padding-bottom {
   padding-bottom: 16px;
 }
@@ -352,12 +323,10 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
-/* Featured card maintains secondary border on hover */
 .featured-card:hover {
   border-color: #8B5A5C !important;
 }
 
-/* Feature Card Button Hover Effects - Specific overrides */
 .card-base .btn-outline-hover:hover {
   color: var(--color-secondary) !important;
 }
@@ -366,7 +335,6 @@
   color: var(--color-secondary) !important;
 }
 
-/* Button hover effects using custom classes */
 .btn-outline-hover:hover {
   color: var(--color-secondary) !important;
 }
@@ -375,17 +343,14 @@
   color: var(--color-secondary) !important;
 }
 
-/* Copy button hover effect */
 .copy-button:hover {
   color: var(--color-secondary) !important;
 }
 
-/* Filter option hover effect */
 .filter-option-hover:hover span {
   color: var(--color-secondary) !important;
 }
 
-/* Filter checkbox hover and focus effects */
 .filter-checkbox {
   outline: none !important;
   border: 1px solid var(--color-border) !important;
@@ -407,7 +372,6 @@
   box-shadow: none !important;
 }
 
-/* General text link hover effects */
 .text-link {
   transition: color 0.2s ease;
 }
@@ -416,7 +380,6 @@
   color: var(--color-secondary) !important;
 }
 
-/* Navigation link hover effects - for header and footer */
 .nav-link {
   transition: color 0.2s ease;
 }
@@ -425,14 +388,12 @@
   color: var(--color-secondary) !important;
 }
 
-/* Brand hover effects - for grouped brand elements */
 .brand-hover:hover .brand-element,
 .brand-hover:hover .brand-text,
 .brand-hover:hover .brand-icon {
   color: var(--color-secondary) !important;
 }
 
-/* Dark theme section backgrounds */
 [data-theme="dark"] .section-primary {
   background-color: var(--color-background-primary);
   border-color: var(--color-border-light);
@@ -443,7 +404,6 @@
   border-color: var(--color-border-light);
 }
 
-/* Home page feature cards - using our color system */
 .home-feature-card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -457,7 +417,6 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* Dark theme hover effects for home feature cards */
 [data-theme="dark"] .home-feature-card {
   background-color: var(--color-surface);
   border-color: var(--color-border);
@@ -469,15 +428,11 @@
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* Header specific styles for proper stickiness */
 .header-background {
   background-color: var(--color-background-primary);
-  /* Ensure completely opaque background */
   opacity: 1;
 }
 
-/* Input autofill styling - override browser defaults */
-/* Aggressive Chrome autofill override - Light theme */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -497,7 +452,6 @@ select:-webkit-autofill:active {
   caret-color: #2B2B2B !important;
 }
 
-/* Aggressive Chrome autofill override - Dark theme */
 [data-theme="dark"] input:-webkit-autofill,
 [data-theme="dark"] input:-webkit-autofill:hover,
 [data-theme="dark"] input:-webkit-autofill:focus,
@@ -517,7 +471,6 @@ select:-webkit-autofill:active {
   caret-color: #FFFFFF !important;
 }
 
-/* Additional Chrome-specific overrides */
 input:-webkit-autofill::first-line,
 textarea:-webkit-autofill::first-line {
   color: var(--color-text-primary) !important;
@@ -532,19 +485,16 @@ textarea:-webkit-autofill::first-line {
   font-size: inherit !important;
 }
 
-/* Autofill suggestion dropdown styling */
 input::-webkit-list-button,
 input::-webkit-calendar-picker-indicator {
   background-color: var(--color-surface) !important;
   color: var(--color-text-primary) !important;
 }
 
-/* Chrome autofill suggestion dropdown */
 input::-webkit-textfield-decoration-container {
   background-color: var(--color-surface) !important;
 }
 
-/* Style the autofill suggestion dropdown */
 input[type="text"]::-webkit-list-button,
 input[type="url"]::-webkit-list-button,
 input[type="email"]::-webkit-list-button {
@@ -553,21 +503,18 @@ input[type="email"]::-webkit-list-button {
   color: var(--color-text-primary) !important;
 }
 
-/* Light theme specific autofill dropdown styling */
 :root input::-webkit-list-button {
   background-color: #FFFFFF !important;
   color: #2B2B2B !important;
   border: 1px solid #E5E7EB !important;
 }
 
-/* Dark theme specific autofill dropdown styling */
 [data-theme="dark"] input::-webkit-list-button {
   background-color: #1F1F1F !important;
   color: #FFFFFF !important;
   border: 1px solid #404040 !important;
 }
 
-/* Firefox autofill styling */
 input:-moz-autofill,
 textarea:-moz-autofill,
 select:-moz-autofill {
@@ -584,7 +531,6 @@ select:-moz-autofill {
   caret-color: var(--color-text-primary) !important;
 }
 
-/* Force consistent styling across all browsers */
 input,
 textarea {
   color: var(--color-text-primary) !important;
@@ -592,7 +538,6 @@ textarea {
   background-color: var(--color-surface) !important;
 }
 
-/* Ensure our custom classes always win */
 .bg-surface input,
 .bg-surface textarea {
   background-color: var(--color-surface) !important;
@@ -600,7 +545,6 @@ textarea {
   caret-color: var(--color-text-primary) !important;
 }
 
-/* Input focus states to ensure proper theming */
 input:focus,
 textarea:focus {
   background-color: var(--color-surface) !important;
@@ -608,7 +552,6 @@ textarea:focus {
   border-color: var(--color-border-focus) !important;
 }
 
-/* Specific input background override for light theme */
 :root input,
 :root textarea {
   background-color: #FFFFFF !important;
@@ -616,7 +559,6 @@ textarea:focus {
   caret-color: #2B2B2B !important;
 }
 
-/* Specific input background override for dark theme */
 [data-theme="dark"] input,
 [data-theme="dark"] textarea {
   background-color: #1F1F1F !important;

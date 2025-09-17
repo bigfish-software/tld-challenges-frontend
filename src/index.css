@@ -4,14 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styling for reCAPTCHA to ensure proper theme support */
 .captcha-container {
-  /* Basic styling that applies to both themes */
   display: inline-block;
-  border-radius: 0.375rem; /* Consistent with form elements */
+  border-radius: 0.375rem;
 }
 
-/* Custom TLD Headline Font */
 @font-face {
   font-family: 'TLD Headline';
   src: url('./assets/fonts/TLDHeadlineOne/TLD_Headline_One_2.1.ttf') format('truetype');
@@ -20,7 +17,6 @@
   font-style: normal;
 }
 
-/* Oswald Variable Font */
 @font-face {
   font-family: 'Oswald';
   src: url('./assets/fonts/Oswald/Oswald-VariableFont_wght.ttf') format('truetype');
@@ -30,10 +26,9 @@
 }
 
 @layer base {
-  /* Gaming-optimized typography */
   html {
     font-family: 'Oswald', system-ui, sans-serif;
-    font-size: 18px; /* Increased base font size for better readability */
+    font-size: 18px;
     scroll-behavior: smooth;
   }
   
@@ -44,12 +39,10 @@
     @apply selection:bg-primary-200 dark:selection:bg-primary-800;
   }
 
-  /* Focus styles for accessibility */
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-primary-500;
   }
 
-  /* Custom scrollbar for dark theme */
   ::-webkit-scrollbar {
     @apply w-2;
   }
@@ -68,7 +61,6 @@
 }
 
 @layer components {
-  /* Gaming UI components */
   .gaming-card {
     @apply bg-white dark:bg-slate-800;
     @apply border border-slate-200 dark:border-slate-700;
@@ -110,14 +102,13 @@
     @apply placeholder:text-slate-500 dark:placeholder:text-slate-400;
     @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500;
     @apply transition-colors duration-200;
-    caret-color: rgb(15 23 42); /* Dark color for light theme */
+    caret-color: rgb(15 23 42);
   }
   
   .dark .gaming-input {
-    caret-color: rgb(241 245 249); /* Light color for dark theme */
+    caret-color: rgb(241 245 249);
   }
 
-  /* Fix autofill styling for dark theme */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
@@ -128,7 +119,6 @@
     background-color: var(--color-surface) !important;
   }
 
-  /* Additional fix for input backgrounds */
   input[data-filled="true"] {
     background-color: var(--color-surface) !important;
     color: var(--color-text-primary) !important;
@@ -136,7 +126,6 @@
 }
 
 @layer utilities {
-  /* Gaming-specific utilities */
   .text-balance {
     text-wrap: balance;
   }
@@ -149,7 +138,6 @@
     animation: slideUp 0.3s ease-out;
   }
 
-  /* Screen reader only content */
   .sr-only {
     position: absolute;
     width: 1px;

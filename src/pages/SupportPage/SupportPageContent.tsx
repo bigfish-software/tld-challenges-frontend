@@ -10,7 +10,7 @@ import {
   getRedditShareUrl,
   getAppDomain
 } from '@/config/externalLinks';
-import supportHeroImage from '@/assets/homepage_hero.png'; // Using same hero image for consistency
+import supportHeroImage from '@/assets/homepage_hero.png';
 
 export const SupportPageContent = () => {
   const handleTwitchClick = (url: string) => {
@@ -38,7 +38,6 @@ export const SupportPageContent = () => {
         shareUrl = getRedditShareUrl(text, url);
         break;
       case 'steam':
-        // Steam doesn't have a direct share URL, so we'll copy to clipboard
         navigator.clipboard.writeText(`${text} ${url}`);
         return;
       default:

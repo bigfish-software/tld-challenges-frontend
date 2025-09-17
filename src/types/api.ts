@@ -1,6 +1,3 @@
-// TypeScript types based on the Strapi backend ORM documentation
-// This file models the actual content types from the tld-challenges-backend
-
 import { StrapiRichTextBlocks } from './richText';
 
 export interface StrapiEntity {
@@ -18,7 +15,6 @@ export interface StrapiCollection<T> {
   data: T[];
 }
 
-// Strapi Media Object (for thumbnails and other media)
 export interface StrapiMedia {
   id: number;
   documentId: string;
@@ -59,7 +55,6 @@ export interface StrapiMediaFormat {
   sizeInBytes: number;
 }
 
-// Direct API Response interfaces (without Strapi wrapper)
 export interface ChallengeResponse {
   id: number;
   documentId: string;
@@ -68,9 +63,9 @@ export interface ChallengeResponse {
   createdAt: string;
   updatedAt: string;
   publishedAt: string | null;
-  description_long?: StrapiRichTextBlocks; // Rich text blocks
+  description_long?: StrapiRichTextBlocks;
   description_short?: string;
-  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard' | 'Extreme'; // Actual values from API
+  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard' | 'Extreme';
   is_featured: boolean;
   thumbnail?: StrapiMedia | null;
   

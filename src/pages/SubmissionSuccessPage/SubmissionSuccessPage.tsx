@@ -8,7 +8,6 @@ export const SubmissionSuccessPage = () => {
   const location = useLocation();
   const { challengeSlug, challengeName } = location.state || {};
 
-  // If someone navigates directly to this page without state, redirect to challenges
   useEffect(() => {
     if (!location.state) {
       navigate('/challenges', { replace: true });

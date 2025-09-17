@@ -10,39 +10,29 @@ export const TournamentsPageContent: React.FC = () => {
   const navigate = useNavigate();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
   
-  // Responsive viewMode based on screen size
   useEffect(() => {
     const handleResize = () => {
-      // Switch to compact on mobile (< 768px), list on desktop
       setViewMode(window.innerWidth < 768 ? 'grid' : 'list');
     };
     
-    // Set initial viewMode
     handleResize();
-    
-    // Add event listener
     window.addEventListener('resize', handleResize);
-    
-    // Cleanup
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 12; // 12 tournaments per page
+  const pageSize = 12;
   
-  // API call for tournaments using React Query with pagination
   const { data: apiResponse, isLoading, error } = useTournaments(
-    undefined, // no filters for now
+    undefined,
     { page: currentPage, pageSize }
   );
   
-  // Handle Strapi response structure: { data: [...], meta: { pagination: {...} } }
   const tournaments: Tournament[] = apiResponse?.data || [];
   const totalCount = apiResponse?.meta?.pagination?.total || 0;
   const totalPages = Math.ceil(totalCount / pageSize);
 
-  // Dynamic filter groups based on available data
   const filterGroups = [
     {
       id: 'status',
@@ -96,18 +86,15 @@ export const TournamentsPageContent: React.FC = () => {
     setActiveFilters({});
   };
 
-  // Filter logic
   const getFilteredTournaments = () => {
     let filtered = [...tournaments];
 
-    // Apply status filter
     if (activeFilters.status?.length) {
       filtered = filtered.filter(tournament => 
         activeFilters.status!.includes(tournament.state)
       );
     }
 
-    // Apply creator filter
     if (activeFilters.creator?.length) {
       filtered = filtered.filter(tournament => {
         const creatorNames = tournament.creators?.map((creator: SimpleCreator) => 
@@ -125,7 +112,6 @@ export const TournamentsPageContent: React.FC = () => {
 
   const filteredTournaments = getFilteredTournaments();
 
-  // Show error state if API call failed
   if (error) {
     return (
       <div className="min-h-screen bg-background">
@@ -226,7 +212,6 @@ export const TournamentsPageContent: React.FC = () => {
                       if (organizerUrl) {
                         window.open(organizerUrl, '_blank', 'noopener,noreferrer');
                       } else if (organizerName) {
-                        // Navigate to creator page if URL not available
                         navigate(`/creators/${organizerName.toLowerCase().replace(/\s+/g, '-')}`);
                       }
                     }}

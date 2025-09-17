@@ -13,7 +13,6 @@ export const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // No longer needed - ScrollToTop component handles this automatically
   const handleBrandClick = () => {};
 
   // Helper function to determine if a navigation link is active

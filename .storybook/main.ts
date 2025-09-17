@@ -21,11 +21,9 @@ const config: StorybookConfig = {
     },
   },
   viteFinal: async (config) => {
-    // Merge custom configuration into the default config
     const { mergeConfig } = await import('vite');
     
     return mergeConfig(config, {
-      // Add any additional Vite configuration here
       resolve: {
         alias: {
           '@': '/src',

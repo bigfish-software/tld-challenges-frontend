@@ -1,7 +1,6 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosRequestConfig } from 'axios';
 import type { StatsOverview, Tournament, CustomCode } from '@/types/api';
 
-// API Error class definition
 export class APIError extends Error {
   constructor(
     public status: number,
@@ -17,7 +16,6 @@ class ApiClient {
   private instance: AxiosInstance;
 
   constructor() {
-    // Get base URL and ensure it has /api suffix for API calls
     const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:1337';
     const apiBaseURL = baseURL.endsWith('/api') ? baseURL : `${baseURL}/api`;
     
@@ -33,7 +31,6 @@ class ApiClient {
   }
 
   private setupInterceptors() {
-    // Request interceptor for authentication
     this.instance.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
         const token = import.meta.env.VITE_API_TOKEN;
@@ -47,14 +44,12 @@ class ApiClient {
       }
     );
 
-    // Response interceptor for error handling
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => {
         return response;
       },
       (error: any) => {
         if (error.response) {
-          // Server responded with error status
           const apiError = new APIError(
             error.response.status,
             error.response.data?.error?.message || 'An error occurred',
@@ -62,7 +57,6 @@ class ApiClient {
           );
           return Promise.reject(apiError);
         } else if (error.request) {
-          // Request was made but no response received
           const networkError = new APIError(
             0,
             'Network error - please check your connection',
@@ -70,7 +64,6 @@ class ApiClient {
           );
           return Promise.reject(networkError);
         } else {
-          // Something else happened
           const unknownError = new APIError(
             500,
             'An unexpected error occurred',
@@ -82,7 +75,6 @@ class ApiClient {
     );
   }
 
-  // Return the Strapi response directly, not wrapped in APIResponse
   async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
     const response = await this.instance.get<T>(url, config);
     return response.data;
@@ -106,24 +98,6 @@ class ApiClient {
 
 export const apiClient = new ApiClient();
 
-/**
- * API service for interacting with TLD Challenges backend
- * Based on Postman collection and API reference documentation
- * 
- * ⚠️  IMPORTANT: DO NOT ADD /api/ PREFIX TO ENDPOINTS!
- * ⚠️  The baseURL is automatically configured with /api suffix
- * ⚠️  Endpoints should start with / (e.g., '/custom-codes', '/challenges')
- * ⚠️  Adding /api/ will result in duplicate /api/api/ in the URL
- * 
- * Key features from backend:
- * - Slug-based endpoints for better SEO and user-friendly URLs
- * - Complex population patterns for related data
- * - Featured content filtering
- * - Ideas content type for community submissions
- * - Statistics endpoint for dashboard data
- */
-
-// ⚠️ ENDPOINT PREFIX WARNING: Do not add /api/ to these paths!
 const ENDPOINTS = {
   CHALLENGES: '/challenges',
   TOURNAMENTS: '/tournaments', 
@@ -134,11 +108,7 @@ const ENDPOINTS = {
   STATS: '/stats'
 } as const;
 export const apiService = {
-  // Challenges
   challenges: {
-    /**
-     * Get all challenges with optional filtering and pagination
-     */
     getAll: (options?: {
       populate?: string;
       filters?: Record<string, any>;
@@ -147,7 +117,6 @@ export const apiService = {
     }): Promise<{ data: any[]; meta?: { pagination?: { start: number; limit: number; total: number; } } }> => {
       const params: Record<string, any> = {};
       
-      // Handle population with bracket notation for multiple relations
       if (options?.populate) {
         const populateFields = options.populate.split(',');
         populateFields.forEach(field => {
@@ -165,7 +134,6 @@ export const apiService = {
         params.sort = options.sort;
       }
       
-      // Use start/limit pagination format as expected by Strapi
       if (options?.pagination) {
         if (options.pagination.start !== undefined) {
           params['pagination[start]'] = options.pagination.start;
@@ -213,7 +181,6 @@ export const apiService = {
     },
   },
 
-  // Tournaments
   tournaments: {
     /**
      * Get all tournaments with optional filtering and pagination
@@ -258,8 +225,6 @@ export const apiService = {
      * The response includes challenges with their thumbnails and rules
      */
     getBySlug: (slug: string): Promise<{data: Tournament}> => {
-      // No need for population parameters as the backend handles it internally
-      // The backend now returns challenges with thumbnails and rules
       return apiClient.get(`/tournaments/slug/${slug}`);
     },
     
@@ -290,7 +255,6 @@ export const apiService = {
     },
   },
 
-  // Custom Codes
   customCodes: {
     /**
      * Get all custom codes with optional filtering and pagination
@@ -304,7 +268,6 @@ export const apiService = {
     }): Promise<{ data: any[]; meta?: { pagination?: { page: number; pageSize: number; pageCount: number; total: number; } } }> => {
       const params: Record<string, any> = {};
       
-      // Always populate creators as minimum
       params.populate = options?.populate || 'creators';
       
       if (options?.filters) {
@@ -326,7 +289,6 @@ export const apiService = {
           params['pagination[limit]'] = options.pagination.limit;
         }
       } else {
-        // Default pagination for testing (pagesize of 1 as requested)
         params['pagination[start]'] = 0;
         params['pagination[limit]'] = 1;
       }
@@ -354,7 +316,6 @@ export const apiService = {
     },
   },
 
-  // Creators
   creators: {
     /**
      * Get all creators with optional pagination
@@ -407,7 +368,6 @@ export const apiService = {
     },
   },
 
-  // Submissions
   submissions: {
     /**
      * Get all submissions with optional filtering
@@ -456,13 +416,11 @@ export const apiService = {
       note?: string;
       challenge: number;
     }) => {
-      // Filter out empty optional fields to match exactly what works in Postman
       const cleanData: any = {
         runner: data.runner,
         challenge: data.challenge
       };
       
-      // Only include optional fields if they have actual values
       if (data.runner_url && data.runner_url.trim()) {
         cleanData.runner_url = data.runner_url.trim();
       }
@@ -491,7 +449,6 @@ export const apiService = {
     },
   },
 
-  // Ideas (New content type from backend)
   ideas: {
     /**
      * Get all community ideas
@@ -532,7 +489,6 @@ export const apiService = {
     },
   },
 
-  // Statistics (New endpoint from backend)
   stats: {
     /**
      * Get overview statistics for dashboard

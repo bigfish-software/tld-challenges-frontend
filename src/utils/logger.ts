@@ -51,7 +51,6 @@ class Logger {
       console.info(`[INFO] ${entry.message}`, this.formatConsoleData(entry));
     }
     
-    // In production, could send to analytics service
     if (this.isProduction) {
       this.sendToLoggingService(entry);
     }
@@ -67,7 +66,6 @@ class Logger {
       console.warn(`[WARN] ${entry.message}`, this.formatConsoleData(entry));
     }
     
-    // In production, send to monitoring service
     if (this.isProduction) {
       this.sendToLoggingService(entry);
     }
@@ -86,7 +84,6 @@ class Logger {
       }
     }
     
-    // In production, send to error reporting service
     if (this.isProduction) {
       this.sendToErrorReporting(entry);
     }
@@ -148,53 +145,17 @@ class Logger {
     return output;
   }
 
-  /**
-   * Send log entry to external logging service (production)
-   */
   private sendToLoggingService(_entry: LogEntry): void {
-    // Implementation placeholder for external logging service
-    // Examples: DataDog, LogRocket, Amplitude, etc.
-    
-    // For now, this is a no-op in production
-    // In the future, integrate with your chosen logging service:
-    
-    // Example with a generic logging service:
-    // try {
-    //   loggingService.send(entry);
-    // } catch (err) {
-    //   // Fallback: don't let logging errors break the app
-    //   console.error('Failed to send log to service:', err);
-    // }
+    // Placeholder for external logging service integration
   }
 
-  /**
-   * Send error to external error reporting service (production)
-   */
   private sendToErrorReporting(_entry: LogEntry): void {
-    // Implementation placeholder for error reporting service
-    // Examples: Sentry, Bugsnag, Rollbar, etc.
-    
-    // For now, this is a no-op in production
-    // In the future, integrate with your chosen error reporting service:
-    
-    // Example with Sentry:
-    // if (entry.error) {
-    //   Sentry.captureException(entry.error, {
-    //     tags: entry.context,
-    //     extra: entry.data,
-    //   });
-    // } else {
-    //   Sentry.captureMessage(entry.message, 'error');
-    // }
+    // Placeholder for error reporting service integration
   }
 
-  /**
-   * Create a child logger with default context
-   */
   child(defaultContext: LogContext): Logger {
     const childLogger = new Logger();
     
-    // Override methods to include default context
     const originalMethods = {
       debug: childLogger.debug.bind(childLogger),
       info: childLogger.info.bind(childLogger),

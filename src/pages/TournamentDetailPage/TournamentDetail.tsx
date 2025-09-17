@@ -4,7 +4,6 @@ import { RichTextRenderer } from '@/components/ui/RichTextRenderer';
 import { Accordion } from '@/components/ui/Accordion';
 import { getImageUrl, getImageAltText, getResponsiveImageProps } from '@/utils/images';
 
-// Helper type with optional thumbnail property
 interface TournamentWithThumbnail extends Tournament {
   thumbnail?: StrapiMedia | null;
 }
@@ -16,7 +15,6 @@ interface TournamentDetailProps {
 export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
   const navigate = useNavigate();
   
-  // Format date for display with better error handling
   const formatDate = (dateString?: string | null) => {
     if (!dateString) {
       return 'Not specified';
@@ -24,7 +22,6 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
     
     try {
       const date = new Date(dateString);
-      // Check if date is valid
       if (isNaN(date.getTime())) {
         return 'Invalid Date';
       }
@@ -40,7 +37,6 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
     }
   };
 
-  // Get tournament state styling
   const getStateBadge = (state: string) => {
     const stateStyles = {
       'planned': 'badge-info',
@@ -190,34 +186,26 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {tournament.challenges.map((challenge) => {
-                    // Convert the challenge to a valid ChallengeResponse
-                    // Use type assertion to handle complex type conversions
                     const processedChallenge = {
                       ...challenge,
-                      // Ensure required ChallengeResponse properties exist
                       id: challenge.id,
                       documentId: challenge.documentId || `doc-${challenge.id}`,
                       name: challenge.name,
                       slug: challenge.slug || `challenge-${challenge.id}`,
-                      // Ensure difficulty is one of the allowed values
                       difficulty: (challenge.difficulty as any) || 'Medium',
                       is_featured: !!challenge.is_featured,
-                      // Make sure these date properties exist
                       createdAt: (challenge as any).createdAt || new Date().toISOString(),
                       updatedAt: (challenge as any).updatedAt || new Date().toISOString(),
                       publishedAt: (challenge as any).publishedAt || new Date().toISOString(),
-                      // Add required properties to match ChallengeResponse type
                       tournaments: [{...tournament, slug: tournament.slug || ''}],
                       custom_code: (challenge as any).custom_code || null,
                       creators: (challenge as any).creators || [],
-                      // These properties may now exist in the challenge from tournament data
                       rules: (challenge as any).rules || [],
                       faqs: (challenge as any).faqs || [],
                       submissions: (challenge as any).submissions || [],
                       thumbnail: (challenge as any).thumbnail || null
                     } as ChallengeResponse;
 
-                    // Get difficulty badge styling
                     const getDifficultyBadge = (difficulty: string | undefined) => {
                       switch(difficulty) {
                         case 'Easy': return 'badge-success';
@@ -243,7 +231,6 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
                             {/* Use aspect-ratio container for consistent thumbnail sizing */}
                             <div className="aspect-w-16 aspect-h-9 bg-surface border border-default">
                               {(() => {
-                                // Define responsive sizes based on grid columns
                                 const customSizes = `
                                   (max-width: 639px) 100vw,
                                   (max-width: 767px) 100vw,
@@ -305,7 +292,6 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
                               <h4 className="text-lg font-semibold text-primary">Rules</h4>
                               <ul className="list-disc space-y-1 text-sm text-secondary pl-4">
                                 {processedChallenge.rules.map((rule: any) => {
-                                  // Extract the text from the first paragraph of the rule description
                                   const ruleText = rule.description && 
                                     Array.isArray(rule.description) && 
                                     rule.description[0]?.children?.[0]?.text

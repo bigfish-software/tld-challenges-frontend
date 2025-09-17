@@ -4,22 +4,18 @@ import '../src/index.css';
 
 const ThemeDecorator = (Story: any, context: any) => {
   const theme = context.globals.theme || 'light';
-  const viewMode = context.viewMode || 'story'; // 'story' for Canvas, 'docs' for Docs
+  const viewMode = context.viewMode || 'story';
   
-  // Apply theme class to document root for Tailwind CSS
   useEffect(() => {
     const root = document.documentElement;
     const body = document.body;
     
-    // Clear existing theme classes
     root.classList.remove('dark', 'light');
     body.classList.remove('dark', 'light');
     
-    // Apply new theme
     root.classList.add(theme);
     body.classList.add(theme);
     
-    // Set Storybook body background based on theme
     if (theme === 'dark') {
       body.style.backgroundColor = '#0f172a';
       body.style.color = '#f1f5f9';
@@ -28,7 +24,6 @@ const ThemeDecorator = (Story: any, context: any) => {
       body.style.color = '#0f172a';
     }
     
-    // Apply to storybook containers
     const storybookRoot = document.getElementById('storybook-root');
     if (storybookRoot) {
       storybookRoot.className = theme;
@@ -41,14 +36,12 @@ const ThemeDecorator = (Story: any, context: any) => {
       }
     }
     
-    // Apply theme to main Storybook containers
     const sbShowMain = document.querySelector('.sb-show-main');
     if (sbShowMain) {
       sbShowMain.setAttribute('data-view-mode', viewMode);
       sbShowMain.setAttribute('data-theme', theme);
       sbShowMain.setAttribute('data-layout', context.parameters?.layout || 'centered');
       
-      // Apply theme styles to main container
       const mainElement = sbShowMain as HTMLElement;
       if (theme === 'dark') {
         mainElement.style.backgroundColor = '#0f172a';
@@ -59,7 +52,6 @@ const ThemeDecorator = (Story: any, context: any) => {
       }
     }
     
-    // Apply theme to story containers
     const storyElements = document.querySelectorAll('.sb-story, .docs-story');
     storyElements.forEach((element) => {
       const storyElement = element as HTMLElement;
@@ -74,7 +66,6 @@ const ThemeDecorator = (Story: any, context: any) => {
     
   }, [theme, viewMode]);
   
-  // Create a theme-aware wrapper for the story
   const containerStyle = {
     backgroundColor: theme === 'dark' ? '#0f172a' : '#ffffff',
     color: theme === 'dark' ? '#f1f5f9' : '#0f172a',
@@ -86,7 +77,6 @@ const ThemeDecorator = (Story: any, context: any) => {
     display: 'block',
   };
   
-  // For full-screen layouts (like pages), ensure proper container setup
   if (context.parameters?.layout === 'fullscreen') {
     const fullscreenStyle = {
       backgroundColor: theme === 'dark' ? '#0f172a' : '#ffffff',
@@ -111,7 +101,6 @@ const ThemeDecorator = (Story: any, context: any) => {
     );
   }
   
-  // For docs view, use full-width container with no padding/margins
   if (viewMode === 'docs') {
     return React.createElement(
       'div',
@@ -134,7 +123,6 @@ const ThemeDecorator = (Story: any, context: any) => {
     );
   }
   
-  // For canvas view, use full container
   return React.createElement(
     'div',
     {
@@ -154,7 +142,7 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      disable: true, // Disable default backgrounds since we handle theming
+      disable: true,
     },
     docs: {
       story: {

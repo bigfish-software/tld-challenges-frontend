@@ -11,24 +11,53 @@ For complete API examples and endpoint references, see the [Postman Collection](
 ### Base Configuration
 ```typescript
 // src/services/api.ts
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 
-const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ? `${import.meta.env.VITE_API_BASE_URL}/api` : 'http://localhost:1337/api',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${import.meta.env.VITE_API_TOKEN}`,
-  },
-});
+class ApiClient {
+  private instance: AxiosInstance;
 
-// Response interceptor for error handling
-apiClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    console.error('API Error:', error.response?.data || error.message);
-    return Promise.reject(error);
+  constructor() {
+    const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:1337';
+    const apiBaseURL = baseURL.endsWith('/api') ? baseURL : `${baseURL}/api`;
+    
+    this.instance = axios.create({
+      baseURL: apiBaseURL,
+      timeout: 30000,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    this.setupInterceptors();
   }
-);
+
+  private setupInterceptors() {
+    // Request interceptor
+    this.instance.interceptors.request.use(
+      (config) => {
+        const token = import.meta.env.VITE_API_TOKEN;
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
+
+    // Response interceptor
+    this.instance.interceptors.response.use(
+      (response) => response.data,
+      (error) => {
+        const apiError = new APIError(
+          error.response?.status || 0,
+          error.response?.data?.error?.message || error.message,
+          error.response?.data?.error?.name
+        );
+        return Promise.reject(apiError);
+      }
+    );
+  }
+}
 ```
 
 ### Environment Variables
@@ -43,12 +72,16 @@ VITE_APP_DOMAIN=http://localhost:3000      # Frontend domain for CORS
 
 ### Challenge API
 ```typescript
-// src/services/challengeService.ts
-export const challengeService = {
-  // Get all challenges with optional filtering
-  getAll: (params?: {
-    difficulty?: string;
-    tournament?: number;
+// Current implementation in src/services/api.ts
+export const apiService = {
+  challenges: {
+    // Get all challenges with optional filtering
+    getAll: (options?: {
+      populate?: string;
+      filters?: Record<string, any>;
+      sort?: string;
+      pagination?: { start?: number; limit?: number };
+    }): Promise<{ data: any[]; meta?: { pagination?: { start: number; limit: number; total: number; } } }> => {
     creator?: number;
     search?: string;
     sort?: string;

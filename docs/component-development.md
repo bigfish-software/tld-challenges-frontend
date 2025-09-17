@@ -18,17 +18,22 @@ Storybook serves as the primary tool for component development, documentation, a
 
 ```
 src/components/
-├── ui/                 # Base UI components
+├── ui/                 # All UI components (base + domain-specific)
 │   ├── Button/
 │   │   ├── Button.tsx
 │   │   ├── Button.stories.tsx
 │   │   └── index.ts
-│   └── Card/
-├── challenge/          # Domain-specific components
 │   ├── ChallengeCard/
 │   │   ├── ChallengeCard.tsx
 │   │   ├── ChallengeCard.stories.tsx
 │   │   └── index.ts
+│   └── CustomCodeCard/
+└── layout/             # Layout components
+    ├── Header/
+    │   ├── Header.tsx
+    │   ├── Header.stories.tsx
+    │   └── index.ts
+    └── PageLayout/
 ```
 
 ## Creating a New Component

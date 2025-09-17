@@ -11,7 +11,6 @@ export const TournamentDetailPage = () => {
   
   const { data: tournament, isLoading, error } = useTournament(slug || '');
   
-  // Redirect if no slug provided
   if (!slug) {
     return <Navigate to="/tournaments" replace />;
   }

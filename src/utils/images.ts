@@ -9,15 +9,11 @@ import type { StrapiMedia } from '@/types/api';
  */
 export const getBaseUrl = (): string => {
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:1337';
-  // Remove /api suffix if it exists
   return apiBaseUrl.replace(/\/api$/, '');
 };
 
 /**
  * Get responsive image URL from Strapi media object
- * @param media - Strapi media object
- * @param size - Desired image size
- * @returns Full image URL or undefined if not available
  */
 export const getImageUrl = (
   media?: StrapiMedia | null,
@@ -36,17 +32,9 @@ export const getImageUrl = (
     return `${baseUrl}${format.url}`;
   }
   
-  // Fallback to original size
   return `${baseUrl}${media.url}`;
 };
 
-/**
- * Get responsive image URL based on device screen size
- * This uses the srcset and sizes attributes for optimal image loading
- * 
- * @param media - Strapi media object
- * @returns Object containing srcset, sizes, and src for responsive image
- */
 export const getResponsiveImageProps = (
   media?: StrapiMedia | null
 ): { src: string; srcSet: string; sizes: string } | undefined => {
@@ -54,13 +42,10 @@ export const getResponsiveImageProps = (
   
   const baseUrl = getBaseUrl();
   
-  // Default src is the original image
   const src = `${baseUrl}${media.url}`;
   
-  // Build srcset with available formats
   const srcSetEntries: string[] = [];
   
-  // Add available formats to srcset
   if (media.formats?.thumbnail) {
     srcSetEntries.push(`${baseUrl}${media.formats.thumbnail.url} ${media.formats.thumbnail.width}w`);
   }
@@ -77,11 +62,8 @@ export const getResponsiveImageProps = (
     srcSetEntries.push(`${baseUrl}${media.formats.large.url} ${media.formats.large.width}w`);
   }
   
-  // Add original size to srcset
   srcSetEntries.push(`${src} ${media.width}w`);
   
-  // Define sizes attribute based on responsive breakpoints
-  // These should align with Tailwind's breakpoints
   const sizes = `
     (max-width: 640px) 100vw,
     (max-width: 768px) 80vw,

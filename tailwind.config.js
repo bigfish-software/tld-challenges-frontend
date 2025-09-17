@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
@@ -9,46 +8,42 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Primary colors (plum theme from docs/colors.md)
         primary: {
           50: '#F5F0F5',
           100: '#E6D6E6',
           200: '#CCADCC',
           300: '#B385B3',
           400: '#7A5C7A',
-          500: '#4A2C4A', // Base primary
+          500: '#4A2C4A',
           600: '#3D233D',
           700: '#2F1B2F',
           800: '#221322',
           900: '#140A14',
         },
-        // Secondary colors (burgundy theme)
         secondary: {
           50: '#F7F4F4',
           100: '#E8E0E0',
           200: '#D1C1C2',
           300: '#B9A1A3',
           400: '#A27E81',
-          500: '#8B5A5C', // Base secondary
+          500: '#8B5A5C',
           600: '#73484A',
           700: '#5B3739',
           800: '#432729',
           900: '#2B1819',
         },
-        // Accent colors (warm peach)
         accent: {
           50: '#FDF9F4',
           100: '#F9EFDE',
           200: '#F3DFBD',
           300: '#EDCF9C',
-          400: '#E6B894', // Base accent
+          400: '#E6B894',
           500: '#D9A373',
           600: '#C08752',
           700: '#A06B31',
           800: '#7A4F10',
           900: '#4D3200',
         },
-        // Semantic colors
         success: {
           50: '#F0FDF4',
           500: '#22C55E',

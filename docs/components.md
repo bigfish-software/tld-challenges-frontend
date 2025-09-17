@@ -6,52 +6,40 @@ This document outlines the component architecture and patterns for the TLD Chall
 
 ```
 src/components/
-├── ui/                     # Base UI components
+├── ui/                     # All UI components (base + domain-specific)
+│   ├── Accordion/
+│   ├── Breadcrumb/
 │   ├── Button/
-│   ├── Input/
-│   ├── Modal/
-│   ├── LoadingSpinner/
-│   ├── ErrorBoundary/
-│   └── Skeleton/
-├── layout/                 # Layout components
-│   ├── Header/
-│   ├── Footer/
-│   ├── Navigation/
-│   ├── Sidebar/
-│   └── PageLayout/
-├── challenge/              # Challenge-specific components
 │   ├── ChallengeCard/
-│   ├── ChallengeDetail/
-│   ├── ChallengeList/
-│   ├── ChallengFilters/
-│   └── DifficultyBadge/
-├── tournament/             # Tournament-specific components
-│   ├── TournamentCard/
-│   ├── TournamentDetail/
-│   ├── TournamentList/
-│   ├── Leaderboard/
-│   └── TournamentStatus/
-├── submission/             # Submission components
-│   ├── SubmissionForm/
-│   ├── SubmissionCard/
-│   ├── SubmissionList/
-│   └── VideoEmbed/
-├── creator/                # Creator profile components
-│   ├── CreatorCard/
-│   ├── CreatorProfile/
-│   ├── CreatorList/
-│   └── SocialLinks/
-├── customcode/             # Custom code components
+│   ├── ChallengeRow/
+│   ├── Checkbox/
 │   ├── CustomCodeCard/
-│   ├── CustomCodeDetail/
-│   ├── CodeBlock/
-│   └── CodeCopyButton/
-└── shared/                 # Shared components
-    ├── SearchBar/
-    ├── Pagination/
-    ├── FilterPanel/
-    ├── MediaEmbed/
-    └── TagList/
+│   ├── DonationSection/
+│   ├── ErrorDisplay/
+│   ├── FeatureCard/
+│   ├── FilterPanel/
+│   ├── icons/
+│   ├── IdeaForm/
+│   ├── Input/
+│   ├── Link/
+│   ├── LoadingSpinner/
+│   ├── NoDataDisplay/
+│   ├── PageHero/
+│   ├── ResultsHeader/
+│   ├── RichTextRenderer/
+│   ├── Select/
+│   ├── SimpleCaptcha/
+│   ├── SubmissionForm/
+│   ├── SupportSection/
+│   ├── Textarea/
+│   ├── TournamentCard/
+│   └── TournamentSection/
+└── layout/                 # Layout components
+    ├── ContentGrid/
+    ├── Footer/
+    ├── Header/
+    ├── PageLayout/
+    └── ScrollToTop/
 ```
 
 ## Component Patterns

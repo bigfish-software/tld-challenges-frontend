@@ -9,10 +9,6 @@ import { useStatsOverview, useTournaments } from '@/hooks/api';
 import type { Tournament } from '@/types/api';
 import tldHeroImage from '@/assets/homepage_hero.png';
 
-/**
- * HomePage content component without Header and Footer.
- * Used for theme comparison stories and content-only rendering.
- */
 export const HomePageContent = () => {
   // Fetch real statistics from API
   const { data: statsResponse, isLoading: statsLoading, error: statsError } = useStatsOverview();
