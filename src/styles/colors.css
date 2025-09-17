@@ -281,11 +281,11 @@
 }
 
 /* Feature Card Button Hover Effects - Specific overrides */
-.card-base button[class*="outline"]:hover {
+.card-base .btn-outline-hover:hover {
   color: var(--color-secondary) !important;
 }
 
-.card-base button[class*="ghost"]:hover {
+.card-base .btn-ghost-hover:hover {
   color: var(--color-secondary) !important;
 }
 
