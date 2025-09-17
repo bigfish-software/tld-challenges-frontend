@@ -143,13 +143,13 @@ export const HomePageContent = () => {
             </div>
 
             {/* Stats or Quick Info */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 max-w-2xl mx-auto">
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-light-primary">
-                  {statsLoading ? '...' : statsError ? '?' : `${stats?.customCodes || 0}+`}
+                  {statsLoading ? '...' : statsError ? '?' : `${stats?.tournaments || 0}+`}
                 </div>
                 <div className="text-sm text-light-secondary">
-                  Custom Codes
+                  Tournaments
                 </div>
               </div>
               <div className="text-center">
@@ -162,10 +162,10 @@ export const HomePageContent = () => {
               </div>
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-light-primary">
-                  {statsLoading ? '...' : statsError ? '?' : `${stats?.tournaments || 0}+`}
+                  {statsLoading ? '...' : statsError ? '?' : `${stats?.submissions || 0}+`}
                 </div>
                 <div className="text-sm text-light-secondary">
-                  Tournaments
+                  Submissions
                 </div>
               </div>
             </div>
