@@ -24,6 +24,7 @@ export interface ExternalLinksConfig {
   };
   game: {
     steamStore: ExternalLink;
+    hinterlandForums: ExternalLink;
   };
 }
 
@@ -73,6 +74,11 @@ export const externalLinks: ExternalLinksConfig = {
       url: 'https://store.steampowered.com/app/305620/The_Long_Dark/',
       label: 'Get the Game',
       description: 'Purchase The Long Dark on Steam'
+    },
+    hinterlandForums: {
+      url: 'https://hinterlandforums.com/forums/',
+      label: 'Hinterland Forums',
+      description: 'Official The Long Dark community forums'
     }
   }
 };
@@ -119,3 +125,4 @@ export const getChefMariaTwitchUrl = () => externalLinks.community.chefmariaTwit
 export const getBigFishModsUrl = () => externalLinks.community.bigfishMods.url;
 export const getGitHubIssuesUrl = () => externalLinks.support.githubIssues.url;
 export const getSteamStoreUrl = () => externalLinks.game.steamStore.url;
+export const getHinterlandForumsUrl = () => externalLinks.game.hinterlandForums.url;
