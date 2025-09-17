@@ -1,6 +1,7 @@
 export * from './HomePage';
 export * from './NotFoundPage';
 export * from './PrivacyPolicyPage';
+export * from './SupportPage';
 export * from './CustomCodesPage';
 export * from './CustomCodeDetailPage';
 export * from './ChallengesPage';

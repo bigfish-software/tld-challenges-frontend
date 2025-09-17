@@ -5,6 +5,7 @@ import { ScrollToTop } from '@/components/layout';
 import { HomePage } from '@/pages/HomePage';
 import { NotFoundPageLayout } from '@/pages/NotFoundPage';
 import { PrivacyPolicyPage } from '@/pages/PrivacyPolicyPage';
+import { SupportPage } from '@/pages/SupportPage';
 import { CustomCodesPage } from '@/pages/CustomCodesPage';
 import { CustomCodeDetailPage } from '@/pages/CustomCodeDetailPage';
 import { ChallengesPage } from '@/pages/ChallengesPage';
@@ -54,6 +55,7 @@ function App() {
             <Route path="/tournaments/:slug" element={<TournamentDetailPage />} />
             <Route path="/idea/submit" element={<IdeaSubmissionPage />} />
             <Route path="/idea/success" element={<IdeaSuccessPage />} />
+            <Route path="/support" element={<SupportPage />} />
             <Route path="/privacy" element={<PrivacyPolicyPage />} />
             <Route path="*" element={<NotFoundPageLayout />} />
           </Routes>

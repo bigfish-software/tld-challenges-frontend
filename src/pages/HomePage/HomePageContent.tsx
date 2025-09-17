@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/Button';
 import { FeatureCard } from '@/components/ui/FeatureCard';
 import { TournamentSection } from '@/components/ui/TournamentSection';
-import { DonationSection } from '@/components/ui/DonationSection';
+import { SupportSection } from '@/components/ui/SupportSection';
 import { ComputerIcon } from '@/components/ui/icons/ComputerIcon';
 import { PaperIcon } from '@/components/ui/icons/PaperIcon';
 import { DollarIcon } from '@/components/ui/icons/DollarIcon';
@@ -263,10 +263,10 @@ export const HomePageContent = () => {
         </div>
       </section>
 
-      {/* Donation Section */}
+      {/* Support Section */}
       <section className="py-16 sm:py-20 lg:py-24 section-primary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <DonationSection />
+          <SupportSection />
         </div>
       </section>
     </main>
