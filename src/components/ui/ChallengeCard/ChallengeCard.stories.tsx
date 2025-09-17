@@ -70,7 +70,7 @@ const activeChallenge: ChallengeResponse = {
       name: 'WildernessGuide',
       username: 'wildernessguide',
       slug: 'wildernessguide',
-      twitch_url: 'https://twitch.tv/wildernessguide',
+      twitch_url: 'https://twitch.tv/wildernessguide', // Fictional creator for testing
       createdAt: '2024-01-01T00:00:00Z',
       updatedAt: '2024-01-01T00:00:00Z',
       publishedAt: '2024-01-01T00:00:00Z'
@@ -108,7 +108,7 @@ const completedChallenge: ChallengeResponse = {
       name: 'IceQueen',
       username: 'icequeen_tld',
       slug: 'icequeen',
-      youtube_url: 'https://youtube.com/@icequeen',
+      youtube_url: 'https://youtube.com/@icequeen', // Fictional creator for testing
       createdAt: '2024-01-01T00:00:00Z',
       updatedAt: '2024-01-01T00:00:00Z',
       publishedAt: '2024-01-01T00:00:00Z'
@@ -159,7 +159,7 @@ const easyChallenge: ChallengeResponse = {
       name: 'CraftMaster',
       username: 'craftmaster_tld',
       slug: 'craftmaster',
-      twitch_url: 'https://twitch.tv/craftmaster',
+      twitch_url: 'https://twitch.tv/craftmaster', // Fictional creator for testing
       createdAt: '2024-01-01T00:00:00Z',
       updatedAt: '2024-01-01T00:00:00Z',
       publishedAt: '2024-01-01T00:00:00Z'

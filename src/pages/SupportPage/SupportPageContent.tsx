@@ -5,7 +5,10 @@ import {
   getBigFishTwitchUrl, 
   getChefMariaTwitchUrl, 
   getDiscordUrl,
-  getGitHubIssuesUrl
+  getGitHubIssuesUrl,
+  getTwitterShareUrl,
+  getRedditShareUrl,
+  getAppDomain
 } from '@/config/externalLinks';
 import supportHeroImage from '@/assets/homepage_hero.png'; // Using same hero image for consistency
 
@@ -23,16 +26,16 @@ export const SupportPageContent = () => {
   };
 
   const handleShareClick = (platform: string) => {
-    const url = 'https://tld-challenges.com';
+    const url = getAppDomain();
     const text = 'Check out TLD Challenges - the ultimate platform for The Long Dark community challenges, tournaments, and custom codes!';
     
     let shareUrl = '';
     switch (platform) {
       case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+        shareUrl = getTwitterShareUrl(text, url);
         break;
       case 'reddit':
-        shareUrl = `https://reddit.com/submit?title=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+        shareUrl = getRedditShareUrl(text, url);
         break;
       case 'steam':
         // Steam doesn't have a direct share URL, so we'll copy to clipboard

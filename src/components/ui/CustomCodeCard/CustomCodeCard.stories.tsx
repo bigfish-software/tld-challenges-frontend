@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CustomCodeCard } from './CustomCodeCard';
 import type { CustomCode } from '@/types/api';
 import type { StrapiRichTextBlocks } from '@/types/richText';
+import { getBigFishTwitchUrl, getChefMariaTwitchUrl } from '@/config/externalLinks';
 
 const meta: Meta<typeof CustomCodeCard> = {
   title: 'UI/CustomCodeCard',
@@ -134,7 +135,7 @@ const sampleCustomCode: CustomCode = {
       name: 'BigFishSoftware',
       username: 'bigfishsoftware',
       slug: 'bigfishsoftware',
-      twitch_url: 'https://twitch.tv/bigfishsoftware',
+      twitch_url: getBigFishTwitchUrl(),
       createdAt: '2024-01-15T10:30:00Z',
       updatedAt: '2024-01-20T09:15:00Z',
       publishedAt: '2024-01-15T10:30:00Z'
@@ -161,7 +162,7 @@ const extremeCustomCode: CustomCode = {
       name: 'ChefMaria',
       username: 'chefmaria_tld',
       slug: 'chefmaria',
-      twitch_url: 'https://twitch.tv/chefmaria',
+      twitch_url: getChefMariaTwitchUrl(),
       createdAt: '2024-01-12T14:45:00Z',
       updatedAt: '2024-01-18T16:30:00Z',
       publishedAt: '2024-01-12T14:45:00Z'
@@ -188,7 +189,7 @@ const detailedCustomCode: CustomCode = {
       name: 'ModCommunity',
       username: 'modcommunity_tld',
       slug: 'modcommunity',
-      youtube_url: 'https://youtube.com/modcommunity',
+      youtube_url: 'https://youtube.com/modcommunity', // Keep as placeholder for fictional creator
       createdAt: '2024-01-20T16:20:00Z',
       updatedAt: '2024-01-25T13:10:00Z',
       publishedAt: '2024-01-20T16:20:00Z'

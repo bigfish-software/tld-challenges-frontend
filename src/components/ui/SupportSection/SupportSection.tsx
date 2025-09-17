@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/Button';
+import { getKofiUrl } from '@/config/externalLinks';
 
 export interface SupportSectionProps {
   className?: string;
@@ -7,7 +8,7 @@ export interface SupportSectionProps {
 export const SupportSection = ({ className = '' }: SupportSectionProps) => {
   const handleKofiClick = () => {
     // Open Ko-fi page for direct donations
-    window.open('https://ko-fi.com/bigfishsoftware', '_blank', 'noopener,noreferrer');
+    window.open(getKofiUrl(), '_blank', 'noopener,noreferrer');
   };
 
   const handleSupportPageClick = () => {

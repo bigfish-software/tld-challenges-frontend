@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/Button';
-import { getBigFishTwitchUrl, getDiscordUrl } from '@/config/externalLinks';
+import { getBigFishTwitchUrl, getDiscordUrl, getKofiUrl } from '@/config/externalLinks';
 
 export interface DonationSectionProps {
   className?: string;
@@ -13,7 +13,7 @@ export const DonationSection = ({ className = '' }: DonationSectionProps) => {
 
   const handleKofiClick = () => {
     // Open Ko-fi page for direct donations
-    window.open('https://ko-fi.com/bigfishsoftware', '_blank', 'noopener,noreferrer');
+    window.open(getKofiUrl(), '_blank', 'noopener,noreferrer');
   };
 
   const handleCommunityClick = () => {

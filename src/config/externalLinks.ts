@@ -21,10 +21,15 @@ export interface ExternalLinksConfig {
   };
   support: {
     githubIssues: ExternalLink;
+    kofi: ExternalLink;
   };
   game: {
     steamStore: ExternalLink;
     hinterlandForums: ExternalLink;
+  };
+  social: {
+    twitterShare: ExternalLink;
+    redditShare: ExternalLink;
   };
 }
 
@@ -67,6 +72,11 @@ export const externalLinks: ExternalLinksConfig = {
       url: 'https://github.com/bigfish-software/tld-challenges-frontend/issues',
       label: 'GitHub Issues',
       description: 'Report bugs, request features, or get technical support'
+    },
+    kofi: {
+      url: 'https://ko-fi.com/bigfishsoftware',
+      label: 'Ko-fi',
+      description: 'Support TLD Challenges with a direct donation'
     }
   },
   game: {
@@ -79,6 +89,18 @@ export const externalLinks: ExternalLinksConfig = {
       url: 'https://hinterlandforums.com/forums/',
       label: 'Hinterland Forums',
       description: 'Official The Long Dark community forums'
+    }
+  },
+  social: {
+    twitterShare: {
+      url: 'https://twitter.com/intent/tweet',
+      label: 'Share on Twitter',
+      description: 'Share on Twitter with custom text and URL'
+    },
+    redditShare: {
+      url: 'https://reddit.com/submit',
+      label: 'Share on Reddit',
+      description: 'Share on Reddit with custom title and URL'
     }
   }
 };
@@ -124,5 +146,34 @@ export const getBigFishTwitchUrl = () => externalLinks.community.bigfishTwitch.u
 export const getChefMariaTwitchUrl = () => externalLinks.community.chefmariaTwitch.url;
 export const getBigFishModsUrl = () => externalLinks.community.bigfishMods.url;
 export const getGitHubIssuesUrl = () => externalLinks.support.githubIssues.url;
+export const getKofiUrl = () => externalLinks.support.kofi.url;
 export const getSteamStoreUrl = () => externalLinks.game.steamStore.url;
 export const getHinterlandForumsUrl = () => externalLinks.game.hinterlandForums.url;
+
+/**
+ * Helper functions for social sharing
+ */
+export const getTwitterShareUrl = (text: string, url: string) => 
+  `${externalLinks.social.twitterShare.url}?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+
+export const getRedditShareUrl = (title: string, url: string) => 
+  `${externalLinks.social.redditShare.url}?title=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
+
+/**
+ * Get the app domain from environment or fallback
+ */
+export const getAppDomain = (): string => {
+  // Try to get domain from environment variable first
+  const envDomain = import.meta.env.VITE_APP_DOMAIN;
+  if (envDomain) {
+    return envDomain;
+  }
+  
+  // Fallback to current location in browser
+  if (typeof window !== 'undefined') {
+    return `${window.location.protocol}//${window.location.host}`;
+  }
+  
+  // Final fallback for SSR or development
+  return 'https://tld-challenges.com';
+};
