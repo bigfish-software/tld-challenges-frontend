@@ -1,0 +1,17 @@
+{
+  "name": "TLD Challenges",
+  "short_name": "TLD Challenges",
+  "description": "The Long Dark challenge platform - Submit runs, compete in tournaments, and track your survival skills.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#4A2C4A",
+  "background_color": "#1F2937",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
+}
