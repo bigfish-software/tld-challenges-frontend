@@ -6,6 +6,7 @@ import {
   getChefMariaTwitchUrl, 
   getDiscordUrl,
   getGitHubIssuesUrl,
+  getKofiUrl,
   getTwitterShareUrl,
   getRedditShareUrl,
   getAppDomain
@@ -13,6 +14,10 @@ import {
 import supportHeroImage from '@/assets/homepage_hero.png';
 
 export const SupportPageContent = () => {
+  const handleKofiClick = () => {
+    window.open(getKofiUrl(), '_blank', 'noopener,noreferrer');
+  };
+
   const handleTwitchClick = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
@@ -72,7 +77,7 @@ export const SupportPageContent = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="max-w-4xl mx-auto space-y-16">
+        <div className="space-y-16">
           
           {/* Introduction */}
           <section className="text-center space-y-6">
@@ -85,11 +90,53 @@ export const SupportPageContent = () => {
             </p>
           </section>
 
+          {/* Primary Support - Ko-fi */}
+          <section className="card-base rounded-lg p-8 text-center space-y-6 border-2 border-accent-color bg-gradient-to-r from-accent-color/10 to-accent-color/5">
+            <div className="space-y-4">
+              <div className="flex items-center justify-center">
+                <svg className="w-8 h-8 text-primary-color" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.033 11.414c.049 4.271 3.468 7.433 7.96 7.433h8.395c4.491 0 7.884-3.138 7.884-7.433C24.25 16.566 23.881 8.948 23.881 8.948zM7.68 8.098c-.184 0-.338.155-.338.343v6.114c0 .188.154.343.338.343h.852c.184 0 .338-.155.338-.343V8.441c0-.188-.154-.343-.338-.343H7.68zm1.542 6.457c0 .188.154.343.338.343h.852c.184 0 .338-.155.338-.343V8.441c0-.188-.154-.343-.338-.343H9.56c-.184 0-.338.155-.338.343v6.114zm1.542-6.457c-.184 0-.338.155-.338.343v6.114c0 .188.154.343.338.343h.852c.184 0 .338-.155.338-.343V8.441c0-.188-.154-.343-.338-.343h-.852zm5.994 4.045c.726-.635 1.185-1.574 1.185-2.625 0-1.932-1.568-3.5-3.5-3.5s-3.5 1.568-3.5 3.5c0 1.051.459 1.99 1.185 2.625.399.348.872.6 1.396.725v1.792c0 .188.154.343.338.343h.852c.184 0 .338-.155.338-.343v-1.792c.524-.125.997-.377 1.396-.725z"/>
+                </svg>
+              </div>
+              
+              <div className="space-y-3">
+                <h3 className="text-heading-2 font-headline uppercase text-primary">
+                  Support Us on Ko-fi
+                </h3>
+                <p className="text-secondary">
+                  Your support directly helps keep TLD Challenges running and enables us to add new features. 
+                  Every donation, no matter the size, helps maintain our servers and development efforts.
+                </p>
+              </div>
+            </div>
+
+            <div className="max-w-md mx-auto">
+              <Button
+                variant="primary"
+                size="lg"
+                fullWidth
+                shadow="xl"
+                hoverEffect="both"
+                onClick={handleKofiClick}
+              >
+                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.033 11.414c.049 4.271 3.468 7.433 7.96 7.433h8.395c4.491 0 7.884-3.138 7.884-7.433C24.25 16.566 23.881 8.948 23.881 8.948zM7.68 8.098c-.184 0-.338.155-.338.343v6.114c0 .188.154.343.338.343h.852c.184 0 .338-.155.338-.343V8.441c0-.188-.154-.343-.338-.343H7.68zm1.542 6.457c0 .188.154.343.338.343h.852c.184 0 .338-.155.338-.343V8.441c0-.188-.154-.343-.338-.343H9.56c-.184 0-.338.155-.338.343v6.114zm1.542-6.457c-.184 0-.338.155-.338.343v6.114c0 .188.154.343.338.343h.852c.184 0 .338-.155.338-.343V8.441c0-.188-.154-.343-.338-.343h-.852zm5.994 4.045c.726-.635 1.185-1.574 1.185-2.625 0-1.932-1.568-3.5-3.5-3.5s-3.5 1.568-3.5 3.5c0 1.051.459 1.99 1.185 2.625.399.348.872.6 1.396.725v1.792c0 .188.154.343.338.343h.852c.184 0 .338-.155.338-.343v-1.792c.524-.125.997-.377 1.396-.725z"/>
+                </svg>
+                Support on Ko-fi
+              </Button>
+            </div>
+
+            <p className="text-body-secondary">
+              <strong className="text-primary">100% Community Supported:</strong> We're entirely funded by the community. 
+              Your donations help pay for hosting, development tools, and new features.
+            </p>
+          </section>
+
           {/* Support Sections Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             {/* B1gF1s4 Twitch Section */}
-            <section className="group card-base rounded-lg p-6 space-y-4 h-full flex flex-col">
+            <section className="group card-base rounded-lg p-8 space-y-6 h-full flex flex-col">
               <div className="flex items-center gap-3">
                 <svg className="w-6 h-6 text-secondary-color" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
@@ -120,7 +167,7 @@ export const SupportPageContent = () => {
             </section>
 
             {/* ChefMaria Twitch Section */}
-            <section className="group card-base rounded-lg p-6 space-y-4 h-full flex flex-col">
+            <section className="group card-base rounded-lg p-8 space-y-6 h-full flex flex-col">
               <div className="flex items-center gap-3">
                 <svg className="w-6 h-6 text-secondary-color" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
@@ -151,7 +198,7 @@ export const SupportPageContent = () => {
             </section>
 
             {/* Content Editors Section */}
-            <section className="group card-base rounded-lg p-6 space-y-4 h-full flex flex-col">
+            <section className="group card-base rounded-lg p-8 space-y-6 h-full flex flex-col">
               <div className="flex items-center gap-3">
                 <svg className="w-6 h-6 text-secondary-color" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
@@ -182,7 +229,7 @@ export const SupportPageContent = () => {
             </section>
 
             {/* Discord Community Section */}
-            <section className="group card-base rounded-lg p-6 space-y-4 h-full flex flex-col">
+            <section className="group card-base rounded-lg p-8 space-y-6 h-full flex flex-col">
               <div className="flex items-center gap-3">
                 <svg className="w-6 h-6 text-secondary-color" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>

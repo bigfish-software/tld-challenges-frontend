@@ -116,6 +116,17 @@ export const Header = () => {
               )}
             </Button>
 
+            {/* Support Link - Desktop only */}
+            <Link to="/support">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="hidden md:block"
+              >
+                Support
+              </Button>
+            </Link>
+
             {/* Theme toggle - Desktop only */}
             <Button
               variant="ghost"
@@ -199,6 +210,14 @@ export const Header = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Tournaments
+              </Link>
+              
+              <Link
+                to="/support"
+                className={`block px-3 py-2 ${getNavLinkClasses("/support")} hover:bg-surface-raised rounded-md`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Support
               </Link>
               
               {/* Divider */}

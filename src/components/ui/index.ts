@@ -2,7 +2,6 @@ export * from './Button';
 export * from './Breadcrumb';
 export * from './FeatureCard';
 export * from './TournamentSection';
-export * from './DonationSection';
 export * from './SupportSection';
 export * from './PageHero';
 export * from './FilterPanel';
