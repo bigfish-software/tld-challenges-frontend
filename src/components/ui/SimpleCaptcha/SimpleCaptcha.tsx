@@ -154,7 +154,7 @@ export const SimpleCaptcha = ({
       </div>
       {(error || captchaError) && <FieldError error={error || captchaError} />}
       {import.meta.env.DEV && !import.meta.env.VITE_RECAPTCHA_SITE_KEY && (
-        <p className="text-xs text-tertiary italic">
+        <p className="text-sm text-tertiary italic">
           Using test reCAPTCHA key. Set VITE_RECAPTCHA_SITE_KEY in .env to remove the test banner.
         </p>
       )}

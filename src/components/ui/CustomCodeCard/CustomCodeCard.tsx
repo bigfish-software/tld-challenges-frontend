@@ -60,7 +60,7 @@ export const CustomCodeCard = ({
       {/* Featured badge in bottom-left corner */}
       {is_featured && (
         <div className="absolute -bottom-px -left-px z-10">
-          <div className="bg-secondary text-light-primary px-3 py-1 text-xs font-semibold rounded-bl-lg rounded-tr-lg">
+          <div className="bg-secondary text-light-primary px-3 py-1 text-sm font-semibold rounded-bl-lg rounded-tr-lg">
             FEATURED
           </div>
         </div>
@@ -70,7 +70,7 @@ export const CustomCodeCard = ({
             <div className="flex-1 min-w-0">
               {/* Header with title and creators */}
               <div className="mb-4">
-                <h3 className="text-xl font-semibold font-headline text-primary group-hover:text-secondary transition-colors mb-2">
+                <h3 className="text-xl sm:text-2xl font-semibold font-headline text-primary group-hover:text-secondary transition-colors mb-2">
                   {name.toUpperCase()}
                 </h3>
                 {creators && creators.length > 0 && (
@@ -95,12 +95,12 @@ export const CustomCodeCard = ({
               {code && (
                 <div className="bg-surface border border-default rounded-lg p-4">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-medium text-secondary uppercase tracking-wide">
+                    <span className="text-sm font-medium text-secondary uppercase tracking-wide">
                       Custom Code
                     </span>
                     <button
                       onClick={handleCopyCode}
-                      className="text-xs text-primary transition-colors flex items-center space-x-1 copy-button"
+                      className="text-sm text-primary transition-colors flex items-center space-x-1 copy-button"
                     >
                       <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
@@ -136,7 +136,7 @@ export const CustomCodeCard = ({
       {/* Featured badge in bottom-left corner */}
       {is_featured && (
         <div className="absolute -bottom-px -left-px z-10">
-          <div className="bg-secondary text-light-primary px-3 py-1 text-xs font-semibold rounded-bl-lg rounded-tr-lg">
+          <div className="bg-secondary text-light-primary px-3 py-1 text-sm font-semibold rounded-bl-lg rounded-tr-lg">
             FEATURED
           </div>
         </div>
@@ -150,7 +150,7 @@ export const CustomCodeCard = ({
           </h3>
           {creators && creators.length > 0 && (
             <div>
-              <span className="text-xs text-tertiary">
+              <span className="text-sm text-tertiary">
                 by {creators.map(creator => creator.name).join(', ')}
               </span>
             </div>
@@ -168,12 +168,12 @@ export const CustomCodeCard = ({
         {code && (
           <div className="bg-surface border border-default rounded-lg p-3 mb-3">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-medium text-secondary uppercase tracking-wide">
+              <span className="text-sm font-medium text-secondary uppercase tracking-wide">
                 Custom Code
               </span>
               <button
                 onClick={handleCopyCode}
-                className="text-xs text-primary transition-colors flex items-center space-x-1 copy-button"
+                className="text-sm text-primary transition-colors flex items-center space-x-1 copy-button"
               >
                 <svg className="h-3 w-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />

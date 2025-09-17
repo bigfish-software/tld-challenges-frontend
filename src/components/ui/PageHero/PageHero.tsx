@@ -68,9 +68,9 @@ export const PageHero = ({
             )}
             
             <h1 className="
-              text-4xl 
-              sm:text-5xl 
-              lg:text-6xl 
+              text-3xl 
+              sm:text-4xl 
+              lg:text-5xl 
               font-bold 
               text-white 
               leading-tight

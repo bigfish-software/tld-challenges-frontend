@@ -68,7 +68,7 @@ export const FilterPanel = ({
           {showClearAll && getTotalSelectedCount() > 0 && (
             <button
               onClick={onClearAll}
-              className="text-xs text-primary transition-colors flex items-center space-x-1 copy-button"
+              className="text-sm text-primary transition-colors flex items-center space-x-1 copy-button"
             >
               <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H8a1 1 0 00-1 1v3M4 7h16" />
@@ -104,7 +104,7 @@ export const FilterPanel = ({
                     {group.label}
                   </span>
                   {groupFilters.length > 0 && (
-                    <span className="ml-1 px-1 text-xs font-medium rounded bg-surface-raised text-secondary border border-default min-w-[16px] text-center">
+                    <span className="ml-1 px-1 text-sm font-medium rounded bg-surface-raised text-secondary border border-default min-w-[16px] text-center">
                       {groupFilters.length}
                     </span>
                   )}
@@ -173,13 +173,13 @@ export const FilterPanel = ({
                                 {option.label}
                               </span>
                               {option.description && (
-                                <p className="text-xs text-secondary mt-0.5">
+                                <p className="text-sm text-secondary mt-0.5">
                                   {option.description}
                                 </p>
                               )}
                             </div>
                             {option.count !== undefined && (
-                              <span className="text-xs text-secondary ml-2">
+                              <span className="text-sm text-secondary ml-2">
                                 {option.count}
                               </span>
                             )}
@@ -200,7 +200,7 @@ export const FilterPanel = ({
         <div className="p-4 border-t border-default sm:hidden">
           <button
             onClick={onClearAll}
-            className="w-full text-center text-xs text-primary transition-colors flex items-center justify-center space-x-1 copy-button"
+            className="w-full text-center text-sm text-primary transition-colors flex items-center justify-center space-x-1 copy-button"
           >
             <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H8a1 1 0 00-1 1v3M4 7h16" />

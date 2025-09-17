@@ -4,7 +4,7 @@ export const PrivacyPolicyContent = () => {
   return (
     <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-primary mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold text-primary mb-8">
           Privacy Policy
         </h1>
         
@@ -14,7 +14,7 @@ export const PrivacyPolicyContent = () => {
           </p>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-primary mb-4">Overview</h2>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-primary mb-4">Overview</h2>
             <p className="mb-4 text-secondary">
               TLD Challenges is a community-driven platform for The Long Dark players to discover 
               custom game codes, participate in challenges and tournaments, and submit their completion runs. 
@@ -23,9 +23,9 @@ export const PrivacyPolicyContent = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-primary mb-4">Data We Collect</h2>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-primary mb-4">Data We Collect</h2>
             
-            <h3 className="text-xl font-medium text-primary mb-3">Anonymous Submission Data</h3>
+            <h3 className="text-xl sm:text-2xl font-medium text-primary mb-3">Anonymous Submission Data</h3>
             <p className="mb-4 text-secondary">
               When you submit a challenge completion run, we collect the following information:
             </p>
@@ -38,7 +38,7 @@ export const PrivacyPolicyContent = () => {
               <li><strong className="text-primary">Submission Timestamp:</strong> When your submission was made</li>
             </ul>
             
-            <h3 className="text-xl font-medium text-primary mb-3">Technical Data</h3>
+            <h3 className="text-xl sm:text-2xl font-medium text-primary mb-3">Technical Data</h3>
             <ul className="list-disc pl-6 mb-4 space-y-2 text-secondary">
               <li><strong className="text-primary">IP Address:</strong> Automatically collected for basic security and abuse prevention</li>
               <li><strong className="text-primary">Browser Information:</strong> Basic technical information to ensure compatibility</li>
@@ -85,14 +85,14 @@ export const PrivacyPolicyContent = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-primary mb-4">Data Storage and Security</h2>
             
-            <h3 className="text-xl font-medium text-primary mb-3">Where Your Data is Stored</h3>
+            <h3 className="text-xl sm:text-2xl font-medium text-primary mb-3">Where Your Data is Stored</h3>
             <ul className="list-disc pl-6 mb-4 space-y-2 text-secondary">
               <li><strong className="text-primary">Database:</strong> Submission data is stored in a secure PostgreSQL database</li>
               <li><strong className="text-primary">Local Storage:</strong> Theme preferences are stored locally in your browser</li>
               <li><strong className="text-primary">No Cloud Tracking:</strong> We don't use cloud analytics or tracking services</li>
             </ul>
 
-            <h3 className="text-xl font-medium text-primary mb-3">Security Measures</h3>
+            <h3 className="text-xl sm:text-2xl font-medium text-primary mb-3">Security Measures</h3>
             <ul className="list-disc pl-6 mb-4 space-y-2 text-secondary">
               <li>All data transmission is encrypted using HTTPS</li>
               <li>Database access is restricted and secured</li>
@@ -122,20 +122,20 @@ export const PrivacyPolicyContent = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-primary mb-4">Your Rights</h2>
             
-            <h3 className="text-xl font-medium text-primary mb-3">Anonymous Submissions</h3>
+            <h3 className="text-xl sm:text-2xl font-medium text-primary mb-3">Anonymous Submissions</h3>
             <p className="mb-4 text-secondary">
               Since submissions are anonymous and we don't collect personal identifiers, we cannot 
               automatically link submissions to specific individuals. However, you have the following rights:
             </p>
             
-            <h3 className="text-xl font-medium text-primary mb-3">Data Removal</h3>
+            <h3 className="text-xl sm:text-2xl font-medium text-primary mb-3">Data Removal</h3>
             <p className="mb-4 text-secondary">
               If you want a specific submission removed, you can contact us with details about the 
               submission (runner name, challenge, approximate submission date) and we will remove it 
               from our platform.
             </p>
             
-            <h3 className="text-xl font-medium text-primary mb-3">Data Portability</h3>
+            <h3 className="text-xl sm:text-2xl font-medium text-primary mb-3">Data Portability</h3>
             <p className="mb-4 text-secondary">
               You can request a copy of submissions you've made by providing identifying information.
             </p>

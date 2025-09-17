@@ -236,7 +236,7 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
                   </div>
                   <div className="flex justify-between">
                     <span className="text-tertiary">Difficulty:</span>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(challenge.difficulty)}`}>
+                    <span className={`px-2 py-1 rounded-full text-sm font-medium ${getDifficultyColor(challenge.difficulty)}`}>
                       {challenge.difficulty}
                     </span>
                   </div>
@@ -338,7 +338,7 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
                           <p className="text-sm text-secondary font-mono">{submission.result}</p>
                         )}
                       </div>
-                      <p className="text-xs text-tertiary">
+                      <p className="text-body-secondary">
                         {formatDate(submission.submitted_date || submission.createdAt)}
                       </p>
                     </div>
@@ -361,7 +361,7 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
                           href={submission.runner_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-tertiary hover:text-primary text-xs transition-colors"
+                          className="text-tertiary hover:text-primary text-sm transition-colors"
                         >
                           Profile
                         </a>

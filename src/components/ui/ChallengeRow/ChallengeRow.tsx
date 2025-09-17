@@ -76,7 +76,7 @@ export const ChallengeRow: React.FC<ChallengeRowProps> = ({
       {/* Featured badge in top-left corner */}
       {is_featured && (
         <div className="absolute top-0 left-0 z-10">
-          <div className="bg-secondary text-light-primary px-3 py-1 text-xs font-semibold rounded-br-lg">
+          <div className="bg-secondary text-light-primary px-3 py-1 text-sm font-semibold rounded-br-lg">
             FEATURED
           </div>
         </div>
@@ -110,7 +110,7 @@ export const ChallengeRow: React.FC<ChallengeRowProps> = ({
       <div className="flex-1 p-4 md:p-6 flex flex-col">
         <div className="flex items-start justify-between mb-2">
           <div className="flex-1 min-w-0">
-            <h3 className="text-xl font-semibold font-headline text-primary group-hover:text-secondary transition-colors mb-2">
+            <h3 className="text-xl sm:text-2xl font-semibold font-headline text-primary group-hover:text-secondary transition-colors mb-2">
               <Link to={`/challenges/${challenge.slug}`} className="hover:text-secondary-color">
                 {name.toUpperCase()}
               </Link>
@@ -133,7 +133,7 @@ export const ChallengeRow: React.FC<ChallengeRowProps> = ({
 
           {/* Difficulty badge */}
           <div className="flex-shrink-0 ml-4">
-            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${difficultyColor}`}>
+            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium ${difficultyColor}`}>
               {difficulty}
             </span>
           </div>
@@ -159,13 +159,13 @@ export const ChallengeRow: React.FC<ChallengeRowProps> = ({
           {custom_code && (
             <div className="flex-1 w-full sm:w-auto">
               <div className="flex items-center space-x-2 mb-2">
-                <span className="text-xs font-medium text-secondary uppercase tracking-wide">
+                <span className="text-sm font-medium text-secondary uppercase tracking-wide">
                   Custom Code:
                 </span>
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={handleCopyCode}
-                    className="text-xs text-primary transition-colors flex items-center space-x-1 copy-button"
+                    className="text-sm text-primary transition-colors flex items-center space-x-1 copy-button"
                   >
                     <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />

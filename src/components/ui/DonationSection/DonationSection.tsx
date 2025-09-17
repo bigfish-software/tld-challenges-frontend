@@ -223,7 +223,7 @@ export const DonationSection = ({ className = '' }: DonationSectionProps) => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                  <span className="text-xs text-secondary font-medium">
+                  <span className="text-sm text-secondary font-medium">
                     Share on social media, gaming forums, or simply word of mouth
                   </span>
                 </div>
@@ -239,7 +239,7 @@ export const DonationSection = ({ className = '' }: DonationSectionProps) => {
             rounded-lg 
             p-4
           ">
-            <p className="text-xs text-secondary leading-relaxed">
+            <p className="text-sm text-secondary leading-relaxed">
               <strong>Transparency:</strong> All donations go directly towards server hosting costs, 
               domain registration, and platform development. This is a community-driven project 
               with no profit motive.

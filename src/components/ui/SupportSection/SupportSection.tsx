@@ -111,7 +111,7 @@ export const SupportSection = ({ className = '' }: SupportSectionProps) => {
             rounded-lg 
             p-4
           ">
-            <p className="text-xs text-secondary leading-relaxed">
+            <p className="text-sm text-secondary leading-relaxed">
               <strong>Transparency:</strong> All donations go directly towards server hosting costs, 
               domain registration, and platform development. This is a community-driven project 
               with no profit motive.

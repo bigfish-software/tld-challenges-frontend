@@ -18,7 +18,7 @@ export const Footer = () => {
             <p className="text-secondary text-sm max-w-md">
                 A hub to explore and create custom game codes, challenges and tournaments, made by the community for the community.
             </p>
-            <p className="text-tertiary text-xs mt-2 italic">
+            <p className="text-tertiary text-sm mt-2 italic">
               Made without crunch by people who care about their friends at a community that cares about its challenges.
             </p>
           </div>
@@ -159,13 +159,13 @@ export const Footer = () => {
         {/* Bottom bar */}
         <div className="mt-8 pt-8 border-t border-default">
           <div className="flex flex-col sm:flex-row justify-between items-center">
-            <p className="text-xs text-tertiary">
+            <p className="text-sm text-tertiary">
               © 2025 TLD Challenges. Built for The Long Dark community.
             </p>
             <div className="flex items-center space-x-4 mt-2 sm:mt-0">
               <a 
                 href="/privacy" 
-                className="text-xs text-tertiary nav-link"
+                className="text-sm text-tertiary nav-link"
               >
                 Privacy Policy
               </a>

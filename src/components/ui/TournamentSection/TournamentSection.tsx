@@ -39,7 +39,7 @@ export const TournamentSection = ({
   const displayTournament = tournament || defaultTournament;
 
   const getStatusBadge = (status: TournamentData['status']) => {
-    const baseClasses = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium';
+    const baseClasses = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium';
     
     switch (status) {
       case 'active':

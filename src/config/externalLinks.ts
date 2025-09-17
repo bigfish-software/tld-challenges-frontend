@@ -47,7 +47,7 @@ export const externalLinks: ExternalLinksConfig = {
       description: 'BigFish Github'
     },
     discord: {
-      url: 'https://discord.gg/9SFXN4CZ', 
+      url: 'https://discord.gg/kjxPkRuHvS', 
       label: 'Discord',
       description: 'BigFish Discord'
     },

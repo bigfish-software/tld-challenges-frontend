@@ -1,3 +1,80 @@
+/* Transition utilities for smooth theme switching */
+.theme-transition {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Global smooth theme transitions for all text and interactive elements */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Text utilities for consistent typography using CSS variables */
+.text-body {
+  font-size: 1rem;
+  line-height: 1.625;
+  color: var(--color-text-primary);
+}
+
+.text-body-secondary {
+  font-size: 0.875rem;
+  line-height: 1.625;
+  color: var(--color-text-secondary);
+}
+
+.text-heading-1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+@media (min-width: 640px) {
+  .text-heading-1 {
+    font-size: 2.25rem;
+  }
+}
+
+.text-heading-2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+@media (min-width: 640px) {
+  .text-heading-2 {
+    font-size: 1.875rem;
+  }
+}
+
+.text-heading-3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+@media (min-width: 640px) {
+  .text-heading-3 {
+    font-size: 1.5rem;
+  }
+}
+
+.text-heading-4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.text-heading-5 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.text-heading-6 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
 /* TLD Challenges Color System - Simplified CSS Variables */
 
 :root {
@@ -78,10 +155,10 @@
   --color-surface: #1F1F1F;               /* Dark card background - lighter */
   --color-surface-raised: #2A2A2A;        /* Slightly lighter for elevation */
 
-  /* Dark theme text - Simplified 3-color system */
+  /* Dark theme text - Simplified 3-color system with improved contrast */
   --color-text-primary: #FFFFFF;          /* Main light text for dark backgrounds */
-  --color-text-secondary: #D1D1D1;        /* Secondary light text for dark backgrounds */
-  --color-text-tertiary: #A0A0A0;         /* Muted grey text for dark backgrounds */
+  --color-text-secondary: #E5E5E5;        /* Secondary light text for dark backgrounds - improved contrast */
+  --color-text-tertiary: #C7C7C7;         /* Muted grey text for dark backgrounds - improved contrast */
   --color-text-light-primary: #FFFFFF;    /* Main light text (same in dark theme) */
   --color-text-light-secondary: #E5E5E5;  /* Secondary light text (same in dark theme) */
 

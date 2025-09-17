@@ -93,7 +93,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
                     )}
                   </div>
                   
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-headline text-white mb-4 drop-shadow-lg">
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-headline text-white mb-4 drop-shadow-lg">
                     {tournament.name.toUpperCase()}
                   </h1>
 
@@ -120,7 +120,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
                   )}
                 </div>
                 
-                <h1 className="text-3xl md:text-4xl font-bold font-headline text-primary mb-4">
+                <h1 className="text-3xl sm:text-4xl font-bold font-headline text-primary mb-4">
                   {tournament.name.toUpperCase()}
                 </h1>
 
@@ -173,7 +173,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
             {/* Detailed Description */}
             {tournament.description_long && (
               <div className="bg-surface border border-default rounded-lg p-8">
-                <h2 className="text-2xl font-bold font-headline text-primary mb-6 uppercase">
+                <h2 className="text-2xl sm:text-3xl font-bold font-headline text-primary mb-6 uppercase">
                   ABOUT THIS TOURNAMENT
                 </h2>
                 <div className="max-w-none text-primary">
@@ -185,7 +185,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
             {/* Tournament Challenges Section - Redesigned with grid layout */}
             {tournament.challenges && tournament.challenges.length > 0 && (
               <div>
-                <h2 className="text-2xl font-bold font-headline text-primary mb-6 uppercase">
+                <h2 className="text-2xl sm:text-3xl font-bold font-headline text-primary mb-6 uppercase">
                   TOURNAMENT CHALLENGES ({tournament.challenges.length})
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -241,7 +241,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
                         {challenge.thumbnail && (
                           <div className="relative overflow-hidden">
                             {/* Use aspect-ratio container for consistent thumbnail sizing */}
-                            <div className="aspect-w-16 aspect-h-9 bg-gray-200 dark:bg-gray-800">
+                            <div className="aspect-w-16 aspect-h-9 bg-surface border border-default">
                               {(() => {
                                 // Define responsive sizes based on grid columns
                                 const customSizes = `
@@ -278,14 +278,14 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
                         
                         {challenge.is_featured && (
                           <div className="absolute -bottom-px -left-px z-10">
-                            <div className="bg-secondary text-light-primary px-3 py-1 text-xs font-semibold rounded-bl-lg rounded-tr-lg">
+                            <div className="bg-secondary text-light-primary px-3 py-1 text-sm font-semibold rounded-bl-lg rounded-tr-lg">
                               FEATURED
                             </div>
                           </div>
                         )}
                         <div className="p-6 flex flex-col h-full">
                           <div className="flex items-start justify-between">
-                            <h3 className="text-xl font-bold font-headline text-primary uppercase group-hover:text-secondary-color transition-colors">
+                            <h3 className="text-xl sm:text-2xl font-bold font-headline text-primary uppercase group-hover:text-secondary-color transition-colors">
                               {challenge.name}
                             </h3>
                             <span className={`inline-flex ml-2 px-3 py-1 rounded-full text-sm font-medium ${getDifficultyBadge(challenge.difficulty)}`}>
@@ -302,7 +302,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
                           {/* Display Rules if available */}
                           {processedChallenge.rules && processedChallenge.rules.length > 0 && (
                             <div className="mt-4 space-y-2">
-                              <h4 className="font-semibold text-primary">Rules</h4>
+                              <h4 className="text-lg font-semibold text-primary">Rules</h4>
                               <ul className="list-disc space-y-1 text-sm text-secondary pl-4">
                                 {processedChallenge.rules.map((rule: any) => {
                                   // Extract the text from the first paragraph of the rule description
@@ -349,7 +349,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
             {/* FAQ Section */}
             {tournament.faqs && tournament.faqs.length > 0 && (
               <div className="bg-surface border border-default rounded-lg p-8">
-                <h2 className="text-2xl font-bold font-headline text-primary mb-6 uppercase">
+                <h2 className="text-2xl sm:text-3xl font-bold font-headline text-primary mb-6 uppercase">
                   FREQUENTLY ASKED QUESTIONS
                 </h2>
                 <Accordion allowMultiple={true} className="space-y-3">

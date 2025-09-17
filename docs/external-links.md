@@ -17,7 +17,7 @@ The configuration is organized into logical categories:
 export const externalLinks: ExternalLinksConfig = {
   community: {
     github: { url: 'https://github.com/bigfish-software', label: 'GitHub' },
-    discord: { url: 'https://discord.gg/tld-challenges', label: 'Discord' },
+    discord: { url: 'https://discord.gg/kjxPkRuHvS', label: 'Discord' },
     bigfishTwitch: { url: 'https://twitch.tv/bigfishsoftware', label: 'BigFish Twitch' },
     chefmariaTwitch: { url: 'https://twitch.tv/chefmaria', label: 'ChefMaria Twitch' },
     bigfishMods: { url: 'https://github.com/bigfish-software/bigfish-mods', label: 'BigFish Mods' }

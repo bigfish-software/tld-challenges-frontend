@@ -102,7 +102,7 @@ export const ChallengeCard = ({
         {/* Featured badge in bottom-left corner */}
         {is_featured && (
           <div className="absolute -bottom-px -left-px z-10">
-            <div className="bg-secondary text-light-primary px-3 py-1 text-xs font-semibold rounded-bl-lg rounded-tr-lg">
+            <div className="bg-secondary text-light-primary px-3 py-1 text-sm font-semibold rounded-bl-lg rounded-tr-lg">
               FEATURED
             </div>
           </div>
@@ -112,7 +112,7 @@ export const ChallengeCard = ({
           {/* Header with title, creators, and difficulty badge */}
           <div className="flex items-start justify-between mb-4">
             <div className="flex-1 min-w-0">
-              <h3 className="text-xl font-semibold font-headline text-primary group-hover:text-secondary transition-colors mb-2">
+              <h3 className="text-xl sm:text-2xl font-semibold font-headline text-primary group-hover:text-secondary transition-colors theme-transition mb-2">
                 {name.toUpperCase()}
               </h3>
               {creators && creators.length > 0 && (
@@ -126,7 +126,7 @@ export const ChallengeCard = ({
 
             {/* Difficulty badge in top-right */}
             <div className="flex-shrink-0 ml-4">
-              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${difficultyColor}`}>
+              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium ${difficultyColor}`}>
                 {difficulty}
               </span>
             </div>
@@ -134,7 +134,7 @@ export const ChallengeCard = ({
 
           {/* Short Description */}
           {description_short && (
-            <p className="text-secondary leading-relaxed mb-4 max-w-2xl">
+            <p className="text-base leading-relaxed text-secondary mb-4 max-w-2xl theme-transition">
               {description_short}
             </p>
           )}
@@ -146,13 +146,13 @@ export const ChallengeCard = ({
               <div className="flex-1">
                 <div className="bg-surface border border-default rounded-lg p-4 max-w-2xl">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-medium text-secondary uppercase tracking-wide">
+                    <span className="text-sm font-medium text-secondary uppercase tracking-wide">
                       Custom Code
                     </span>
                     <div className="flex items-center space-x-3">
                       <button
                         onClick={handleCopyCode}
-                        className="text-xs text-primary transition-colors flex items-center space-x-1 copy-button flex-shrink-0"
+                        className="text-sm text-primary transition-colors flex items-center space-x-1 copy-button flex-shrink-0"
                       >
                         <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
@@ -162,7 +162,7 @@ export const ChallengeCard = ({
                       <Link
                         to={`/custom-codes/${custom_code.slug}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="text-xs text-primary transition-colors flex items-center space-x-1 copy-button flex-shrink-0"
+                        className="text-sm text-primary transition-colors flex items-center space-x-1 copy-button flex-shrink-0"
                       >
                         <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -211,7 +211,7 @@ export const ChallengeCard = ({
       {/* Featured badge in bottom-left corner */}
       {is_featured && (
         <div className="absolute -bottom-px -left-px z-10">
-          <div className="bg-secondary text-light-primary px-3 py-1 text-xs font-semibold rounded-bl-lg rounded-tr-lg">
+          <div className="bg-secondary text-light-primary px-3 py-1 text-sm font-semibold rounded-bl-lg rounded-tr-lg">
             FEATURED
           </div>
         </div>
@@ -227,7 +227,7 @@ export const ChallengeCard = ({
             {creators && creators.length > 0 && (
               <button
                 onClick={handleCreatorClick}
-                className="text-xs text-tertiary hover:text-secondary transition-colors cursor-pointer"
+                className="text-sm text-tertiary hover:text-secondary transition-colors cursor-pointer"
               >
                 by {creators.map((creator) => creator.name).join(', ')}
               </button>
@@ -236,7 +236,7 @@ export const ChallengeCard = ({
 
           {/* Difficulty badge in top-right */}
           <div className="flex-shrink-0 ml-3">
-            <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${difficultyColor}`}>
+            <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-sm font-medium ${difficultyColor}`}>
               {difficulty}
             </span>
           </div>
@@ -244,7 +244,7 @@ export const ChallengeCard = ({
 
         {/* Short Description */}
         {description_short && (
-          <p className="text-secondary text-sm leading-relaxed mb-3">
+          <p className="text-sm leading-relaxed text-secondary mb-3">
             {description_short}
           </p>
         )}
@@ -254,13 +254,13 @@ export const ChallengeCard = ({
           <div className="mb-3">
             <div className="bg-surface border border-default rounded-lg p-3">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium text-secondary uppercase tracking-wide">
+                <span className="text-sm font-medium text-secondary uppercase tracking-wide">
                   Custom Code
                 </span>
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={handleCopyCode}
-                    className="text-xs text-primary transition-colors flex items-center space-x-1 copy-button flex-shrink-0"
+                    className="text-sm text-primary transition-colors flex items-center space-x-1 copy-button flex-shrink-0"
                   >
                     <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
@@ -270,7 +270,7 @@ export const ChallengeCard = ({
                   <Link
                     to={`/custom-codes/${custom_code.slug}`}
                     onClick={(e) => e.stopPropagation()}
-                    className="text-xs text-primary transition-colors flex items-center space-x-1 copy-button flex-shrink-0"
+                    className="text-sm text-primary transition-colors flex items-center space-x-1 copy-button flex-shrink-0"
                   >
                     <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

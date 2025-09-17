@@ -93,7 +93,7 @@ export const TournamentCard = ({
         {/* Featured badge in bottom-left corner */}
         {is_featured && (
           <div className="absolute -bottom-px -left-px z-10">
-            <div className="bg-secondary text-light-primary px-3 py-1 text-xs font-semibold rounded-bl-lg rounded-tr-lg">
+            <div className="bg-secondary text-light-primary px-3 py-1 text-sm font-semibold rounded-bl-lg rounded-tr-lg">
               FEATURED
             </div>
           </div>
@@ -103,7 +103,7 @@ export const TournamentCard = ({
           {/* Header with title, creators, and status badge */}
           <div className="flex items-start justify-between mb-4">
             <div className="flex-1 min-w-0">
-              <h3 className="text-xl font-semibold font-headline text-primary group-hover:text-secondary transition-colors mb-2">
+              <h3 className="text-xl sm:text-2xl font-semibold font-headline text-primary group-hover:text-secondary transition-colors mb-2">
                 {name.toUpperCase()}
               </h3>
               {creators && creators.length > 0 && (
@@ -117,7 +117,7 @@ export const TournamentCard = ({
 
             {/* Status badge in top-right */}
             <div className="flex-shrink-0 ml-4">
-              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusInfo.color}`}>
+              <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium ${statusInfo.color}`}>
                 {statusInfo.label}
               </span>
             </div>
@@ -137,7 +137,7 @@ export const TournamentCard = ({
               <div className="flex-1">
                 <div className="bg-surface border border-default rounded-lg p-4 max-w-2xl">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-medium text-secondary uppercase tracking-wide">
+                    <span className="text-sm font-medium text-secondary uppercase tracking-wide">
                       Tournament Dates
                     </span>
                   </div>
@@ -191,7 +191,7 @@ export const TournamentCard = ({
       {/* Featured badge in bottom-left corner */}
       {is_featured && (
         <div className="absolute -bottom-px -left-px z-10">
-          <div className="bg-secondary text-light-primary px-3 py-1 text-xs font-semibold rounded-bl-lg rounded-tr-lg">
+          <div className="bg-secondary text-light-primary px-3 py-1 text-sm font-semibold rounded-bl-lg rounded-tr-lg">
             FEATURED
           </div>
         </div>
@@ -207,7 +207,7 @@ export const TournamentCard = ({
             {creators && creators.length > 0 && (
               <button
                 onClick={handleOrganizerClick}
-                className="text-xs text-tertiary hover:text-secondary transition-colors cursor-pointer"
+                className="text-sm text-tertiary hover:text-secondary transition-colors cursor-pointer"
               >
                 by {creators.map((creator) => creator.name).join(', ')}
               </button>
@@ -216,7 +216,7 @@ export const TournamentCard = ({
 
           {/* Status badge in top-right */}
           <div className="flex-shrink-0 ml-3">
-            <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${statusInfo.color}`}>
+            <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-sm font-medium ${statusInfo.color}`}>
               {statusInfo.label}
             </span>
           </div>
@@ -234,7 +234,7 @@ export const TournamentCard = ({
           <div className="mb-3">
             <div className="bg-surface border border-default rounded-lg p-3">
               <div className="mb-2">
-                <span className="text-xs font-medium text-secondary uppercase tracking-wide">
+                <span className="text-sm font-medium text-secondary uppercase tracking-wide">
                   Tournament Dates
                 </span>
               </div>

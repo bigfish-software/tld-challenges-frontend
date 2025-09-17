@@ -58,7 +58,7 @@ const SampleCard = ({ title, description, type }: { title: string; description: 
         {title}
       </h3>
       {type && (
-        <span className="px-2 py-1 text-xs font-medium bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200 rounded-full">
+        <span className="px-2 py-1 text-sm font-medium bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200 rounded-full">
           {type}
         </span>
       )}
@@ -67,7 +67,7 @@ const SampleCard = ({ title, description, type }: { title: string; description: 
       {description}
     </p>
     <div className="flex items-center justify-between">
-      <span className="text-xs text-slate-500 dark:text-slate-400">2 days ago</span>
+      <span className="text-sm text-slate-500 dark:text-slate-400">2 days ago</span>
       <button className="px-3 py-1.5 text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
         View Details
       </button>
@@ -90,7 +90,7 @@ const SampleListItem = ({ title, description, type }: { title: string; descripti
             {title}
           </h3>
           {type && (
-            <span className="ml-2 px-2 py-1 text-xs font-medium bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200 rounded-full">
+            <span className="ml-2 px-2 py-1 text-sm font-medium bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200 rounded-full">
               {type}
             </span>
           )}
@@ -99,7 +99,7 @@ const SampleListItem = ({ title, description, type }: { title: string; descripti
           {description}
         </p>
         <div className="flex items-center justify-between mt-2">
-          <span className="text-xs text-slate-500 dark:text-slate-400">2 days ago</span>
+          <span className="text-sm text-slate-500 dark:text-slate-400">2 days ago</span>
           <button className="text-sm font-medium text-primary-700 dark:text-primary-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
             View Details
           </button>
