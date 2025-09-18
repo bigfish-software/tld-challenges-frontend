@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { sortSubmissionsByResult, getTopSubmissions, type Submission } from '../../../utils/submissions';
+import { sortSubmissionsByResult, sortSubmissionsByDate, getTopSubmissions, type Submission } from '../../../utils/submissions';
 import { MedalIcon, YouTubeIcon } from '../icons';
 import { isVideoUrl } from '../../../utils/socialMedia';
 
@@ -26,7 +26,7 @@ export const TopSubmissions = ({
   // Sort submissions based on leaderboard settings
   const sortedSubmissions = hasLeaderboard 
     ? sortSubmissionsByResult(submissions, sortDirection)
-    : submissions; // Don't sort if no leaderboard
+    : sortSubmissionsByDate(submissions, 'DESC'); // Sort by most recent first when no leaderboard
 
   // Get top 3 submissions
   const topSubmissions = getTopSubmissions(sortedSubmissions, 3, hasLeaderboard);
