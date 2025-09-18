@@ -151,7 +151,7 @@ export const SupportPageContent = () => {
               
               <div className="mt-auto">
                 <Button
-                  variant="primary"
+                  variant="outline"
                   size="lg"
                   fullWidth
                   shadow="md"
@@ -182,7 +182,7 @@ export const SupportPageContent = () => {
               
               <div className="mt-auto">
                 <Button
-                  variant="primary"
+                  variant="outline"
                   size="lg"
                   fullWidth
                   shadow="md"
@@ -213,7 +213,7 @@ export const SupportPageContent = () => {
               
               <div className="mt-auto">
                 <Button
-                  variant="primary"
+                  variant="outline"
                   size="lg"
                   fullWidth
                   shadow="md"
@@ -244,7 +244,7 @@ export const SupportPageContent = () => {
               
               <div className="mt-auto">
                 <Button
-                  variant="primary"
+                  variant="outline"
                   size="lg"
                   fullWidth
                   shadow="md"
@@ -282,7 +282,7 @@ export const SupportPageContent = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
               <Button
-                variant="primary"
+                variant="outline"
                 size="lg"
                 shadow="md"
                 hoverEffect="both"
@@ -296,7 +296,7 @@ export const SupportPageContent = () => {
               </Button>
               
               <Button
-                variant="primary"
+                variant="outline"
                 size="lg"
                 shadow="md"
                 hoverEffect="both"
