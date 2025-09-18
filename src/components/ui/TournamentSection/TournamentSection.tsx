@@ -80,12 +80,9 @@ export const TournamentSection = ({
 
   return (
     <section className={`
-      bg-gradient-to-r 
-      from-primary-light
-      to-primary-base
-      card-surface
-      border 
-      border-primary
+      card-base
+      border-2
+      border-default
       rounded-lg 
       overflow-hidden
       ${className}

@@ -70,16 +70,16 @@ export const HomePageContent = () => {
       <section className="relative overflow-hidden">
         {/* TLD Background Image */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{
             backgroundImage: `url(${tldHeroImage})`,
           }}
         />
         
-        {/* Simple dark overlay for text readability */}
-        <div className="absolute inset-0 bg-black bg-opacity-40" />
+        {/* Simple dark overlay for text readability - between background and content */}
+        <div className="absolute inset-0 bg-black bg-opacity-40 z-10" />
         
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 z-20">
           <div className="text-center space-y-8">
             {/* Hero Content */}
             <div className="space-y-6">

@@ -496,7 +496,7 @@ const TournamentView = lazy(() => import('./TournamentView'));
 className="text-gray-900 bg-blue-600 border-red-500"
 
 // ✅ REQUIRED: Custom color system classes
-className="text-primary bg-primary-color border-error"
+className="text-primary bg-primary border-error"
 ```
 
 **Available Custom Color Classes**:
@@ -1665,6 +1665,14 @@ export const ErrorState: Story = {
 - **Mobile Responsiveness**: Excellent mobile experience across both themes
 - **Performance Focus**: Fast loading times and smooth interactions
 - **Accessibility**: WCAG guidelines for inclusive design with proper contrast ratios in both themes
+- **CRITICAL: Custom Color System Priority**: ALWAYS use our custom color system CSS classes over Tailwind color classes. Our custom system ensures proper theme support and brand consistency.
+
+#### Color System Priority Rules
+- **NEVER use Tailwind color classes** like `bg-blue-500`, `text-red-600`, `border-gray-300`
+- **ALWAYS use custom CSS classes** like `bg-primary`, `text-secondary`, `border-default`
+- **Custom color system classes** are defined in `src/styles/colors.css`
+- **Button variants** use our color system: `btn-primary`, `btn-secondary`, not Tailwind colors
+- **Theme-aware colors** automatically adapt between light/dark themes when using our system
 
 ### External Integrations
 - **YouTube Integration**: Video embedding for submission videos
