@@ -99,7 +99,7 @@ const completedChallenge: ChallengeResponse = {
   updatedAt: '2024-01-08T23:59:59Z',
   publishedAt: '2024-01-01T00:00:00Z',
   description_short: 'Survive a continuous blizzard for 7 days in the most challenging weather conditions. Only the strongest will emerge victorious.',
-  difficulty: 'Extreme',
+  difficulty: 'Very Hard',
   is_featured: false,
   creators: [
     {
@@ -257,7 +257,7 @@ export const HardDifficulty: Story = {
   }
 };
 
-export const ExtremeDifficulty: Story = {
+export const VeryHardDifficulty: Story = {
   args: {
     challenge: completedChallenge
   }

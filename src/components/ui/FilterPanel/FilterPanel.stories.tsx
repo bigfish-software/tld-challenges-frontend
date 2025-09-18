@@ -108,7 +108,7 @@ const challengesGroups: FilterGroup[] = [
       { id: 'easy', label: 'Easy', count: 125 },
       { id: 'medium', label: 'Medium', count: 200 },
       { id: 'hard', label: 'Hard', count: 150 },
-      { id: 'extreme', label: 'Extreme', count: 25 }
+      { id: 'very-hard', label: 'Very Hard', count: 25 }
     ],
     multiSelect: true,
     defaultExpanded: true

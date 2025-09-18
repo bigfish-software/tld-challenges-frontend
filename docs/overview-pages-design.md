@@ -8,7 +8,7 @@ I've created three comprehensive overview pages for Custom Codes, Challenges, an
 
 ### 1. Custom Codes Page (`src/pages/CustomCodesPage/`)
 - **Purpose**: Browse and discover community-created game configurations
-- **Mock Data**: 6 diverse custom codes ranging from easy to extreme difficulty
+- **Mock Data**: 6 diverse custom codes ranging from easy to very hard difficulty
 - **Filtering**: Difficulty, tags, and creator-based filters
 - **Sorting**: Newest, oldest, most downloads, difficulty, alphabetical
 

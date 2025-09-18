@@ -170,7 +170,7 @@ export const apiService = {
     /**
      * Filter challenges by difficulty level
      */
-    getByDifficulty: (difficulty: 'Easy' | 'Medium' | 'Hard', populate?: string) => {
+    getByDifficulty: (difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard', populate?: string) => {
       const params: Record<string, any> = {
         'filters[difficulty][$eq]': difficulty,
       };

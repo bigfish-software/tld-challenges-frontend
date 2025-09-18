@@ -211,8 +211,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
                         case 'Easy': return 'badge-success';
                         case 'Medium': return 'badge-info';
                         case 'Hard': return 'badge-warning';
-                        case 'Very Hard': 
-                        case 'Extreme': return 'badge-error';
+                        case 'Very Hard': return 'badge-error';
                         default: return 'badge-info';
                       }
                     };

@@ -189,7 +189,7 @@ export const IdeaForm = ({ onSuccess, initialType }: IdeaFormProps) => {
             <ul className="list-disc list-inside space-y-1 ml-4">
               <li>Be precise about the goal - when is the challenge completed?</li>
               <li>List all rules that apply to the challenge</li>
-              <li>Specify the difficulty level (Easy, Medium, Hard, Very Hard, Extreme)</li>
+              <li>Specify the difficulty level (Easy, Medium, Hard, Very Hard)</li>
               <li>Mention any custom codes that should be used</li>
               <li>Provide both a short description (teaser) and long description (detail page)</li>
               <li>Include a compelling name for the challenge</li>

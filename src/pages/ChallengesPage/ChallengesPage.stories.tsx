@@ -19,7 +19,7 @@ The Challenges overview page showcases community-created survival challenges wit
 - **Detailed Information**: Each challenge includes rules, participant count, and creator info
 
 ## Mock Data
-Includes 6 diverse challenges ranging from easy exploration to extreme endurance tests.
+Includes 6 diverse challenges ranging from easy exploration to very hard endurance tests.
         `
       }
     }

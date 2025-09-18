@@ -65,7 +65,7 @@ export interface ChallengeResponse {
   publishedAt: string | null;
   description_long?: StrapiRichTextBlocks;
   description_short?: string;
-  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard' | 'Extreme';
+  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard';
   is_featured: boolean;
   thumbnail?: StrapiMedia | null;
   
@@ -139,7 +139,7 @@ export interface SimpleChallenge {
   documentId: string;
   name: string;
   slug: string;
-  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard' | 'Extreme';
+  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard';
   description_short?: string;
   createdAt: string;
   updatedAt: string;

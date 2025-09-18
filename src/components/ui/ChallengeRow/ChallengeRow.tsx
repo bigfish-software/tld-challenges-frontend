@@ -46,7 +46,6 @@ export const ChallengeRow: React.FC<ChallengeRowProps> = ({
       case 'Hard':
         return 'badge-warning'; // Hard - Orange/Amber
       case 'Very Hard':
-      case 'Extreme':
         return 'badge-error'; // Very Hard - Red
       default:
         return 'badge-neutral';

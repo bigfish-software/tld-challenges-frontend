@@ -114,7 +114,7 @@ const sampleItems = [
   { title: 'Survivor Paradise', description: 'Enhanced loot spawns with reduced wildlife aggression for a more relaxed survival experience.', type: 'Easy' },
   { title: 'Blizzard Challenge', description: 'Extreme weather conditions with limited visibility and increased cold damage.', type: 'Hard' },
   { title: 'Minimalist Run', description: 'Start with nothing and survive 30 days using only found items.', type: 'Medium' },
-  { title: 'Wolf Pack Territory', description: 'Increased wolf spawns in all regions with enhanced AI behavior.', type: 'Extreme' },
+  { title: 'Wolf Pack Territory', description: 'Increased wolf spawns in all regions with enhanced AI behavior.', type: 'Very Hard' },
   { title: 'Forager Dream', description: 'Abundant plant life and crafting materials with reduced tool durability.', type: 'Easy' },
   { title: 'Nomad Journey', description: 'Cross all regions without establishing a permanent base.', type: 'Medium' },
   { title: 'Silent World', description: 'No audio cues from wildlife or weather systems.', type: 'Hard' },

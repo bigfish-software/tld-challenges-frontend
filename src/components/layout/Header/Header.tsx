@@ -123,7 +123,7 @@ export const Header = () => {
                 size="sm" 
                 className="hidden md:block"
               >
-                Support
+                Support Us
               </Button>
             </Link>
 
@@ -217,7 +217,7 @@ export const Header = () => {
                 className={`block px-3 py-2 ${getNavLinkClasses("/support")} hover:bg-surface-raised rounded-md`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Support
+                Support Us
               </Link>
               
               {/* Divider */}
