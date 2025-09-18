@@ -2,7 +2,6 @@ import { useSearchParams } from 'react-router-dom';
 import { PageLayout } from '../../components/layout';
 import { PageHero, IdeaForm, Breadcrumb } from '../../components/ui';
 import type { BreadcrumbItem } from '../../components/ui/Breadcrumb/Breadcrumb';
-import submissionHeroImage from '../../assets/submission_hero.png';
 
 export const IdeaSubmissionPage = () => {
   const [searchParams] = useSearchParams();
@@ -40,7 +39,7 @@ export const IdeaSubmissionPage = () => {
       <PageHero 
         title={title}
         description={heroDescription}
-        backgroundImage={submissionHeroImage}
+        pageType="submit_idea"
       />
       
       {/* Breadcrumb */}

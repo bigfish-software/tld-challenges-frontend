@@ -126,7 +126,7 @@ export const CustomCodesPageContent: React.FC = () => {
         <PageHero
           title="Custom Codes"
           description="Discover and share custom game configurations to enhance your survival experience"
-          backgroundImage="/src/assets/custom_code_hero.png"
+          pageType="codes"
           contactMessage="Submit your Custom Code"
           contactSubtext="Share your custom settings with players around the world and join our community of creators"
           buttonText="Submit your Idea"
@@ -151,7 +151,7 @@ export const CustomCodesPageContent: React.FC = () => {
       <PageHero
         title="Custom Codes"
         description="Discover and share custom game configurations to enhance your survival experience"
-        backgroundImage="/src/assets/custom_code_hero.png"
+        pageType="codes"
         contactMessage="Submit your Custom Code"
         contactSubtext="Share your custom settings with players around the world and join our community of creators"
         buttonText="Submit your Idea"

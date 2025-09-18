@@ -4,7 +4,6 @@ import { PageLayout } from '../../components/layout';
 import { PageHero, LoadingSpinner, SubmissionForm, Breadcrumb } from '../../components/ui';
 import { apiClient } from '../../services/api';
 import type { ChallengeResponse } from '../../types/api';
-import submissionHeroImage from '../../assets/submission_hero.png';
 
 export const SubmissionPage = () => {
   const { challengeId } = useParams<{ challengeId?: string }>();
@@ -48,7 +47,7 @@ export const SubmissionPage = () => {
       <PageHero 
         title={title}
         description={heroDescription}
-        backgroundImage={submissionHeroImage}
+        pageType="submit_run"
       />
       
       {/* Breadcrumb */}

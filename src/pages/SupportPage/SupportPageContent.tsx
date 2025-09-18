@@ -11,7 +11,6 @@ import {
   getRedditShareUrl,
   getAppDomain
 } from '@/config/externalLinks';
-import supportHeroImage from '@/assets/homepage_hero.png';
 
 export const SupportPageContent = () => {
   const handleKofiClick = () => {
@@ -60,7 +59,7 @@ export const SupportPageContent = () => {
       <PageHero
         title="Support TLD Challenges"
         description="Help us grow the platform and community for everyone"
-        backgroundImage={supportHeroImage}
+        pageType="support"
         contactMessage="Report an Issue"
         contactSubtext="Found a bug or have a feature request? Let us know!"
         buttonText="Report Issue"

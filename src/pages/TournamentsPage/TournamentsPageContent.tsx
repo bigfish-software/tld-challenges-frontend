@@ -4,7 +4,6 @@ import { PageHero, FilterPanel, ErrorDisplay, TournamentCard, Breadcrumb } from 
 import { ContentGrid } from '@/components/layout';
 import { useTournaments } from '@/hooks/api';
 import { Tournament, SimpleCreator } from '@/types/api';
-import tournamentsHeroImage from '@/assets/tournaments_hero.png';
 
 export const TournamentsPageContent: React.FC = () => {
   const navigate = useNavigate();
@@ -118,7 +117,7 @@ export const TournamentsPageContent: React.FC = () => {
         <PageHero
           title="Tournaments"
           description="Join competitive events and tournaments created by the community."
-          backgroundImage="/src/assets/homepage_hero.png"
+          pageType="tournaments"
           contactMessage="Host Your Tournament!"
           contactSubtext="Organize competitive events for the community"
           buttonText="Submit your Idea"
@@ -143,7 +142,7 @@ export const TournamentsPageContent: React.FC = () => {
       <PageHero
         title="Tournaments"
         description="Join competitive events and tournaments created by the community."
-        backgroundImage={tournamentsHeroImage}
+        pageType="tournaments"
         contactMessage="Host Your Tournament!"
         contactSubtext="Organize competitive events for the community"
         buttonText="Submit your Idea"

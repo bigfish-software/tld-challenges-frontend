@@ -5,6 +5,7 @@ import {
   Tournament, 
   SimpleCreator,
   StatsOverview,
+  PageHero,
   ChallengeFilters,
   SubmissionFilters,
   TournamentFilters,
@@ -30,6 +31,7 @@ export const queryKeys = {
   ideas: ['ideas'] as const,
   idea: (id: number) => ['ideas', id] as const,
   stats: ['stats'] as const,
+  pageHero: ['page-hero'] as const,
 } as const;
 
 // Challenges
@@ -216,6 +218,15 @@ export const useStatsOverview = () => {
   });
 };
 
+// Page Hero (single type with all hero images)
+export const usePageHero = () => {
+  return useQuery<{ data: PageHero; meta: {} }>({
+    queryKey: queryKeys.pageHero,
+    queryFn: () => apiService.pageHero.get(),
+    staleTime: 60 * 60 * 1000, // 1 hour (hero images rarely change)
+  });
+};
+
 // Re-export types for convenience
 export type {
   ChallengeResponse,
@@ -223,6 +234,7 @@ export type {
   Tournament,
   SimpleCreator,
   StatsOverview,
+  PageHero,
   ChallengeFilters,
   SubmissionFilters,
   TournamentFilters,

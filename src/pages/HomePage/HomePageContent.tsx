@@ -5,9 +5,9 @@ import { SupportSection } from '@/components/ui/SupportSection';
 import { ComputerIcon } from '@/components/ui/icons/ComputerIcon';
 import { PaperIcon } from '@/components/ui/icons/PaperIcon';
 import { DollarIcon } from '@/components/ui/icons/DollarIcon';
-import { useStatsOverview, useTournaments } from '@/hooks/api';
+import { useStatsOverview, useTournaments, usePageHero } from '@/hooks/api';
+import { getHeroResponsiveImageProps, getImageAltText } from '@/utils/images';
 import type { Tournament } from '@/types/api';
-import tldHeroImage from '@/assets/homepage_hero.png';
 
 export const HomePageContent = () => {
   // Fetch real statistics from API
@@ -17,6 +17,14 @@ export const HomePageContent = () => {
   const { data: tournamentsResponse, isLoading: tournamentsLoading, error: tournamentsError } = useTournaments({
     state: 'active'
   });
+
+  // Fetch page hero data
+  const { data: pageHeroResponse } = usePageHero();
+
+  // Get dynamic home page hero image data
+  const getHomeHeroImageData = () => {
+    return pageHeroResponse?.data?.home;
+  };
   
   // Extract stats data from the response
   const stats = statsResponse?.data;
@@ -68,13 +76,32 @@ export const HomePageContent = () => {
     <main className="flex-1">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        {/* TLD Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-          style={{
-            backgroundImage: `url(${tldHeroImage})`,
-          }}
-        />
+        {/* Background Image using proper img element */}
+        {(() => {
+          const heroImageData = getHomeHeroImageData();
+          if (heroImageData) {
+            const imageProps = getHeroResponsiveImageProps(heroImageData);
+            return imageProps ? (
+              <img
+                src={imageProps.src}
+                srcSet={imageProps.srcSet}
+                sizes={imageProps.sizes}
+                alt={getImageAltText(heroImageData, 'TLD Challenges Hero')}
+                className="absolute inset-0 w-full h-full object-cover z-0"
+              />
+            ) : (
+              <img
+                src={`${import.meta.env.VITE_API_BASE_URL?.replace(/\/api$/, '') || 'http://localhost:1337'}${heroImageData.url}`}
+                alt={getImageAltText(heroImageData, 'TLD Challenges Hero')}
+                className="absolute inset-0 w-full h-full object-cover z-0"
+              />
+            );
+          } else {
+            return (
+              <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary z-0" />
+            );
+          }
+        })()}
         
         {/* Simple dark overlay for text readability - between background and content */}
         <div className="absolute inset-0 bg-black bg-opacity-40 z-10" />

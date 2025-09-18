@@ -149,7 +149,7 @@ export const ChallengesPageContent: React.FC = () => {
         <PageHero
           title="Challenges"
           description="Test your skills with community-created challenges"
-          backgroundImage="/src/assets/challanges_hero.png"
+          pageType="challenges"
           contactMessage="Submit your Challenge"
           contactSubtext="Share your challenges with players around the world and join our community of creators"
           buttonText="Submit your Idea"
@@ -174,7 +174,7 @@ export const ChallengesPageContent: React.FC = () => {
       <PageHero
         title="Challenges"
         description="Test your skills with community-created challenges"
-        backgroundImage="/src/assets/challanges_hero.png"
+        pageType="challenges"
         contactMessage="Submit your Challenge"
         contactSubtext="Share your challenges with players around the world and join our community of creators"
         buttonText="Submit your Idea"

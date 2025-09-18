@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosResponse, AxiosRequestConfig } from 'axios';
-import type { StatsOverview, Tournament, CustomCode } from '@/types/api';
+import type { StatsOverview, Tournament, CustomCode, PageHero } from '@/types/api';
 
 export class APIError extends Error {
   constructor(
@@ -495,6 +495,20 @@ export const apiService = {
      */
     getOverview: (): Promise<{ data: StatsOverview }> => {
       return apiClient.get('/stats/overview');
+    },
+  },
+
+  pageHero: {
+    /**
+     * Get page hero images (single type endpoint)
+     * All media fields are fully populated by default
+     */
+    get: (): Promise<{ data: PageHero; meta: {} }> => {
+      return apiClient.get('/page-hero', { 
+        params: { 
+          populate: '*' 
+        }
+      });
     },
   },
 };

@@ -1,11 +1,16 @@
 import { ReactNode } from 'react';
 import { Button } from '@/components/ui/Button';
 import { externalLinks } from '@/config/externalLinks';
-import tldHeroImage from '@/assets/homepage_hero.png';
+import { usePageHero } from '@/hooks/api';
+import { getHeroResponsiveImageProps, getImageAltText } from '@/utils/images';
+import type { StrapiMedia } from '@/types/api';
+
+export type PageHeroType = 'home' | 'codes' | 'challenges' | 'tournaments' | 'submit_run' | 'submit_idea' | 'support';
 
 export interface PageHeroProps {
   title: string;
   description: string;
+  pageType?: PageHeroType;
   backgroundImage?: string;
   contactMessage?: string;
   contactSubtext?: string;
@@ -17,13 +22,38 @@ export interface PageHeroProps {
 export const PageHero = ({
   title,
   description,
-  backgroundImage = tldHeroImage,
+  pageType,
+  backgroundImage,
   contactMessage,
   contactSubtext,
   buttonText = "Contact Us",
   onButtonClick,
   icon
 }: PageHeroProps) => {
+  // Fetch dynamic page hero data if pageType is provided
+  const { data: pageHeroResponse } = usePageHero();
+
+  // Get dynamic image based on page type
+  const getDynamicImageData = (): StrapiMedia | null | undefined => {
+    if (!pageType || !pageHeroResponse?.data) return undefined;
+    
+    const pageHeroData = pageHeroResponse.data;
+    const imageMap: Record<PageHeroType, StrapiMedia | null | undefined> = {
+      home: pageHeroData.home,
+      codes: pageHeroData.codes,
+      challenges: pageHeroData.challenges,
+      tournaments: pageHeroData.tournament, // Note: backend field is 'tournament' not 'tournaments'
+      submit_run: pageHeroData.submit_run,
+      submit_idea: pageHeroData.submit_idea,
+      support: pageHeroData.support,
+    };
+
+    return imageMap[pageType];
+  };
+
+  // Get the image data for rendering
+  const heroImageData = getDynamicImageData();
+
   const handleContactClick = () => {
     if (onButtonClick) {
       onButtonClick();
@@ -34,13 +64,44 @@ export const PageHero = ({
 
   return (
     <section className="relative overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-        }}
-      />
+      {/* Background Image - use proper img element with responsive attributes */}
+      {(() => {
+        // Check for backgroundImage override first, then dynamic image
+        if (backgroundImage) {
+          return (
+            <img
+              src={backgroundImage}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover z-0"
+            />
+          );
+        }
+        
+        // Use dynamic image with responsive attributes
+        if (heroImageData) {
+          const imageProps = getHeroResponsiveImageProps(heroImageData);
+          return imageProps ? (
+            <img
+              src={imageProps.src}
+              srcSet={imageProps.srcSet}
+              sizes={imageProps.sizes}
+              alt={getImageAltText(heroImageData, 'Hero background')}
+              className="absolute inset-0 w-full h-full object-cover z-0"
+            />
+          ) : (
+            <img
+              src={`${import.meta.env.VITE_API_BASE_URL?.replace(/\/api$/, '') || 'http://localhost:1337'}${heroImageData.url}`}
+              alt={getImageAltText(heroImageData, 'Hero background')}
+              className="absolute inset-0 w-full h-full object-cover z-0"
+            />
+          );
+        }
+        
+        // Fallback gradient when no image is available
+        return (
+          <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary z-0" />
+        );
+      })()}
       
       {/* Light overlay for text readability - between background and content */}
       <div className="absolute inset-0 bg-black bg-opacity-30 z-10" />

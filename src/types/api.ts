@@ -253,6 +253,24 @@ export interface StatsOverview {
   ideas: number;
 }
 
+// Content Type: PageHero (Single type containing hero images for all pages)
+export interface PageHero {
+  id: number;
+  documentId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string | null;
+  
+  // Hero images for different pages
+  home?: StrapiMedia | null;
+  codes?: StrapiMedia | null;
+  challenges?: StrapiMedia | null;
+  tournament?: StrapiMedia | null;
+  submit_run?: StrapiMedia | null;
+  submit_idea?: StrapiMedia | null;
+  support?: StrapiMedia | null;
+}
+
 // Helper types for API responses
 export interface StrapiResponse<T> {
   data: T;
