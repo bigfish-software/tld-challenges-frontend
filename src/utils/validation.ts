@@ -76,7 +76,7 @@ export const getResultValidationError = (): string => {
 };
 
 /**
- * URL validation utility
+ * URL validation utility - validates URL format and ensures https protocol
  */
 export const isValidUrl = (url: string): boolean => {
   if (!url) return false;
@@ -96,13 +96,33 @@ export const isValidUrl = (url: string): boolean => {
 };
 
 /**
- * Video URL validation (YouTube or Twitch)
+ * Ensure URL starts with https:// (add it if missing)
+ */
+export const ensureHttpsUrl = (url: string): string => {
+  if (!url) return url;
+  
+  // If already has https://, return as is
+  if (url.startsWith('https://')) {
+    return url;
+  }
+  
+  // If has http://, replace with https://
+  if (url.startsWith('http://')) {
+    return url.replace('http://', 'https://');
+  }
+  
+  // If no protocol, add https://
+  return 'https://' + url;
+};
+
+/**
+ * Video URL validation (YouTube or Twitch) - ensures https protocol
  */
 export const isValidVideoUrl = (url: string): boolean => {
   // If empty, return false immediately
   if (!url) return false;
   
-  // First ensure it's a valid URL format
+  // First ensure it's a valid URL format (will add https if needed)
   if (!isValidUrl(url)) return false;
   
   // Check if URL contains YouTube or Twitch
@@ -110,4 +130,81 @@ export const isValidVideoUrl = (url: string): boolean => {
   return lowerUrl.includes('youtube') || 
          lowerUrl.includes('youtu.be') || 
          lowerUrl.includes('twitch');
+};
+
+/**
+ * YouTube URL validation - ensures https protocol
+ */
+export const isValidYouTubeUrl = (url: string): boolean => {
+  // If empty, return true (optional field)
+  if (!url) return true;
+  
+  // First ensure it's a valid URL format (will add https if needed)
+  if (!isValidUrl(url)) return false;
+  
+  // Check if URL contains YouTube
+  const lowerUrl = url.toLowerCase();
+  return lowerUrl.includes('youtube') || lowerUrl.includes('youtu.be');
+};
+
+/**
+ * Twitch URL validation - ensures https protocol
+ */
+export const isValidTwitchUrl = (url: string): boolean => {
+  // If empty, return true (optional field)
+  if (!url) return true;
+  
+  // First ensure it's a valid URL format (will add https if needed)
+  if (!isValidUrl(url)) return false;
+  
+  // Check if URL contains Twitch
+  const lowerUrl = url.toLowerCase();
+  return lowerUrl.includes('twitch');
+};
+
+/**
+ * Social URL validation (YouTube, Twitch, or Twitter) - ensures https protocol
+ */
+export const isValidSocialUrl = (url: string): boolean => {
+  // If empty, return true (optional field)
+  if (!url) return true;
+  
+  // First ensure it's a valid URL format (will add https if needed)
+  if (!isValidUrl(url)) return false;
+  
+  // Check if URL contains YouTube, Twitch, or Twitter
+  const lowerUrl = url.toLowerCase();
+  return lowerUrl.includes('youtube') || 
+         lowerUrl.includes('youtu.be') || 
+         lowerUrl.includes('twitch') ||
+         lowerUrl.includes('twitter') ||
+         lowerUrl.includes('x.com');
+};
+
+/**
+ * Get error message for invalid video URL
+ */
+export const getVideoUrlValidationError = (): string => {
+  return 'Please enter a valid YouTube or Twitch URL (e.g., youtube.com/watch?v=... or twitch.tv/videos/...)';
+};
+
+/**
+ * Get error message for invalid YouTube URL
+ */
+export const getYouTubeUrlValidationError = (): string => {
+  return 'Please enter a valid YouTube URL (e.g., youtube.com/@yourhandle or youtube.com/channel/...)';
+};
+
+/**
+ * Get error message for invalid Twitch URL
+ */
+export const getTwitchUrlValidationError = (): string => {
+  return 'Please enter a valid Twitch URL (e.g., twitch.tv/yourhandle)';
+};
+
+/**
+ * Get error message for invalid social URL
+ */
+export const getSocialUrlValidationError = (): string => {
+  return 'Please enter a valid YouTube, Twitch, or Twitter URL (e.g., youtube.com/@handle, twitch.tv/handle, or twitter.com/handle)';
 };

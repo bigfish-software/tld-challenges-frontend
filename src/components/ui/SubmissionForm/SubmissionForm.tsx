@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { Input, Textarea, Select, SimpleCaptcha, Button, ErrorDisplay } from '../';
 import { apiService } from '../../../services/api';
-import { validateResult, getResultValidationError } from '../../../utils/validation';
+import { validateResult, getResultValidationError, isValidVideoUrl, isValidSocialUrl, getVideoUrlValidationError, getSocialUrlValidationError, ensureHttpsUrl } from '../../../utils/validation';
 import type { SelectOption } from '../Select/Select';
 import type { ChallengeResponse } from '../../../types/api';
 
@@ -76,8 +76,8 @@ export const SubmissionForm = ({
       // Match exactly what the backend expects based on working request
       const dataToSend = {
         runner: submissionData.runner,
-        runner_url: submissionData.runner_url,
-        video_url: submissionData.video_url,
+        runner_url: submissionData.runner_url ? ensureHttpsUrl(submissionData.runner_url) : '',
+        video_url: ensureHttpsUrl(submissionData.video_url),
         note: submissionData.note,
         result: submissionData.result,
         challenge: Number(submission.challenge_id)
@@ -184,7 +184,7 @@ export const SubmissionForm = ({
     if (!formValues.video_url) {
       newErrors.video_url = 'Video URL is required';
     } else if (!isValidVideoUrl(formValues.video_url)) {
-      newErrors.video_url = 'Please enter a valid YouTube or Twitch URL';
+      newErrors.video_url = getVideoUrlValidationError();
     }
     
     // Result is now optional, but if provided, must be valid
@@ -192,9 +192,9 @@ export const SubmissionForm = ({
       newErrors.result = getResultValidationError();
     }
     
-    // URL validation
-    if (formValues.runner_url && !isValidUrl(formValues.runner_url)) {
-      newErrors.runner_url = 'Please enter a valid URL';
+    // URL validation for social media
+    if (formValues.runner_url && !isValidSocialUrl(formValues.runner_url)) {
+      newErrors.runner_url = getSocialUrlValidationError();
     }
     
     // Captcha validation
@@ -204,36 +204,6 @@ export const SubmissionForm = ({
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
-
-  const isValidUrl = (url: string): boolean => {
-    // If URL doesn't have protocol, add https:// to make it valid for URL constructor
-    let urlToCheck = url;
-    if (url && !url.match(/^https?:\/\//)) {
-      urlToCheck = 'https://' + url;
-    }
-    
-    try {
-      new URL(urlToCheck);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
-  
-  // Check if URL contains YouTube or Twitch
-  const isValidVideoUrl = (url: string): boolean => {
-    // If empty, return false immediately
-    if (!url) return false;
-    
-    // First ensure it's a valid URL format
-    if (!isValidUrl(url)) return false;
-    
-    // Check if URL contains YouTube or Twitch
-    const lowerUrl = url.toLowerCase();
-    return lowerUrl.includes('youtube') || 
-           lowerUrl.includes('youtu.be') || 
-           lowerUrl.includes('twitch');
   };
 
   const resetForm = () => {
@@ -290,9 +260,34 @@ export const SubmissionForm = ({
           onChange={handleInputChange}
           error={errors.video_url || null}
           required
-          placeholder="https://youtube.com/watch?v=..."
-          helperText="Link to your run video (YouTube or Twitch)"
+          placeholder="youtube.com/watch?v=... or twitch.tv/videos/..."
+          helperText="Link to your run video (YouTube or Twitch only)"
         />
+        
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 flex items-start">
+          <svg 
+            className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mr-3 flex-shrink-0 mt-0.5" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" 
+            />
+          </svg>
+          <div className="text-sm">
+            <p className="text-yellow-800 dark:text-yellow-200 font-medium mb-1">
+              Important: Twitch VOD Limitation
+            </p>
+            <p className="text-yellow-700 dark:text-yellow-300">
+              Keep in mind that Twitch only stores your VODs for a limited amount of time. 
+              We highly recommend exporting your VOD to YouTube and providing a link to that for permanent archival.
+            </p>
+          </div>
+        </div>
         
         <Input
           name="result"
@@ -310,8 +305,8 @@ export const SubmissionForm = ({
           value={formValues.runner_url}
           onChange={handleInputChange}
           error={errors.runner_url || null}
-          placeholder="https://your-social-media.com/profile"
-          helperText="Link to your YouTube, Twitch, or social media profile"
+          placeholder="youtube.com/@yourhandle or twitch.tv/yourhandle"
+          helperText="Link to your YouTube, Twitch, or Twitter profile"
         />
         
         <Textarea

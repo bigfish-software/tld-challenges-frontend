@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { Input, Textarea, Select, SimpleCaptcha, Button, ErrorDisplay } from '../';
 import { apiService } from '../../../services/api';
+import { isValidYouTubeUrl, isValidTwitchUrl, getYouTubeUrlValidationError, getTwitchUrlValidationError, ensureHttpsUrl } from '../../../utils/validation';
 import type { SelectOption } from '../Select/Select';
 
 export interface IdeaFormValues {
@@ -47,8 +48,8 @@ export const IdeaForm = ({ onSuccess, initialType }: IdeaFormProps) => {
         type: idea.type,
         description: idea.description,
         creator: idea.creator,
-        creator_twitch: idea.creator_twitch || '',
-        creator_youtube: idea.creator_youtube || ''
+        creator_twitch: idea.creator_twitch ? ensureHttpsUrl(idea.creator_twitch) : '',
+        creator_youtube: idea.creator_youtube ? ensureHttpsUrl(idea.creator_youtube) : ''
       };
       
       return apiService.ideas.create(dataToSend);
@@ -122,6 +123,15 @@ export const IdeaForm = ({ onSuccess, initialType }: IdeaFormProps) => {
     
     if (!formValues.creator.trim()) {
       newErrors.creator = 'Creator name is required';
+    }
+    
+    // URL validation for social media fields
+    if (formValues.creator_twitch && !isValidTwitchUrl(formValues.creator_twitch)) {
+      newErrors.creator_twitch = getTwitchUrlValidationError();
+    }
+    
+    if (formValues.creator_youtube && !isValidYouTubeUrl(formValues.creator_youtube)) {
+      newErrors.creator_youtube = getYouTubeUrlValidationError();
     }
     
     // Captcha validation
@@ -247,7 +257,8 @@ export const IdeaForm = ({ onSuccess, initialType }: IdeaFormProps) => {
             label="Twitch Channel (Optional)"
             value={formValues.creator_twitch || ''}
             onChange={handleInputChange}
-            placeholder="https://twitch.tv/yourhandle"
+            error={errors.creator_twitch || null}
+            placeholder="twitch.tv/yourhandle"
             helperText="Your Twitch channel URL"
           />
           
@@ -256,7 +267,8 @@ export const IdeaForm = ({ onSuccess, initialType }: IdeaFormProps) => {
             label="YouTube Channel (Optional)"
             value={formValues.creator_youtube || ''}
             onChange={handleInputChange}
-            placeholder="https://youtube.com/@yourhandle"
+            error={errors.creator_youtube || null}
+            placeholder="youtube.com/@yourhandle"
             helperText="Your YouTube channel URL"
           />
         </div>

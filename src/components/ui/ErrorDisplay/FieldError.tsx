@@ -10,7 +10,7 @@ export const FieldError: React.FC<FieldErrorProps> = ({ error }) => {
   return (
     <div className="flex items-center mt-1 px-2 py-1.5 rounded bg-error dark:bg-error dark:bg-opacity-90 bg-opacity-80">
       <svg 
-        className="h-4 w-4 text-white dark:text-white mr-1.5" 
+        className="h-5 w-5 text-white dark:text-white mr-1.5 flex-shrink-0" 
         fill="currentColor" 
         viewBox="0 0 20 20"
       >
