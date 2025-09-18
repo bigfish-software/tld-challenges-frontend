@@ -264,9 +264,9 @@ export const SubmissionForm = ({
           helperText="Link to your run video (YouTube or Twitch only)"
         />
         
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 flex items-start">
+        <div className="bg-surface border border-border rounded-lg p-4 flex items-start">
           <svg 
-            className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mr-3 flex-shrink-0 mt-0.5" 
+            className="h-5 w-5 text-secondary-color mr-2 flex-shrink-0 mt-0.5" 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -278,15 +278,11 @@ export const SubmissionForm = ({
               d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" 
             />
           </svg>
-          <div className="text-sm">
-            <p className="text-yellow-800 dark:text-yellow-200 font-medium mb-1">
-              Important: Twitch VOD Limitation
-            </p>
-            <p className="text-yellow-700 dark:text-yellow-300">
-              Keep in mind that Twitch only stores your VODs for a limited amount of time. 
-              We highly recommend exporting your VOD to YouTube and providing a link to that for permanent archival.
-            </p>
-          </div>
+          <p className="text-sm text-secondary">
+            <strong>Important: Twitch VOD Limitation</strong><br />
+            Keep in mind that Twitch only stores your VODs for a limited amount of time. 
+            We highly recommend exporting your VOD to YouTube and providing a link to that for permanent archival.
+          </p>
         </div>
         
         <Input
