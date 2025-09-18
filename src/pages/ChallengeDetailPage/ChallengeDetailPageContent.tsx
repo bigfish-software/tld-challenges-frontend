@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import type { ChallengeResponse } from '@/types/api';
 import { RichTextRenderer } from '@/components/ui/RichTextRenderer';
 import { CustomCodeCard } from '@/components/ui/CustomCodeCard';
@@ -8,6 +8,7 @@ import { TopSubmissions } from '@/components/ui/TopSubmissions';
 import { Accordion } from '@/components/ui/Accordion';
 import { Button } from '@/components/ui/Button';
 import { getImageUrl, getImageAltText, getResponsiveImageProps } from '@/utils/images';
+import { getCreatorExternalLink } from '@/utils/creatorLinks';
 
 interface ChallengeDetailPageContentProps {
   challenge: ChallengeResponse;
@@ -141,16 +142,28 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
                   <div className="flex items-center gap-4">
                     <span className="text-sm text-tertiary font-medium">Created by:</span>
                     <div className="flex flex-wrap items-center gap-3">
-                      {challenge.creators.map((creator) => (
-                        <div key={creator.id} className="flex items-center gap-2">
-                          <Link
-                            to={`/creators/${creator.slug}`}
-                            className="text-primary nav-link hover:text-secondary-color transition-colors font-medium text-sm"
-                          >
-                            {creator.name}
-                          </Link>
-                        </div>
-                      ))}
+                      {challenge.creators.map((creator) => {
+                        const externalLink = getCreatorExternalLink(creator);
+                        
+                        return (
+                          <div key={creator.id} className="flex items-center gap-2">
+                            {externalLink ? (
+                              <a
+                                href={externalLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary nav-link hover:text-secondary-color transition-colors font-medium text-sm"
+                              >
+                                {creator.name}
+                              </a>
+                            ) : (
+                              <span className="text-primary font-medium text-sm">
+                                {creator.name}
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}

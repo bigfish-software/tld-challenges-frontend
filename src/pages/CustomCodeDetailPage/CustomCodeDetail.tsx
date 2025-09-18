@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import type { CustomCode } from '@/types/api';
 import { RichTextRenderer } from '@/components/ui/RichTextRenderer';
 import { Accordion } from '@/components/ui/Accordion';
 import { Button } from '@/components/ui/Button';
 import { ChallengeCard } from '@/components/ui/ChallengeCard';
 import { getImageUrl, getImageAltText, getResponsiveImageProps } from '@/utils/images';
+import { getCreatorExternalLink } from '@/utils/creatorLinks';
 
 export interface CustomCodeDetailProps {
   /** The custom code object from the API */
@@ -149,16 +150,28 @@ export const CustomCodeDetail = ({
                   <div className="flex items-center gap-4">
                     <span className="text-sm text-tertiary font-medium">Created by:</span>
                     <div className="flex flex-wrap items-center gap-3">
-                      {creators.map((creator) => (
-                        <div key={creator.id} className="flex items-center gap-2">
-                          <Link
-                            to={`/creators/${creator.slug}`}
-                            className="text-primary nav-link hover:text-secondary-color transition-colors font-medium text-sm"
-                          >
-                            {creator.name}
-                          </Link>
-                        </div>
-                      ))}
+                      {creators.map((creator) => {
+                        const externalLink = getCreatorExternalLink(creator);
+                        
+                        return (
+                          <div key={creator.id} className="flex items-center gap-2">
+                            {externalLink ? (
+                              <a
+                                href={externalLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary nav-link hover:text-secondary-color transition-colors font-medium text-sm"
+                              >
+                                {creator.name}
+                              </a>
+                            ) : (
+                              <span className="text-primary font-medium text-sm">
+                                {creator.name}
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
