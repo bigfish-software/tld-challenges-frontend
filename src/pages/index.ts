@@ -6,6 +6,7 @@ export * from './CustomCodesPage';
 export * from './CustomCodeDetailPage';
 export * from './ChallengesPage';
 export * from './ChallengeDetailPage';
+export * from './ChallengeLeaderboardPage';
 export * from './TournamentsPage';
 export * from './TournamentDetailPage';
 export * from './SubmissionPage';

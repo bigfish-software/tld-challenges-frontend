@@ -67,6 +67,8 @@ export interface ChallengeResponse {
   description_short?: string;
   difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard';
   is_featured: boolean;
+  has_leaderboard: boolean;
+  submission_result_sorting: 'ASC' | 'DESC';
   thumbnail?: StrapiMedia | null;
   
   // Direct relations (populated by backend slug endpoint)

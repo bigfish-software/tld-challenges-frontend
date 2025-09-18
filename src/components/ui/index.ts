@@ -17,6 +17,7 @@ export * from './ErrorDisplay/FieldError';
 export * from './NoDataDisplay';
 export * from './LoadingSpinner';
 export * from './Accordion';
+export * from './TopSubmissions';
 export * from './icons';
 export * from './Link';
 export * from './Input';

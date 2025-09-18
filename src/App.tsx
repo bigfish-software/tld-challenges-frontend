@@ -10,6 +10,7 @@ import { CustomCodesPage } from '@/pages/CustomCodesPage';
 import { CustomCodeDetailPage } from '@/pages/CustomCodeDetailPage';
 import { ChallengesPage } from '@/pages/ChallengesPage';
 import { ChallengeDetailPage } from '@/pages/ChallengeDetailPage';
+import { ChallengeLeaderboardPage } from '@/pages/ChallengeLeaderboardPage';
 import { TournamentsPage } from '@/pages/TournamentsPage';
 import { TournamentDetailPage } from '@/pages/TournamentDetailPage';
 import { SubmissionPage } from '@/pages/SubmissionPage';
@@ -46,6 +47,7 @@ function App() {
             <Route path="/custom-codes/:slug" element={<CustomCodeDetailPage />} />
             <Route path="/challenges" element={<ChallengesPage />} />
             <Route path="/challenges/:slug" element={<ChallengeDetailPage />} />
+            <Route path="/challenges/:slug/leaderboard" element={<ChallengeLeaderboardPage />} />
             <Route path="/submissions" element={<SubmissionPage />} />
             <Route path="/submissions/:challengeId" element={<SubmissionPage />} />
             <Route path="/submission/success" element={<SubmissionSuccessPage />} />

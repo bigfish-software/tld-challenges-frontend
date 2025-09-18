@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { Input, Textarea, Select, SimpleCaptcha, Button, ErrorDisplay } from '../';
 import { apiService } from '../../../services/api';
+import { validateResult, getResultValidationError } from '../../../utils/validation';
 import type { SelectOption } from '../Select/Select';
 import type { ChallengeResponse } from '../../../types/api';
 
@@ -186,8 +187,9 @@ export const SubmissionForm = ({
       newErrors.video_url = 'Please enter a valid YouTube or Twitch URL';
     }
     
-    if (!formValues.result.trim()) {
-      newErrors.result = 'Result is required';
+    // Result is now optional, but if provided, must be valid
+    if (formValues.result.trim() && !validateResult(formValues.result)) {
+      newErrors.result = getResultValidationError();
     }
     
     // URL validation
@@ -298,9 +300,8 @@ export const SubmissionForm = ({
           value={formValues.result}
           onChange={handleInputChange}
           error={errors.result || null}
-          required
-          placeholder="e.g., 45:30 or 150 days"
-          helperText="Your completion time or score"
+          placeholder="e.g., 98d, 9d 20h 21m, 10:30:12.123, or 501321"
+          helperText="Your completion time, survival days, or score (optional)"
         />
 
         <Input

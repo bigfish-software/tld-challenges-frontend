@@ -282,6 +282,8 @@ export const CustomCodeDetail = ({
                         challenge={{
                           ...challenge,
                           is_featured: !!challenge.is_featured, // Convert undefined to false
+                          has_leaderboard: false, // Default value for SimpleChallenge
+                          submission_result_sorting: 'DESC' as 'ASC' | 'DESC', // Default value
                           // Add required properties from ChallengeResponse that SimpleChallenge doesn't have
                           custom_code: customCode ? {
                             id: customCode.id,

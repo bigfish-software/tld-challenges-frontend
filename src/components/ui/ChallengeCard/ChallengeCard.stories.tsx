@@ -63,6 +63,8 @@ const activeChallenge: ChallengeResponse = {
   description_short: 'Survive 30 days without establishing a permanent base. Move every 3 days and visit all major regions. Test your adaptability and resource management skills.',
   difficulty: 'Hard',
   is_featured: true,
+  has_leaderboard: true,
+  submission_result_sorting: 'ASC',
   creators: [
     {
       id: 1,
@@ -101,6 +103,8 @@ const completedChallenge: ChallengeResponse = {
   description_short: 'Survive a continuous blizzard for 7 days in the most challenging weather conditions. Only the strongest will emerge victorious.',
   difficulty: 'Very Hard',
   is_featured: false,
+  has_leaderboard: false,
+  submission_result_sorting: 'DESC',
   creators: [
     {
       id: 2,
@@ -127,6 +131,8 @@ const upcomingChallenge: ChallengeResponse = {
   description_short: 'Face enhanced wolf AI in a special challenge where wolves hunt in coordinated packs. Survive encounters with multiple wolf packs.',
   difficulty: 'Medium',
   is_featured: true,
+  has_leaderboard: true,
+  submission_result_sorting: 'DESC',
   creators: [
     {
       id: 3,
@@ -152,6 +158,8 @@ const easyChallenge: ChallengeResponse = {
   description_short: 'A beginner-friendly challenge focused on gathering, crafting, and exploring. Perfect for new players to learn the ropes.',
   difficulty: 'Easy',
   is_featured: false,
+  has_leaderboard: true,
+  submission_result_sorting: 'ASC',
   creators: [
     {
       id: 4,
@@ -190,6 +198,8 @@ const compactChallenge: ChallengeResponse = {
   description_short: 'Complete specific objectives as quickly as possible. Time is everything in this fast-paced challenge.',
   difficulty: 'Medium',
   is_featured: false,
+  has_leaderboard: true,
+  submission_result_sorting: 'ASC',
   creators: [
     {
       id: 5,

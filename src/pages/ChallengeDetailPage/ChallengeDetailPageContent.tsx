@@ -4,6 +4,7 @@ import type { ChallengeResponse } from '@/types/api';
 import { RichTextRenderer } from '@/components/ui/RichTextRenderer';
 import { CustomCodeCard } from '@/components/ui/CustomCodeCard';
 import { TournamentCard } from '@/components/ui/TournamentCard';
+import { TopSubmissions } from '@/components/ui/TopSubmissions';
 import { Accordion } from '@/components/ui/Accordion';
 import { Button } from '@/components/ui/Button';
 import { getImageUrl, getImageAltText, getResponsiveImageProps } from '@/utils/images';
@@ -82,12 +83,12 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
                     )}
                   </div>
                   
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-headline text-white mb-4 drop-shadow-lg">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-headline text-light-primary mb-4 drop-shadow-lg">
                     {challenge.name.toUpperCase()}
                   </h1>
 
                   {challenge.description_short && (
-                    <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl drop-shadow">
+                    <p className="text-lg md:text-xl text-light-secondary leading-relaxed max-w-3xl drop-shadow">
                       {challenge.description_short}
                     </p>
                   )}
@@ -271,6 +272,16 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
                 </Button>
               </div>
 
+              {/* Top Submissions / Leaderboard */}
+              {challenge.submissions && challenge.submissions.length > 0 && (
+                <TopSubmissions
+                  submissions={challenge.submissions}
+                  challengeSlug={challenge.slug}
+                  sortDirection={challenge.submission_result_sorting}
+                  hasLeaderboard={challenge.has_leaderboard}
+                />
+              )}
+
               {/* Custom Code Section */}
               {challenge.custom_code && (
                 <div className="w-full">
@@ -320,65 +331,6 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
               )}
             </div>
           </div>
-
-          {/* Recent Submissions Section */}
-          {challenge.submissions && challenge.submissions.length > 0 && (
-            <div className="bg-surface border border-default rounded-lg p-8">
-              <h2 className="text-2xl font-bold font-headline text-primary mb-6">
-                RECENT SUBMISSIONS
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {challenge.submissions.slice(0, 6).map((submission) => (
-                  <div key={submission.id} className="border border-default rounded-lg p-4 hover:border-secondary-color transition-colors">
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <p className="font-medium text-primary">{submission.runner}</p>
-                        {submission.result && (
-                          <p className="text-sm text-secondary font-mono">{submission.result}</p>
-                        )}
-                      </div>
-                      <p className="text-body-secondary">
-                        {formatDate(submission.submitted_date || submission.createdAt)}
-                      </p>
-                    </div>
-                    {submission.note && (
-                      <p className="text-sm text-tertiary mt-2 line-clamp-2">{submission.note}</p>
-                    )}
-                    <div className="flex justify-between items-center mt-3">
-                      {submission.video_url && (
-                        <a 
-                          href={submission.video_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-primary hover:text-secondary-color text-sm transition-colors font-medium"
-                        >
-                          Watch Run
-                        </a>
-                      )}
-                      {submission.runner_url && (
-                        <a 
-                          href={submission.runner_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-tertiary hover:text-primary text-sm transition-colors"
-                        >
-                          Profile
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              {challenge.submissions.length > 6 && (
-                <div className="text-center mt-6">
-                  <p className="text-sm text-tertiary">
-                    Showing 6 of {challenge.submissions.length} submissions
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
         </div>
       </div>
     </div>
