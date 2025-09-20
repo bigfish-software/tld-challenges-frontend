@@ -17,6 +17,9 @@ class ApiClient {
 
   constructor() {
     const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:1337';
+
+    console.log("apiBaseUrl:", baseURL);
+
     const apiBaseURL = baseURL.endsWith('/api') ? baseURL : `${baseURL}/api`;
     
     this.instance = axios.create({
