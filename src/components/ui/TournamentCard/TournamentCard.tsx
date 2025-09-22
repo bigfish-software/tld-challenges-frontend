@@ -55,7 +55,7 @@ export const TournamentCard = ({
   const getStatusInfo = () => {
     switch (state) {
       case 'planned':
-        return { label: 'Upcoming', color: 'badge-warning' };
+        return { label: 'Planned', color: 'badge-warning' };
       case 'active':
         return { label: 'Active', color: 'badge-success' };
       case 'completed':

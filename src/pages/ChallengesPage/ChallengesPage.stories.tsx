@@ -15,7 +15,7 @@ The Challenges overview page showcases community-created survival challenges wit
 - **Challenge Filtering**: Filter by difficulty, status, region, and challenge type
 - **Advanced Search**: Search across titles, descriptions, tags, creators, and regions
 - **Multiple Sort Options**: Sort by newest, ending soon, participants, difficulty, and more
-- **Status Tracking**: Shows active, completed, and upcoming challenges
+- **Status Tracking**: Shows active, completed, and planned challenges
 - **Detailed Information**: Each challenge includes rules, participant count, and creator info
 
 ## Mock Data

@@ -199,7 +199,7 @@ export const TournamentsFilter: Story = {
           label: 'Status',
           options: [
             { id: 'active', label: 'Active', count: 3 },
-            { id: 'upcoming', label: 'Upcoming', count: 5 },
+            { id: 'planned', label: 'Planned', count: 5 },
             { id: 'completed', label: 'Completed', count: 12 }
           ],
           multiSelect: true,

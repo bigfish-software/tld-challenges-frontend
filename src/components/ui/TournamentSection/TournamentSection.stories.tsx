@@ -10,11 +10,11 @@ const meta: Meta<typeof TournamentSection> = {
     docs: {
       description: {
         component: `
-A prominent section component for showcasing current or upcoming tournaments on the homepage.
+A prominent section component for showcasing current or planned tournaments on the homepage.
 Features tournament details, status indicators, participant count, and call-to-action buttons.
 
 ## Usage Guidelines
-- Display current active tournament or next upcoming tournament
+- Display current active tournament or next planned tournament
 - Show clear status indicators (Active, Coming Soon, Ending Soon)
 - Provide easy access to tournament details and run submission
 - Include live indicator for active tournaments
@@ -52,7 +52,7 @@ const activeTournament: TournamentData = {
   prizePool: 'Community Recognition'
 };
 
-const upcomingTournament: TournamentData = {
+const plannedTournament: TournamentData = {
   id: 2,
   title: 'Speed Run Championship',
   description: 'Race against time in this fast-paced speedrun tournament. Complete Story Mode as quickly as possible.',
@@ -81,10 +81,10 @@ export const Active: Story = {
   }
 };
 
-// Upcoming tournament
-export const Upcoming: Story = {
+// Planned tournament
+export const Planned: Story = {
   args: {
-    tournament: upcomingTournament
+    tournament: plannedTournament
   }
 };
 
@@ -127,8 +127,8 @@ export const StatusComparison: Story = {
       </div>
       
       <div>
-        <h3 className="text-lg font-semibold mb-4 text-slate-900 dark:text-slate-100">Upcoming Tournament</h3>
-        <TournamentSection tournament={upcomingTournament} />
+        <h3 className="text-lg font-semibold mb-4 text-slate-900 dark:text-slate-100">Planned Tournament</h3>
+        <TournamentSection tournament={plannedTournament} />
       </div>
       
       <div>

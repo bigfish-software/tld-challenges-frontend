@@ -120,7 +120,7 @@ const completedChallenge: ChallengeResponse = {
   ]
 };
 
-const upcomingChallenge: ChallengeResponse = {
+const plannedChallenge: ChallengeResponse = {
   id: 3,
   documentId: 'challenge_3',
   name: 'Wolf Pack Encounter',
@@ -242,9 +242,9 @@ export const CompletedChallenge: Story = {
   }
 };
 
-export const UpcomingChallenge: Story = {
+export const PlannedChallenge: Story = {
   args: {
-    challenge: upcomingChallenge
+    challenge: plannedChallenge
   }
 };
 
@@ -257,7 +257,7 @@ export const EasyDifficulty: Story = {
 
 export const MediumDifficulty: Story = {
   args: {
-    challenge: upcomingChallenge
+    challenge: plannedChallenge
   }
 };
 
@@ -283,7 +283,7 @@ export const HighParticipation: Story = {
 // No submissions yet
 export const NoSubmissions: Story = {
   args: {
-    challenge: upcomingChallenge
+    challenge: plannedChallenge
   }
 };
 
@@ -324,7 +324,7 @@ export const NoEndDate: Story = {
 // Creator without URL
 export const CreatorNoURL: Story = {
   args: {
-    challenge: upcomingChallenge
+    challenge: plannedChallenge
   }
 };
 
@@ -334,7 +334,7 @@ export const GridLayout: Story = {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <ChallengeCard challenge={activeChallenge} />
       <ChallengeCard challenge={completedChallenge} />
-      <ChallengeCard challenge={upcomingChallenge} />
+      <ChallengeCard challenge={plannedChallenge} />
       <ChallengeCard challenge={easyChallenge} />
       <ChallengeCard challenge={{...compactChallenge, id: 6, documentId: 'challenge_6'}} />
       <ChallengeCard challenge={{...activeChallenge, id: 7, documentId: 'challenge_7', is_featured: false}} />
@@ -355,7 +355,7 @@ export const CompactGrid: Story = {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <ChallengeCard challenge={activeChallenge} variant="compact" />
       <ChallengeCard challenge={completedChallenge} variant="compact" />
-      <ChallengeCard challenge={upcomingChallenge} variant="compact" />
+      <ChallengeCard challenge={plannedChallenge} variant="compact" />
       <ChallengeCard challenge={easyChallenge} variant="compact" />
     </div>
   ),
