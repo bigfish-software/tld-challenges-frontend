@@ -13,7 +13,7 @@ export default defineConfig({
     __DEV__: process.env.NODE_ENV === 'development',
   },
   server: {
-    port: 3000,
+    port: parseInt(process.env.PORT || '3000'),
     open: true,
   },
   build: {
