@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PageHero, FilterPanel, ErrorDisplay, TournamentCard, Breadcrumb } from '@/components/ui';
+import { PageHero, FilterPanel, ErrorDisplay, NoDataDisplay, TournamentCard, Breadcrumb } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { useTournaments } from '@/hooks/api';
 import { Tournament, SimpleCreator } from '@/types/api';
@@ -181,25 +181,12 @@ export const TournamentsPageContent: React.FC = () => {
                 isLoading={isLoading}
                 isEmpty={filteredTournaments.length === 0}
                 emptyStateComponent={
-                  <div className="text-center py-16">
-                    <div className="mx-auto h-24 w-24 text-secondary mb-6">
-                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="h-full w-full">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg font-medium text-primary mb-2">
-                      No tournaments found
-                    </h3>
-                    <p className="text-secondary max-w-md mx-auto mb-6">
-                      Try adjusting your filters to find tournaments that match your interests.
-                    </p>
-                    <button 
-                      onClick={clearAllFilters}
-                      className="btn-primary px-4 py-2 rounded-md"
-                    >
-                      Clear Filters
-                    </button>
-                  </div>
+                  <NoDataDisplay
+                    title="No tournaments found"
+                    description="Try adjusting your filters to find tournaments that match your interests."
+                    actionText="Clear Filters"
+                    onAction={clearAllFilters}
+                  />
                 }
               >
                 {filteredTournaments.map(tournament => (

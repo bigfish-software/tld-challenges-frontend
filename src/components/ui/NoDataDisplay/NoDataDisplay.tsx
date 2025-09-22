@@ -12,6 +12,8 @@ export interface NoDataDisplayProps {
   onAction?: () => void;
   /** Custom icon component */
   icon?: React.ReactNode;
+  /** Size variant to match ErrorDisplay pattern */
+  size?: 'sm' | 'md' | 'lg';
   /** Additional CSS classes */
   className?: string;
 }
@@ -22,32 +24,79 @@ export const NoDataDisplay = ({
   actionText,
   onAction,
   icon,
+  size = 'md',
   className
 }: NoDataDisplayProps) => {
+  const sizeClasses = {
+    sm: {
+      container: 'py-8',
+      icon: 'h-16 w-16',
+      title: 'text-base',
+      message: 'text-sm',
+      button: 'px-3 py-1.5 text-sm'
+    },
+    md: {
+      container: 'py-16',
+      icon: 'h-24 w-24',
+      title: 'text-lg',
+      message: 'text-base',
+      button: 'px-4 py-2 text-base'
+    },
+    lg: {
+      container: 'py-24',
+      icon: 'h-32 w-32',
+      title: 'text-xl',
+      message: 'text-lg',
+      button: 'px-6 py-3 text-lg'
+    }
+  };
+
+  const currentSizeClasses = sizeClasses[size];
+
   const defaultIcon = (
-    <div className="w-16 h-16 rounded-full border-2 flex items-center justify-center mb-6" style={{ borderColor: 'var(--color-primary)' }}>
-      <svg className="w-8 h-8 text-primary-color" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-      </svg>
-    </div>
+    <svg 
+      fill="none" 
+      stroke="currentColor" 
+      viewBox="0 0 24 24" 
+      className="h-full w-full"
+    >
+      <path 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        strokeWidth={1} 
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+      />
+    </svg>
   );
 
   return (
     <div className={clsx(
-      'flex flex-col items-center justify-center text-center py-16 px-8',
+      'text-center',
+      currentSizeClasses.container,
       className
     )}>
       {/* Icon */}
-      {icon || defaultIcon}
+      <div className={clsx(
+        'mx-auto text-primary-color mb-6',
+        currentSizeClasses.icon
+      )}>
+        {icon || defaultIcon}
+      </div>
       
       {/* Title */}
-      <h3 className="text-xl font-semibold text-primary mb-3">
+      <h3 className={clsx(
+        'font-medium text-primary mb-2',
+        currentSizeClasses.title
+      )}>
         {title}
       </h3>
       
       {/* Description */}
       {description && (
-        <p className="text-secondary text-base leading-relaxed mb-8 max-w-md">
+        <p className={clsx(
+          'text-secondary max-w-md mx-auto mb-6',
+          currentSizeClasses.message
+        )}>
           {description}
         </p>
       )}
@@ -56,7 +105,10 @@ export const NoDataDisplay = ({
       {actionText && onAction && (
         <button
           onClick={onAction}
-          className="btn-primary px-6 py-3 text-sm font-medium rounded-md"
+          className={clsx(
+            'btn-primary rounded-md',
+            currentSizeClasses.button
+          )}
         >
           {actionText}
         </button>

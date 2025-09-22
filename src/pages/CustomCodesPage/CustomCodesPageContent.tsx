@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PageHero, FilterPanel, CustomCodeCard, ErrorDisplay, Breadcrumb } from '@/components/ui';
+import { PageHero, FilterPanel, CustomCodeCard, ErrorDisplay, NoDataDisplay, Breadcrumb } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
 import { useCustomCodes } from '@/hooks/api';
 import { CustomCode } from '@/types/api';
@@ -190,25 +190,12 @@ export const CustomCodesPageContent: React.FC = () => {
                 isLoading={isLoading}
                 isEmpty={filteredCodes.length === 0}
                 emptyStateComponent={
-                  <div className="text-center py-16">
-                    <div className="mx-auto h-24 w-24 text-secondary mb-6">
-                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="h-full w-full">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-lg font-medium text-primary mb-2">
-                      No custom codes found
-                    </h3>
-                    <p className="text-secondary max-w-md mx-auto mb-6">
-                      Try adjusting your filters to find the perfect custom code for your gameplay style.
-                    </p>
-                    <button 
-                      onClick={clearAllFilters}
-                      className="btn-primary px-4 py-2 rounded-md"
-                    >
-                      Clear Filters
-                    </button>
-                  </div>
+                  <NoDataDisplay
+                    title="No custom codes found"
+                    description="Try adjusting your filters to find the perfect custom code for your gameplay style."
+                    actionText="Clear Filters"
+                    onAction={clearAllFilters}
+                  />
                 }
               >
                 {filteredCodes.map(code => (
