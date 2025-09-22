@@ -40,7 +40,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
 
   const getStateBadge = (state: string) => {
     const stateStyles = {
-      'planned': 'badge-info',
+      'planned': 'badge-warning',
       'active': 'badge-success',
       'completed': 'badge-neutral',
       'cancelled': 'badge-error'
