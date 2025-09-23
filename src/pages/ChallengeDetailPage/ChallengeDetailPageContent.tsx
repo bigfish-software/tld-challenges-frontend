@@ -187,18 +187,18 @@ export const ChallengeDetailPageContent: React.FC<ChallengeDetailPageContentProp
                 </div>
               )}
 
-              {/* Rules Section */}
+              {/* Rules Section - Updated design: individual cards, no numbering, cleaner separation */}
               {challenge.rules && challenge.rules.length > 0 && (
                 <div className="bg-surface border border-default rounded-lg p-8">
                   <h2 className="text-2xl font-bold font-headline text-primary mb-6">
                     RULES & REQUIREMENTS
                   </h2>
-                  <div className="space-y-6">
+                  <div className="space-y-4">
                     {challenge.rules.map((rule, index) => (
-                      <div key={rule.id || index} className="border-l-4 border-secondary-color pl-6 py-2">
+                      <div key={rule.id || index} className="bg-background-primary border border-default rounded-lg p-4">
                         {rule.name && (
-                          <h3 className="text-lg font-semibold text-primary mb-2">
-                            {index + 1}. {rule.name}
+                          <h3 className="text-lg font-semibold text-primary mb-3">
+                            {rule.name}
                           </h3>
                         )}
                         <div className="prose dark:prose-invert prose-sm prose-headings:text-primary prose-links:text-primary prose-links:no-underline hover:prose-links:text-secondary-color">
