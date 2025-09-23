@@ -52,3 +52,34 @@ export function hasRichTextContent(blocks: StrapiRichTextBlocks | unknown): bool
   const text = extractTextFromBlocks(blocks);
   return text.trim().length > 0;
 }
+
+/**
+ * Check if rich text blocks contain meaningful content (excluding empty paragraphs)
+ * This function considers empty paragraphs as not having content for layout purposes
+ */
+export function hasMeaningfulRichTextContent(blocks: StrapiRichTextBlocks | unknown): boolean {
+  if (!isStrapiRichTextBlocks(blocks)) {
+    return false;
+  }
+
+  function hasNodeContent(node: StrapiRichTextNode): boolean {
+    if (isTextNode(node)) {
+      return node.text.trim().length > 0;
+    }
+
+    // For paragraphs, check if any children have content
+    if (node.type === 'paragraph' && hasChildren(node)) {
+      return getNodeChildren(node).some(hasNodeContent);
+    }
+
+    // For other block types with children, check if they have content
+    if (hasChildren(node)) {
+      return getNodeChildren(node).some(hasNodeContent);
+    }
+
+    // For non-text, non-paragraph types, consider them as having content
+    return true;
+  }
+
+  return blocks.some(hasNodeContent);
+}

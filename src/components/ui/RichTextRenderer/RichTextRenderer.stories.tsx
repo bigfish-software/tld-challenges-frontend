@@ -348,3 +348,89 @@ export const ThemeComparison: Story = {
     }
   }
 };
+
+// Sample rich text blocks with empty paragraphs for spacing testing
+const emptyParagraphBlocks = [
+  {
+    type: "paragraph",
+    children: [
+      {
+        text: "This is the first paragraph with content.",
+        type: "text"
+      }
+    ]
+  },
+  {
+    type: "paragraph",
+    children: [
+      {
+        text: "",
+        type: "text"
+      }
+    ]
+  },
+  {
+    type: "paragraph",
+    children: [
+      {
+        text: "This paragraph comes after an empty paragraph that should create spacing.",
+        type: "text"
+      }
+    ]
+  },
+  {
+    type: "paragraph",
+    children: [
+      {
+        text: "",
+        type: "text"
+      }
+    ]
+  },
+  {
+    type: "paragraph",
+    children: [
+      {
+        text: "",
+        type: "text"
+      }
+    ]
+  },
+  {
+    type: "paragraph",
+    children: [
+      {
+        text: "This paragraph comes after two consecutive empty paragraphs.",
+        type: "text"
+      }
+    ]
+  }
+];
+
+export const EmptyParagraphs: Story = {
+  args: {
+    blocks: emptyParagraphBlocks,
+    variant: 'default'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates how empty paragraphs are rendered to preserve spacing added by content editors'
+      }
+    }
+  }
+};
+
+export const EmptyParagraphsCompact: Story = {
+  args: {
+    blocks: emptyParagraphBlocks,
+    variant: 'compact'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates how empty paragraphs are rendered in compact variant with reduced spacing'
+      }
+    }
+  }
+};

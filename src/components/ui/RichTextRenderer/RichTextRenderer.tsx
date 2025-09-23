@@ -77,14 +77,43 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
     return element;
   };
 
+  // Helper function to check if a paragraph has meaningful content
+  const hasTextContent = (children: StrapiRichTextNode[]): boolean => {
+    return children.some(child => {
+      if (isTextNode(child)) {
+        return child.text.trim().length > 0;
+      }
+      // Non-text nodes (links, etc.) count as content
+      return true;
+    });
+  };
+
   const renderBlock = (block: StrapiRichTextNode, index: number): React.ReactNode => {
     const key = `block-${index}`;
 
     switch (block.type) {
       case 'paragraph':
         if (isParagraphNode(block)) {
+          // Check if paragraph is empty (contains only empty text nodes)
+          const hasContent = hasTextContent(block.children);
+
+          // For empty paragraphs, render a div with proper spacing to preserve layout
+          if (!hasContent) {
+            const spacingClass = variant === 'compact' ? 'mb-2 last:mb-0' : 'mb-4 last:mb-0';
+            const height = variant === 'compact' ? '1em' : '1.5em';
+            
+            return (
+              <div key={key} className={spacingClass} style={{ height }}>
+                &nbsp;
+              </div>
+            );
+          }
+
+          // Regular paragraph with content
+          const paragraphSpacing = variant === 'compact' ? 'mb-2 last:mb-0' : 'mb-4 last:mb-0';
+          
           return (
-            <p key={key} className="mb-4 last:mb-0 text-secondary">
+            <p key={key} className={`${paragraphSpacing} text-secondary`}>
               {block.children.map((child, childIndex) => 
                 renderInlineElement(child, childIndex)
               )}
@@ -96,19 +125,36 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
       case 'heading':
         if (isHeadingNode(block)) {
           const HeadingTag = `h${block.level}` as keyof JSX.IntrinsicElements;
-          const headingClasses = {
-            1: 'text-3xl font-bold mb-6',
-            2: 'text-2xl font-bold mb-5',
-            3: 'text-xl font-bold mb-4',
-            4: 'text-lg font-bold mb-3',
-            5: 'text-base font-bold mb-2',
-            6: 'text-sm font-bold mb-2'
+          
+          // Adjust spacing based on variant
+          const getHeadingClasses = (level: number) => {
+            if (variant === 'compact') {
+              const compactHeadingClasses = {
+                1: 'text-2xl font-bold mb-3',
+                2: 'text-xl font-bold mb-3',
+                3: 'text-lg font-bold mb-2',
+                4: 'text-base font-bold mb-2',
+                5: 'text-sm font-bold mb-1',
+                6: 'text-xs font-bold mb-1'
+              };
+              return compactHeadingClasses[level as keyof typeof compactHeadingClasses] || compactHeadingClasses[1];
+            } else {
+              const defaultHeadingClasses = {
+                1: 'text-3xl font-bold mb-6',
+                2: 'text-2xl font-bold mb-5',
+                3: 'text-xl font-bold mb-4',
+                4: 'text-lg font-bold mb-3',
+                5: 'text-base font-bold mb-2',
+                6: 'text-sm font-bold mb-2'
+              };
+              return defaultHeadingClasses[level as keyof typeof defaultHeadingClasses] || defaultHeadingClasses[1];
+            }
           };
           
           return (
             <HeadingTag 
               key={key} 
-              className={`${headingClasses[block.level] || headingClasses[1]} text-primary`}
+              className={`${getHeadingClasses(block.level)} text-primary`}
             >
               {block.children.map((child, childIndex) => 
                 renderInlineElement(child, childIndex)
