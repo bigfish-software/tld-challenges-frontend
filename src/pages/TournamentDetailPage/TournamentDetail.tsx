@@ -48,6 +48,21 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
     return stateStyles[state as keyof typeof stateStyles] || 'badge-info';
   };
 
+  const getStateLabel = (state: string) => {
+    switch (state) {
+      case 'planned':
+        return 'Coming Soon';
+      case 'active':
+        return 'Active';
+      case 'completed':
+        return 'Completed';
+      case 'cancelled':
+        return 'Cancelled';
+      default:
+        return state.charAt(0).toUpperCase() + state.slice(1);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Main Content */}
@@ -81,7 +96,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                   <div className="flex flex-wrap items-center gap-3 mb-4">
                     <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStateBadge(tournament.state)}`}>
-                      {tournament.state.charAt(0).toUpperCase() + tournament.state.slice(1)}
+                      {getStateLabel(tournament.state)}
                     </span>
                     {tournament.is_featured && (
                       <span className="px-3 py-1 rounded-full text-sm font-medium bg-secondary text-light-primary">
@@ -108,7 +123,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
               <div className="p-8">
                 <div className="flex flex-wrap items-center gap-3 mb-4">
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStateBadge(tournament.state)}`}>
-                    {tournament.state.charAt(0).toUpperCase() + tournament.state.slice(1)}
+                    {getStateLabel(tournament.state)}
                   </span>
                   {tournament.is_featured && (
                     <span className="px-3 py-1 rounded-full text-sm font-medium bg-secondary text-light-primary">

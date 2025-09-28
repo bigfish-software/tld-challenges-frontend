@@ -32,6 +32,21 @@ export const TournamentsPageContent: React.FC = () => {
   const totalCount = apiResponse?.meta?.pagination?.total || 0;
   const totalPages = Math.ceil(totalCount / pageSize);
 
+  const getStateLabel = (state: string) => {
+    switch (state) {
+      case 'planned':
+        return 'Coming Soon';
+      case 'active':
+        return 'Active';
+      case 'completed':
+        return 'Completed';
+      case 'cancelled':
+        return 'Cancelled';
+      default:
+        return state.charAt(0).toUpperCase() + state.slice(1);
+    }
+  };
+
   const filterGroups = [
     {
       id: 'status',
@@ -40,7 +55,7 @@ export const TournamentsPageContent: React.FC = () => {
         new Set(tournaments.map(tournament => tournament.state))
       ).map(state => ({
         id: state,
-        label: state.charAt(0).toUpperCase() + state.slice(1),
+        label: getStateLabel(state),
         count: tournaments.filter(tournament => tournament.state === state).length
       }))
     },

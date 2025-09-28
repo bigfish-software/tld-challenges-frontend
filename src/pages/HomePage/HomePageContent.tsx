@@ -13,9 +13,13 @@ export const HomePageContent = () => {
   // Fetch real statistics from API
   const { data: statsResponse, isLoading: statsLoading, error: statsError } = useStatsOverview();
   
-  // Fetch active tournaments
-  const { data: tournamentsResponse, isLoading: tournamentsLoading, error: tournamentsError } = useTournaments({
+  // Fetch active and planned tournaments
+  const { data: activeTournamentsResponse, isLoading: activeTournamentsLoading, error: activeTournamentsError } = useTournaments({
     state: 'active'
+  });
+
+  const { data: plannedTournamentsResponse, isLoading: plannedTournamentsLoading, error: plannedTournamentsError } = useTournaments({
+    state: 'planned'
   });
 
   // Fetch page hero data
@@ -31,21 +35,42 @@ export const HomePageContent = () => {
   
   // Extract active tournaments - handle different response structures
   const activeTournaments: Tournament[] = (() => {
-    if (!tournamentsResponse) return [];
+    if (!activeTournamentsResponse) return [];
     
     // Handle direct array response
-    if (Array.isArray(tournamentsResponse)) {
-      return tournamentsResponse;
+    if (Array.isArray(activeTournamentsResponse)) {
+      return activeTournamentsResponse;
     }
     
     // Handle Strapi response with data property
-    if ((tournamentsResponse as any)?.data) {
-      const data = (tournamentsResponse as any).data;
+    if ((activeTournamentsResponse as any)?.data) {
+      const data = (activeTournamentsResponse as any).data;
       return Array.isArray(data) ? data : [data];
     }
     
     return [];
   })();
+
+  // Extract planned tournaments - handle different response structures
+  const plannedTournaments: Tournament[] = (() => {
+    if (!plannedTournamentsResponse) return [];
+    
+    // Handle direct array response
+    if (Array.isArray(plannedTournamentsResponse)) {
+      return plannedTournamentsResponse;
+    }
+    
+    // Handle Strapi response with data property
+    if ((plannedTournamentsResponse as any)?.data) {
+      const data = (plannedTournamentsResponse as any).data;
+      return Array.isArray(data) ? data : [data];
+    }
+    
+    return [];
+  })();
+
+  // Combine active and planned tournaments
+  const displayTournaments = [...activeTournaments, ...plannedTournaments];
 
   // Feature cards data - using proper icon components
   const features = [
@@ -196,8 +221,8 @@ export const HomePageContent = () => {
         </div>
       </section>
 
-      {/* Tournament Section - Only show if there are active tournaments */}
-      {!tournamentsLoading && !tournamentsError && activeTournaments.length > 0 && (
+      {/* Tournament Section - Show if there are active or planned tournaments */}
+      {!activeTournamentsLoading && !plannedTournamentsLoading && !activeTournamentsError && !plannedTournamentsError && displayTournaments.length > 0 && (
         <section className="py-16 sm:py-20 lg:py-24 section-primary">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
@@ -210,22 +235,22 @@ export const HomePageContent = () => {
                 mb-4
                 uppercase
               ">
-                {activeTournaments.length === 1 ? 'CURRENT TOURNAMENT' : 'ACTIVE TOURNAMENTS'}
+                {displayTournaments.length === 1 ? 'CURRENT TOURNAMENT' : 'TOURNAMENTS'}
               </h2>
               <p className="
                 text-lg 
                 text-secondary 
                 mx-auto
               ">
-                {activeTournaments.length === 1 
-                  ? 'Join our active tournament and compete with the community for recognition and prizes.'
-                  : 'Join one of our active tournaments and compete with the community for recognition and prizes.'
+                {displayTournaments.length === 1 
+                  ? 'Join our tournament and compete with the community for recognition and prizes.'
+                  : 'Join our tournaments and compete with the community for recognition and prizes.'
                 }
               </p>
             </div>
 
             <div className="space-y-6">
-              {activeTournaments.map((tournament) => {
+              {displayTournaments.map((tournament) => {
                 return (
                   <TournamentSection 
                     key={tournament.id} 
@@ -233,7 +258,7 @@ export const HomePageContent = () => {
                       id: tournament.id,
                       title: tournament.name || 'Unnamed Tournament',
                       description: tournament.description_short || 'No description available',
-                      status: 'active',
+                      status: tournament.state as 'active' | 'planned',
                       startDate: tournament.start_date || '',
                       endDate: tournament.end_date || '',
                       slug: tournament.slug || '',
