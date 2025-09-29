@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageHero, FilterPanel, CustomCodeCard, ErrorDisplay, NoDataDisplay, Breadcrumb } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
-import { useCustomCodes } from '@/hooks/api';
+import { useCustomCodes, usePaginationScroll } from '@/hooks';
 import { CustomCode } from '@/types/api';
 
 export const CustomCodesPageContent: React.FC = () => {
@@ -29,6 +29,9 @@ export const CustomCodesPageContent: React.FC = () => {
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
   const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 8; // 8 custom codes per page
+  
+  // Use pagination scroll hook for automatic scrolling
+  usePaginationScroll(currentPage);
   
   // API call for custom codes using React Query with pagination
   const { data: apiResponse, isLoading, error } = useCustomCodes(
@@ -212,7 +215,9 @@ export const CustomCodesPageContent: React.FC = () => {
               {totalCount > pageSize && (
                 <div className="mt-8 flex justify-center items-center space-x-4">
                   <button
-                    onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
+                    onClick={() => {
+                      setCurrentPage(Math.max(0, currentPage - 1));
+                    }}
                     disabled={currentPage === 0}
                     className="btn-secondary px-4 py-2 rounded-md disabled:opacity-50"
                   >
@@ -222,7 +227,9 @@ export const CustomCodesPageContent: React.FC = () => {
                     Page {currentPage + 1} of {totalPages} (Total: {totalCount} items)
                   </span>
                   <button
-                    onClick={() => setCurrentPage(Math.min(totalPages - 1, currentPage + 1))}
+                    onClick={() => {
+                      setCurrentPage(Math.min(totalPages - 1, currentPage + 1));
+                    }}
                     disabled={currentPage >= totalPages - 1}
                     className="btn-secondary px-4 py-2 rounded-md disabled:opacity-50"
                   >

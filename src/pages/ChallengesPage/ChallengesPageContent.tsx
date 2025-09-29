@@ -5,6 +5,7 @@ import { ContentGrid } from '@/components/layout';
 import { useQuery } from '@tanstack/react-query';
 import { apiService } from '@/services/api';
 import { ChallengeResponse } from '@/types/api';
+import { usePaginationScroll } from '@/hooks';
 
 export const ChallengesPageContent: React.FC = () => {
   const navigate = useNavigate();
@@ -30,6 +31,9 @@ export const ChallengesPageContent: React.FC = () => {
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
   const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 8; // 8 challenges per page
+  
+  // Use pagination scroll hook for automatic scrolling
+  usePaginationScroll(currentPage);
   
   // API call for challenges using React Query with pagination
   // Populate creators and custom_code as requested
@@ -240,7 +244,9 @@ export const ChallengesPageContent: React.FC = () => {
               {totalCount > pageSize && (
                 <div className="mt-8 flex justify-center items-center space-x-4">
                   <button
-                    onClick={() => setCurrentPage(Math.max(0, currentPage - 1))}
+                    onClick={() => {
+                      setCurrentPage(Math.max(0, currentPage - 1));
+                    }}
                     disabled={currentPage === 0}
                     className="btn-secondary px-4 py-2 rounded-md disabled:opacity-50"
                   >
@@ -250,7 +256,9 @@ export const ChallengesPageContent: React.FC = () => {
                     Page {currentPage + 1} of {totalPages} (Total: {totalCount} items)
                   </span>
                   <button
-                    onClick={() => setCurrentPage(Math.min(totalPages - 1, currentPage + 1))}
+                    onClick={() => {
+                      setCurrentPage(Math.min(totalPages - 1, currentPage + 1));
+                    }}
                     disabled={currentPage >= totalPages - 1}
                     className="btn-secondary px-4 py-2 rounded-md disabled:opacity-50"
                   >

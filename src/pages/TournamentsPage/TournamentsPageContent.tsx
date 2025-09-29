@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageHero, FilterPanel, ErrorDisplay, NoDataDisplay, TournamentCard, Breadcrumb } from '@/components/ui';
 import { ContentGrid } from '@/components/layout';
-import { useTournaments } from '@/hooks/api';
+import { useTournaments, usePaginationScrollOneBased } from '@/hooks';
 import { Tournament, SimpleCreator } from '@/types/api';
 
 export const TournamentsPageContent: React.FC = () => {
@@ -22,6 +22,9 @@ export const TournamentsPageContent: React.FC = () => {
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 12;
+  
+  // Use pagination scroll hook for automatic scrolling (1-based)
+  usePaginationScrollOneBased(currentPage);
   
   const { data: apiResponse, isLoading, error } = useTournaments(
     undefined,
@@ -224,7 +227,9 @@ export const TournamentsPageContent: React.FC = () => {
               {totalCount > pageSize && (
                 <div className="mt-8 flex justify-center items-center space-x-4">
                   <button
-                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                    onClick={() => {
+                      setCurrentPage(Math.max(1, currentPage - 1));
+                    }}
                     disabled={currentPage === 1}
                     className="btn-secondary px-4 py-2 rounded-md disabled:opacity-50"
                   >
@@ -234,7 +239,9 @@ export const TournamentsPageContent: React.FC = () => {
                     Page {currentPage} of {totalPages} (Total: {totalCount} items)
                   </span>
                   <button
-                    onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                    onClick={() => {
+                      setCurrentPage(Math.min(totalPages, currentPage + 1));
+                    }}
                     disabled={currentPage >= totalPages}
                     className="btn-secondary px-4 py-2 rounded-md disabled:opacity-50"
                   >

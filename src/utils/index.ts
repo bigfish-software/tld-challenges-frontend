@@ -6,3 +6,4 @@ export * from './validation';
 export * from './submissions';
 export * from './creatorLinks';
 export * from './dateFormatting';
+export * from './scrollToTop';
