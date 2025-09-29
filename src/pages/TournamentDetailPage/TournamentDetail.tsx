@@ -4,6 +4,7 @@ import { RichTextRenderer } from '@/components/ui/RichTextRenderer';
 import { Accordion } from '@/components/ui/Accordion';
 import { getImageUrl, getImageAltText, getResponsiveImageProps } from '@/utils/images';
 import { getCreatorExternalLink } from '@/utils/creatorLinks';
+import { formatTournamentDateLongUTC } from '@/utils/dateFormatting';
 
 interface TournamentWithThumbnail extends Tournament {
   thumbnail?: StrapiMedia | null;
@@ -21,21 +22,7 @@ export const TournamentDetail = ({ tournament }: TournamentDetailProps) => {
       return 'Not specified';
     }
     
-    try {
-      const date = new Date(dateString);
-      if (isNaN(date.getTime())) {
-        return 'Invalid Date';
-      }
-      
-      return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-    } catch (error) {
-      console.error('Date formatting error:', error, 'for date:', dateString);
-      return 'Invalid Date';
-    }
+    return formatTournamentDateLongUTC(dateString);
   };
 
   const getStateBadge = (state: string) => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Tournament } from '@/types/api';
+import { formatTournamentDateUTC } from '@/utils/dateFormatting';
 
 export interface TournamentCardProps {
   /** The tournament object from the API */
@@ -44,11 +45,7 @@ export const TournamentCard = ({
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return '';
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    });
+    return formatTournamentDateUTC(dateString);
   };
 
   // Get status info based on state

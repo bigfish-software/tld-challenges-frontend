@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/Button';
+import { formatTournamentDateUTC } from '@/utils/dateFormatting';
+import { getCreatorExternalLink, hasCreatorExternalLink } from '@/utils/creatorLinks';
+import type { SimpleCreator } from '@/types/api';
 
 export interface TournamentData {
   id: number;
@@ -12,6 +15,7 @@ export interface TournamentData {
   prizePool?: string;
   bannerImage?: string;
   slug?: string;
+  creators?: SimpleCreator[];
 }
 
 export interface TournamentSectionProps {
@@ -71,11 +75,7 @@ export const TournamentSection = ({
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    });
+    return formatTournamentDateUTC(dateString);
   };
 
   return (
@@ -132,6 +132,43 @@ export const TournamentSection = ({
                   <span>
                     {formatDate(displayTournament.startDate)} - {formatDate(displayTournament.endDate)}
                   </span>
+                </div>
+              )}
+              
+              {/* Created By */}
+              {displayTournament.creators && displayTournament.creators.length > 0 && (
+                <div className="flex items-center gap-1.5">
+                  <span className="font-medium">Created by:</span>
+                  <div className="flex flex-wrap items-center gap-1">
+                    {displayTournament.creators.map((creator, index) => {
+                      const externalLink = getCreatorExternalLink(creator);
+                      const isLast = index === displayTournament.creators!.length - 1;
+                      const separator = isLast ? '' : ', ';
+                      
+                      if (hasCreatorExternalLink(creator) && externalLink) {
+                        return (
+                          <span key={creator.id}>
+                            <a
+                              href={externalLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-primary nav-link hover:text-secondary-color transition-colors font-medium text-sm"
+                            >
+                              {creator.display_name || creator.name}
+                            </a>
+                            {separator}
+                          </span>
+                        );
+                      } else {
+                        return (
+                          <span key={creator.id} className="text-primary font-medium text-sm">
+                            {creator.display_name || creator.name}
+                            {separator}
+                          </span>
+                        );
+                      }
+                    })}
+                  </div>
                 </div>
               )}
             </div>

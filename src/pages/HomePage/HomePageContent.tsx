@@ -262,6 +262,7 @@ export const HomePageContent = () => {
                       startDate: tournament.start_date || '',
                       endDate: tournament.end_date || '',
                       slug: tournament.slug || '',
+                      creators: tournament.creators || [],
                     }}
                   />
                 );
