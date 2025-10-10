@@ -13,3 +13,4 @@ export * from './SubmissionPage';
 export * from './SubmissionSuccessPage';
 export * from './IdeaSubmissionPage';
 export * from './IdeaSuccessPage';
+export * from './FtsCalculatorPage';

@@ -27,3 +27,4 @@ export * from './Checkbox';
 export * from './SimpleCaptcha';
 export * from './SubmissionForm';
 export * from './IdeaForm';
+export * from './FtsCalculatorForm';

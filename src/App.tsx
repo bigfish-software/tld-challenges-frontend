@@ -17,6 +17,7 @@ import { SubmissionPage } from '@/pages/SubmissionPage';
 import { SubmissionSuccessPage } from '@/pages/SubmissionSuccessPage';
 import { IdeaSubmissionPage } from '@/pages/IdeaSubmissionPage';
 import { IdeaSuccessPage } from '@/pages/IdeaSuccessPage';
+import { FtsCalculatorPage } from '@/pages/FtsCalculatorPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,6 +47,7 @@ function App() {
             <Route path="/custom-codes" element={<CustomCodesPage />} />
             <Route path="/custom-codes/:slug" element={<CustomCodeDetailPage />} />
             <Route path="/challenges" element={<ChallengesPage />} />
+            <Route path="/challenges/fts-calculator" element={<FtsCalculatorPage />} />
             <Route path="/challenges/:slug" element={<ChallengeDetailPage />} />
             <Route path="/challenges/:slug/leaderboard" element={<ChallengeLeaderboardPage />} />
             <Route path="/submissions" element={<SubmissionPage />} />
