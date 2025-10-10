@@ -58,27 +58,21 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
     
-    // Validate shots taken
-    if (!formValues.shotsTaken.trim()) {
-      newErrors.shotsTaken = 'Shots taken is required';
-    } else if (isNaN(Number(formValues.shotsTaken)) || Number(formValues.shotsTaken) < 0) {
+    // Validate shots taken - empty is treated as 0
+    if (formValues.shotsTaken.trim() && (isNaN(Number(formValues.shotsTaken)) || Number(formValues.shotsTaken) < 0)) {
       newErrors.shotsTaken = 'Must be a valid number';
     }
     
-    // Validate shots hit
-    if (!formValues.shotsHit.trim()) {
-      newErrors.shotsHit = 'Shots hit is required';
-    } else if (isNaN(Number(formValues.shotsHit)) || Number(formValues.shotsHit) < 0) {
+    // Validate shots hit - empty is treated as 0
+    if (formValues.shotsHit.trim() && (isNaN(Number(formValues.shotsHit)) || Number(formValues.shotsHit) < 0)) {
       newErrors.shotsHit = 'Must be a valid number';
     }
     
-    // Validate animal counts
+    // Validate animal counts - empty is treated as 0
     const animalFields: (keyof FtsCalculatorFormValues)[] = ['moose', 'bears', 'wolves', 'deer', 'rabbits', 'ptarmigans'];
     animalFields.forEach(field => {
       const value = formValues[field] as string;
-      if (!value.trim()) {
-        newErrors[field] = 'Required';
-      } else if (isNaN(Number(value)) || Number(value) < 0) {
+      if (value.trim() && (isNaN(Number(value)) || Number(value) < 0)) {
         newErrors[field] = 'Must be a valid number';
       }
     });
@@ -91,15 +85,15 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
     e.preventDefault();
     
     if (validateForm()) {
-      // Convert form values to numbers
-      const shotsTaken = Number(formValues.shotsTaken);
-      const shotsHit = Number(formValues.shotsHit);
-      const moose = Number(formValues.moose);
-      const bears = Number(formValues.bears);
-      const wolves = Number(formValues.wolves);
-      const deer = Number(formValues.deer);
-      const rabbits = Number(formValues.rabbits);
-      const ptarmigans = Number(formValues.ptarmigans);
+      // Convert form values to numbers, treating empty strings as 0
+      const shotsTaken = formValues.shotsTaken.trim() ? Number(formValues.shotsTaken) : 0;
+      const shotsHit = formValues.shotsHit.trim() ? Number(formValues.shotsHit) : 0;
+      const moose = formValues.moose.trim() ? Number(formValues.moose) : 0;
+      const bears = formValues.bears.trim() ? Number(formValues.bears) : 0;
+      const wolves = formValues.wolves.trim() ? Number(formValues.wolves) : 0;
+      const deer = formValues.deer.trim() ? Number(formValues.deer) : 0;
+      const rabbits = formValues.rabbits.trim() ? Number(formValues.rabbits) : 0;
+      const ptarmigans = formValues.ptarmigans.trim() ? Number(formValues.ptarmigans) : 0;
       const hasCougar = formValues.cougar === 'yes';
       
       // Calculate animal points
@@ -187,7 +181,6 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
             value={formValues.shotsTaken}
             onChange={handleInputChange}
             error={errors.shotsTaken || null}
-            required
             placeholder="0"
             min="0"
           />
@@ -199,7 +192,6 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
             value={formValues.shotsHit}
             onChange={handleInputChange}
             error={errors.shotsHit || null}
-            required
             placeholder="0"
             min="0"
           />
@@ -217,7 +209,6 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
             value={formValues.moose}
             onChange={handleInputChange}
             error={errors.moose || null}
-            required
             placeholder="0"
             min="0"
           />
@@ -229,7 +220,6 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
             value={formValues.bears}
             onChange={handleInputChange}
             error={errors.bears || null}
-            required
             placeholder="0"
             min="0"
           />
@@ -241,7 +231,6 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
             value={formValues.wolves}
             onChange={handleInputChange}
             error={errors.wolves || null}
-            required
             placeholder="0"
             min="0"
           />
@@ -253,7 +242,6 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
             value={formValues.deer}
             onChange={handleInputChange}
             error={errors.deer || null}
-            required
             placeholder="0"
             min="0"
           />
@@ -265,7 +253,6 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
             value={formValues.rabbits}
             onChange={handleInputChange}
             error={errors.rabbits || null}
-            required
             placeholder="0"
             min="0"
           />
@@ -277,7 +264,6 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
             value={formValues.ptarmigans}
             onChange={handleInputChange}
             error={errors.ptarmigans || null}
-            required
             placeholder="0"
             min="0"
           />
@@ -286,7 +272,7 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
         {/* Cougar Radio Button */}
         <div className="space-y-2">
           <label className="block text-sm font-medium text-primary">
-            Cougar? <span className="text-error">*</span>
+            Cougar?
           </label>
           <div className="flex gap-6">
             <label className="flex items-center cursor-pointer">
