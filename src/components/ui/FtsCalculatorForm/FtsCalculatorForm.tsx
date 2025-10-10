@@ -34,6 +34,7 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
   
   const [errors, setErrors] = useState<FormErrors>({});
   const [result, setResult] = useState<number | null>(null);
+  const [showAccuracyWarning, setShowAccuracyWarning] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -90,9 +91,66 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
     e.preventDefault();
     
     if (validateForm()) {
-      // Placeholder calculation - will be implemented later
-      // For now, just set a dummy result
-      setResult(0);
+      // Convert form values to numbers
+      const shotsTaken = Number(formValues.shotsTaken);
+      const shotsHit = Number(formValues.shotsHit);
+      const moose = Number(formValues.moose);
+      const bears = Number(formValues.bears);
+      const wolves = Number(formValues.wolves);
+      const deer = Number(formValues.deer);
+      const rabbits = Number(formValues.rabbits);
+      const ptarmigans = Number(formValues.ptarmigans);
+      const hasCougar = formValues.cougar === 'yes';
+      
+      // Calculate animal points
+      let animalPoints = 0;
+      animalPoints += ptarmigans * 1;  // Birds: 1 point
+      animalPoints += rabbits * 1;     // Rabbits: 1 point
+      animalPoints += deer * 3;        // Deer: 3 points
+      animalPoints += wolves * 5;      // Wolf: 5 points
+      animalPoints += bears * 25;      // Bear: 25 points
+      animalPoints += moose * 100;     // Moose: 100 points
+      
+      // Cougar: 250 points, capped at one cougar total
+      if (hasCougar) {
+        animalPoints += 250;
+      }
+      
+      // Calculate accuracy bonus
+      let accuracyPoints = 0;
+      const meetsMinimumShots = shotsTaken >= 50;
+      
+      if (meetsMinimumShots && shotsTaken > 0) {
+        const accuracy = (shotsHit / shotsTaken) * 100;
+        
+        // Accuracy score based on bands (scored on the full percent)
+        if (accuracy >= 100) {
+          accuracyPoints = 1500;
+        } else if (accuracy >= 90) {
+          accuracyPoints = 900;
+        } else if (accuracy >= 80) {
+          accuracyPoints = 800;
+        } else if (accuracy >= 70) {
+          accuracyPoints = 700;
+        } else if (accuracy >= 60) {
+          accuracyPoints = 600;
+        } else if (accuracy >= 50) {
+          accuracyPoints = 500;
+        } else if (accuracy >= 40) {
+          accuracyPoints = 400;
+        } else if (accuracy >= 30) {
+          accuracyPoints = 300;
+        } else if (accuracy >= 20) {
+          accuracyPoints = 200;
+        } else if (accuracy >= 10) {
+          accuracyPoints = 100;
+        }
+        // Below 10% accuracy gives 0 points
+      }
+      
+      const totalScore = animalPoints + accuracyPoints;
+      setResult(totalScore);
+      setShowAccuracyWarning(!meetsMinimumShots);
       
       if (onCalculate) {
         onCalculate(formValues);
@@ -114,6 +172,7 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
     });
     setErrors({});
     setResult(null);
+    setShowAccuracyWarning(false);
   };
 
   return (
@@ -260,9 +319,32 @@ export const FtsCalculatorForm = ({ onCalculate }: FtsCalculatorFormProps) => {
         
         {/* Result Display */}
         {result !== null && (
-          <div className="bg-surface border border-primary rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-primary mb-2 font-headline uppercase">Final Score</h3>
-            <p className="text-3xl font-bold text-secondary-color">{result}</p>
+          <div className="space-y-4">
+            <div className="bg-surface border border-primary rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-primary mb-2 font-headline uppercase">Final Score</h3>
+              <p className="text-3xl font-bold text-secondary-color">{result}</p>
+            </div>
+            
+            {showAccuracyWarning && (
+              <div className="bg-surface border border-border rounded-lg p-4 flex items-start">
+                <svg 
+                  className="h-5 w-5 text-secondary-color mr-2 flex-shrink-0 mt-0.5" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" 
+                  />
+                </svg>
+                <p className="text-sm text-secondary">
+                  <strong>Note:</strong> Accuracy bonus not included. Minimum of 50 shots required to earn accuracy points.
+                </p>
+              </div>
+            )}
           </div>
         )}
       </div>
