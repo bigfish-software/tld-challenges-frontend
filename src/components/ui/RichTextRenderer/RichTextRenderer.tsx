@@ -236,7 +236,7 @@ export const RichTextRenderer: React.FC<RichTextRendererProps> = ({
           href={element.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-primary-color hover:text-primary-dark underline"
+          className="text-primary-color nav-link"
         >
           {element.children.map((child: StrapiRichTextNode, childIndex: number) => 
             renderInlineElement(child, childIndex)
